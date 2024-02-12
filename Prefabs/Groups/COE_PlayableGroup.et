@@ -1,0 +1,4 @@
+SCR_AIGroup : "{8B4D49A9F324E7D5}Prefabs/Groups/PlayableGroup.et" {
+ ID "56FC873F6D4EEACC"
+ m_iMaxMembers 10
+}

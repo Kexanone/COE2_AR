@@ -1,0 +1,13 @@
+GenericEntity Farm : "{0762BC104736A99B}Prefabs/World/Locations/Arland/Natural/Arland_Fields_02.et" {
+ components {
+  SCR_EditableCommentComponent "{529AB059519FE609}" {
+   m_UIInfo SCR_EditableCommentUIInfo "{5298E609432D192D}" {
+    Name "#AR-MapLocation_Farm"
+   }
+  }
+  SCR_MapDescriptorComponent "{527892B6ED748CEB}" {
+   DisplayName "#AR-MapLocation_Farm"
+  }
+ }
+ coords 2219.992 53.779 2889.189
+}

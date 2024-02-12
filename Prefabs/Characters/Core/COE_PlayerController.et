@@ -1,0 +1,7 @@
+COE_PlayerController : "{CD2B8EF361478648}Prefabs/Characters/Core/DefaultPlayerControllerMP_ScenarioFramework.et" {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  SCR_SpawnerRequestComponent "{5F12A4F038B79C31}" {
+  }
+ }
+}

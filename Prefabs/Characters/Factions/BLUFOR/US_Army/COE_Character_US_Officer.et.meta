@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{DB108F0264C75F14}Prefabs/Characters/Factions/BLUFOR/US_Army/KEX_Character_US_Officer.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

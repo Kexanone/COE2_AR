@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{4A99F32BDA6CF38B}Prefabs/Editor/Modes/COE_EditorModeSquadLeader.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{B801B53B98A1C5F8}Sounds/Music/Ingame/COE_Music_Ingame.acp"
+ Configurations {
+  AudioProjectResourceClass PC {
+  }
+  AudioProjectResourceClass XBOX_ONE : PC {
+  }
+  AudioProjectResourceClass XBOX_SERIES : PC {
+  }
+  AudioProjectResourceClass PS4 : PC {
+  }
+  AudioProjectResourceClass HEADLESS : PC {
+  }
+ }
+}

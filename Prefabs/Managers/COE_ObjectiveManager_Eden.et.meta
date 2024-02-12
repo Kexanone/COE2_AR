@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{7C1C3C1B0D6B8457}Prefabs/Managers/COE_ObjectiveManager_Eden.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

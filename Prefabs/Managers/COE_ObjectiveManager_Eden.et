@@ -1,0 +1,66 @@
+COE_ObjectiveManager : "{973B5090288C8ADC}Prefabs/Managers/COE_ObjectiveManager.et" {
+ ID "5E76D989132921B4"
+ coords 4765.562 28.113 11684.592
+ m_aLocationConfigs {
+  COE_FreeRoamingLocationConfig "{5E7B42E9CB2B02CF}" {
+   m_bWeight 42
+   m_fMaxDistanceMainBase 10000
+  }
+  COE_PrefabLocationConfig "{5E7B42D1349C35C1}" {
+   m_bWeight 18
+   m_fMaxDistanceMainBase 10000
+  }
+  COE_SlotLocationConfig "{5E7B42D0793541FB}" {
+   m_bWeight 10
+   m_fMaxDistanceMainBase 10000
+  }
+  COE_AreaLocationConfig "{5E7C1ABC4E15FEA7}" {
+   m_bEnabled 0
+  }
+  COE_AreaLocationConfig "{5E7C1ABE1F9F05D6}" {
+   m_bEnabled 0
+  }
+  COE_NamedLocationConfig "{5E7D7A70CD6A5F2A}" {
+   m_sComment "Towns"
+   m_bWeight 12
+   m_fMaxDistanceMainBase 10000
+   m_aNamedLocations {
+    "C_Location_St_Pierre" "C_LocationChotain" "C_LocationDurras" "C_LocationEntreDeux" "C_LocationErquy" "C_LocationFigari" "C_LocationGravette" "C_LocationLamentin" "C_LocationLaruns" "C_LocationLeMoule" "C_LocationLevie" "C_LocationMeaux" "C_LocationMontignac" "C_LocationMorton" "C_LocationProvins" "C_LocationRegina" "C_LocationStPhilippe" "C_LocationTyrone" "C_LocationVernon" "C_LocationVilleneuve"
+   }
+  }
+  COE_NamedLocationConfig "{5E8F1CE937D132EA}" {
+   m_bWeight 3
+   m_fMaxDistanceMainBase 10000
+   m_aNamedLocations {
+    "G_Military" "G_Military2" "G_Military3" "G_Military4" "G_Military5" "G_Military6"
+   }
+  }
+  COE_NamedLocationConfig "{5E8F1CE955E96A2B}" {
+   m_bWeight 3
+   m_fMaxDistanceMainBase 10000
+   m_aNamedLocations {
+    "G_Harbour" "G_Harbour2" "G_Harbour3" "G_Harbour4" "G_Harbour5" "G_Harbour6"
+   }
+  }
+  COE_NamedLocationConfig "{5E8F1CE953563688}" {
+   m_bWeight 3
+   m_fMaxDistanceMainBase 10000
+   m_aNamedLocations {
+    "G_Industrial" "G_Industrial3" "G_Sawmill" "G_Quarry" "G_Landfill"
+   }
+  }
+ }
+ m_aTaskConfigs {
+  COE_TaskClearAreaConfig "{5E83606A455304A0}" {
+  }
+  COE_TaskDestroyConfig "{5E83606AACFAFC49}" {
+  }
+  COE_TaskDestroyConfig "{5E8360688CB4482C}" {
+  }
+  COE_TaskKillConfig "{5E83606A43AC974F}" {
+  }
+  COE_TaskDeliverIntelConfig "{5E83606A41749631}" {
+   m_bEnabled 1
+  }
+ }
+}

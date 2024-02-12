@@ -1,0 +1,147 @@
+COE_FactionManager : "{4A188E44289B9A50}Prefabs/MP/Managers/Factions/FactionManager_Editor.et" {
+ ID "56B2B4776E6E4499"
+ coords 9.189 1 5.925
+ Factions {
+  COE_Faction "{56DEAC40D2DBC8B1}" {
+   m_aPlayerMainBasePrefabs {
+    "{C863167AA262B49D}Prefabs/Compositions/Base/COE_MainBaseLandUS.et"
+   }
+   m_aPlayerMainBaseCarrierPrefabs {
+    "{0F7E14BBC969DF41}Prefabs/Compositions/Base/COE_CarrierMainBase.et"
+   }
+   m_aPlayerSpawnPrefabs {
+    "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et"
+   }
+   m_aArsenalBoxPrefabs {
+    "{2304C0551A8A1D65}Prefabs/Props/Military/Compositions/US/COE_ArsenalBox_US.et"
+   }
+   m_aSmallVehicleRequestBoardPrefabs {
+    "{2462378BA6550F4A}Prefabs/Props/Military/Compositions/US/COE_VehicleService_US_Small.et"
+   }
+   m_aHelicopterRequestBoardPrefabs {
+    "{79B5D4B750B9D596}Prefabs/Props/Military/Compositions/US/COE_VehicleService_US_Large.et"
+   }
+   m_aInstallationToDestroyPrefabs {
+    "{DC7B76A39454380A}Prefabs/Compositions/Installation/USSR/COE_RPL5_Radar.et" "{CC15340158615106}Prefabs/Compositions/Installation/USSR/COE_R404_Antenna.et" "{A643E3CEBDAF05BB}Prefabs/Compositions/Installation/US/COE_M923A1_Command.et"
+   }
+   m_aHVTPrefabs {
+    "{DB108F0264C75F14}Prefabs/Characters/Factions/BLUFOR/US_Army/COE_Character_US_Officer.et"
+   }
+   m_aIntelPrefabs {
+    "{6D56FED1E55A8F84}Prefabs/Items/Misc/IntelligenceFolder_E_01/IntelligenceFolder_E_01.et"
+   }
+   m_aSmallRoadSlotPrefabs {
+    "{24B7F96197053B39}Prefabs/Compositions/Slotted/SlotRoadSmall/Barricade_S_US_01.et" "{E660DE914A7211EB}Prefabs/Compositions/Slotted/SlotRoadSmall/Checkpoint_S_US_01.et"
+   }
+   m_aMediumRoadSlotPrefabs {
+    "{172D03072FE6ECAB}Prefabs/Compositions/Slotted/SlotRoadMedium/Barricade_M_US_01.et" "{55D508179EF5E64A}Prefabs/Compositions/Slotted/SlotRoadMedium/Checkpoint_M_US_01.et"
+   }
+   m_aLargeRoadSlotPrefabs {
+    "{AF770C825EA592CF}Prefabs/Compositions/Slotted/SlotRoadLarge/Barricade_L_US_01.et" "{E74D2F51CD4F03D0}Prefabs/Compositions/Slotted/SlotRoadLarge/Checkpoint_L_US_01.et"
+   }
+   m_aLargeFlatSlotPrefabs {
+    "{557283C29F82042D}Prefabs/Compositions/Slotted/SlotFlatLarge/COE_LivingArea_L_US_01.et"
+   }
+   m_aMGNestPrefabs {
+    "{AC84AEB35260CEF8}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_01.et" "{9D720679B696FEE1}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_01_M2HB.et" "{4D69F9D77C372BE5}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_01_M60.et" "{C0D09A53EEA441D6}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_02.et"
+   }
+   m_aArmedVehiclePrefabs {
+    "{3EA6F47D95867114}Prefabs/Vehicles/Wheeled/M998/M1025_armed_M2HB.et" "{DD774A8FD0989A78}Prefabs/Vehicles/Wheeled/M998/M1025_armed_M2HB_MERDC.et"
+   }
+   m_aMarksmanPrefabs {
+    "{0F6689B491641155}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_Sniper.et"
+   }
+   m_aRiflemanMGPrefabs {
+    "{AC84AEB35260CEF8}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_01.et" "{9D720679B696FEE1}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_01_M2HB.et" "{4D69F9D77C372BE5}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_US_01_M60.et"
+   }
+   m_aRiflemanGLPrefabs {
+    "{84029128FA6F6BB9}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_GL.et"
+   }
+   m_aRiflemanATPrefabs {
+    "{27BF1FF235DD6036}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_LAT.et"
+   }
+   m_aRiflemanPrefabs {
+    "{5B1996C05B1E51A4}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_AR.et" "{84029128FA6F6BB9}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_GL.et" "{27BF1FF235DD6036}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_LAT.et" "{1623EA3AEFACA0E4}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_MG.et" "{3726077BE60962FF}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_RTO.et" "{E45F1E163F5CA080}Prefabs/Characters/Factions/BLUFOR/US_Army/Character_US_SL.et"
+   }
+   m_aPatrolGroupPrefabs {
+    "{84E5BBAB25EA23E5}Prefabs/Groups/BLUFOR/Group_US_FireTeam.et" "{FCF7F5DC4F83955C}Prefabs/Groups/BLUFOR/Group_US_LightFireTeam.et" "{DE747BC9217D383C}Prefabs/Groups/BLUFOR/Group_US_Team_GL.et" "{FAEA8B9E1252F56E}Prefabs/Groups/BLUFOR/Group_US_Team_LAT.et" "{81B6DBF2B88545F5}Prefabs/Groups/BLUFOR/Group_US_Team_Suppress.et"
+   }
+   m_aCheckpointGroupPrefabs {
+    "{958039B857396B7B}Prefabs/Groups/BLUFOR/Group_US_MachineGunTeam.et"
+   }
+  }
+  COE_Faction "{56DEAC40D3C2E623}" {
+   m_aPlayerMainBasePrefabs {
+    "{AA187F3D6F4C39E8}Prefabs/Compositions/Base/COE_MainBaseLandUSSR.et"
+   }
+   m_aPlayerMainBaseCarrierPrefabs {
+    "{0F7E14BBC969DF41}Prefabs/Compositions/Base/COE_CarrierMainBase.et"
+   }
+   m_aPlayerSpawnPrefabs {
+    "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et"
+   }
+   m_aArsenalBoxPrefabs {
+    "{1EE03FF59E89C75F}Prefabs/Props/Military/Compositions/USSR/COE_ArsenalBox_USSR.et"
+   }
+   m_aSmallVehicleRequestBoardPrefabs {
+    "{2CAE9616C43351CA}Prefabs/Props/Military/Compositions/USSR/COE_VehicleService_USSR_Small.et"
+   }
+   m_aHelicopterRequestBoardPrefabs {
+    "{7179752A32DF8B16}Prefabs/Props/Military/Compositions/USSR/COE_VehicleService_USSR_Large.et"
+   }
+   m_aInstallationToDestroyPrefabs {
+    "{DC7B76A39454380A}Prefabs/Compositions/Installation/USSR/COE_RPL5_Radar.et" "{CC15340158615106}Prefabs/Compositions/Installation/USSR/COE_R404_Antenna.et" "{5A5D82E72D1AD220}Prefabs/Compositions/Installation/USSR/COE_Ural4320_Command.et"
+   }
+   m_aSuppliesToDestroyPrefabs {
+    "{D074913C6D18C69E}Prefabs/Compositions/Installation/USSR/COE_Ural4320_Tanker.et"
+   }
+   m_aHVTPrefabs {
+    "{5117311FB822FD1F}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Officer.et"
+   }
+   m_aIntelPrefabs {
+    "{6D56FED1E55A8F84}Prefabs/Items/Misc/IntelligenceFolder_E_01/IntelligenceFolder_E_01.et"
+   }
+   m_aSmallRoadSlotPrefabs {
+    "{83A10E8547281E58}Prefabs/Compositions/Slotted/SlotRoadSmall/Barricade_S_USSR_01.et" "{9483333BFD9E2D0F}Prefabs/Compositions/Slotted/SlotRoadSmall/Checkpoint_S_USSR_01.et"
+   }
+   m_aMediumRoadSlotPrefabs {
+    "{27F6A0815E6FF6EF}Prefabs/Compositions/Slotted/SlotRoadMedium/Barricade_M_USSR_01.et" "{7C85836D444E3797}Prefabs/Compositions/Slotted/SlotRoadMedium/Checkpoint_M_USSR_01.et"
+   }
+   m_aLargeRoadSlotPrefabs {
+    "{2A27606856B8A914}Prefabs/Compositions/Slotted/SlotRoadLarge/Barricade_L_USSR_01.et" "{9F9924B626C5FA2C}Prefabs/Compositions/Slotted/SlotRoadLarge/Checkpoint_L_USSR_01.et"
+   }
+   m_aLargeFlatSlotPrefabs {
+    "{9C5CB7722205BA65}Prefabs/Compositions/Slotted/SlotFlatLarge/COE_LivingArea_L_USSR_01.et"
+   }
+   m_aMGNestPrefabs {
+    "{7A40BF128BB47EFD}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_USSR_01.et" "{114DE81321786CD9}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_USSR_01_PKM.et" "{16148BF23770F1D3}Prefabs/Compositions/Slotted/SlotFlatSmall/MachineGunNest_S_USSR_02.et"
+   }
+   m_aArmedVehiclePrefabs {
+    "{C012BB3488BEA0C2}Prefabs/Vehicles/Wheeled/BTR70/BTR70.et"
+   }
+   m_aMarksmanPrefabs {
+    "{976AC400219898FA}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Sharpshooter.et"
+   }
+   m_aRiflemanMGPrefabs {
+    "{23ADBBC31B6A3DC6}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_AR.et" "{96C784C502AC37DA}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_MG.et"
+   }
+   m_aRiflemanGLPrefabs {
+    "{8E0FE664CE7D1CA9}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_GL.et"
+   }
+   m_aRiflemanATPrefabs {
+    "{1C78331E156A3D65}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_AT.et"
+   }
+   m_aRiflemanPrefabs {
+    "{23ADBBC31B6A3DC6}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_AR.et" "{1C78331E156A3D65}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_AT.et" "{8E0FE664CE7D1CA9}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_GL.et" "{AB9726163EC1BD81}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Medic.et" "{DCB41B3746FDD1BE}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Rifleman.et" "{612F43A4D5AE765F}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_RTO.et" "{5436629450D8387A}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_SL.et"
+   }
+   m_aPatrolGroupPrefabs {
+    "{657590C1EC9E27D3}Prefabs/Groups/OPFOR/Group_USSR_LightFireTeam.et" "{96BAB56E6558788E}Prefabs/Groups/OPFOR/Group_USSR_Team_AT.et" "{43C7A28EEB660FF8}Prefabs/Groups/OPFOR/Group_USSR_Team_GL.et" "{1C0502B5729E7231}Prefabs/Groups/OPFOR/Group_USSR_Team_Suppress.et"
+   }
+   m_aCheckpointGroupPrefabs {
+    "{A2F75E45C66B1C0A}Prefabs/Groups/OPFOR/Group_USSR_MachineGunTeam.et"
+   }
+  }
+  COE_Faction "{56DEAC40D132400B}" {
+  }
+ }
+}

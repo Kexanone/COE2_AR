@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{764EA71E6CAA60AF}UI/layouts/Campaign/COE_LocationElement.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

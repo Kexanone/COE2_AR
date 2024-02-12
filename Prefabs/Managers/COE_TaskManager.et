@@ -1,0 +1,39 @@
+SCR_BaseTaskManager : "{87208DAD6F3C0DE2}Prefabs/MP/Managers/Tasks/TaskManager_Editor.et" {
+ ID "56DEB09946BD23E3"
+ coords 12 0 12
+ {
+  SCR_ScenarioFrameworkTaskClearAreaSupportEntity {
+   ID "5E7D7A6ECD16440F"
+   coords -6 0 -6
+   m_sTaskPrefab "{A5E8E68E46D3E064}Prefabs/ScenarioFramework/Tasks/TaskClearArea.et"
+  }
+  SCR_ScenarioFrameworkTaskDefendSupportEntity {
+   ID "5E7D7A6ECD1638E3"
+   coords 0.243 0 0.04
+  }
+  SCR_ScenarioFrameworkTaskDeliverSupportEntity {
+   ID "5E7D7A6ECD1638E1"
+   coords -5 0 -5
+   m_sTaskPrefab "{9DDDA4BB387EC0B6}Prefabs/ScenarioFramework/Tasks/TaskDeliver.et"
+  }
+  SCR_ScenarioFrameworkTaskDestroySupportEntity {
+   ID "5E7D7A6ECD17F206"
+   coords -4 0 -4
+   m_sTaskPrefab "{2BA67286E2C06835}Prefabs/ScenarioFramework/Tasks/TaskDestroy.et"
+  }
+  SCR_ScenarioFrameworkTaskExtractSupportEntity {
+   ID "5E7D7A6ECD17AC80"
+   coords -3 0 -3
+   m_sTaskPrefab "{6829FAD588965A88}Prefabs/ScenarioFramework/Tasks/TaskExtract.et"
+  }
+  SCR_ScenarioFrameworkTaskKillSupportEntity {
+   ID "5E7D7A6ECD17AC81"
+   coords -1.442 0 -1.163
+   m_sTaskPrefab "{CD66837DD5606573}Prefabs/ScenarioFramework/Tasks/TaskKill.et"
+  }
+  SCR_ScenarioFrameworkTaskSupportEntity {
+   ID "5E7D7A6ECD174EE3"
+   coords 2503.309 147.787 2255.878
+  }
+ }
+}

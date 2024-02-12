@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{2E2B64DBB9C9E518}Configs/Map/MapLocationSelectionMenu.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

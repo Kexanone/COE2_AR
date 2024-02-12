@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A6D232BFD42A52FC}Prefabs/Structures/Civilian/BoardMap_01/COE_BoardMap_Everon.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

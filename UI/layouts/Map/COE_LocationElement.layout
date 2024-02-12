@@ -1,0 +1,128 @@
+FrameWidgetClass {
+ Name "COE_LocationElement"
+ "Z Order" 1
+ Clipping False
+ components {
+  COE_MapUILocation "{6094BED44AC74379}" {
+  }
+ }
+ {
+  OverlayWidgetClass "{6094B4FC76103F55}" {
+   Name "Overlay0"
+   Slot FrameWidgetSlot "{5A748248649ECD71}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    OffsetRight -100
+    SizeY 100
+    OffsetBottom -100
+    Alignment 0.5 0.5
+   }
+   {
+    SizeLayoutWidgetClass "{6094B4FC76103F5B}" {
+     Name "SizeLayout"
+     Slot OverlayWidgetSlot "{5A7494430A5DF5B2}" {
+     }
+     "Ignore Cursor" 0
+     AllowWidthOverride 1
+     WidthOverride 60
+     AllowHeightOverride 1
+     HeightOverride 60
+     {
+      OverlayWidgetClass "{6094B4FC76103F5A}" {
+       Name "IconOverlay"
+       Slot AlignableSlot "{5A74824A63E50D09}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       {
+        ImageWidgetClass "{6094B4FC76103F58}" {
+         Name "BackgroundGradient"
+         Slot OverlayWidgetSlot "{56FAD15D251881C8}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+          Padding 2 2 2 2
+         }
+         "Is Visible" 0
+         Opacity 0.599
+         Color 0 0 0 0.745
+         Saturation 0.555
+         Mask "{0BFC9F2798DAD87D}system/textures/PP/HDRCircleWeight_A.edds"
+         "Transition width" 0.498
+         Progress 0.461
+         "Mask Mode" "Exclude Range"
+         Range 0.672
+        }
+        OverlayWidgetClass "{6094B4FC76103F67}" {
+         Name "Symbol"
+         Slot OverlayWidgetSlot "{55106432EF84C21E}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         "Z Order" 1
+         components {
+          SCR_MilitarySymbolUIComponent "{5A1275AE49C098AA}" {
+           m_MilitarySymbol SCR_MilitarySymbol "{5A1275AEB780F20B}" {
+           }
+          }
+         }
+        }
+        ButtonWidgetClass "{6094B4FC76103F66}" {
+         Name "Button"
+         Slot OverlayWidgetSlot "{5A7494430A5DF5D0}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         Color 1 1 1 0
+        }
+        ImageWidgetClass "{6094B4FC76103F65}" {
+         Name "Highlight"
+         Slot OverlayWidgetSlot "{56FAD15D251881C8}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+          Padding 0 0 0 0
+         }
+         "Is Visible" 0
+         Size 36 36
+        }
+        ImageWidgetClass "{6094B4FC76103F64}" {
+         Name "Corners"
+         Slot OverlayWidgetSlot "{560858B2103D12BB}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         "Is Visible" 0
+         Color 0.896 0.539 0.184 1
+         Image ""
+        }
+        TextWidgetClass "{6094B4FC76103F63}" {
+         Name "Name"
+         Slot OverlayWidgetSlot "{54D4BC2CF0FC90D0}" {
+          VerticalAlign 0
+          Padding 0 -12 0 0
+         }
+         Clipping False
+         Color 0 0 0 1
+         Text "#ar-deploymenu_spawnpoint_name"
+         "Font Size" 20
+         "Min Font Size" 20
+         "Horizontal Alignment" Center
+         FontProperties FontProperties "{54C883806AE51B80}" {
+          Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+          Bold 1
+          OutlineColor 0 0 0 1
+          ShadowSize 8
+          ShadowColor 1 1 1 1
+          ShadowOffset 10 7
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

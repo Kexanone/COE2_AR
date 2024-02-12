@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{5F7188CDD6BEF399}UI/layouts/Menus/RoleSelection/COE_ObjectiveSelectionMenu.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

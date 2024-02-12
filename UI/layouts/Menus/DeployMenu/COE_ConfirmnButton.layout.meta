@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A9DF98D65716F571}UI/layouts/Menus/DeployMenu/COE_ConfirmnButton.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{A2AFE881DE2DDBCE}worlds/COE2/Test/COE2_Test.ent"
+ Configurations {
+  ENTResourceClass PC {
+  }
+  ENTResourceClass XBOX_ONE : PC {
+  }
+  ENTResourceClass XBOX_SERIES : PC {
+  }
+  ENTResourceClass PS4 : PC {
+  }
+  ENTResourceClass HEADLESS : PC {
+  }
+ }
+}

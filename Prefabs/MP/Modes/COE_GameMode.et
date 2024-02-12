@@ -1,0 +1,216 @@
+COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
+ ID "56B2B479C6B96951"
+ components {
+  SignalsManagerComponent "{5E6F1867E2884BD3}" {
+  }
+  SCR_CommunicationSoundComponent "{5E757D047CE171AF}" {
+   Filenames {
+    "{91D53896F5AD5DB4}Sounds/RadioProtocol/RadioProtocol_CombatPatrol_US.acp"
+   }
+  }
+  COE_ObjectiveAttributesComponent "{609470DCB4A256EF}" {
+   m_iTaskType RANDOM
+  }
+  COE_SessionAttributesComponent "{60943BB91093B87A}" {
+  }
+  SCR_ArsenalManagerComponent "{5E6F1867E2884BA8}" {
+  }
+  SCR_CommandingManagerComponent "{5E6F1867E2884BA4}" {
+   m_sCommandsConfigPath "{54764D4E706F348C}Configs/Commanding/Commands.conf"
+  }
+  SCR_CompositionSlotManagerComponent "{5E8ED61996D6450A}" {
+  }
+  SCR_DebriefingScreenComponent "{5E6F1867E2884BA2}" {
+   m_sHeaderTitle "#AR-CombatScenarioArland_Name"
+   m_BaseLayout SCR_DebriefingScreenUnevenFourTiles "{5E6F1867E2884BBF}" {
+    m_TopLeftTile SCR_DebriefingScreenBigImageContent "{5E6F1867E2884BBD}" {
+     m_sContentImage "{C9D485F6F055C410}UI/Textures/MissionLoadingScreens/COE_Arland_Preview.edds"
+    }
+    m_TopRightTile SCR_DebriefingScreenFinishedObjectivesContent "{5E6F1867E2884BBB}" {
+     m_sTitleText "#AR-DebriefingScreen_Objectives"
+    }
+    m_BottomLeftTile SCR_DebriefingScreenSummaryContent "{5E6F1867E2884BB9}" {
+     m_sTitleText "#AR-DebriefingScreen_Debriefing"
+     m_sSubtitleText "#AR-DebriefingScreen_Subtitle"
+    }
+    m_BottomRightTile SCR_DebriefingScreenStatisticsContent "{5E6F1867E2884BB6}" {
+     m_sTitleText "#AR-DebriefingScreen_Statistics"
+     m_aStatistics {
+      SCR_DebriefingScreenStatisticShotsFired "{5E83095F660AB0A2}" {
+      }
+      SCR_DebriefingScreenStatisticKills "{5E83095F67BFBC71}" {
+      }
+      SCR_DebriefingScreenStatisticDeaths "{5E83095F659FABBF}" {
+      }
+      SCR_DebriefingScreenStatisticDistanceWalked "{5E83095F619EFC94}" {
+      }
+      SCR_DebriefingScreenStatisticDistanceDriven "{5E83095F6EE0B393}" {
+      }
+     }
+    }
+   }
+  }
+  SCR_GameModeSFManager "{5E750EAAE1E3BF20}" {
+  }
+  SCR_GroupsManagerComponent "{5706EC99934496F5}" {
+   m_sDefaultGroupPrefab "{5D1731EDAA56A96E}Prefabs/Groups/COE_PlayableGroup.et"
+  }
+  SCR_NametagConfigComponent "{571AA9E54FC9210D}" {
+   m_sConfigPath "{09F7AAA14A642683}Configs/NameTags/NametagFriendlies.conf"
+  }
+  SCR_NotificationSenderComponent "{56FA84B04BE7D4C0}" {
+   m_iKillFeedType FULL
+   m_iReceiveKillFeedType ALL
+  }
+  SCR_RespawnBriefingComponent "{5E6F1867E2884BB0}" {
+   m_Info SCR_UIInfo "{5E6F1867E2884B89}" {
+    Description "#CombatScenario_Briefing"
+   }
+   m_aGameModeHints {
+    SCR_HintUIInfo "{5E6F1867E2884B84}" {
+     Name "#AR-Workshop_TabName_Briefing"
+     Description "#AR-CombatScenario_Briefing"
+    }
+   }
+   m_aWinConditions {
+    SCR_BriefingVictoryCondition "{5E6F1867E2884B80}" {
+     victoryCondition CUSTOM
+     name "#AR-CombatScenario_Intel_Title"
+     description "#AR-CombatScenario_Intel_Title"
+    }
+    SCR_BriefingVictoryCondition "{5E6F1867E2884B9C}" {
+     victoryCondition SEIZE
+     name "#AR-CombatScenario_ClearAreaTask_Title"
+     description "#AR-CombatScenario_ClearAreaTask_Title"
+    }
+    SCR_BriefingVictoryCondition "{5E6F1867E2884B99}" {
+     victoryCondition GUARD
+     name "#AR-EditableEntity_AIWaypoint_SearchAndDestroy_Name"
+     description "#AR-EditableEntity_AIWaypoint_SearchAndDestroy_Name"
+    }
+    SCR_BriefingVictoryCondition "{5E6F1867E2884B96}" {
+     name "#AR-CombatScenario_ExfilTask_Title"
+     description "#AR-CombatScenario_ExfilTask_Title"
+    }
+   }
+  }
+  SCR_RespawnSystemComponent "{56B2B4793051E7C9}" {
+   m_SpawnLogic SCR_MenuSpawnLogic "{5D36888CC966608A}" {
+   }
+  }
+  SCR_RespawnTimerComponent "{5E6F1867E2884B95}" {
+  }
+  SCR_TimeAndWeatherHandlerComponent "{5E6F1867E2884B93}" {
+   m_bRandomStartingDaytime 1
+   m_bRandomStartingWeather 1
+   m_bAllowHeaderSettings 1
+  }
+  SCR_VotingManagerComponent "{5650BB6B6089393A}" {
+   m_aVotingTemplates {
+    COE_VotingSquadLeaderIn "{609411A0386C76A3}" {
+     m_Type COE_SQUAD_LEADER_IN
+     m_bIsValuePlayerID 1
+     m_Info SCR_VotingUIInfo "{609411A2A5AF7594}" {
+      Name "#AR-Voting_EDITOR_IN_AddVoteName"
+      m_sStartVotingName "#AR-Voting_EDITOR_IN_StartVotingName"
+      m_sCancelVotingName "#AR-Voting_EDITOR_IN_CancelVotingName"
+      m_sAbstainVoteName "#AR-Voting_EDITOR_IN_AbstainVotingName"
+      m_sStickyNotificationText "#AR-Notification_Sticky_VoteGM"
+      m_iStartNotificationId VOTING_EDITOR_IN_START
+      m_iSucceededNotificationId VOTING_EDITOR_IN_SUCCEED
+      m_iFailedNotificationId VOTING_EDITOR_IN_FAIL
+      m_eVoteCastedLocalNotification VOTING_EDITOR_IN_VOTE_CASTED
+      m_eVoteAbstainedLocalNotification VOTING_EDITOR_IN_VOTE_ABSTAINED
+     }
+    }
+    COE_VotingSquadLeaderOut "{609411A3941BB487}" {
+     m_Type COE_SQUAD_LEADER_OUT
+     m_bIsValuePlayerID 1
+     m_fThreshold 0.333
+     m_iMinParticipation 0.333
+     m_Info SCR_VotingUIInfo "{609411A2AF7C2033}" {
+      Name "#AR-Voting_EDITOR_OUT_AddVoteName"
+      m_sStartVotingName "#AR-Voting_EDITOR_OUT_StartVotingName"
+      m_sCancelVotingName "#AR-Voting_EDITOR_OUT_CancelVotingName"
+      m_sAbstainVoteName "#AR-Voting_EDITOR_OUT_AbstainVotingName"
+      m_sStickyNotificationText "#AR-Notification_Sticky_VoteRemoveGM"
+      m_iStartNotificationId VOTING_EDITOR_OUT_START
+      m_iSucceededNotificationId VOTING_EDITOR_OUT_SUCCEED
+      m_iFailedNotificationId VOTING_EDITOR_OUT_FAIL
+      m_eVoteCastedLocalNotification VOTING_EDITOR_OUT_VOTE_CASTED
+      m_eVoteAbstainedLocalNotification VOTING_EDITOR_OUT_VOTE_ABSTAINED
+     }
+    }
+    COE_VotingSquadLeaderWithdraw "{609411A393A209C3}" {
+     m_Type COE_SQUAD_LEADER_WITHDRAW
+     m_bIsValuePlayerID 1
+     m_fThreshold 0
+     m_iMinParticipation 0
+     m_iMinVotes 1
+     m_Info SCR_VotingUIInfo "{609411A2A9174EF9}" {
+      Name "#AR-Voting_EDITOR_WIDRAW_Name"
+      m_sStartVotingName "#AR-Voting_EDITOR_WIDRAW_Name"
+     }
+    }
+   }
+  }
+  SCR_WelcomeScreenComponent "{5E6F1867E2884B90}" {
+   m_BaseLayout SCR_WelcomeScreenThreeHorizontalColumns "{5E6F1867E2884B91}" {
+    m_LeftColumn SCR_WelcomeScreenFactionContent "{5E6F1867E2884A6E}" {
+     m_sTitleText "#AR-DeployScreen_AvailableFactionsTitle"
+     m_sBottomTitleText "#AR-DeployScreen_MoreFactions"
+    }
+    m_MiddleColumn SCR_WelcomeScreenMissionObjectivesContent "{5E6F1867E2884A6C}" {
+     m_sTitleText "Possible Objectives"
+     m_aMissionObjectives {
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A68}" {
+       m_sObjectiveQuadName "Seize"
+       m_sDescription "#AR-CombatScenario_Kill_Title"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A66}" {
+       m_sObjectiveQuadName "Custom"
+       m_sDescription "#AR-CombatScenario_Intel_Title"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A63}" {
+       m_sObjectiveQuadName "Seize"
+       m_sDescription "#AR-CombatScenario_ClearAreaTask_Title"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E289B940}" {
+       m_sObjectiveQuadName "Defend"
+       m_sDescription "#AR-Commanding_Command_SaD"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E289B95F}" {
+       m_sObjectiveQuadName "GetOut"
+       m_sDescription "#AR-CombatScenario_ExfilTask_Title"
+      }
+     }
+    }
+    m_RightColumn SCR_WelcomeScreenIntroductionContent "{5E6F1867E289B95B}" {
+     m_sTitleText "Introduction"
+     m_aIntroduction {
+      SCR_WelcomeScreenIntroduction "{5E6F1867E289B951}" {
+       m_sContentTitleText "#AR-Workshop_TabName_Briefing"
+       m_sContentDescriptionText "#AR-CombatScenario_Briefing"
+      }
+     }
+    }
+   }
+  }
+  SerializerInventoryStorageManagerComponent "{5E6F1867E289B96E}" {
+  }
+ }
+ PlayerControllerPrefab "{21EAEB797197C0C3}Prefabs/Characters/Core/COE_PlayerController.et"
+ m_bAutoPlayerRespawn 0
+ m_fAutoReloadTime 30
+ m_aMainBaseNames {
+  "COE_MainBase_1"
+ }
+ m_aBlacklistedDescriptorTypes {
+  COE_MapDescriptorType "{6094DDD7F4523371}" {
+   m_iType MDT_NAME_SEA_MINOR
+  }
+  COE_MapDescriptorType "{6094DDD704E08A01}" {
+   m_iType MDT_NAME_SEA_MAJOR
+  }
+ }
+}
