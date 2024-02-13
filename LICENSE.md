@@ -1,5 +1,5 @@
-Arma Public Licence (APL)
-=========================
+Arma Public Licence Share Alike (APL-SA)
+========================================
 
 ## Brief summary of this Licence
 
@@ -16,7 +16,9 @@ With this licence you are free to adapt (i.e. modify, rework or update) and shar
 - **Noncommercial** - You may not use this material for any commercial purposes.
 - **Arma Only** - You may not convert or adapt this material to be used in other games
   than Arma.
+- **Share Alike** - If you adapt, or build upon this material, you may distribute the resulting material only under the same license.
+
 
 ## Full version of licence
 
-See https://www.bohemia.net/community/licenses/arma-public-license
+See https://www.bohemia.net/community/licenses/arma-public-license-share-alike

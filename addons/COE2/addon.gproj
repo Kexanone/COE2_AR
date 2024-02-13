@@ -1,0 +1,77 @@
+GameProject {
+ ID "COE2"
+ GUID "60926835F4A7B0CA"
+ TITLE "COE2"
+ Dependencies {
+  "58D0FB3206B6F859" "5ED61DC0AFE17E8E"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{6098EB41F15B02E6}" {
+      StringTableSource "{B03E06F7A63745FA}Language/COE_localization.st"
+      Languages {
+       LanguageDefinition "{6098EB41FF119D74}" {
+        Code "cs_cz"
+        StringTableRuntime "{3162FC9E63AAEC8F}Language/COE_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AB7}" {
+        Code "de_de"
+        StringTableRuntime "{E41CE6AD7009FDAF}Language/COE_localization.de_de.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AC5}" {
+        Code "en_us"
+        StringTableRuntime "{BAEC6CE61AFAF8AE}Language/COE_localization.en_us.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AD5}" {
+        Code "es_es"
+        StringTableRuntime "{7FA0216FF4F893B1}Language/COE_localization.es_es.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AE4}" {
+        Code "fr_fr"
+        StringTableRuntime "{C408D458127B70B3}Language/COE_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AFF}" {
+        Code "it_it"
+        StringTableRuntime "{44145B6CBF59F34A}Language/COE_localization.it_it.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A0D}" {
+        Code "ja_jp"
+        StringTableRuntime "{540FE6FE8128C3E1}Language/COE_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A1D}" {
+        Code "ko_kr"
+        StringTableRuntime "{F4B1CE521205C0DE}Language/COE_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A2E}" {
+        Code "pl_pl"
+        StringTableRuntime "{A8C068A8ACEA5CA2}Language/COE_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A3F}" {
+        Code "pt_br"
+        StringTableRuntime "{7DB7F26497149618}Language/COE_localization.pt_br.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A49}" {
+        Code "ru_ru"
+        StringTableRuntime "{28F6E6CC0A6DF36E}Language/COE_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{6098EB41FF119B08}" {
+        Code "zh_cn"
+        StringTableRuntime "{781EDD075FE39D26}Language/COE_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

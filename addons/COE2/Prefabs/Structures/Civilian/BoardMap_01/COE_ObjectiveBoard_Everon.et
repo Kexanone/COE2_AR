@@ -1,0 +1,93 @@
+GenericEntity : "{C6B86C6BD76EA814}Prefabs/Structures/Civilian/BoardMap_01/BoardMap_01.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  COE_EditableObjectiveBoardComponent "{6096B7227A1AA6E7}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{6096B723A7090A15}" {
+    Name "#COE-Editor_ObjectiveAttributes_Name"
+    Icon "{C8326EF8E990396A}UI/Textures/Editor/EditableEntities/Factions/EditableEntity_Faction_Base.edds"
+   }
+   m_bAutoRegister ALWAYS
+   m_Flags 896
+  }
+  ActionsManagerComponent "{6094DD8CCAF35E71}" {
+   ActionContexts {
+    UserActionContext "{6094DD8CC81E58F7}" {
+     ContextName "default"
+     Position PointInfo "{6094DD8CD67F3009}" {
+      Offset 0 1.3141 0
+     }
+     Radius 0.5
+     Omnidirectional 0
+    }
+   }
+   additionalActions {
+    COE_ScenarioSettingsUserAction "{6096B72531F62F2F}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6096B7253D765591}" {
+      Name "#AR-KeybindEditor_ScenarioAttributes"
+     }
+    }
+    COE_ObjectiveSettingsUserAction "{60968491BBF68418}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{60968491D17547EA}" {
+      Name "#COE-Action_ObjectiveAttributes"
+     }
+     "Sort Priority" 1
+    }
+    COE_SelectAOUserAction "{60968491C76CC5FC}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{60968491D754E656}" {
+      Name "#COE-Action_SelectAO"
+     }
+     "Sort Priority" 2
+    }
+    COE_GenerateAOUserAction "{6099212B1DE3C9AA}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6099212B2FA9B8BF}" {
+      Name "#COE-Action_GenerateAO"
+     }
+     Duration 0.5
+     "Sort Priority" 3
+    }
+    COE_BriefingUserAction "{609A2A3F5BD96C65}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{609A2A3F70E3BF39}" {
+      Name "#COE-Action_Briefing"
+     }
+     Duration 0.5
+     "Sort Priority" 4
+    }
+    COE_DeployUserAction "{6094DDB188A98196}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6094DDB197CF031D}" {
+      Name "#AR-ButtonSelectDeploy"
+     }
+     Duration 0.5
+     "Sort Priority" 5
+    }
+    COE_CancelAOUserAction "{609A2A3F65C0301C}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{609A2A3CB826AFDB}" {
+      Name "#COE-Action_CancelAO"
+     }
+     Duration 2
+     "Sort Priority" 6
+    }
+   }
+  }
+ }
+}

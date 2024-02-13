@@ -1,0 +1,56 @@
+GenericEntity COE_MainBase_1 {
+ components {
+  SCR_FactionAffiliationComponent "{6098B5F361A74C63}" {
+   "faction affiliation" "US"
+  }
+  Hierarchy "{6098B5F3B93033CA}" {
+  }
+ }
+ coords 116.61 1 200.734
+ {
+  SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et" {
+   components {
+    SCR_EditableSpawnPointComponent "{52E65E94E3532698}" {
+     m_Flags 32855
+    }
+   }
+   coords 3.915 0.001 -2.681
+  }
+  GenericEntity : "{A6D232BFD42A52FC}Prefabs/Structures/Civilian/BoardMap_01/COE_ObjectiveBoard_Everon.et" {
+   components {
+    COE_EditableObjectiveBoardComponent "{6096B7227A1AA6E7}" {
+     m_Flags 2944
+    }
+    RplComponent "{5624A88DC2D9928D}" {
+     Enabled 1
+    }
+   }
+   coords 2.155 0 3.353
+   angleY -180
+  }
+  GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
+   components {
+    SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+     m_eArsenalSaveType NO_RESTRICTIONS
+    }
+    SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+     m_Flags 789
+    }
+    SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+     m_aContainers {
+      SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
+       m_eResourceRights SELF
+       m_eStorageType STORED
+       m_fResourceValueCurrent 10000
+       m_fResourceValueMax 1000
+       m_bEnableResourceGain 1
+       m_fResourceGain 1000
+       m_fResourceGainTickrate 1
+      }
+     }
+    }
+   }
+   coords 4.718 0.001 3.38
+  }
+ }
+}

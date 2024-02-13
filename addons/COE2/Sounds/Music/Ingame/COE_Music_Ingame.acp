@@ -1,0 +1,102 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 71689
+   name "SOUND_COE_EXECUTION"
+   version 0
+   tl 58.937 -843.25
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 74756
+       port 65
+      }
+     }
+    }
+   }
+   outState 6155
+   outStatePort 22535
+  }
+  SoundClass {
+   id 73737
+   name "SOUND_COE_INTERMISSION"
+   version 0
+   tl 63.437 -1014.5
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 72708
+       port 65
+      }
+     }
+    }
+   }
+   outState 6155
+   outStatePort 22535
+  }
+ }
+ mixers {
+  MixerClass {
+   id 6155
+   name "OutputState"
+   version 4
+   tl 418.206 -894.111
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 22535
+     links {
+      ConnectionClass connection {
+       id 71689
+       port 65
+      }
+      ConnectionClass connection {
+       id 73737
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    2048
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "ANM_Footsteps" "ANM_Voice" "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct"
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 72708
+   name "Bank 1"
+   version 0
+   tl -438.526 -1011.643
+   Volume -18
+   "Fade out function" SCurve
+   "Fade out time" 3000
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{43576F8954191503}Sounds/Music/Ingame/Samples/A2_Reforger.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 74756
+   name "Bank 2"
+   version 0
+   tl -441.562 -845.75
+   Volume -14
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{25857955EC47E83B}Sounds/Music/Ingame/Samples/A2PMC_Niemandsland.wav"
+    }
+   }
+  }
+ }
+ version 1
+}

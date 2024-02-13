@@ -1,8 +1,0 @@
-GameProject {
- ID "COE2"
- GUID "60926835F4A7B0CA"
- TITLE "COE2"
- Dependencies {
-  "58D0FB3206B6F859" "5ED61DC0AFE17E8E"
- }
-}
