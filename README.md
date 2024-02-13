@@ -1,4 +1,4 @@
-# Combat Ops Enhenced 2 (COE2)
+# Combat Ops Enhanced 2 (COE2)
 
 [![Version](https://img.shields.io/github/release/Kexanone/COE2_AR.svg?label=Version&colorB=007EC6&style=flat-square)](https://github.com/Kexanone/COE2_AR/releases/latest)
 [![Issues](https://img.shields.io/github/issues-raw/Kexanone/COE2_AR.svg?label=Issues&style=flat-square)](https://github.com/Kexanone/COE2_AR/issues)
