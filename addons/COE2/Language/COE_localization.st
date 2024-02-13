@@ -169,6 +169,20 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{609AD01DEF816FDD}" {
+   Id "COE-Notification_EDITOR_COMMANDER_RIGHTS_ASSIGNED"
+   Target_en_us "%1 gained commander role"
+   Modified 1620759693
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{609AD01DE9C7414C}" {
+   Id "COE-Notification_EDITOR_COMMANDER_RIGHTS_REMOVED"
+   Target_en_us "%1 lost commander role"
+   Modified 1620759702
+   Author "kex"
+   LastChanged "kex"
+  }
   CustomStringTableItem "{6098EB4A96030214}" {
    Id "COE-Notification_Sticky_VoteCommander"
    Target_en_us "Vote %1 to become Commander"
