@@ -12,10 +12,11 @@ COE_EditorModeCommanderEntity : "{1CF7F1998A0257B1}Prefabs/Editor/Modes/EditorMo
  m_ModeType COE_COMMANDER
  m_iOrder 50
  m_bIsLimited 1
- m_bCloseAfterRemoval 1
  m_UIInfo SCR_UIInfo "{52E85B585B1800FE}" {
   Name "Commander"
   Description "Commander"
   Icon "{B152FFD63EE49AC5}UI/Textures/Editor/Logos/Outline_Editor_256x256.edds"
  }
+ m_ModeAddedNotification COE_COMMANDER_ROLE_ASSIGNED
+ m_ModeRemovedNotification COE_COMMANDER_ROLE_REMOVED
 }

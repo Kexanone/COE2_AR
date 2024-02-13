@@ -260,7 +260,7 @@ class COE_GameMode : SCR_BaseGameMode
 			
 			if (becomesCommanderOrAdmin)
 			{
-				editorManager.AddEditorModes(EEditorModeAccess.BASE, EEditorMode.COE_COMMANDER, true);
+				editorManager.AddEditorModes(EEditorModeAccess.BASE, EEditorMode.COE_COMMANDER);
 			}
 			else
 			{
