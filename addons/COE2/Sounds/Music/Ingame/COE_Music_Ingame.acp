@@ -23,7 +23,7 @@ AudioClass {
    id 73737
    name "SOUND_COE_INTERMISSION"
    version 0
-   tl 63.437 -1014.5
+   tl 61.437 -975.5
    ins {
     ConnectionsClass connections {
      id 64
@@ -75,7 +75,7 @@ AudioClass {
    id 72708
    name "Bank 1"
    version 0
-   tl -438.526 -1011.643
+   tl -439.526 -979.643
    Volume -18
    "Fade out function" SCurve
    "Fade out time" 3000
@@ -91,9 +91,11 @@ AudioClass {
    version 0
    tl -441.562 -845.75
    Volume -14
+   "Fade out function" SCurve
+   "Fade out time" 3000
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{25857955EC47E83B}Sounds/Music/Ingame/Samples/A2PMC_Niemandsland.wav"
+     Filename "{25857955EC47E83B}Sounds/Music/Ingame/Samples/A2OAPMC_NoMansLand.wav"
     }
    }
   }
