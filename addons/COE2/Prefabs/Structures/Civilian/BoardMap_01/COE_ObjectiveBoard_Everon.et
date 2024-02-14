@@ -29,15 +29,6 @@ GenericEntity : "{C6B86C6BD76EA814}Prefabs/Structures/Civilian/BoardMap_01/Board
       Name "#AR-KeybindEditor_ScenarioAttributes"
      }
     }
-    COE_ObjectiveSettingsUserAction "{60968491BBF68418}" {
-     ParentContextList {
-      "default"
-     }
-     UIInfo UIInfo "{60968491D17547EA}" {
-      Name "#COE-Action_ObjectiveAttributes"
-     }
-     "Sort Priority" 1
-    }
     COE_SelectAOUserAction "{60968491C76CC5FC}" {
      ParentContextList {
       "default"
