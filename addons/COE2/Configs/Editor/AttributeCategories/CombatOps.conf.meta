@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{60A99F6DA2FAB87C}Configs/Editor/AttributeCategories/Scenario.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}
