@@ -43,6 +43,13 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{609C43226A8405AB}" {
+   Id "COE-Editor_AttributeCategory_CombatOps_Name"
+   Target_en_us "Combat Ops"
+   Modified 1620867316
+   Author "kex"
+   LastChanged "kex"
+  }
   CustomStringTableItem "{6098EB54F6C1E4B8}" {
    Id "COE-Editor_CommanderMode_Name"
    Target_en_us "Commander"

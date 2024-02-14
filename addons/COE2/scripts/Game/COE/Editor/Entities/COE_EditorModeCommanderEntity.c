@@ -95,49 +95,44 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 	}
 
 	//------------------------------------------------------------------------------------------------
-	static void StartEditingNextLocation()
+	static void StartSelectingAO()
 	{
 		COE_EditorModeCommanderEntity editorEntity = COE_EditorModeCommanderEntity.Cast(COE_EditorModeCommanderEntity.GetInstance());
 		if (!editorEntity)
 			return;
 		
-		editorEntity.Rpc(editorEntity.StartEditingNextLocationServer);
+		editorEntity.Rpc(editorEntity.StartSelectingAOServer);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void StartEditingNextLocationServer()
+	void StartSelectingAOServer()
 	{
-		Rpc(StartEditingNextLocationOwner, m_pGameMode.GetNextLocation().GetOrigin());
+		Rpc(StartSelectingAOOwner, m_pGameMode.GetNextAOParams());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void StartEditingNextLocationOwner(vector nextLocationPos)
+	void StartSelectingAOOwner(COE_AOParams params)
 	{
-		IEntity location = KSC_WorldTools.GetNearestEntityByType(nextLocationPos);
-		if (!location)
-			return;
-		
 		COE_AOSelectionMenu dialog = COE_AOSelectionMenu.Cast(GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.COE_AOSelectionMenu, DialogPriority.INFORMATIVE, 0, true));
 		if (!dialog)
 			return;
 		
-		dialog.SetInitialLocation(location);
-		dialog.GetOnLocationConfirmed().Insert(ConfirmEditingNextLocation);
+		dialog.SetParams(params);
+		dialog.GetOnConfirm().Insert(ConfirmSelectingAO);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ConfirmEditingNextLocation(IEntity newLocation)
+	void ConfirmSelectingAO(COE_AOParams params)
 	{
-		Rpc(ConfirmEditingNextLocationServer, newLocation.GetOrigin());
+		Rpc(ConfirmSelectingAOServer, params);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void ConfirmEditingNextLocationServer(vector newLocationPos)
+	void ConfirmSelectingAOServer(COE_AOParams params)
 	{
-		IEntity location = KSC_WorldTools.GetNearestEntityByType(newLocationPos);
-		m_pGameMode.SetNextLocation(location);
+		m_pGameMode.SetNextAOParams(params);
 	}
 }

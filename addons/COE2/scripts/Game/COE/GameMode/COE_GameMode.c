@@ -36,6 +36,24 @@ class COE_MapDescriptorType
 }
 
 //------------------------------------------------------------------------------------------------
+[BaseContainerProps(), SCR_BaseContainerCustomTitleEnum(KSC_ETaskType, "m_eType")]
+class COE_TaskType
+{
+	[Attribute(uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(KSC_ETaskType))]
+	protected KSC_ETaskType m_eType;
+	
+	KSC_ETaskType GetID()
+	{
+		return m_eType;
+	}
+	
+	LocalizedString GetName()
+	{
+		return SCR_Enum.GetEnumName(KSC_ETaskType, m_eType);
+	}
+}
+
+//------------------------------------------------------------------------------------------------
 class COE_GameModeClass : SCR_BaseGameModeClass
 {
 };
@@ -48,6 +66,9 @@ class COE_GameMode : SCR_BaseGameMode
 	
 	[Attribute(desc: "Location types to be excluded", category: "Locations")]
 	protected ref array<ref COE_MapDescriptorType> m_aBlacklistedDescriptorTypes;
+	
+	[Attribute(desc: "Available task types", category: "Tasks")]
+	protected ref array<ref COE_TaskType> m_aAvailableTaskTypes;
 	
 	[Attribute(desc: "Default faction key for the players", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultPlayerFactionKey;
@@ -68,7 +89,7 @@ class COE_GameMode : SCR_BaseGameMode
 	protected IEntity m_pMainBase;
 	protected ref array<IEntity> m_aAvailableLocations;
 	protected COE_FactionManager m_pFactionManager;
-	protected IEntity m_pNextLocation;
+	protected ref COE_AOParams m_pNextAOParams = new COE_AOParams();
 		
 	//------------------------------------------------------------------------------------------------
 	void COE_GameMode(IEntitySource src, IEntity parent)
@@ -111,8 +132,9 @@ class COE_GameMode : SCR_BaseGameMode
 			m_pFactionManager.SetEnemyFaction(SCR_Faction.Cast(m_pFactionManager.GetFactionByKey(m_sDefaultEnemyFactionKey)));
 		
 		// Compile possible locations and select one randomly
+		m_pNextAOParams.m_eTaskType = m_aAvailableTaskTypes[Math.RandomInt(0, m_aAvailableTaskTypes.Count())].GetID();
 		array<IEntity> locations = GetAvailableLocations();
-		m_pNextLocation = locations[Math.RandomInt(0, locations.Count())];
+		m_pNextAOParams.m_pLocation = locations[Math.RandomInt(0, locations.Count())];
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -126,6 +148,12 @@ class COE_GameMode : SCR_BaseGameMode
 	vector GetMainBasePos()
 	{
 		return m_vMainBasePos;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	array<ref COE_TaskType> GetAvailableTaskTypes()
+	{
+		return m_aAvailableTaskTypes;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -159,15 +187,15 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	IEntity GetNextLocation()
+	COE_AOParams GetNextAOParams()
 	{
-		return m_pNextLocation;
+		return m_pNextAOParams;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetNextLocation(IEntity location)
+	void SetNextAOParams(COE_AOParams params)
 	{
-		m_pNextLocation = location;
+		m_pNextAOParams = params;
 	}
 	
 	//------------------------------------------------------------------------------------------------

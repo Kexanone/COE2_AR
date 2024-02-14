@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{A9DF98D65716F571}UI/layouts/Menus/DeployMenu/COE_ConfirmnButton.layout"
+ Name "{196EAA331A95CC52}UI/layouts/WidgetLibrary/Buttons/COE_DialogButtonConfirm.layout"
  Configurations {
   LayoutResourceClass PC {
   }
