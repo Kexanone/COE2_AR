@@ -1,0 +1,19 @@
+ButtonWidgetClass : "{D27D044A8145DC7C}UI/layouts/WidgetLibrary/Buttons/WLib_ButtonTextUnderlined.layout" {
+ {
+  SizeLayoutWidgetClass "{55708DE68194FB56}" {
+   Prefab "{55708DE68194FB56}"
+   {
+    OverlayWidgetClass "{55708DE68194FB53}" {
+     Prefab "{55708DE68194FB53}"
+     {
+      TextWidgetClass "{55708DE68194FB5B}" {
+       Prefab "{55708DE68194FB5B}"
+       "Font Size" 32
+       "Min Font Size" 32
+      }
+     }
+    }
+   }
+  }
+ }
+}

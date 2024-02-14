@@ -1,0 +1,46 @@
+ButtonWidgetClass : "{73DCF6682DCA9F1E}UI/layouts/Menus/DeployMenu/SpawnPointSpinBox.layout" {
+ components {
+  SCR_SpawnPointSpinBox "{5CCCC84E5035D07E}" {
+   m_bForceSize 0
+  }
+ }
+ {
+  SizeLayoutWidgetClass "{5CCCBCDCB8B4D0C2}" {
+   Prefab "{5CCCBCDCB8B4D0C2}"
+   {
+    OverlayWidgetClass "{55367D8E531FD623}" {
+     Prefab "{55367D8E531FD623}"
+     {
+      HorizontalLayoutWidgetClass "{55367D8E4592BC6E}" {
+       Prefab "{55367D8E4592BC6E}"
+       {
+        HorizontalLayoutWidgetClass "{5CCCBCDCB8B4D0D9}" {
+         Prefab "{5CCCBCDCB8B4D0D9}"
+         Slot LayoutSlot "{55367D828911C327}" {
+         }
+         {
+          VerticalLayoutWidgetClass "{5CCCBCDCB8B4D0DC}" {
+           Prefab "{5CCCBCDCB8B4D0DC}"
+           Slot LayoutSlot "{55367D82D7AA2C75}" {
+           }
+           {
+            RichTextWidgetClass "{5CCCBCDCB8B4D0DF}" {
+             Prefab "{5CCCBCDCB8B4D0DF}"
+             Slot LayoutSlot "{55367D82CFCF3437}" {
+              Padding 0 5 0 5
+             }
+             "Font Size" 32
+             "Min Font Size" 32
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

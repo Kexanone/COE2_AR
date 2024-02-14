@@ -39,6 +39,21 @@ FrameWidgetClass {
       HorizontalAlign 3
       VerticalAlign 3
      }
+     {
+      CanvasWidgetClass "{5A45347FD72F20E4}" {
+       Prefab "{5A45347FD72F20E4}"
+       Slot FrameWidgetSlot "{5A45347FD72F20AD}" {
+        PositionX 1.585
+        OffsetLeft 1.585
+        PositionY -0.961
+        OffsetTop -0.961
+        SizeX 0
+        OffsetRight -1.585
+        SizeY 0
+        OffsetBottom 0.961
+       }
+      }
+     }
     }
     FrameWidgetClass "{6094B4F8B609F8E0}" {
      Name "MenuFrame"
@@ -94,6 +109,7 @@ FrameWidgetClass {
              }
              components {
               SCR_InputButtonComponent "{5D346C3DD81D95CD}" {
+               m_sSoundClicked "SOUND_FE_BUTTON_CANCEL"
                m_sActionName "MenuOpen"
                m_sLabel "#AR-AttributesDialog_ButtonCloseNoSave"
               }
@@ -235,12 +251,6 @@ FrameWidgetClass {
                   }
                  }
                  {
-                  ImageWidgetClass "{6096DE8BE95F2FD7}" {
-                   Name "Image0"
-                   Slot OverlayWidgetSlot "{6096DE8033A8A400}" {
-                   }
-                   Color 0.761 0.392 0.08 1
-                  }
                   ImageWidgetClass "{6094B4F8B609F80B}" {
                    Name "Background"
                    Slot OverlayWidgetSlot "{5D0882235FCEF807}" {
@@ -270,66 +280,56 @@ FrameWidgetClass {
                       VerticalAlign 3
                      }
                      {
-                      OverlayWidgetClass "{6096DE8AD388806E}" {
-                       Name "LocationNameOverlay"
-                       Slot LayoutSlot "{6096DE8AD3888186}" {
-                        Padding 0 0 0 10
+                      ButtonWidgetClass "{609B3357328DDEF3}" : "{105B85242BEE5A8D}UI/layouts/WidgetLibrary/ToolBoxes/ToolBoxMultiline.layout" {
+                       Name "ObjectiveToolbox"
+                       Slot LayoutSlot "{609B33564B31E20D}" {
+                        Padding 0 0 0 5
                        }
-                       {
-                        HorizontalLayoutWidgetClass "{6096DE8AE54E48EB}" {
-                         Name "HorizontalLayout0"
-                         Slot OverlayWidgetSlot "{6096DE8AE54E4801}" {
-                         }
-                         {
-                          RichTextWidgetClass "{6096DE8ADC6A21C9}" {
-                           Name "LabelText"
-                           Slot LayoutSlot "{6096DE8033A8A47C}" {
-                            Padding 0 0 5 0
-                           }
-                           Text "#COE-Dialog_SelectAO_Location"
-                           "Font Size" 32
-                           "Min Font Size" 32
-                           "Vertical Alignment" Center
-                           FontProperties FontProperties "{6096DE8A2B64661B}" {
-                            Bold 1
-                           }
-                          }
-                          RichTextWidgetClass "{6096DE8AC625D8EC}" {
-                           Name "LocationText"
-                           Slot LayoutSlot "{6096DE8033A8A59E}" {
-                           }
-                           Text "None"
-                           "Font Size" 32
-                           "Min Font Size" 32
-                           "Vertical Alignment" Center
-                          }
-                         }
+                       components {
+                        SCR_ToolboxMultilineComponent "{55487E49768AEAF9}" {
+                         m_bUseLabel 0
+                         m_ElementLayout "{627299109547E0A4}UI/layouts/WidgetLibrary/Buttons/COE_WLib_ButtonTextUnderlined.layout"
+                         m_bCycleMode 1
+                         m_iMaxItemsInRow 1
+                         m_fElementHeight 42
                         }
                        }
                       }
-                      ButtonWidgetClass "{6096DE8C7A2B0F76}" : "{A9DF98D65716F571}UI/layouts/Menus/DeployMenu/COE_ConfirmnButton.layout" {
-                       Name "ConfirmButton"
-                       Slot LayoutSlot "{6096DE8033A88BFC}" {
+                      ButtonWidgetClass "{609C432791D5249C}" : "{34630898CB740138}UI/layouts/Menus/DeployMenu/COE_LocationSpinBox.layout" {
+                       Name "LocationSelector"
+                       Slot LayoutSlot "{609C4327234AD85F}" {
+                        Padding 0 0 0 10
                        }
                        components {
-                        SCR_DeployButton "{5D08A913BC266D57}" {
-                         m_sActionName "DeployMenuSelect"
-                         m_sLabel "Confirm"
+                        SCR_SpawnPointSpinBox "{5CCCC84E5035D07E}" {
                         }
                        }
+                      }
+                      ButtonWidgetClass "{609B3352A17CD7FB}" : "{196EAA331A95CC52}UI/layouts/WidgetLibrary/Buttons/COE_DialogButtonConfirm.layout" {
+                       Name "ConfirmButton"
+                       Slot LayoutSlot "{5CC2F7A314C9440B}" {
+                       }
                        {
-                        SizeLayoutWidgetClass "{6096DE8CCF7B8AA6}" {
-                         Prefab "{6096DE8CCF7B8AA6}"
+                        SizeLayoutWidgetClass "{609C4339EE288DE1}" {
+                         Prefab "{609C4339EE288DE1}"
+                         Slot ButtonWidgetSlot "{5DB89B776AA9CEBD}" {
+                          Padding 2 2 2 2
+                         }
                          {
-                          OverlayWidgetClass "{6096DE8CCF7B8AA5}" {
-                           Prefab "{6096DE8CCF7B8AA5}"
+                          OverlayWidgetClass "{609C433B01994951}" {
+                           Prefab "{609C433B01994951}"
+                           Slot AlignableSlot "{609C433B1228F878}" {
+                           }
                            {
-                            HorizontalLayoutWidgetClass "{6096DE8CCF7B8AA2}" {
-                             Prefab "{6096DE8CCF7B8AA2}"
+                            OverlayWidgetClass "{609C433A2B22C229}" {
+                             Prefab "{609C433A2B22C229}"
+                             Slot OverlayWidgetSlot "{609C433A2B22C240}" {
+                             }
                              {
-                              RichTextWidgetClass "{6096DE8CCF7B8AAA}" {
-                               Prefab "{6096DE8CCF7B8AAA}"
-                               Text "Navigation Button"
+                              ImageWidgetClass "{609C43393BD3E20E}" {
+                               Prefab "{609C43393BD3E20E}"
+                               Slot OverlayWidgetSlot "{609C43393BD3E227}" {
+                               }
                               }
                              }
                             }
@@ -602,14 +602,14 @@ FrameWidgetClass {
        Name "Chat"
        Slot FrameWidgetSlot "{5CDEC184D2CE1995}" {
         Anchor 0 0.6 1 1
-        PositionX 0
-        OffsetLeft 0
-        PositionY 0
-        OffsetTop 0
+        PositionX -9.69
+        OffsetLeft -9.69
+        PositionY -3.23
+        OffsetTop -3.23
         SizeX 0
-        OffsetRight 0
+        OffsetRight 9.69
         SizeY 0
-        OffsetBottom 0
+        OffsetBottom 3.23
         Alignment 0 0
        }
       }

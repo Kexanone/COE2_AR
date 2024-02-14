@@ -7,16 +7,19 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	protected ref MapConfiguration m_MapConfigDeploy = new MapConfiguration();
 	protected SCR_MapUIElementContainer m_UIElementContainer;
 	
-	protected SCR_InputButtonComponent m_ConfirmButton;
 	protected SCR_InputButtonComponent m_CloseButton;
-	protected TextWidget m_LocationText;
 	protected SCR_InputButtonComponent m_ChatButton;
-	protected SCR_InputButtonComponent m_DeployButton;
 	protected SCR_ChatPanel m_ChatPanel;
+		
+	protected SCR_ToolboxComponent m_ObjectiveToolbox;
+	protected SCR_SpinBoxComponent m_LocationSelector;
+	protected SCR_InputButtonComponent m_ConfirmButton;
+
+	protected ref ScriptInvoker m_OnConfirm = new ScriptInvoker();
 	
-	protected ref ScriptInvoker m_OnLocationConfirmed = new ScriptInvoker();
-	
-	protected IEntity m_pSelectedLocation;
+	protected ref COE_AOParams m_SelectedAOParams;
+	protected ref array<ref COE_TaskType> m_aTaskTypes = {};
+	protected ref array<IEntity> m_aLocations;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuOpen()
@@ -53,17 +56,40 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		if (m_ChatButton)
 			m_ChatButton.m_OnActivated.Insert(OnChatToggle);
 		
-		m_LocationText = TextWidget.Cast(GetRootWidget().FindAnyWidget("LocationText"));
-
 		m_ConfirmButton = SCR_InputButtonComponent.GetInputButtonComponent("ConfirmButton", GetRootWidget());
 		if (m_ConfirmButton)
-			m_ConfirmButton.m_OnActivated.Insert(ConfirmAndClose);
+			m_ConfirmButton.m_OnActivated.Insert(OnConfirm);
 		
 		m_CloseButton = SCR_InputButtonComponent.GetInputButtonComponent("CloseButton", GetRootWidget());
 		if (m_CloseButton)
 			m_CloseButton.m_OnActivated.Insert(Close);
 		
-		SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_HUD_MAP_OPEN);
+		m_ObjectiveToolbox = SCR_ToolboxComponent.GetToolboxComponent("ObjectiveToolbox", GetRootWidget());
+		if (m_ObjectiveToolbox)
+		{
+			m_aTaskTypes = COE_GameMode.GetInstance().GetAvailableTaskTypes();
+			
+			foreach(COE_TaskType type : m_aTaskTypes)
+				m_ObjectiveToolbox.AddItem(type.GetName());
+			
+			m_ObjectiveToolbox.m_OnChanged.Insert(OnObjectiveChanged);
+		};
+		
+		m_LocationSelector = SCR_SpinBoxComponent.GetSpinBoxComponent("LocationSelector", GetRootWidget());
+		if (m_LocationSelector)
+		{
+			m_aLocations = COE_GameMode.GetInstance().GetAvailableLocations();
+			
+			foreach(int i, IEntity location : m_aLocations)
+			{
+				MapDescriptorComponent descriptor = MapDescriptorComponent.Cast(location.FindComponent(MapDescriptorComponent));
+				if (descriptor)
+					m_LocationSelector.AddItem(descriptor.Item().GetDisplayName());
+			};
+			
+			m_LocationSelector.m_OnChanged.Insert(OnLocationSelectorChanged);
+			GetGame().GetWorkspace().SetFocusedWidget(m_LocationSelector.GetRootWidget());
+		};
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -85,24 +111,43 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		if (m_UIElementContainer)
 			m_UIElementContainer.COE_GetOnLocationSelected().Insert(SetLocationExt);
 		
-		SetLocationExt(m_pSelectedLocation);
+		FocusOnPoint(m_SelectedAOParams.m_pLocation);
+		
+		SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_HUD_MAP_OPEN);
 	}
 	
-	void SetInitialLocation(IEntity entity)
+	void SetParams(COE_AOParams params)
 	{
-		m_pSelectedLocation = entity;
+		m_SelectedAOParams = params.Copy();
+		SetLocationExt(m_SelectedAOParams.m_pLocation);
+		
+		foreach (int i, COE_TaskType type : m_aTaskTypes)
+		{
+			if (type.GetID() == m_SelectedAOParams.m_eTaskType)
+			{
+				m_ObjectiveToolbox.SetCurrentItem(i);
+				break;
+			};
+		};
 	}
 	
 	protected void SetLocationExt(IEntity entity)
 	{
-		m_pSelectedLocation = entity;
+		m_SelectedAOParams.m_pLocation = entity;
 		FocusOnPoint(entity);
 		
 		MapDescriptorComponent mapDescriptor = MapDescriptorComponent.Cast(entity.FindComponent(MapDescriptorComponent));
 		if (!mapDescriptor)
 			return;
 		
-		m_LocationText.SetText(mapDescriptor.Item().GetDisplayName());
+		foreach(int i, IEntity location : m_aLocations)
+		{
+			if (location == m_SelectedAOParams.m_pLocation)
+			{
+				m_LocationSelector.SetCurrentItem(i);
+				break;
+			}
+		};
 	}
 	
 	//! Centers map to a specific spawn point.
@@ -124,6 +169,18 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		else
 			m_MapEntity.SetPan(xScaled, yScaled);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnObjectiveChanged(SCR_SelectionWidgetComponent comp, int i)
+	{
+		m_SelectedAOParams.m_eTaskType = m_aTaskTypes[i].GetID();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnLocationSelectorChanged(SCR_SelectionWidgetComponent comp, int i)
+	{
+		SetLocationExt(m_aLocations[i]);
+	}
 
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuUpdate(float tDelta)
@@ -142,9 +199,9 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 			m_MapEntity.CloseMap();		
 	}
 	
-	void ConfirmAndClose()
+	void OnConfirm()
 	{
-		m_OnLocationConfirmed.Invoke(m_pSelectedLocation);
+		m_OnConfirm.Invoke(m_SelectedAOParams);
 		Close();
 	}
 
@@ -159,9 +216,6 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		SCR_InfoDisplay actionMenuDisplay = GetGame().GetHUDManager().FindInfoDisplay(SCR_ActionMenuInteractionDisplay);
 		if (actionMenuDisplay)
 			actionMenuDisplay.GetRootWidget().SetVisible(true);
-				
-		SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_HUD_MAP_CLOSE);
-
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -174,8 +228,8 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		SCR_ChatPanelManager.GetInstance().ToggleChatPanel(m_ChatPanel);
 	}
 	
-	ScriptInvoker GetOnLocationConfirmed()
+	ScriptInvoker GetOnConfirm()
 	{
-		return m_OnLocationConfirmed;
+		return m_OnConfirm;
 	}
 }

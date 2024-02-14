@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{627299109547E0A4}UI/layouts/WidgetLibrary/Buttons/COE_WLib_ButtonTextUnderlined.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}
