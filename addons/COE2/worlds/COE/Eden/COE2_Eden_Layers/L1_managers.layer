@@ -1,23 +1,11 @@
-SCR_AIWorld AIWorld : "{70CCCF16487C927F}Prefabs/AI/SCR_AIWorld_Eden.et" {
- coords 4796.551 26.689 11866.529
+SCR_AIWorld AIWorld : "{01DC74137CFDDB6A}Prefabs/AI/SCR_AIWorld_Arland.et" {
+ coords 4805.584 0 11850.729
 }
 PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
  coords 4778.674 27.103 11842.043
 }
 TagManager TagManager : "{2FA9E172CAB1857A}Prefabs/MP/Managers/TagManager.et" {
  coords 4773.712 27.317 11843.783
-}
-COE_GameMode COE_GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
- components {
-  SCR_VotingManagerComponent "{5650BB6B6089393A}" {
-   m_aVotingTemplates {
-    COE_VotingCommanderWithdraw "{609411A393A209C3}" {
-     m_Type KICK
-    }
-   }
-  }
- }
- coords 935.815 42.872 2639.417
 }
 RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
  coords 3819.31 -23.878 11386.672
@@ -86,9 +74,6 @@ COE_FactionManager FactionManager : "{F9A08100A9E20FB5}Prefabs/Managers/COE_Fact
 HitRegistrationManager HitRegManager : "{0EDA3D48791120DD}Prefabs/MP/HitRegManager.et" {
  coords 4776.811 27.103 11840.395
 }
-SCR_LoadoutManager LoadoutManager : "{4193EDCF6585A770}Prefabs/MP/Managers/COE_LoadoutManager.et" {
- coords 4776.918 27.182 11843.557
-}
-SCR_SpawnPoint : "{CEA2B24051A44525}PrefabsEditable/SpawnPoints/E_SpawnPoint_US.et" {
- coords 926.144 39.01 2641.947
+SCR_LoadoutManager LoadoutManager : "{B54D08AEA74A5354}Prefabs/MP/Managers/Loadouts/LoadoutManager_Editor.et" {
+ coords 105.612 1 186.664
 }

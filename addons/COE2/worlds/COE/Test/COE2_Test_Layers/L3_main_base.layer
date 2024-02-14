@@ -15,6 +15,9 @@ GenericEntity COE_MainBase_1 {
     }
    }
    coords 3.915 0.001 -2.681
+   m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
+    Name "Main Base"
+   }
   }
   GenericEntity : "{A6D232BFD42A52FC}Prefabs/Structures/Civilian/BoardMap_01/COE_ObjectiveBoard_Everon.et" {
    components {

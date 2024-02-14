@@ -77,15 +77,3 @@ HitRegistrationManager HitRegManager : "{0EDA3D48791120DD}Prefabs/MP/HitRegManag
 SCR_LoadoutManager LoadoutManager : "{4193EDCF6585A770}Prefabs/MP/Managers/COE_LoadoutManager.et" {
  coords 4776.918 27.182 11843.557
 }
-GenericEntity : "{A6D232BFD42A52FC}Prefabs/Structures/Civilian/BoardMap_01/COE_ObjectiveBoard_Everon.et" {
- coords 925.69 39.01 2647.009
- angleY 180
-}
-$grp SCR_SpawnPoint : "{CEA2B24051A44525}PrefabsEditable/SpawnPoints/E_SpawnPoint_US.et" {
- {
-  coords 1476.418 39.011 2800.407
- }
- {
-  coords 1296.104 39.01 2105.716
- }
-}
