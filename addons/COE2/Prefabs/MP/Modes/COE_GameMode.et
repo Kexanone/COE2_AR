@@ -208,4 +208,18 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
    m_iType MDT_NAME_SEA_MAJOR
   }
  }
+ m_aAvailableTaskTypes {
+  COE_TaskType "{609C432042815E08}" {
+   m_eType CLEAR_AREA
+  }
+  COE_TaskType "{609C432064AAB3F4}" {
+   m_eType DESTROY
+  }
+  COE_TaskType "{609C43206E03DC1E}" {
+   m_eType KILL
+  }
+  COE_TaskType "{609C43206C9AD750}" {
+   m_eType FIND_INTEL
+  }
+ }
 }
