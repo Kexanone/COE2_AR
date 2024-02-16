@@ -15,6 +15,13 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{609F29E24795601A}" {
+   Id "COE-Action_ConfirmCancelAO"
+   Target_en_us "CONFIRM CANCEL AO"
+   Modified 1621047048
+   Author "kex"
+   LastChanged "kex"
+  }
   CustomStringTableItem "{6099212B7E1B92EE}" {
    Id "COE-Action_GenerateAO"
    Target_en_us "Generate AO"
@@ -29,10 +36,31 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{609F29E23AC05072}" {
+   Id "COE-Action_QuitCancelAO"
+   Target_en_us "Quit cancel AO"
+   Modified 1621047068
+   Author "kex"
+   LastChanged "kex"
+  }
   CustomStringTableItem "{6098EB56B679A6E9}" {
    Id "COE-Action_SelectAO"
    Target_en_us "Select AO"
    Modified 1620742934
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{609F29E3E0663A77}" {
+   Id "COE-Action_SetInsertionPoint"
+   Target_en_us "Set insertion point"
+   Modified 1621047339
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{60A0A47D302DACF1}" {
+   Id "COE-ActionCategory_CombatOpsCommands"
+   Target_en_us "Combat Ops Commands"
+   Modified 1621150500
    Author "kex"
    LastChanged "kex"
   }
@@ -57,6 +85,20 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{609C9CFFC2CE19E5}" {
+   Id "COE-Editor_EnemyAICountMultiplier_Attribute_Description"
+   Target_en_us "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below minimum count)"
+   Modified 1620882763
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{609C9CFFC6C3DF41}" {
+   Id "COE-Editor_EnemyAICountMultiplier_Attribute_Name"
+   Target_en_us "Enemy AI count multiplier"
+   Modified 1620882710
+   Author "kex"
+   LastChanged "kex"
+  }
   CustomStringTableItem "{6098EB5536406790}" {
    Id "COE-Editor_EnemyFaction_Attribute_Description"
    Target_en_us "Set faction for enemy AI"
@@ -68,6 +110,20 @@ StringTable {
    Id "COE-Editor_EnemyFaction_Attribute_Name"
    Target_en_us "Enemy faction"
    Modified 1620643419
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{609C9CFFB03B11FC}" {
+   Id "COE-Editor_MinEnemyAICount_Attribute_Description"
+   Target_en_us "Minimum enemy AI count for an AO"
+   Modified 1620882697
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{609C9CFFB4E1B11F}" {
+   Id "COE-Editor_MinEnemyAICount_Attribute_Name"
+   Target_en_us "Minimum enemy AI count"
+   Modified 1620882678
    Author "kex"
    LastChanged "kex"
   }
@@ -103,6 +159,13 @@ StringTable {
    Id "COE-Editor_PlayerFaction_Attribute_Name"
    Target_en_us "Player faction"
    Modified 1620643413
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{60A0A467427CC45C}" {
+   Id "COE-MapLocation_Safehouse"
+   Target_en_us "Safehouse"
+   Modified 1621145325
    Author "kex"
    LastChanged "kex"
   }
