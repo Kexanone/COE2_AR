@@ -18,20 +18,20 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static void Request(COE_ECommanderRequest request)
+	static void Request(COE_ECommanderRequest request, vector pos = vector.Zero)
 	{
 		COE_EditorModeCommanderEntity editorEntity = COE_EditorModeCommanderEntity.Cast(COE_EditorModeCommanderEntity.GetInstance());
 		if (!editorEntity)
 			return;
 		
-		editorEntity.Rpc(editorEntity.RequestServer, request);
+		editorEntity.Rpc(editorEntity.RequestServer, request, pos);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RequestServer(COE_ECommanderRequest request)
+	protected void RequestServer(COE_ECommanderRequest request, vector pos)
 	{
-		m_pGameMode.ExecuteCommanderRequest(request);
+		m_pGameMode.ExecuteCommanderRequest(request, pos);
 	}
 	
 	//------------------------------------------------------------------------------------------------

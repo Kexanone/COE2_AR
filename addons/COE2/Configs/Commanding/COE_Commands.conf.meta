@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{7F7CE136B89ABDC8}Configs/Commanding/COE_Commands.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

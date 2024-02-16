@@ -1,0 +1,393 @@
+COE_MainBaseEntity {
+ ID "60A042236B7D1D24"
+ components {
+  SCR_EditableCommentComponent "{609E5DF69A2A8499}" {
+   m_EntityType COMMENT
+   m_UIInfo SCR_EditableDescriptorUIInfo "{609E5DF6DF6CDE33}" {
+    Name "#AR-MapLocation_Military"
+    Icon "{D03F58B327C582D0}UI/Textures/Editor/EditableEntities/Locations/EditableEntity_Location_Base.edds"
+   }
+   m_bAutoRegister ALWAYS
+   m_bStatic 1
+   m_Flags 6168
+  }
+  SCR_FactionAffiliationComponent "{6098B5F361A74C63}" {
+  }
+  Hierarchy "{6098B5F3B93033CA}" {
+  }
+ }
+ coords 111.653 1 150.752
+ Flags 1027
+ {
+  SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et" {
+   ID "60A042236B7D1D38"
+   components {
+    SCR_EditableSpawnPointComponent "{52E65E94E3532698}" {
+     m_UIInfo SCR_EditableDescriptorUIInfo "{52E65E94C47560A2}" {
+     }
+     m_Flags 32855
+    }
+   }
+   coords -10.446 -0.001 1.341
+   m_fSpawnRadius 5
+   m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
+   }
+   m_fSpawnPositionUsageRange 5
+  }
+  SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
+   ID "60A042236B7D1D3B"
+   components {
+    SignalsManagerComponent "{599ECE6EE4C2CC22}" {
+     Enabled 0
+    }
+    SCR_BuildingSoundComponent "{599ECE6EE1AF81F1}" {
+     Enabled 0
+     Filenames {
+      "{6950FFCB5A048F3E}Sounds/Structures/Industrial/Sheds/ShedMetal_02/Structures_ShedMetal_02.acp"
+     }
+     IncludeInactive 1
+     m_vMins -20 5 -5
+     m_vMaxs 20 6 5
+    }
+    MeshObject "{506EDA9D46FC6C06}" {
+     Object "{D5D501A2DEE93E60}Assets/Structures/Industrial/Houses/Warehouse_01/Warehouse_01.xob"
+    }
+    RigidBody "{506EDA9CBE1B57FF}" {
+     ModelGeometry 1
+     Static 1
+    }
+   }
+   coords 0 0 0
+   SlotBoneMappings {
+    SlotBoneMappingObject "{609E5DF35C11347B}" {
+     BonePrefix "socket_420x142"
+     Prefab "{F88356BA8490D112}Prefabs/Structures/BuildingParts/Windows/Win_Warehouse_E_A/Win_Warehouse_E_A_420x142_4_B.et"
+    }
+    SlotBoneMappingObject "{609E5DF35C113584}" {
+     BonePrefix "socket_door"
+     Prefab "{0BB684BD42CCD7E1}Prefabs/Structures/BuildingParts/Doors/DoorSet_Garage_E_03_EXT.et"
+    }
+   }
+   {
+    $grp GenericEntity : "{0BB684BD42CCD7E1}Prefabs/Structures/BuildingParts/Doors/DoorSet_Garage_E_03_EXT.et" {
+     {
+      ID "60A042236B7D1D30"
+      components {
+       Hierarchy "{612AE78C85563E26}" {
+        Enabled 1
+        PivotID "socket_door_garage_001"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+      {
+       GenericEntity {
+        ID "5864884E7120121A"
+        components {
+         DoorComponent "{221C667A9F7D4B69}" {
+          Enabled 0
+         }
+         NavmeshCustomLinkComponent "{559E7AC91AFA25BA}" {
+          Enabled 0
+         }
+         SCR_AISmartActionComponent "{5890ED6117CBB20D}" {
+          Enabled 0
+         }
+         ActionsManagerComponent "{F32B667C3C823800}" {
+          Enabled 0
+         }
+         RplComponent "{9532A705752C8DA8}" {
+          Enabled 0
+         }
+        }
+       }
+       GenericEntity {
+        ID "5864884E712012FA"
+        components {
+         DoorComponent "{221C667A9F7D4B69}" {
+          Enabled 0
+         }
+         NavmeshCustomLinkComponent "{559E7AC91AFA25BA}" {
+          Enabled 0
+         }
+         SCR_AISmartActionComponent "{5890ED6117CBB20D}" {
+          Enabled 0
+         }
+         ActionsManagerComponent "{F32B667C3C823800}" {
+          Enabled 0
+         }
+         RplComponent "{9532A705752C8DA8}" {
+          Enabled 0
+         }
+        }
+       }
+      }
+     }
+     {
+      ID "60A042236B7D1D35"
+      components {
+       Hierarchy "{612AE78C85563E26}" {
+        Enabled 1
+        PivotID "socket_door_garage_002"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+      {
+       GenericEntity {
+        ID "5864884E7120121A"
+        components {
+         DoorComponent "{221C667A9F7D4B69}" {
+          Enabled 0
+         }
+         NavmeshCustomLinkComponent "{559E7AC91AFA25BA}" {
+          Enabled 0
+         }
+         SCR_AISmartActionComponent "{5890ED6117CBB20D}" {
+          Enabled 0
+         }
+         ActionsManagerComponent "{F32B667C3C823800}" {
+          Enabled 0
+         }
+         RplComponent "{9532A705752C8DA8}" {
+          Enabled 0
+         }
+        }
+       }
+       GenericEntity {
+        ID "5864884E712012FA"
+        components {
+         DoorComponent "{221C667A9F7D4B69}" {
+          Enabled 0
+         }
+         NavmeshCustomLinkComponent "{559E7AC91AFA25BA}" {
+          Enabled 0
+         }
+         SCR_AISmartActionComponent "{5890ED6117CBB20D}" {
+          Enabled 0
+         }
+         ActionsManagerComponent "{F32B667C3C823800}" {
+          Enabled 0
+         }
+         RplComponent "{9532A705752C8DA8}" {
+          Enabled 0
+         }
+        }
+       }
+      }
+     }
+    }
+    GenericEntity : "{30E9136D8A77B3C0}Prefabs/Structures/Industrial/Houses/Warehouse_01/COE_Warehouse_01_furniture_01.et" {
+     ID "60A042236B7D1D33"
+     coords 0 0 0
+    }
+    $grp GenericEntity : "{B61A08FB644D2050}Prefabs/Props/Furniture/LampFluorescent/LampFluorescent_01_exterior.et" {
+     {
+      ID "60A042236B7D02C0"
+      components {
+       StreetLampComponent "{58D67C8D679081DF}" {
+        EmissiveGlassSlots {
+         EmissiveGlassSlot glass {
+          Prefab "{90D3BC6D5790E931}Prefabs/Props/Furniture/LampFluorescent/COE_LampFluorescent_01_glass.et"
+         }
+        }
+       }
+      }
+      coords -1.845 5.645 -0.096
+     }
+     {
+      ID "60A042236B7DEC18"
+      components {
+       StreetLampComponent "{58D67C8D679081DF}" {
+        EmissiveGlassSlots {
+         EmissiveGlassSlot glass {
+          Prefab "{90D3BC6D5790E931}Prefabs/Props/Furniture/LampFluorescent/COE_LampFluorescent_01_glass.et"
+         }
+        }
+       }
+      }
+      coords 9.704 5.645 -0.096
+     }
+     {
+      ID "60A042236B7DEC1B"
+      components {
+       StreetLampComponent "{58D67C8D679081DF}" {
+        EmissiveGlassSlots {
+         EmissiveGlassSlot glass {
+          Prefab "{90D3BC6D5790E931}Prefabs/Props/Furniture/LampFluorescent/COE_LampFluorescent_01_glass.et"
+         }
+        }
+       }
+      }
+      coords -13.044 5.645 -0.096
+     }
+    }
+    EnvironmentProbeEntity : "{C0499303ABB1E8A7}Prefabs/Structures/Industrial/Houses/Warehouse_01/Probe_Warehouse_01.et" {
+     ID "60A042236B7DEC07"
+     coords 0 3.618 0
+     LVDiffuseBrightness 2
+    }
+    $grp Building : "{F88356BA8490D112}Prefabs/Structures/BuildingParts/Windows/Win_Warehouse_E_A/Win_Warehouse_E_A_420x142_4_B.et" {
+     {
+      ID "60A042236B7DEC01"
+      components {
+       Hierarchy "{609E5DF35C1135A2}" {
+        Enabled 1
+        PivotID "socket_420x142_05"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC02"
+      components {
+       Hierarchy "{609E5DF35C1135A4}" {
+        Enabled 1
+        PivotID "socket_420x142_02"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC03"
+      components {
+       Hierarchy "{609E5DF35C1135A7}" {
+        Enabled 1
+        PivotID "socket_420x142_03"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC08"
+      components {
+       Hierarchy "{609E5DF35C1135A0}" {
+        Enabled 1
+        PivotID "socket_420x142_07"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC0C"
+      components {
+       Hierarchy "{609E5DF35C1135B6}" {
+        Enabled 1
+        PivotID "socket_420x142_09"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC0D"
+      components {
+       Hierarchy "{609E5DF35C1135A9}" {
+        Enabled 1
+        PivotID "socket_420x142_01"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC0E"
+      components {
+       Hierarchy "{609E5DF35C1135AB}" {
+        Enabled 1
+        PivotID "socket_420x142_08"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+     {
+      ID "60A042236B7DEC0F"
+      components {
+       Hierarchy "{609E5DF35C1135AD}" {
+        Enabled 1
+        PivotID "socket_420x142_06"
+        AutoTransform 1
+       }
+      }
+      coords 0 0 0
+     }
+    }
+   }
+  }
+  GenericEntity : "{A6D232BFD42A52FC}Prefabs/Structures/Civilian/BoardMap_01/COE_ObjectiveBoard_Everon.et" {
+   ID "60A042236B7DEC36"
+   components {
+    COE_EditableObjectiveBoardComponent "{6096B7227A1AA6E7}" {
+     m_Flags 2944
+    }
+    RplComponent "{5624A88DC2D9928D}" {
+     Enabled 1
+    }
+   }
+   coords -9.487 -0.001 6.38
+   angleY -180
+  }
+  $grp GenericEntity : "{E105D2F87098E1D8}Prefabs/Systems/Compositions/PatrolPoint/PatrolPoint_LoiterPoint.et" {
+   {
+    ID "60A042236B427BA9"
+    components {
+     SCR_AISmartActionSentinelComponent "{5CB0DBCC796A6F1C}" {
+      m_vLookPosition 0 0 1
+     }
+    }
+    coords -9.86 0.05 -6.162
+    angleY 0
+   }
+   {
+    ID "60A042236B7DEC32"
+    components {
+     SCR_AISmartActionSentinelComponent "{5CB0DBCC796A6F1C}" {
+      m_vLookPosition 0 0 1
+     }
+    }
+    coords -5.572 0.05 -6.162
+    angleY 0
+   }
+   {
+    ID "60A042236B7DEC33"
+    components {
+     SCR_AISmartActionSentinelComponent "{5CB0DBCC796A6F1C}" {
+      m_vLookPosition 0 0 1
+     }
+    }
+    coords -15.774 0.05 -6.162
+    angleY 0
+   }
+  }
+  GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
+   ID "60A042236B427BA4"
+   components {
+    SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+     m_eArsenalSaveType NO_RESTRICTIONS
+    }
+    SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+     m_Flags 789
+    }
+    SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+     m_aContainers {
+      SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
+       m_eResourceRights SELF
+       m_eStorageType STORED
+       m_fResourceValueCurrent 10000
+       m_fResourceValueMax 1000
+       m_bEnableResourceGain 1
+       m_fResourceGain 1000
+       m_fResourceGainTickrate 1
+      }
+     }
+    }
+   }
+   coords -7.387 -0.001 6.215
+  }
+ }
+}

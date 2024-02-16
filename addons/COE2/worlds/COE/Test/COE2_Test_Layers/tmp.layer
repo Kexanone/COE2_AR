@@ -1,0 +1,8 @@
+COE_PlayerController COE_PlayerController1 : "{21EAEB797197C0C3}Prefabs/Characters/Core/COE_PlayerController.et" {
+ components {
+  COE_PlayerControllerCommandingComponent "{5A7CC0F22BDDB868}" {
+  }
+ }
+ coords 98.347 4.499 148.003
+ Flags 1048579
+}

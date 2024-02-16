@@ -288,6 +288,7 @@ FrameWidgetClass {
                        components {
                         SCR_ToolboxMultilineComponent "{55487E49768AEAF9}" {
                          m_bUseLabel 0
+                         m_bAllowMultiselection 1
                          m_ElementLayout "{627299109547E0A4}UI/layouts/WidgetLibrary/Buttons/COE_WLib_ButtonTextUnderlined.layout"
                          m_bCycleMode 1
                          m_iMaxItemsInRow 1
@@ -308,6 +309,10 @@ FrameWidgetClass {
                       ButtonWidgetClass "{609B3352A17CD7FB}" : "{196EAA331A95CC52}UI/layouts/WidgetLibrary/Buttons/COE_DialogButtonConfirm.layout" {
                        Name "ConfirmButton"
                        Slot LayoutSlot "{5CC2F7A314C9440B}" {
+                       }
+                       components {
+                        SCR_InputButtonComponent "{5D346C3DD81D95CD}" {
+                        }
                        }
                        {
                         SizeLayoutWidgetClass "{609C4339EE288DE1}" {

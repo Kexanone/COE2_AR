@@ -1,5 +1,5 @@
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
-class COE_NumObjectivesEditorAttribute: SCR_BaseValueListEditorAttribute
+class COE_NumObjectivesEditorAttribute : SCR_BaseValueListEditorAttribute
 {		
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{

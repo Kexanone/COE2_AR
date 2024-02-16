@@ -5,11 +5,11 @@ MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager_Base.et" {
  coords 113.358 3.15 186.92
 }
 GenericEntity : "{485F978E315C6097}Prefabs/World/Locations/Eden/Urban/Moutains_East_quarry_01.et" {
- coords 123.531 1 184.437
+ coords 117.638 1 199.395
 }
 GenericEntity : "{70D370E32E04F6AB}Prefabs/World/Locations/Eden/Urban/Regina_sawmill_01.et" {
- coords 147.2 1 97.799
+ coords 197.508 1 40.12
 }
 GenericEntity : "{B40E827D2AC8F210}Prefabs/World/Locations/Eden/Urban/Erquy_Harbor_01.et" {
- coords 75.95 1 136.262
+ coords 37.181 1 77.535
 }

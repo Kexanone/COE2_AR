@@ -8,10 +8,15 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
     "{91D53896F5AD5DB4}Sounds/RadioProtocol/RadioProtocol_CombatPatrol_US.acp"
    }
   }
+  COE_MapConfigComponent "{5C669498E250A34B}" {
+   m_sGadgetMapConfigPath "{A092C0660C5FBA20}Configs/Map/COE_MapFullscreen.conf"
+   m_sSpawnMapConfigPath "{AB17A0C35CDB53A1}Configs/Map/COE_MapSpawnMenu.conf"
+  }
   SCR_ArsenalManagerComponent "{5E6F1867E2884BA8}" {
   }
   SCR_CommandingManagerComponent "{5E6F1867E2884BA4}" {
-   m_sCommandsConfigPath "{54764D4E706F348C}Configs/Commanding/Commands.conf"
+   m_sCommandsConfigPath "{7F7CE136B89ABDC8}Configs/Commanding/COE_Commands.conf"
+   m_iMaxAIPerGroup 10
   }
   SCR_CompositionSlotManagerComponent "{5E8ED61996D6450A}" {
   }
@@ -56,6 +61,9 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
   SCR_NotificationSenderComponent "{56FA84B04BE7D4C0}" {
    m_iKillFeedType FULL
    m_iReceiveKillFeedType ALL
+  }
+  SCR_PlayerSpawnPointManagerComponent "{609CD73D4B95B9D9}" {
+   m_SpawnPointPrefab "{6FC8BA123C919DB3}Prefabs/MP/PlayerRadioSpawnPointCampaign.et"
   }
   SCR_RespawnBriefingComponent "{5E6F1867E2884BB0}" {
    m_Info SCR_UIInfo "{5E6F1867E2884B89}" {

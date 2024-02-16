@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{18DC5F13245A8BCB}Prefabs/Compositions/Misc/COE/COE_Hideout_01.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

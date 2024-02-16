@@ -1,0 +1,331 @@
+GenericEntity : "{28411B0C79460DF8}Prefabs/Structures/Core/BuildingFurniture_base.et" {
+ ID "56A8CBB92342240A"
+ {
+  GenericEntity : "{0879933F4FDD2C2B}Prefabs/Props/Civilian/SackUniversal_01_Pile.et" {
+   ID "609E5DF15393D3B8"
+   coords 11.326 0.05 5.809
+   angleY 80.46
+  }
+  $grp GenericEntity : "{1112756E8A13445B}Prefabs/Props/Industrial/Pallets/Pallet_01_Pile.et" {
+   {
+    ID "609E5DF153939184"
+    coords 13.093 0.435 -5.772
+    angleY 86.476
+   }
+   {
+    ID "609E5DF15393D3C5"
+    coords -17.125 0.05 -5.229
+    angleY 86.268
+   }
+   {
+    ID "609E5DF15393D3C6"
+    coords 12.852 0.05 6.128
+    angleY 86.476
+   }
+  }
+  $grp GenericEntity : "{2B1D0128ED660BE9}Prefabs/Props/Crates/BoxWooden_01.et" {
+   {
+    ID "609E5DF153AC016F"
+    coords 11.408 0.43 -6.077
+    angleY 83.914
+   }
+   {
+    ID "609E5DF153AC4373"
+    coords 11.876 0.43 -5.93
+    angleY 71.268
+   }
+  }
+  $grp GenericEntity : "{2BF58454BEAB913D}Prefabs/Props/Industrial/Pallets/WoodenPalletBox_01_Wood.et" {
+   {
+    ID "609E5DF153AC83BC"
+    coords -17.061 0.05 -6.246
+    angleY -89.078
+   }
+   {
+    ID "609E5DF153AC83BF"
+    coords -17.199 -0.02 5.869
+    angleY -179.078
+   }
+   {
+    ID "609E5DF153AC926B"
+    coords -19.447 -0.02 5.906
+    angleY -179.078
+   }
+   {
+    ID "609E5DF153AE61AF"
+    coords -0.762 0.05 -6.146
+    angleY 0.922
+   }
+   {
+    ID "609E5DF153AECDB6"
+    coords 1.507 0.05 -4.863
+    angleY 0.922
+   }
+   {
+    ID "609E5DF153AEE8F8"
+    coords 0.369 0.05 -6.164
+    angleY 0.922
+   }
+   {
+    ID "609E5DF153AF16A4"
+    coords -18.33 -0.02 5.888
+    angleY -179.078
+   }
+   {
+    ID "609E5DF153AF3ED4"
+    coords -19.468 -0.02 4.586
+    angleY -179.078
+   }
+   {
+    ID "609E5DF153AFB423"
+    coords 1.486 0.05 -6.182
+    angleY 0.922
+   }
+  }
+  $grp GenericEntity : "{51B08BDA20AF8FF7}Prefabs/Props/Industrial/Pallets/WoodenPalletBox_01.et" {
+   {
+    ID "609E5DF153A8D1A7"
+    coords -18.337 0.963 5.862
+    angleY -178.206
+   }
+   {
+    ID "609E5DF153A8D1A8"
+    coords 7.804 0.05 -6.068
+    angleY 86.268
+   }
+   {
+    ID "609E5DF153A8ED01"
+    coords -19.444 0.963 5.897
+    angleY -178.206
+   }
+   {
+    ID "609E5DF153AB23C9"
+    coords 1.483 1.034 -6.174
+    angleY 1.794
+   }
+   {
+    ID "609E5DF153AB72CD"
+    coords 0.376 1.034 -6.139
+    angleY 1.794
+   }
+  }
+  $grp GenericEntity : "{60315717A8C131A8}Prefabs/Props/Furniture/Rack_02_brown.et" {
+   {
+    ID "609E5DF153A53713"
+    coords 10.441 0.05 -5.982
+    angleY -3.732
+   }
+   {
+    ID "609E5DF153AAE8EA"
+    coords 14.333 0.05 -5.728
+    angleY -3.732
+   }
+  }
+  $grp GenericEntity : "{62B2ADC4243454F9}Prefabs/Props/Civilian/Jerrycan_01.et" {
+   {
+    ID "609E5DF153A51765"
+    coords -4.703 0.06 -6.555
+    angleY -3.732
+   }
+   {
+    ID "609E5DF153A5F552"
+    coords -4.911 0.06 -6.568
+    angleY 2.673
+   }
+  }
+  GenericEntity : "{67B5336A6D63CCA4}Prefabs/Props/Construction/PlankPile/PlankPile_01_Medium.et" {
+   ID "609E5DF153A47BE0"
+   coords -18.916 0.05 -0.356
+   angleY 0.564
+  }
+  $grp GenericEntity : "{7030822F7A54F479}Prefabs/Props/Crates/CrateWooden_01_base.et" {
+   {
+    ID "609E5DF153A00109"
+    coords 11.56 1.638 -5.747
+    angleY 83.905
+   }
+   {
+    ID "609E5DF153A0D85F"
+    coords 9.312 0.435 -5.9
+    angleY 86.372
+   }
+  }
+  $grp GenericEntity : "{7BB30759D09C70B5}Prefabs/Props/Civilian/StepladderWooden_01.et" {
+   {
+    ID "609E5DF153A09567"
+    coords 1.516 0.025 6.426
+    angleX -7.77
+    angleY 1.013
+    angleZ 0.721
+   }
+   {
+    ID "609E5DF153A0D85D"
+    coords -19.601 0.007 2.707
+    angleX -14.42
+    angleY -89.288
+    angleZ 1.527
+   }
+  }
+  $grp GenericEntity : "{82DDDA574CB4F0D9}Prefabs/Props/Industrial/BarrelFuel_01_Base.et" {
+   {
+    ID "609E5DF153A09579"
+    coords -7.334 0.05 -6.364
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153A25B3B"
+    coords -2.229 0.05 -6.228
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153A2FA7A"
+    coords -2.901 0.05 -5.782
+    angleY 137.497
+   }
+   {
+    ID "609E5DF153A2FA7B"
+    coords -2.202 0.05 -5.545
+    angleY 77.842
+   }
+   {
+    ID "609E5DF153A33A7E"
+    coords -7.834 0.05 -5.853
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153A3B8D8"
+    coords -6.568 0.05 -6.33
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153BC101F"
+    coords 14.026 0.05 6.123
+    angleY 146.268
+   }
+   {
+    ID "609E5DF153BC2B01"
+    coords 16.11 0.05 5.134
+    angleY -128.438
+   }
+   {
+    ID "609E5DF153BC4AA3"
+    coords 15.521 0.05 5.605
+    angleY 146.268
+   }
+   {
+    ID "609E5DF153BC73B5"
+    coords 15.89 0.05 6.136
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153BD5918"
+    coords -8.29 0.05 -6.407
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153BD591F"
+    coords -3.122 0.05 -6.445
+    angleY 3.859
+   }
+   {
+    ID "609E5DF153BD66F0"
+    coords -4.241 0.05 -6.378
+    angleY 83.671
+   }
+   {
+    ID "609E5DF153BD94B1"
+    coords 15.142 0.05 6.174
+    angleY 146.268
+   }
+   {
+    ID "609E5DF153BDC02D"
+    coords -3.559 0.05 -5.952
+    angleY 83.671
+   }
+  }
+  GenericEntity : "{8EF9A7BC7B9C732E}Prefabs/Props/Industrial/BenchDrill_01_table.et" {
+   ID "609E5DF153BCA84D"
+   coords 15.93 0.05 3.126
+   angleY -3.732
+  }
+  $grp GenericEntity : "{BCE07A58672955B9}Prefabs/Props/Civilian/Bucket_01.et" {
+   {
+    ID "609E5DF153BFE1D5"
+    coords 2.798 0.05 6.261
+    angleY -178.755
+   }
+   {
+    ID "609E5DF153BFFD97"
+    coords 14.622 0.05 5.76
+    angleY 71.268
+   }
+  }
+  $grp GenericEntity : "{C76C3AF337109066}Prefabs/Props/Crates/CardboardBoxStack_01.et" {
+   {
+    ID "609E5DF153B82913"
+    coords 14.762 2.834 -5.649
+    angleY -93.732
+   }
+   {
+    ID "609E5DF153B84C18"
+    coords 12.848 2.834 -5.692
+    angleY 86.268
+   }
+   {
+    ID "609E5DF153BE64D5"
+    coords 13.58 2.834 -5.726
+    angleY -3.732
+   }
+  }
+  $grp GenericEntity : "{CB033C658E372CED}Prefabs/Props/Construction/PlankPile/PlankPile_01_Large.et" {
+   {
+    ID "609E5DF153B883AD"
+    coords -12.812 0.05 -5.73
+    angleY 90.687
+   }
+   {
+    ID "609E5DF153B883AE"
+    coords -18.864 0.05 -4.69
+    angleY -179.313
+   }
+  }
+  GenericEntity : "{D7F69BF7D2DCA0A8}Prefabs/Props/Industrial/Pallets/Pallet_01.et" {
+   ID "609E5DF153B883AC"
+   coords 14.442 0.05 4.935
+   angleY 71.268
+  }
+  GenericEntity : "{DE658AC78172D02E}Prefabs/Props/Construction/GarbageStack_01/GarbageStack_01_Short.et" {
+   ID "609E5DF153BB2F42"
+   coords 4.814 0.05 -6.001
+   angleY 179.455
+  }
+  GenericEntity : "{DF3EF41CE4D441DE}Prefabs/Props/Industrial/BarrelMetal_01_rust.et" {
+   ID "609E5DF153BB2143"
+   coords 2.591 0.05 -6.273
+   angleY 71.268
+  }
+  $grp GenericEntity : "{EB66EE2298D16D18}Prefabs/Props/Civilian/SackTruck_01.et" {
+   {
+    ID "609E5DF153BB2142"
+    coords 13.161 0.05 -4.73
+    angleY 0.049
+   }
+   {
+    ID "609E5DF153BBA498"
+    coords 15.806 0.05 4.232
+    angleY 71.268
+   }
+   {
+    ID "609E5DF153BBE711"
+    coords 2.265 0.05 6.251
+    angleY 181.013
+   }
+  }
+  GenericEntity : "{FE47006C7C7869FE}Prefabs/Props/Civilian/LadderWooden_01.et" {
+   ID "609E5DF153B515ED"
+   coords 15.702 -0.028 -3.715
+   angleX -16.777
+   angleY 86.268
+  }
+ }
+}

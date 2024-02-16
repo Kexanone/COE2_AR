@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{AB17A0C35CDB53A1}Configs/Map/COE_MapSpawnMenu.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}
