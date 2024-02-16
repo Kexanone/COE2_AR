@@ -77,15 +77,9 @@ class COE_FactionManager : SCR_FactionManager
 			gameMode.ExecuteCommanderRequest(COE_ECommanderRequest.CANCEL_AO);
 		
 		// Change affiliation of all objects at the player base
-		IEntity entity = gameMode.GetMainBase().GetChildren();
-		while (entity)
-		{
-			SCR_FactionAffiliationComponent factionAffiliation =SCR_FactionAffiliationComponent.Cast(entity.FindComponent(SCR_FactionAffiliationComponent));
-			if (factionAffiliation)
-				factionAffiliation.SetAffiliatedFaction(faction);
-			
-			entity = entity.GetSibling();
-		};
+		COE_MainBaseEntity mainBase = gameMode.GetMainBase();
+		if (mainBase)
+			mainBase.SetFaction(faction);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	protected COE_GameMode m_GameMode;
 	protected SCR_MapEntity m_MapEntity;
 	protected ref MapConfiguration m_MapConfigDeploy = new MapConfiguration();
-	protected SCR_MapUIElementContainer m_UIElementContainer;
+	protected COE_MapUIElementContainer m_UIElementContainer;
 	
 	protected SCR_InputButtonComponent m_CloseButton;
 	protected SCR_InputButtonComponent m_ChatButton;
@@ -17,8 +17,8 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 
 	protected ref ScriptInvoker m_OnConfirm = new ScriptInvoker();
 	
-	protected ref COE_AOParams m_SelectedAOParams;
-	protected ref array<ref COE_TaskType> m_aTaskTypes = {};
+	protected ref COE_AOParams m_SelectedAOParams = new COE_AOParams();
+	protected ref array<ref COE_TaskType> m_aTaskTypes;
 	protected ref array<IEntity> m_aLocations;
 	
 	//------------------------------------------------------------------------------------------------
@@ -34,11 +34,11 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		if (!m_MapEntity)
 			return;
 		
-		SCR_MapConfigComponent configComp = SCR_MapConfigComponent.Cast(m_GameMode.FindComponent(SCR_MapConfigComponent));
+		COE_MapConfigComponent configComp = COE_MapConfigComponent.Cast(m_GameMode.FindComponent(SCR_MapConfigComponent));
 		if (!configComp)
 			return;
 		
-		m_MapConfigDeploy = m_MapEntity.SetupMapConfig(EMapEntityMode.COE_LOCATION_SELECTION, configComp.COE_GetLocationSelectionMapConfig(), GetRootWidget());
+		m_MapConfigDeploy = m_MapEntity.SetupMapConfig(EMapEntityMode.COE_LOCATION_SELECTION, configComp.GetLocationSelectionMapConfig(), GetRootWidget());
 		m_MapEntity.OpenMap(m_MapConfigDeploy);
 		m_MapEntity.GetOnMapOpen().Insert(OnMapOpen);
 		
@@ -107,9 +107,9 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 			child = sibling;
 		}		
 		
-		m_UIElementContainer = SCR_MapUIElementContainer.Cast(m_MapEntity.GetMapUIComponent(SCR_MapUIElementContainer));
+		m_UIElementContainer = COE_MapUIElementContainer.Cast(m_MapEntity.GetMapUIComponent(COE_MapUIElementContainer));
 		if (m_UIElementContainer)
-			m_UIElementContainer.COE_GetOnLocationSelected().Insert(SetLocationExt);
+			m_UIElementContainer.GetOnLocationSelected().Insert(SetLocationExt);
 		
 		FocusOnPoint(m_SelectedAOParams.m_pLocation);
 		
@@ -118,16 +118,13 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	
 	void SetParams(COE_AOParams params)
 	{
-		m_SelectedAOParams = params.Copy();
+		m_SelectedAOParams.Copy(params);
 		SetLocationExt(m_SelectedAOParams.m_pLocation);
 		
-		foreach (int i, COE_TaskType type : m_aTaskTypes)
+		for (int i = 0; i < m_aTaskTypes.Count(); i++)
 		{
-			if (type.GetID() == m_SelectedAOParams.m_eTaskType)
-			{
+			if (KSC_BitTools.IsBitSet(m_SelectedAOParams.m_eTaskTypes, i))
 				m_ObjectiveToolbox.SetCurrentItem(i);
-				break;
-			};
 		};
 	}
 	
@@ -171,9 +168,16 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void OnObjectiveChanged(SCR_SelectionWidgetComponent comp, int i)
+	protected void OnObjectiveChanged(SCR_SelectionWidgetComponent comp, int i, bool state)
 	{
-		m_SelectedAOParams.m_eTaskType = m_aTaskTypes[i].GetID();
+		if (state)
+		{
+			KSC_BitTools.SetBit(m_SelectedAOParams.m_eTaskTypes, i);
+		}
+		else
+		{
+			KSC_BitTools.ClearBit(m_SelectedAOParams.m_eTaskTypes, i);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

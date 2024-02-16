@@ -1,24 +1,33 @@
 //------------------------------------------------------------------------------------------------
 class COE_AOParams : Managed
 {
-	KSC_ETaskType m_eTaskType;
+	int m_eTaskTypes; // bit flags for tasks
 	IEntity m_pLocation;
 	private const int SERIALIZED_BYTES = 16;
 	
 	//------------------------------------------------------------------------------------------------
-	COE_AOParams Copy()
+	void Copy(COE_AOParams from)
 	{
-		COE_AOParams copy = new COE_AOParams();
-		copy.m_eTaskType = m_eTaskType;
-		copy.m_pLocation = m_pLocation;
-		return copy;
+		m_eTaskTypes = from.m_eTaskTypes;
+		m_pLocation = from.m_pLocation;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void Clear()
+	{
+		m_eTaskTypes = 0;
+		m_pLocation = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	static bool Extract(COE_AOParams instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
 	{
-		snapshot.SerializeInt(instance.m_eTaskType);
-		vector pos = instance.m_pLocation.GetOrigin();
+		snapshot.SerializeInt(instance.m_eTaskTypes);
+		
+		vector pos;
+		if (instance.m_pLocation)
+			pos = instance.m_pLocation.GetOrigin();
+		
 		snapshot.SerializeVector(pos);
 		return true;
 	}
@@ -26,10 +35,18 @@ class COE_AOParams : Managed
 	//------------------------------------------------------------------------------------------------
 	static bool Inject(SSnapSerializerBase snapshot, ScriptCtx ctx, COE_AOParams instance)
 	{
-		snapshot.SerializeInt(instance.m_eTaskType);
+		snapshot.SerializeInt(instance.m_eTaskTypes);
 		vector pos;
 		snapshot.SerializeVector(pos);
-		instance.m_pLocation = KSC_WorldTools.GetNearestEntityByType(pos);
+		if (!pos)
+		{
+			instance.m_pLocation = null;
+		}
+		else
+		{
+			instance.m_pLocation = KSC_WorldTools.GetNearestEntityByType(pos);
+		};
+		
 		return true;
 	}
 
@@ -54,7 +71,11 @@ class COE_AOParams : Managed
 	//------------------------------------------------------------------------------------------------
 	static bool PropCompare(COE_AOParams instance, SSnapSerializerBase snapshot, ScriptCtx ctx)
 	{
-		return snapshot.CompareInt(instance.m_eTaskType)
-			&& snapshot.CompareVector(instance.m_pLocation.GetOrigin());
+		vector pos;
+		if (instance.m_pLocation)
+			pos = instance.m_pLocation.GetOrigin();
+		
+		return snapshot.CompareInt(instance.m_eTaskTypes)
+			&& snapshot.CompareVector(pos);
 	}
 }

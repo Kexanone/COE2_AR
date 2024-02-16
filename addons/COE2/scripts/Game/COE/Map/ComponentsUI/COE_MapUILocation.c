@@ -1,3 +1,5 @@
+//------------------------------------------------------------------------------
+//! Handler for an objective location element used in COE_MapUIElementContainer
 class COE_MapUILocation : SCR_MapUIElement
 {
 	protected IEntity m_Location;
@@ -144,7 +146,7 @@ class COE_MapUILocation : SCR_MapUIElement
 			m_wGradient.SetVisible(true);
 
 		if (m_bIsSelected && invoke)
-			m_Parent.COE_OnLocationSelected(m_Location);
+			COE_MapUIElementContainer.Cast(m_Parent).OnLocationSelected(m_Location);
 	}
 
 	//------------------------------------------------------------------------------

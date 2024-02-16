@@ -18,7 +18,7 @@ class COE_IntermissionMusic : ScriptedMusic
 			return;
 		
 		// Play briefing music when spawned at main base
-		if (vector.Distance(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 100)
+		if (vector.Distance(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 25)
 			return;
 		
 		m_MusicManager.Play("SOUND_COE_INTERMISSION");	

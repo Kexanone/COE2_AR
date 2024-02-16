@@ -1,0 +1,63 @@
+COE_MainBaseEntity {
+ ID "60A0A47B59D705B2"
+ components {
+  SCR_EditableCommentComponent "{609E5DF69A2A8499}" {
+   m_EntityType COMMENT
+   m_UIInfo SCR_EditableDescriptorUIInfo "{609E5DF6DF6CDE33}" {
+    Name "#AR-MapLocation_Military"
+    Icon "{D03F58B327C582D0}UI/Textures/Editor/EditableEntities/Locations/EditableEntity_Location_Base.edds"
+   }
+   m_bAutoRegister ALWAYS
+   m_bStatic 1
+   m_Flags 6168
+  }
+  SCR_FactionAffiliationComponent "{6098B5F361A74C63}" {
+  }
+  Hierarchy "{6098B5F3B93033CA}" {
+  }
+ }
+ coords 1356.476 39.01 2156.516
+ Flags 1027
+ {
+  SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et" {
+   ID "60A0A47B59D705B8"
+   components {
+    SCR_EditableSpawnPointComponent "{52E65E94E3532698}" {
+     m_UIInfo SCR_EditableDescriptorUIInfo "{52E65E94C47560A2}" {
+     }
+     m_Flags 32855
+    }
+   }
+   coords 0 0 0
+   m_fSpawnRadius 5
+   m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
+   }
+   m_fSpawnPositionUsageRange 5
+  }
+  GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
+   ID "60A0A47B59D705C4"
+   components {
+    SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+     m_eArsenalSaveType NO_RESTRICTIONS
+    }
+    SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+     m_Flags 789
+    }
+    SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+     m_aContainers {
+      SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
+       m_eResourceRights SELF
+       m_eStorageType STORED
+       m_fResourceValueCurrent 10000
+       m_fResourceValueMax 1000
+       m_bEnableResourceGain 1
+       m_fResourceGain 1000
+       m_fResourceGainTickrate 1
+      }
+     }
+    }
+   }
+   coords 0 0 3
+  }
+ }
+}

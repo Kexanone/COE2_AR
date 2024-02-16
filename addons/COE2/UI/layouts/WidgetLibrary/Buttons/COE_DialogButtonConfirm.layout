@@ -17,7 +17,6 @@ ButtonWidgetClass {
    m_sComboIndicatorImageSet "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
    m_sComboIndicatorImageSetGlow "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
    m_bOverrideTextSize 1
-   m_sBackground "Background0"
   }
  }
  {
