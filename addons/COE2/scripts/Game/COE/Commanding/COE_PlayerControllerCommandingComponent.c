@@ -22,8 +22,6 @@ class COE_PlayerControllerCommandingComponent : SCR_PlayerControllerCommandingCo
 	//------------------------------------------------------------------------------------------------
 	override void SetupMapRadialMenu()
 	{
-		super.SetupMapRadialMenu();
-		
 		// Commands restricted to commander and admins
 		if (!(COE_PlayerController.Cast(GetOwner()).GetPlayerRoles() & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR)))
 			return;
@@ -79,15 +77,15 @@ class COE_PlayerControllerCommandingComponent : SCR_PlayerControllerCommandingCo
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnMapClose(MapConfiguration config)
+	protected void COE_OnRadialMenuClose()
 	{
-		super.OnMapClose(config);
 		GetGame().GetCallqueue().Remove(COE_UpdateRadialMenuEntries);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void COE_OnRadialMenuClose()
+	override void OnMapClose(MapConfiguration config)
 	{
+		super.OnMapClose(config);
 		GetGame().GetCallqueue().Remove(COE_UpdateRadialMenuEntries);
 	}
 }

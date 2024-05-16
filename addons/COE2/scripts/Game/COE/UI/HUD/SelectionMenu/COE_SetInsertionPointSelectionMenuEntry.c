@@ -3,12 +3,6 @@
 class COE_SetInsertionPointSelectionMenuEntry : COE_SelectionMenuEntry
 {
 	//------------------------------------------------------------------------------------------------
-	override void Update()
-	{
-		Enable(COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION);
-	}
-
-	//------------------------------------------------------------------------------------------------
 	override protected void OnPerform()
 	{
 		SCR_MapEntity mapEntity = SCR_MapEntity.Cast(GetGame().GetMapManager());
@@ -20,5 +14,11 @@ class COE_SetInsertionPointSelectionMenuEntry : COE_SelectionMenuEntry
 		vector pos = Vector(x, 0, z);
 		pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
 		COE_EditorModeCommanderEntity.Request(COE_ECommanderRequest.INSERTION_POINT, pos);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool CanBePerformed()
+	{
+		return (COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION);
 	}
 }

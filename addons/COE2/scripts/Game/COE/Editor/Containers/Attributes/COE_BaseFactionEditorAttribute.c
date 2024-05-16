@@ -1,15 +1,17 @@
+//------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
 class COE_BaseFactionEditorAttribute: SCR_BaseFactionEditableAttribute
 {
 	COE_FactionManager m_pFactionManager;
 	
+	//------------------------------------------------------------------------------------------------
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
 		if (!gameMode)
 			return null;		
 		
-		m_pFactionManager = COE_FactionManager.GetInstance();
+		m_pFactionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		if (!m_pFactionManager)
 			return null;
 		
@@ -35,6 +37,7 @@ class COE_BaseFactionEditorAttribute: SCR_BaseFactionEditableAttribute
 		return SCR_BaseEditorAttributeVar.CreateInt(-1);
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override void WriteVariable(Managed item, SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, int playerID)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
@@ -58,6 +61,7 @@ class COE_BaseFactionEditorAttribute: SCR_BaseFactionEditableAttribute
 		SetFaction(gameMode, faction, playerID);
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override void UpdateInterlinkedVariables(SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, bool isInit = false)
 	{
 		if (!var)
@@ -74,15 +78,18 @@ class COE_BaseFactionEditorAttribute: SCR_BaseFactionEditableAttribute
 			manager.SetAttributeVariable(GetTypeLinkedAttribute(), SCR_BaseEditorAttributeVar.CreateInt(1));
 	};
 	
-	SCR_Faction GetFaction(COE_GameMode gameMode)
+	//------------------------------------------------------------------------------------------------
+	Faction GetFaction(COE_GameMode gameMode)
 	{
 		return null;
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	void SetFaction(COE_GameMode gameMode, SCR_Faction faction, int playerID)
 	{
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	typename GetTypeLinkedAttribute()
 	{
 		return typename.Empty;

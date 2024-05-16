@@ -37,27 +37,9 @@ class COE_MapDescriptorType
 }
 
 //------------------------------------------------------------------------------------------------
-[BaseContainerProps(), SCR_BaseContainerCustomTitleEnum(KSC_ETaskType, "m_eType")]
-class COE_TaskType
-{
-	[Attribute(uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(KSC_ETaskType))]
-	protected KSC_ETaskType m_eType;
-	
-	KSC_ETaskType GetID()
-	{
-		return m_eType;
-	}
-	
-	LocalizedString GetName()
-	{
-		return SCR_Enum.GetEnumName(KSC_ETaskType, m_eType);
-	}
-}
-
-//------------------------------------------------------------------------------------------------
 class COE_GameModeClass : SCR_BaseGameModeClass
 {
-};
+}
 
 //------------------------------------------------------------------------------------------------
 class COE_GameMode : SCR_BaseGameMode
@@ -65,8 +47,8 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(desc: "Location types to be excluded", category: "Locations")]
 	protected ref array<ref COE_MapDescriptorType> m_aBlacklistedDescriptorTypes;
 	
-	[Attribute(desc: "Available task types", category: "Tasks")]
-	protected ref array<ref COE_TaskType> m_aAvailableTaskTypes;
+	[Attribute(desc: "Available task builders", category: "Tasks")]
+	protected ref array<ref COE_BaseTaskBuilder> m_aAvailableTaskBuilders;
 	
 	[Attribute(desc: "Default faction key for the players", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultPlayerFactionKey;
@@ -74,18 +56,21 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "FIA", desc: "Default faction key of the enemy AI", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultEnemyFactionKey;
 	
-	[Attribute(defvalue: "3", desc: "Number of objectives before session ends", category: "Default Scenario Properties")]
-	protected int m_iNumberOfRemainingObjectives;
-	
 	[Attribute(defvalue: "-1", uiwidget: UIWidgets.Slider, params: "-1 3 1", desc: "Number of tasks per objective. Random if -1.", category: "Default Scenario Properties")]
 	protected int m_iTasksPerObjective;
 	protected int m_iMaxTasksPerObjective = 3;
 	
-	[Attribute(defvalue: "30", desc: "Minimal enemy AI count for an AO", category: "Default Scenario Properties")]
-	protected int m_iMinEnemyAiCount;
+	[Attribute(defvalue: "250", desc: "Radius of AO", category: "Default Scenario Properties")]
+	protected float m_fAORadius;
 	
-	[Attribute(defvalue: "2.5", desc: "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below m_iMinEnemyAiCount)", category: "Default Scenario Properties")]
-	protected float m_fEnemyAiCountMultiplier;
+	[Attribute(defvalue: "50", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(EAISkill), desc: "Enemy AI Skill Level", category: "Default Scenario Properties")]
+	protected EAISkill m_eEnemyAISkill;
+	
+	[Attribute(defvalue: "30", desc: "Minimal enemy AI count for an AO", category: "Default Scenario Properties")]
+	protected int m_iMinEnemyAICount;
+	
+	[Attribute(defvalue: "2.5", desc: "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below m_iMinEnemyAICount)", category: "Default Scenario Properties")]
+	protected float m_fEnemyAICountMultiplier;
 	
 	[RplProp()]
 	protected vector m_vMainBasePos;
@@ -94,6 +79,7 @@ class COE_GameMode : SCR_BaseGameMode
 	[RplProp()]
 	protected ref COE_AOParams m_pCurrentAOParams = new COE_AOParams();
 	protected ref COE_AOParams m_pNextAOParams = new COE_AOParams();
+	protected COE_AO m_pCurrentAO;
 	
 	[RplProp()]
 	protected vector m_vInsertionPos;
@@ -103,7 +89,6 @@ class COE_GameMode : SCR_BaseGameMode
 	protected COE_EGameModeState m_eCOE_CurrentState = COE_EGameModeState.INTERMISSION;
 	protected ref ScriptInvoker m_pCOE_OnStateChanged = new ScriptInvoker();
 	
-	protected ref array<IEntity> m_aAvailableLocations;
 	protected COE_FactionManager m_pFactionManager;
 		
 	//------------------------------------------------------------------------------------------------
@@ -138,7 +123,7 @@ class COE_GameMode : SCR_BaseGameMode
 		m_vMainBasePos = m_pMainBase.GetOrigin();
 		Replication.BumpMe();
 		
-		m_pFactionManager = COE_FactionManager.GetInstance();
+		m_pFactionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		if (!m_pFactionManager)
 			return;
 		
@@ -147,6 +132,8 @@ class COE_GameMode : SCR_BaseGameMode
 		
 		if (!m_sDefaultEnemyFactionKey.IsEmpty())
 			m_pFactionManager.SetEnemyFaction(SCR_Faction.Cast(m_pFactionManager.GetFactionByKey(m_sDefaultEnemyFactionKey)));
+		
+		KSC_GameTools.SetAISkill(m_eEnemyAISkill);
 		
 		COE_SetState(COE_EGameModeState.INTERMISSION);
 	}
@@ -165,14 +152,15 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	array<ref COE_TaskType> GetAvailableTaskTypes()
+	array<ref COE_BaseTaskBuilder> GetAvailableTaskBuilders()
 	{
-		return m_aAvailableTaskTypes;
+		return m_aAvailableTaskBuilders;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	array<IEntity> GetAvailableLocations()
+	array<ref KSC_Location> GetAvailableLocations()
 	{
+		/*
 		if (!m_aAvailableLocations)
 		{
 			vector mins, maxs;
@@ -180,11 +168,13 @@ class COE_GameMode : SCR_BaseGameMode
 			m_aAvailableLocations = {};
 			GetGame().GetWorld().QueryEntitiesByAABB(mins, maxs, QueryLocationEntitiesCallback, null, EQueryEntitiesFlags.STATIC);
 		}
+		*/
 		
-		return m_aAvailableLocations;
+		return m_pKSC_WorldSlotsConfig.m_aLocations;
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	/*
 	protected bool QueryLocationEntitiesCallback(IEntity entity)
 	{
 		if (!SCR_EditableCommentComponent.Cast(entity.FindComponent(SCR_EditableCommentComponent)))
@@ -202,6 +192,7 @@ class COE_GameMode : SCR_BaseGameMode
 		m_aAvailableLocations.Insert(entity);
 		return true;
 	}
+	*/
 	
 	//------------------------------------------------------------------------------------------------
 	COE_AOParams GetNextAOParams()
@@ -213,6 +204,21 @@ class COE_GameMode : SCR_BaseGameMode
 	void SetNextAOParams(COE_AOParams params)
 	{
 		m_pNextAOParams.Copy(params);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	KSC_Location GetCurrentLocation()
+	{
+		if (m_pCurrentAOParams.m_iLocationIdx < 0)
+			return null;
+		
+		return GetAvailableLocations()[m_pCurrentAOParams.m_iLocationIdx];
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	COE_AOParams GetCurrentAOParams()
+	{
+		return m_pCurrentAOParams;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -243,21 +249,22 @@ class COE_GameMode : SCR_BaseGameMode
 			case COE_EGameModeState.INTERMISSION:
 			{
 				// Select random mission and objective
-				m_pNextAOParams.m_eTaskTypes = 1 << Math.RandomInt(0, m_aAvailableTaskTypes.Count());
-				array<IEntity> locations = GetAvailableLocations();
-				m_pNextAOParams.m_pLocation = locations[Math.RandomInt(0, locations.Count())];
+				m_pNextAOParams.m_eTaskTypes = 1 << Math.RandomInt(0, m_aAvailableTaskBuilders.Count());
+				array<ref KSC_Location> locations = GetAvailableLocations();
+				m_pNextAOParams.m_iLocationIdx = Math.RandomInt(0, locations.Count());
 				
 				// Clear old AO;
 				DeleteInsertionPoint();
 				m_pCurrentAOParams.Clear();
 				break;
 			}
-			case COE_EGameModeState.BRIEFING:
+			//case COE_EGameModeState.BRIEFING:
+			case COE_EGameModeState.EXECUTION:
 			{
 				// Copy AO params
 				m_pCurrentAOParams.Copy(m_pNextAOParams);
 				break;
-			}	
+			}
 		};
 		
 		Replication.BumpMe();
@@ -266,7 +273,12 @@ class COE_GameMode : SCR_BaseGameMode
 	//------------------------------------------------------------------------------------------------
 	protected void GenerateAO()
 	{
-		COE_SetState(COE_EGameModeState.BRIEFING);
+		//COE_SetState(COE_EGameModeState.BRIEFING);
+		COE_SetState(COE_EGameModeState.EXECUTION);
+		EntitySpawnParams params = new EntitySpawnParams();
+		params.TransformMode = ETransformMode.WORLD;
+		params.Transform[3] = GetCurrentLocation().m_vCenter;
+		m_pCurrentAO = COE_AO.Cast(GetGame().SpawnEntity(COE_AO, GetWorld(), params));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -279,12 +291,34 @@ class COE_GameMode : SCR_BaseGameMode
 	protected void DeleteAO()
 	{
 		COE_SetState(COE_EGameModeState.INTERMISSION);
+		
+		array<int> playerIds = {};
+		GetGame().GetPlayerManager().GetPlayers(playerIds);
+		foreach (int playerId : playerIds)
+		{
+			SCR_ChimeraCharacter player = SCR_ChimeraCharacter.Cast(GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId));
+			if (!player)
+				continue;
+			
+			CharacterControllerComponent charCtrl = player.GetCharacterController();
+			if (charCtrl.GetLifeState() == ECharacterLifeState.DEAD)
+				continue;
+			
+			COE_PlayerController playerCtrl = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
+			playerCtrl.RequestFastTravel(m_vMainBasePos, 0, 5);
+			
+			SCR_DamageManagerComponent damageManager = player.GetDamageManager();
+			damageManager.FullHeal();
+		}
+		
+		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 3000, false, m_pCurrentAO);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void CreateInsertionPoint(vector pos)
 	{
-		vector dir = (m_pCurrentAOParams.m_pLocation.GetOrigin() - pos);
+		pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
+		vector dir = (GetCurrentLocation().m_vCenter - pos);
 		
 		if (!m_pInsertionPoint)
 		{
@@ -321,48 +355,45 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	IEntity GetCurrentAO()
+	COE_AO GetCurrentAO()
 	{
-		if (!m_pCurrentAOParams)
-			return null;
-		
-		return m_pCurrentAOParams.m_pLocation;
+		return m_pCurrentAO;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	int GetNumRemainingObjectives()
+	void SetAORadius(float radius)
 	{
-		return m_iNumberOfRemainingObjectives;
+		m_fAORadius = radius;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetNumRemainingObjectives(int numObjectives)
+	float GetAORadius()
 	{
-		m_iNumberOfRemainingObjectives = numObjectives;
+		return m_fAORadius;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void SetMinEnemyAiCount(int count)
 	{
-		m_iMinEnemyAiCount = count;
+		m_iMinEnemyAICount = count;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	int GetMinEnemyAiCount()
 	{
-		return m_iMinEnemyAiCount;
+		return m_iMinEnemyAICount;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void SetEnemyAiCountMultiplier(float multiplier)
 	{
-		m_fEnemyAiCountMultiplier = multiplier;
+		m_fEnemyAICountMultiplier = multiplier;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float GetEnemyAiCountMultiplier()
 	{
-		return m_fEnemyAiCountMultiplier;
+		return m_fEnemyAICountMultiplier;
 	}
 	
 	//------------------------------------------------------------------------------------------------

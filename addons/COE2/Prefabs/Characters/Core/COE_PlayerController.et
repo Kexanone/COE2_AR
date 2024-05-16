@@ -13,13 +13,28 @@ COE_PlayerController : "{CD2B8EF361478648}Prefabs/Characters/Core/DefaultPlayerC
      Name "#COE-ActionCategory_CombatOpsCommands"
      IconSetName "careerMenuIcon"
      m_aEntries {
+      COE_ScenarioSettingsSelectionMenuEntry "{60A49EA4005A7CE5}" {
+       Name "#AR-KeybindEditor_ScenarioAttributes"
+       IconSetName "settings"
+      }
+      COE_SelectAOSelectionMenuEntry "{60A49EA40817BA51}" {
+       Name "#COE-Action_SelectAO"
+       IconSetName "faction"
+      }
+      COE_GenerateAOSelectionMenuEntry "{60A49EA4140CCBCD}" {
+       Name "#COE-Action_GenerateAO"
+      }
+      COE_DeploySelectionMenuEntry "{60A4C38EF5088820}" {
+       Name "#AR-ButtonSelectDeploy"
+       IconSetName "moveCommandAlt"
+      }
       COE_CancelAOSelectionMenuCategory "{609EE3AC570269B1}" {
        Name "#COE-Action_CancelAO"
-       IconSetName "trash"
+       IconSetName "disable"
        m_aEntries {
         COE_CancelAOSelectionMenuEntry "{609F29E29A11C5C0}" {
          Name "#COE-Action_ConfirmCancelAO"
-         IconSetName "warning"
+         IconSetName "disable"
         }
         COE_SelectionMenuEntry "{609F29E397E570A5}" {
          Name "#COE-Action_QuitCancelAO"
@@ -35,19 +50,6 @@ COE_PlayerController : "{CD2B8EF361478648}Prefabs/Characters/Core/DefaultPlayerC
      Name "#COE-ActionCategory_CombatOpsCommands"
      IconSetName "careerMenuIcon"
      m_aEntries {
-      COE_CancelAOSelectionMenuCategory "{609F29E361E728CB}" {
-       Name "#COE-Action_CancelAO"
-       IconSetName "back-to-main-menu"
-       m_aEntries {
-        COE_SelectionMenuEntry "{60A00CC1F6DE62C2}" {
-         Name "#COE-Action_QuitCancelAO"
-        }
-        COE_CancelAOSelectionMenuEntry "{60A00CC1F5375802}" {
-         Name "#COE-Action_ConfirmCancelAO"
-         IconSetName "warning"
-        }
-       }
-      }
       COE_SetInsertionPointSelectionMenuEntry "{609F29E3DF53083D}" {
        Name "#COE-Action_SetInsertionPoint"
        IconSetName "respawn"

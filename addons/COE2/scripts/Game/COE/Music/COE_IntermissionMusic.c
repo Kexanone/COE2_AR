@@ -7,7 +7,7 @@ class COE_IntermissionMusic : ScriptedMusic
 	protected void OnPlayerSpawned()
 	{
 		// Location check has to be done a frame later to get the correct player position
-		GetGame().GetCallqueue().Call(CheckLocationAndPlay);
+		GetGame().GetCallqueue().CallLater(CheckLocationAndPlay, 100, false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ class COE_IntermissionMusic : ScriptedMusic
 			return;
 		
 		// Play briefing music when spawned at main base
-		if (vector.Distance(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 25)
+		if (vector.DistanceXZ(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 25)
 			return;
 		
 		m_MusicManager.Play("SOUND_COE_INTERMISSION");	
@@ -37,6 +37,7 @@ class COE_IntermissionMusic : ScriptedMusic
 			return;
 		
 		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Insert(OnPlayerSpawned);
+		COE_PlayerController.s_OnLocalPlayerFastTraveled.Insert(OnPlayerSpawned);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -46,5 +47,6 @@ class COE_IntermissionMusic : ScriptedMusic
 			return;
 		
 		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Remove(OnPlayerSpawned);
+		COE_PlayerController.s_OnLocalPlayerFastTraveled.Remove(OnPlayerSpawned);
 	}
 }

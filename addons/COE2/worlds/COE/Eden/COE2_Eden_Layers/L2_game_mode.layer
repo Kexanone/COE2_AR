@@ -1,10 +1,5 @@
 COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
- components {
-  SCR_RespawnSystemComponent "{56B2B4793051E7C9}" {
-   m_SpawnLogic SCR_AutoSpawnLogic "{5D36888CC966608A}" {
-   }
-  }
- }
  coords 118.45 1 205.011
- m_sDefaultPlayerFactionKey "US"
+ m_pKSC_WorldSlotsConfig KSC_WorldSlotsConfig "{615E23D0E2278B0C}" : "{BE2360AA5B24FE81}Configs/Slots/Eden/KSC_Slots_Eden.conf" {
+ }
 }

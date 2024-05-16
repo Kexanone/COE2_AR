@@ -186,11 +186,6 @@ COE_MainBaseEntity {
       ID "60A042236B7D02C0"
       components {
        StreetLampComponent "{58D67C8D679081DF}" {
-        EmissiveGlassSlots {
-         EmissiveGlassSlot glass {
-          Prefab "{90D3BC6D5790E931}Prefabs/Props/Furniture/LampFluorescent/COE_LampFluorescent_01_glass.et"
-         }
-        }
        }
       }
       coords -1.845 5.645 -0.096
@@ -199,11 +194,6 @@ COE_MainBaseEntity {
       ID "60A042236B7DEC18"
       components {
        StreetLampComponent "{58D67C8D679081DF}" {
-        EmissiveGlassSlots {
-         EmissiveGlassSlot glass {
-          Prefab "{90D3BC6D5790E931}Prefabs/Props/Furniture/LampFluorescent/COE_LampFluorescent_01_glass.et"
-         }
-        }
        }
       }
       coords 9.704 5.645 -0.096
@@ -212,11 +202,6 @@ COE_MainBaseEntity {
       ID "60A042236B7DEC1B"
       components {
        StreetLampComponent "{58D67C8D679081DF}" {
-        EmissiveGlassSlots {
-         EmissiveGlassSlot glass {
-          Prefab "{90D3BC6D5790E931}Prefabs/Props/Furniture/LampFluorescent/COE_LampFluorescent_01_glass.et"
-         }
-        }
        }
       }
       coords -13.044 5.645 -0.096
@@ -364,30 +349,44 @@ COE_MainBaseEntity {
     angleY 0
    }
   }
-  GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
-   ID "60A042236B427BA4"
-   components {
-    SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
-     m_eArsenalSaveType NO_RESTRICTIONS
-    }
-    SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
-     m_Flags 789
-    }
-    SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
-     m_aContainers {
-      SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
-       m_eResourceRights SELF
-       m_eStorageType STORED
-       m_fResourceValueCurrent 10000
-       m_fResourceValueMax 1000
-       m_bEnableResourceGain 1
-       m_fResourceGain 1000
-       m_fResourceGainTickrate 1
+  $grp GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
+   {
+    ID "60A042236B427BA4"
+    components {
+     SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+      m_eArsenalSaveType NO_RESTRICTIONS
+     }
+     SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+      m_Flags 789
+     }
+     SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+      m_aDisabledResourceTypes {
+       0
       }
      }
     }
+    coords -7.387 0 6.215
    }
-   coords -7.387 -0.001 6.215
+   {
+    ID "61288E8539ECF97D"
+    components {
+     SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+      m_eArsenalSaveType NO_RESTRICTIONS
+     }
+     SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+      m_Flags 789
+     }
+     SCR_FactionAffiliationComponent "{5A50E7655452A21D}" {
+      m_bCOE_VanillaFactionOnly 1
+     }
+     SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+      m_aDisabledResourceTypes {
+       0
+      }
+     }
+    }
+    coords -5.263 0 6.215
+   }
   }
  }
 }

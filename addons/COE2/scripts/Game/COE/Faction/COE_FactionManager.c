@@ -1,26 +1,20 @@
 //------------------------------------------------------------------------------------------------
-class COE_FactionManagerClass: SCR_FactionManagerClass
+class COE_FactionManagerClass : KSC_FactionManagerClass
 {
-};
+}
 
 //------------------------------------------------------------------------------------------------
-class COE_FactionManager : SCR_FactionManager
+class COE_FactionManager : KSC_FactionManager
 {
 	[RplProp(onRplName: "OnPlayerFactionChanged")]
 	protected int m_iPlayerFactionId;
-	protected SCR_Faction m_pPlayerFaction;
+	protected Faction m_pPlayerFaction;
 	
 	[RplProp(onRplName: "OnEnemyFactionChanged")]
 	protected int m_iEnemyFactionId;
-	protected SCR_Faction m_pEnemyFaction;
+	protected Faction m_pEnemyFaction;
 	
 	protected SCR_DelegateFactionManagerComponent m_pDelegateFactionManager;
-	
-	//------------------------------------------------------------------------------------------------
-	static COE_FactionManager GetInstance()
-	{
-		return COE_FactionManager.Cast(GetGame().GetFactionManager());
-	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void EOnInit(IEntity owner)
@@ -30,7 +24,7 @@ class COE_FactionManager : SCR_FactionManager
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	SCR_Faction GetPlayerFaction()
+	Faction GetPlayerFaction()
 	{
 		return m_pPlayerFaction;
 	}
@@ -90,12 +84,6 @@ class COE_FactionManager : SCR_FactionManager
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	SCR_Faction GetEnemyFaction()
-	{
-		return m_pEnemyFaction;
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	void SetEnemyFaction(SCR_Faction faction)
 	{
 		m_pEnemyFaction = faction;	
@@ -104,9 +92,15 @@ class COE_FactionManager : SCR_FactionManager
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	Faction GetEnemyFaction()
+	{
+		return m_pEnemyFaction;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Called on clients when enemy faction has changed
 	protected void OnEnemyFactionChanged()
 	{
-		m_pEnemyFaction = SCR_Faction.Cast(GetFactionByIndex(m_iEnemyFactionId));
+		m_pEnemyFaction = GetFactionByIndex(m_iEnemyFactionId);
 	}
 }

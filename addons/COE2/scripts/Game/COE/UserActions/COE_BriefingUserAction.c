@@ -24,4 +24,10 @@ class COE_BriefingUserAction : COE_BaseBoardUserAction
 		
 		return true;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool CanBeShownScript(IEntity user) 
+	{
+		return false;
+	}
 }

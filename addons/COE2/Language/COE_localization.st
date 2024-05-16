@@ -60,7 +60,14 @@ StringTable {
   CustomStringTableItem "{60A0A47D302DACF1}" {
    Id "COE-ActionCategory_CombatOpsCommands"
    Target_en_us "Combat Ops Commands"
-   Modified 1621150500
+   Modified 1621412051
+   Author "kex"
+   LastChanged "swellig"
+  }
+  CustomStringTableItem "{6155376789FAB1FC}" {
+   Id "COE-DeployScreen_NoFactionsAvailable"
+   Target_en_us "There are no available factions. Please vote for a commander or wait for them to set a faction."
+   Modified 1632978970
    Author "kex"
    LastChanged "kex"
   }
@@ -68,6 +75,20 @@ StringTable {
    Id "COE-Dialog_SelectAO_Location"
    Target_en_us "Location:"
    Modified 1620743035
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{61585B1D0CD2464E}" {
+   Id "COE-Editor_AORadius_Attribute_Description"
+   Target_en_us "Set radius of the AO"
+   Modified 1633217948
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{61585B1D03EC739D}" {
+   Id "COE-Editor_AORadius_Attribute_Name"
+   Target_en_us "AO radius"
+   Modified 1633217920
    Author "kex"
    LastChanged "kex"
   }
@@ -96,6 +117,20 @@ StringTable {
    Id "COE-Editor_EnemyAICountMultiplier_Attribute_Name"
    Target_en_us "Enemy AI count multiplier"
    Modified 1620882710
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{6155376BAE5CD00A}" {
+   Id "COE-Editor_EnemyAISkill_Attribute_Description"
+   Target_en_us "Set skill for enemy AI."
+   Modified 1632976935
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{6155376BB5461EDD}" {
+   Id "COE-Editor_EnemyAISkill_Attribute_Name"
+   Target_en_us "Enemy AI Skill"
+   Modified 1632976926
    Author "kex"
    LastChanged "kex"
   }
@@ -271,6 +306,13 @@ StringTable {
    Id "COE-Reason_NoAO"
    Target_en_us "No AO"
    Modified 1620741206
+   Author "kex"
+   LastChanged "kex"
+  }
+  CustomStringTableItem "{612881F66CCCA0B3}" {
+   Id "COE-Reason_NoInsertionPoint"
+   Target_en_us "No Insertion Point"
+   Modified 1630047446
    Author "kex"
    LastChanged "kex"
   }

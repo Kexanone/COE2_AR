@@ -8,29 +8,32 @@ class COE_DeployUserAction : COE_BaseBoardUserAction
 		if (!gameMode)
 			return;
 		
-		IEntity location = gameMode.GetCurrentAO();
+		KSC_Location location = gameMode.GetCurrentLocation();
 		if (!location)
 			return;
 		
-		vector locationPos = location.GetOrigin();
-		vector spawnPos = gameMode.GetInsertionPos();
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (locationPos - spawnPos).ToYaw());
+		vector spawnPos = gameMode.GetInsertionPos();		
+		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (location.m_vCenter - spawnPos).ToYaw());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBePerformedScript(IEntity user) 
 	{
-		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.INTERMISSION)
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return false;
+		
+		if (gameMode.COE_GetState() == COE_EGameModeState.INTERMISSION)
 		{
 			m_sCannotPerformReason = "#COE-Reason_NoAO";
 			return false;
-		};
+		}
 		
-		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.BRIEFING)
+		if (gameMode.GetInsertionPos() == vector.Zero)
 		{
-			m_sCannotPerformReason = "#COE-Reason_OngoingBriefing";
+			m_sCannotPerformReason = "#COE-Reason_NoInsertionPoint";
 			return false;
-		};
+		}
 		
 		return true;
 	}
