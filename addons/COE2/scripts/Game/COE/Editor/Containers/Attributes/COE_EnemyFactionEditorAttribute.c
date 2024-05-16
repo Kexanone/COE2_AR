@@ -1,7 +1,7 @@
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
 class COE_EnemyFactionEditorAttribute: COE_BaseFactionEditorAttribute
 {		
-	override SCR_Faction GetFaction(COE_GameMode gameMode)
+	override Faction GetFaction(COE_GameMode gameMode)
 	{
 		return m_pFactionManager.GetEnemyFaction();
 	}

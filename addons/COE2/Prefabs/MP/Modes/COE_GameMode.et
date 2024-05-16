@@ -8,6 +8,14 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
     "{91D53896F5AD5DB4}Sounds/RadioProtocol/RadioProtocol_CombatPatrol_US.acp"
    }
   }
+  COE_HintManagerComponent "{5702B54C6CBC9D7F}" {
+   m_aCOE_HintEntries {
+    COE_HintEntry "{60A2B1E16B7F79F6}" {
+     m_HintInfo SCR_HintUIInfo "{60A2B1E1765A1472}" {
+     }
+    }
+   }
+  }
   COE_MapConfigComponent "{5C669498E250A34B}" {
    m_sGadgetMapConfigPath "{A092C0660C5FBA20}Configs/Map/COE_MapFullscreen.conf"
    m_sSpawnMapConfigPath "{AB17A0C35CDB53A1}Configs/Map/COE_MapSpawnMenu.conf"
@@ -205,8 +213,8 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
  PlayerControllerPrefab "{21EAEB797197C0C3}Prefabs/Characters/Core/COE_PlayerController.et"
  m_bAutoPlayerRespawn 0
  m_fAutoReloadTime 30
- m_aMainBaseNames {
-  "COE_MainBase_1"
+ m_aDisabledResourceTypes {
+  0
  }
  m_aBlacklistedDescriptorTypes {
   COE_MapDescriptorType "{6094DDD7F4523371}" {
@@ -216,18 +224,14 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
    m_iType MDT_NAME_SEA_MAJOR
   }
  }
- m_aAvailableTaskTypes {
-  COE_TaskType "{609C432042815E08}" {
-   m_eType CLEAR_AREA
+ m_aAvailableTaskBuilders {
+  COE_ClearAreaTaskBuilder "{61597E8E54065A21}" {
   }
-  COE_TaskType "{609C432064AAB3F4}" {
-   m_eType DESTROY
+  COE_DestroyInstallationTaskBuilder "{61597E8E4A6758CA}" {
   }
-  COE_TaskType "{609C43206E03DC1E}" {
-   m_eType KILL
+  COE_KillOfficerTaskBuilder "{61597E8E486E53D3}" {
   }
-  COE_TaskType "{609C43206C9AD750}" {
-   m_eType FIND_INTEL
+  COE_FindIntelTaskBuilder "{61597E8E4968BB4B}" {
   }
  }
 }

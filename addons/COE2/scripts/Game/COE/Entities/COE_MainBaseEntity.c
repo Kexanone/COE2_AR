@@ -11,9 +11,7 @@ class COE_MainBaseEntity : GenericEntity
 		IEntity entity = GetChildren();
 		while (entity)
 		{
-			SCR_FactionAffiliationComponent factionAffiliation = SCR_FactionAffiliationComponent.Cast(entity.FindComponent(SCR_FactionAffiliationComponent));
-			if (factionAffiliation)
-				factionAffiliation.SetAffiliatedFaction(faction);
+			SCR_FactionAffiliationComponent.SetFaction(entity, faction);
 			
 			SCR_EditableSpawnPointComponent editableSpawn = SCR_EditableSpawnPointComponent.Cast(entity.FindComponent(SCR_EditableSpawnPointComponent));
 			if (editableSpawn)

@@ -1,4 +1,4 @@
-GenericEntity COE_MainBase_1 {
+COE_MainBaseEntity COE_MainBase_1 {
  components {
   SCR_FactionAffiliationComponent "{6098B5F361A74C63}" {
    "faction affiliation" "US"

@@ -18,8 +18,8 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	protected ref ScriptInvoker m_OnConfirm = new ScriptInvoker();
 	
 	protected ref COE_AOParams m_SelectedAOParams = new COE_AOParams();
-	protected ref array<ref COE_TaskType> m_aTaskTypes;
-	protected ref array<IEntity> m_aLocations;
+	protected ref array<ref COE_BaseTaskBuilder> m_aTaskBuilders;
+	protected ref array<ref KSC_Location> m_aLocations;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuOpen()
@@ -67,10 +67,12 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		m_ObjectiveToolbox = SCR_ToolboxComponent.GetToolboxComponent("ObjectiveToolbox", GetRootWidget());
 		if (m_ObjectiveToolbox)
 		{
-			m_aTaskTypes = COE_GameMode.GetInstance().GetAvailableTaskTypes();
+			m_aTaskBuilders = COE_GameMode.GetInstance().GetAvailableTaskBuilders();
 			
-			foreach(COE_TaskType type : m_aTaskTypes)
-				m_ObjectiveToolbox.AddItem(type.GetName());
+			foreach(COE_BaseTaskBuilder builder : m_aTaskBuilders)
+			{
+				m_ObjectiveToolbox.AddItem(builder.GetTaskName());
+			}
 			
 			m_ObjectiveToolbox.m_OnChanged.Insert(OnObjectiveChanged);
 		};
@@ -80,12 +82,10 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		{
 			m_aLocations = COE_GameMode.GetInstance().GetAvailableLocations();
 			
-			foreach(int i, IEntity location : m_aLocations)
+			foreach(KSC_Location location : m_aLocations)
 			{
-				MapDescriptorComponent descriptor = MapDescriptorComponent.Cast(location.FindComponent(MapDescriptorComponent));
-				if (descriptor)
-					m_LocationSelector.AddItem(descriptor.Item().GetDisplayName());
-			};
+				m_LocationSelector.AddItem(location.m_sName);
+			}
 			
 			m_LocationSelector.m_OnChanged.Insert(OnLocationSelectorChanged);
 			GetGame().GetWorkspace().SetFocusedWidget(m_LocationSelector.GetRootWidget());
@@ -111,7 +111,7 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 		if (m_UIElementContainer)
 			m_UIElementContainer.GetOnLocationSelected().Insert(SetLocationExt);
 		
-		FocusOnPoint(m_SelectedAOParams.m_pLocation);
+		FocusOnPoint(m_aLocations[m_SelectedAOParams.m_iLocationIdx]);
 		
 		SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_HUD_MAP_OPEN);
 	}
@@ -119,41 +119,30 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	void SetParams(COE_AOParams params)
 	{
 		m_SelectedAOParams.Copy(params);
-		SetLocationExt(m_SelectedAOParams.m_pLocation);
+		SetLocationExt(m_aLocations[m_SelectedAOParams.m_iLocationIdx]);
 		
-		for (int i = 0; i < m_aTaskTypes.Count(); i++)
+		for (int i = 0; i < m_aTaskBuilders.Count(); i++)
 		{
 			if (KSC_BitTools.IsBitSet(m_SelectedAOParams.m_eTaskTypes, i))
 				m_ObjectiveToolbox.SetCurrentItem(i);
 		};
 	}
 	
-	protected void SetLocationExt(IEntity entity)
+	protected void SetLocationExt(KSC_Location location)
 	{
-		m_SelectedAOParams.m_pLocation = entity;
-		FocusOnPoint(entity);
-		
-		MapDescriptorComponent mapDescriptor = MapDescriptorComponent.Cast(entity.FindComponent(MapDescriptorComponent));
-		if (!mapDescriptor)
-			return;
-		
-		foreach(int i, IEntity location : m_aLocations)
-		{
-			if (location == m_SelectedAOParams.m_pLocation)
-			{
-				m_LocationSelector.SetCurrentItem(i);
-				break;
-			}
-		};
+		int idx = m_aLocations.Find(location);
+		m_SelectedAOParams.m_iLocationIdx = idx;
+		FocusOnPoint(location);
+		m_LocationSelector.SetCurrentItem(idx);
 	}
 	
 	//! Centers map to a specific spawn point.
-	protected void FocusOnPoint(notnull IEntity entity, bool smooth = true)
+	protected void FocusOnPoint(notnull KSC_Location location, bool smooth = true)
 	{
 		if (!m_MapEntity || !m_MapEntity.IsOpen())
 			return;
 
-		vector o = entity.GetOrigin();
+		vector o = location.m_vCenter;
 
 		float x, y;
 		m_MapEntity.WorldToScreen(o[0], o[2], x, y);

@@ -1,5 +1,5 @@
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
-class COE_NumObjectivesEditorAttribute : SCR_BaseValueListEditorAttribute
+class COE_AORadiusEditorAttribute : SCR_BaseValueListEditorAttribute
 {		
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
@@ -7,7 +7,7 @@ class COE_NumObjectivesEditorAttribute : SCR_BaseValueListEditorAttribute
 		if (!gameMode)
 			return null;			
 		
-		return SCR_BaseEditorAttributeVar.CreateFloat(gameMode.GetNumRemainingObjectives());
+		return SCR_BaseEditorAttributeVar.CreateFloat(gameMode.GetAORadius());
 	}
 	
 	override void WriteVariable(Managed item, SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, int playerID)
@@ -19,6 +19,6 @@ class COE_NumObjectivesEditorAttribute : SCR_BaseValueListEditorAttribute
 		if (!var)
 			return;
 		
-		gameMode.SetNumRemainingObjectives(Math.Round(var.GetFloat()));
+		gameMode.SetAORadius(Math.Round(var.GetFloat()));
 	}
 }

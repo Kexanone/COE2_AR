@@ -2,7 +2,7 @@
 //! Handler for an objective location element used in COE_MapUIElementContainer
 class COE_MapUILocation : SCR_MapUIElement
 {
-	protected IEntity m_Location;
+	protected KSC_Location m_Location;
 	protected string m_sFactionKey;
 	protected TextWidget m_wLocationName;
 	protected Widget m_wImageOverlay;
@@ -12,20 +12,12 @@ class COE_MapUILocation : SCR_MapUIElement
 	protected SizeLayoutWidget m_wSizeLayout;
 	
 	//------------------------------------------------------------------------------
-	void Init(notnull IEntity location)
+	void Init(notnull KSC_Location location)
 	{
-		m_Location = location;
-		MapDescriptorComponent mapDescriptor = MapDescriptorComponent.Cast(location.FindComponent(MapDescriptorComponent));
-		if (!mapDescriptor)
-			return;
+		m_Location = location;		
+		m_wLocationName.SetText(location.m_sName);
 		
-		MapItem mapItem = mapDescriptor.Item();
-		if (!mapItem)
-			return;
-		
-		m_wLocationName.SetText(mapItem.GetDisplayName());
-		
-		COE_FactionManager factionManager = COE_FactionManager.GetInstance();
+		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		if (!factionManager)
 			return;
 		
@@ -36,7 +28,7 @@ class COE_MapUILocation : SCR_MapUIElement
 	//------------------------------------------------------------------------------------------------
 	override vector GetPos()
 	{
-		return m_Location.GetOrigin();
+		return m_Location.m_vCenter;
 	}
 
 	//------------------------------------------------------------------------------
@@ -188,7 +180,7 @@ class COE_MapUILocation : SCR_MapUIElement
 		return false;
 	}
 
-	IEntity GetLocation()
+	KSC_Location GetLocation()
 	{
 		return m_Location;
 	}

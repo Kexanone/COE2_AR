@@ -15,13 +15,10 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 	
 	protected ref ScriptInvoker m_OnLocationSelected;
 
-	protected void AddLocation(IEntity location)
+	protected void AddLocation(KSC_Location location)
 	{
-		if (SCR_EditableCommentComponent.Cast(location.FindComponent(SCR_EditableCommentComponent)))
-		{
-			ShowLocation(location);
-			UpdateIcons();
-		}
+		ShowLocation(location);
+		UpdateIcons();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -42,7 +39,7 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 		
 		if (m_bShowAvailableLocations)
 		{
-			foreach (IEntity location : gameMode.GetAvailableLocations())
+			foreach (KSC_Location location : gameMode.GetAvailableLocations())
 			{
 				ShowLocation(location);
 			}
@@ -50,7 +47,7 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 		
 		if (m_bShowCurrentLocation)
 		{
-			IEntity location = gameMode.GetCurrentAO();
+			KSC_Location location = gameMode.GetCurrentLocation();
 			if (location)
 				ShowLocation(location);
 		}
@@ -59,7 +56,7 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 	}
 
 	//------------------------------------------------------------------------------
-	protected void ShowLocation(notnull IEntity location)
+	protected void ShowLocation(notnull KSC_Location location)
 	{
 		Widget w = GetGame().GetWorkspace().CreateWidgets(m_sCOE_LocationElement, m_wIconsContainer);
 		COE_MapUILocation handler = COE_MapUILocation.Cast(w.FindHandler(COE_MapUILocation));
@@ -75,7 +72,7 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 	}
 
 	//------------------------------------------------------------------------------
-	void OnLocationSelectedExt(IEntity location) // called when selected via deploy menu spinbox
+	void OnLocationSelectedExt(KSC_Location location) // called when selected via deploy menu spinbox
 	{
 		SCR_MapUIElement icon = FindLocationIcon(location);
 		if (icon)
@@ -83,13 +80,13 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 	}
 	
 	//------------------------------------------------------------------------------
-	void OnLocationSelected(IEntity location = null)
+	void OnLocationSelected(KSC_Location location = null)
 	{
 		GetOnLocationSelected().Invoke(location);
 	}
 	
 	//------------------------------------------------------------------------------
-	COE_MapUILocation FindLocationIcon(IEntity location)
+	COE_MapUILocation FindLocationIcon(KSC_Location location)
 	{
 		foreach (Widget w, SCR_MapUIElement e : m_mIcons)
 		{

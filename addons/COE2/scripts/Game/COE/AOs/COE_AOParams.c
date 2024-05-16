@@ -1,34 +1,29 @@
 //------------------------------------------------------------------------------------------------
 class COE_AOParams : Managed
 {
-	int m_eTaskTypes; // bit flags for tasks
-	IEntity m_pLocation;
-	private const int SERIALIZED_BYTES = 16;
+	int m_eTaskTypes = 0; // bit flags for tasks
+	int m_iLocationIdx = -1;
+	private const int SERIALIZED_BYTES = 8;
 	
 	//------------------------------------------------------------------------------------------------
 	void Copy(COE_AOParams from)
 	{
 		m_eTaskTypes = from.m_eTaskTypes;
-		m_pLocation = from.m_pLocation;
+		m_iLocationIdx = from.m_iLocationIdx;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void Clear()
 	{
 		m_eTaskTypes = 0;
-		m_pLocation = null;
+		m_iLocationIdx = -1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	static bool Extract(COE_AOParams instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
 	{
 		snapshot.SerializeInt(instance.m_eTaskTypes);
-		
-		vector pos;
-		if (instance.m_pLocation)
-			pos = instance.m_pLocation.GetOrigin();
-		
-		snapshot.SerializeVector(pos);
+		snapshot.SerializeInt(instance.m_iLocationIdx);
 		return true;
 	}
 
@@ -36,17 +31,7 @@ class COE_AOParams : Managed
 	static bool Inject(SSnapSerializerBase snapshot, ScriptCtx ctx, COE_AOParams instance)
 	{
 		snapshot.SerializeInt(instance.m_eTaskTypes);
-		vector pos;
-		snapshot.SerializeVector(pos);
-		if (!pos)
-		{
-			instance.m_pLocation = null;
-		}
-		else
-		{
-			instance.m_pLocation = KSC_WorldTools.GetNearestEntityByType(pos);
-		};
-		
+		snapshot.SerializeInt(instance.m_iLocationIdx);
 		return true;
 	}
 
@@ -71,11 +56,7 @@ class COE_AOParams : Managed
 	//------------------------------------------------------------------------------------------------
 	static bool PropCompare(COE_AOParams instance, SSnapSerializerBase snapshot, ScriptCtx ctx)
 	{
-		vector pos;
-		if (instance.m_pLocation)
-			pos = instance.m_pLocation.GetOrigin();
-		
 		return snapshot.CompareInt(instance.m_eTaskTypes)
-			&& snapshot.CompareVector(pos);
+			&& snapshot.CompareInt(instance.m_iLocationIdx);
 	}
 }

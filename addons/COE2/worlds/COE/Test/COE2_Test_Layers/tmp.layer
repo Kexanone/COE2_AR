@@ -1,8 +1,27 @@
 COE_PlayerController COE_PlayerController1 : "{21EAEB797197C0C3}Prefabs/Characters/Core/COE_PlayerController.et" {
- components {
-  COE_PlayerControllerCommandingComponent "{5A7CC0F22BDDB868}" {
-  }
- }
  coords 98.347 4.499 148.003
  Flags 1048579
+}
+GenericEntity : "{1E4C8AD00BBB16AA}Prefabs/Systems/AmbientPatrol/AmbientPatrolSpawnpoint_Base.et" {
+ coords 53.712 1 180.554
+}
+$grp Vehicle : "{2BE1F8B9299B67C1}Prefabs/Vehicles/Wheeled/M923A1/M923A1_tanker.et" {
+ D1 {
+  coords 142.297 1 183.109
+ }
+ D2 {
+  coords 122.533 1 180.092
+ }
+}
+GenericEntity I1 : "{6D56FED1E55A8F84}Prefabs/Items/Misc/IntelligenceFolder_E_01/IntelligenceFolder_E_01.et" {
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "Intelligence Folder"
+    }
+   }
+  }
+ }
+ coords 121.882 1 170.389
 }

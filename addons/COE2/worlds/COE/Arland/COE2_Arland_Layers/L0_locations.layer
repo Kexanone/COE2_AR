@@ -11,3 +11,6 @@ GenericEntity Farm : "{0762BC104736A99B}Prefabs/World/Locations/Arland/Natural/A
  }
  coords 2219.992 53.779 2889.189
 }
+SCR_ChimeraCharacter : "{976AC400219898FA}Prefabs/Characters/Factions/OPFOR/USSR_Army/Character_USSR_Sharpshooter.et" {
+ coords 3183.66 18.13 2838.399
+}

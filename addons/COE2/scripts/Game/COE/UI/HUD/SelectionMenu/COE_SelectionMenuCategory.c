@@ -8,7 +8,24 @@ class COE_SelectionMenuCategory : SCR_SelectionMenuCategoryEntry
 	//------------------------------------------------------------------------------------------------
 	override protected void Update()
 	{
-		foreach (SCR_SelectionMenuEntry entry : m_aEntries)
-			entry.Update();
+		bool enabled = CanBePerformed();
+		
+		if (enabled)
+		{
+			foreach (SCR_SelectionMenuEntry entry : m_aEntries)
+				entry.Update();
+		};
+	
+		Enable(enabled);	
+	}
+	
+	bool CanBePerformed()
+	{
+		return true;
+	}
+	
+	bool CanBeShown()
+	{
+		return true;
 	}
 }

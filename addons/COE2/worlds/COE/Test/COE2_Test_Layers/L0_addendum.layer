@@ -1,15 +1,30 @@
 SCR_MapEntity MapEntity_Default1 : "{21C189074DAB7E90}Prefabs/World/DefaultWorld/MapEntity_Default.et" {
  coords 133.688 1 149.39
 }
+SCR_DestructibleBuildingEntity KEK : "{18B2439FBF6CADFD}Prefabs/Structures/Houses/Farm/FarmHouse_E_1L01/FarmHouse_E_1L01_Wood.et" {
+ coords 81.575 0 155.536
+}
 MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager_Base.et" {
  coords 113.358 3.15 186.92
 }
 GenericEntity : "{485F978E315C6097}Prefabs/World/Locations/Eden/Urban/Moutains_East_quarry_01.et" {
  coords 117.638 1 199.395
 }
+SCR_DestructibleBuildingEntity : "{51F233A0BA73532A}Prefabs/Structures/Industrial/Houses/Office_E_01/Office_E_01.et" {
+ coords 42.337 0 163.861
+}
 GenericEntity : "{70D370E32E04F6AB}Prefabs/World/Locations/Eden/Urban/Regina_sawmill_01.et" {
  coords 197.508 1 40.12
 }
+GenericEntity : "{7492BAA88AFCEDCE}Prefabs/Compositions/Slotted/SlotFlatSmall/Bunker_S_USSR_01.et" {
+ coords 69.326 1 163.828
+}
+SCR_ChimeraCharacter D3 : "{854C04F0EA2129CC}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Unarmed.et" {
+ coords 131.664 1 181.255
+}
 GenericEntity : "{B40E827D2AC8F210}Prefabs/World/Locations/Eden/Urban/Erquy_Harbor_01.et" {
  coords 37.181 1 77.535
+}
+SCR_DestructibleBuildingEntity : "{BEF9077AF9F93AE7}Prefabs/Structures/Houses/Village/House_Mountain_E_1I01/House_Mountain_E_1I01.et" {
+ coords 79.455 1.496 182.206
 }
