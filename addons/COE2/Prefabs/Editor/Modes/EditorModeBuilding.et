@@ -1,0 +1,8 @@
+SCR_EditorModeEntity : "{E56F54E533ACE527}Prefabs/Editor/Modes/EditorModeBase.et" {
+ ID "518A34314C7CB324"
+ components {
+  SCR_PreviewEntityEditorComponent "{5C7C884DECBBCD05}" {
+   m_AllowedVerticalModes 6
+  }
+ }
+}

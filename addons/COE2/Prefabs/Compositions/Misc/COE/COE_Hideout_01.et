@@ -19,6 +19,34 @@ COE_MainBaseEntity {
  coords 111.653 1 150.752
  Flags 1027
  {
+  GenericEntity : "{922497B648E05697}Prefabs/Compositions/Misc/CustomEntities/InteractionPoints/PersonnelService_FIA_Small_NoAffiliation.et" {
+   ID "616A2D203BA331DE"
+   components {
+    SCR_CampaignBuildingProviderComponent "{5ED7185081A6289C}" {
+     m_fBuildingRadius 15
+     m_iRank PRIVATE
+     m_aBudgetsToEvaluate {
+      SCR_CampaignBuildingMaxValueBudgetToEvaluateData "{5EFAB3098942052B}" {
+       m_iMaxValue 16
+      }
+     }
+    }
+    SCR_ResourceComponent "{5D7CC617A89926F3}" {
+     m_aContainers {
+      SCR_ResourceContainerVirtual "{616A2D22714B77DD}" {
+       m_eResourceRights SELF
+       m_eStorageType STORED
+       m_fResourceValueCurrent 10000
+       m_fResourceValueMax 10000
+       m_fResourceGain 0
+       m_fResourceGainTickrate 0
+      }
+     }
+    }
+   }
+   coords -2.323 0.05 5.479
+   angleY -180
+  }
   SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et" {
    ID "60A042236B7D1D38"
    components {

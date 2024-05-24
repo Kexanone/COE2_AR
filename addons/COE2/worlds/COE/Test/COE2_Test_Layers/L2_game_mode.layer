@@ -9,7 +9,6 @@ COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
    m_sSpawnMapConfigPath "{AB17A0C35CDB53A1}Configs/Map/COE_MapSpawnMenu.conf"
   }
   SCR_CommandingManagerComponent "{5E6F1867E2884BA4}" {
-   m_sCommandsConfigPath "{54764D4E706F348C}Configs/Commanding/Commands.conf"
    m_iMaxAIPerGroup 10
   }
   SCR_DebriefingScreenComponent "{5E6F1867E2884BA2}" {
@@ -177,5 +176,6 @@ COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
   }
  }
  coords 118.45 1 205.011
+ m_sKSC_WorldSlotsConfigName "{CC5657883F3EE57B}Configs/Slots/Test/KSC_Slots_Test.conf"
  m_sDefaultPlayerFactionKey "US"
 }

@@ -9,6 +9,9 @@ GenericEntity : "{C6B86C6BD76EA814}Prefabs/Structures/Civilian/BoardMap_01/Board
    m_bAutoRegister ALWAYS
    m_Flags 896
   }
+  SCR_DestructionMultiPhaseComponent "{5624A88D86EFE8BA}" {
+   Enabled 0
+  }
   ActionsManagerComponent "{6094DD8CCAF35E71}" {
    ActionContexts {
     UserActionContext "{6094DD8CC81E58F7}" {

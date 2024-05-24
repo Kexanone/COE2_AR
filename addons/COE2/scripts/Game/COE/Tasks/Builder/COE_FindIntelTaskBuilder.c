@@ -11,18 +11,28 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 		COE_GameMode gameMode = COE_GameMode.GetInstance();
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		
-		array<ResourceName> entries = {};
-		factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_TENT, entries);
-		if (entries.IsEmpty())
+		IEntity structure; array<IEntity> tables = {};
+		Tuple2<IEntity, array<ref PointInfo>> entry = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.ROLE_SCOUT);
+		if (entry)
+		{
+			structure = entry.param1;
+			FindTables(structure, tables);
+		}
+		else
+		{
+			array<ResourceName> entries = {};
+			factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_TENT, entries);
+			if (entries.IsEmpty())
+				return null;
+			
+			structure = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
+			KSC_CompositionHelper.GetChildrenByXobSubstring(structure, "Table", tables);
+			KSC_CompositionHelper.GetChildrenByXobSubstring(structure, "Desk", tables);
+		}			
+		
+		if (!structure || tables.IsEmpty())
 			return null;
-				
-		IEntity tent = KSC_GameTools.SpawnStructurePrefab(entries.GetRandomElement(), ao.GetOrigin(), Math.RandomFloat(0, 360));
-		ao.AddEntity(tent);
-				
-		array<IEntity> tables = KSC_CompositionHelper.GetChildrenByXobSubstring(tent, "Table");
-		if (tables.IsEmpty())
-			return null;
-				
+		
 		IEntity table = tables.GetRandomElement();
 		vector mins, maxs;
 		table.GetWorldBounds(mins, maxs);
@@ -38,5 +48,33 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 	override LocalizedString GetTaskName()
 	{
 		return "Find Intel";
+	}
+	
+	protected ref array<IEntity> m_aTables;
+	
+	//------------------------------------------------------------------------------------------------
+	protected void FindTables(IEntity structure, inout notnull array<IEntity> tables)
+	{
+		m_aTables = {};
+		vector mins, maxs;
+		structure.GetBounds(mins, maxs);
+		vector transform[4];
+		structure.GetWorldTransform(transform);
+		GetGame().GetWorld().QueryEntitiesByOBB(mins, maxs, transform, QueryTablesCallback);
+		tables.InsertAll(m_aTables);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected bool QueryTablesCallback(IEntity entity)
+	{
+		VObject vObject = entity.GetVObject();
+		if (!vObject)
+			return true;
+		
+		ResourceName xobName = vObject.GetResourceName();
+		if (xobName.IndexOf("Table") >= 0 || xobName.IndexOf("Desk") >= 0)
+			m_aTables.Insert(entity);
+		
+		return true;
 	}
 }

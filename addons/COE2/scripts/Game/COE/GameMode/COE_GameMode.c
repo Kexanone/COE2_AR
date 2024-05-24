@@ -90,6 +90,8 @@ class COE_GameMode : SCR_BaseGameMode
 	protected ref ScriptInvoker m_pCOE_OnStateChanged = new ScriptInvoker();
 	
 	protected COE_FactionManager m_pFactionManager;
+	
+	protected const float MAIN_BASE_RANGE = 25;
 		
 	//------------------------------------------------------------------------------------------------
 	void COE_GameMode(IEntitySource src, IEntity parent)
@@ -287,11 +289,14 @@ class COE_GameMode : SCR_BaseGameMode
 		COE_SetState(COE_EGameModeState.EXECUTION);
 	}
 	
+	protected ref array<IEntity> m_aAIToDelete;
+	
 	//------------------------------------------------------------------------------------------------
 	protected void DeleteAO()
 	{
 		COE_SetState(COE_EGameModeState.INTERMISSION);
 		
+		// Heal and teleport all players to main base
 		array<int> playerIds = {};
 		GetGame().GetPlayerManager().GetPlayers(playerIds);
 		foreach (int playerId : playerIds)
@@ -305,15 +310,52 @@ class COE_GameMode : SCR_BaseGameMode
 				continue;
 			
 			COE_PlayerController playerCtrl = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
-			playerCtrl.RequestFastTravel(m_vMainBasePos, 0, 5);
+			playerCtrl.RequestFastTravel(m_vMainBasePos, 0, 5, false);
 			
 			SCR_DamageManagerComponent damageManager = player.GetDamageManager();
 			damageManager.FullHeal();
 		}
 		
+		CollectAIForCleanUp();
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 3000, false, m_pCurrentAO);
+		GetGame().GetCallqueue().CallLater(CleanUpAI, 4000);
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	//! Delete all AI outside main base
+	void CollectAIForCleanUp(bool collectInsideMainBase = false)
+	{
+		array<AIAgent> agents = {};
+		GetGame().GetAIWorld().GetAIAgents(agents);
+		m_aAIToDelete = {};
+		foreach (AIAgent agent : agents)
+		{
+			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
+			if (!char)
+				continue;
+			
+			if (EntityUtils.IsPlayer(char))
+				continue;
+			
+			if (!collectInsideMainBase && vector.DistanceXZ(char.GetOrigin(), m_vMainBasePos) <= MAIN_BASE_RANGE)
+				continue;
+			
+			m_aAIToDelete.Insert(char);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Delete all AI outside main base
+	void CleanUpAI()
+	{
+		array<AIAgent> agents = {};
+		GetGame().GetAIWorld().GetAIAgents(agents);
+		foreach (IEntity entity : m_aAIToDelete)
+		{
+			SCR_EntityHelper.DeleteEntityAndChildren(entity);
+		}
+	}
+		
 	//------------------------------------------------------------------------------------------------
 	protected void CreateInsertionPoint(vector pos)
 	{
@@ -394,6 +436,12 @@ class COE_GameMode : SCR_BaseGameMode
 	float GetEnemyAiCountMultiplier()
 	{
 		return m_fEnemyAICountMultiplier;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetTargetEnemyAICount()
+	{
+		return Math.Max(m_fEnemyAICountMultiplier * GetGame().GetPlayerManager().GetPlayerCount(), m_iMinEnemyAICount);
 	}
 	
 	//------------------------------------------------------------------------------------------------
