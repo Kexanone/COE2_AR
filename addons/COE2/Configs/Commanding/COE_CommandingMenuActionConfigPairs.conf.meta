@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{56FAFB76048DE929}Configs/Commanding/COE_CommandingMenu.conf"
+ Name "{B4859BD5EDB35D06}Configs/Commanding/COE_CommandingMenuActionConfigPairs.conf"
  Configurations {
   CONFResourceClass PC {
   }

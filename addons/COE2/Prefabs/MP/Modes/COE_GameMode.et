@@ -20,7 +20,13 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
    m_sGadgetMapConfigPath "{A092C0660C5FBA20}Configs/Map/COE_MapFullscreen.conf"
    m_sSpawnMapConfigPath "{AB17A0C35CDB53A1}Configs/Map/COE_MapSpawnMenu.conf"
   }
-  SCR_ArsenalManagerComponent "{5E6F1867E2884BA8}" {
+  SCR_CampaignBuildingManagerComponent "{616A2D22D895D15C}" {
+   m_sFreeRoamBuildingClientTrigger "{5E191CEAF4B95816}Prefabs/MP/FreeRoamBuildingClientTrigger.et"
+   m_BudgetType CAMPAIGN
+   m_iCompositionRefundPercentage 100
+   m_OutlineManager SCR_CampaignBuildingCompositionOutlineManager "{616A2D22092CE8E6}" : "{96A8B496A076F1C0}scripts/Game/Building/CampaignBuildingCompositionOutline.conf" {
+   }
+   m_sPrefabsToBuildResource "{D2527D9AA5B4A33E}Configs/Editor/PlaceableEntities/Compositions/Compositions_FreeRoamBuilding.conf"
   }
   SCR_CommandingManagerComponent "{5E6F1867E2884BA4}" {
    m_sCommandsConfigPath "{7F7CE136B89ABDC8}Configs/Commanding/COE_Commands.conf"
@@ -206,8 +212,6 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
      }
     }
    }
-  }
-  SerializerInventoryStorageManagerComponent "{5E6F1867E289B96E}" {
   }
  }
  PlayerControllerPrefab "{21EAEB797197C0C3}Prefabs/Characters/Core/COE_PlayerController.et"

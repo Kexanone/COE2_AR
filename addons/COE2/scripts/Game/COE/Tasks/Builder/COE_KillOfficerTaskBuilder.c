@@ -13,16 +13,37 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		if (entries.IsEmpty())
 			return null;
 		
-		ao.AddEntity(KSC_GameTools.SpawnStructurePrefab(entries.GetRandomElement(), ao.GetOrigin(), Math.RandomFloat(0, 360)));
+		IEntity structure; vector pos;
+		Tuple2<IEntity, array<ref PointInfo>> entry = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.ROLE_SCOUT);
+		if (entry)
+		{
+			structure = entry.param1;
+			PointInfo point = entry.param2.GetRandomElement();
+			point.Init(structure);
+			vector transform[4];
+			point.GetWorldTransform(transform);
+			pos = transform[3];
+		}
+		else
+		{
+			structure = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
+			pos = structure.GetOrigin();
+		}
+		
+		if (!structure)
+			return null;
 		
 		entries.Clear();
 		factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.KSC_TRAIT_HVT, entries);
 		if (entries.IsEmpty())
 			return null;
 		
-		SCR_ChimeraCharacter hvt = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), ao.GetOrigin(), Math.RandomFloat(0, 360));
+		SCR_ChimeraCharacter hvt = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), pos, Math.RandomFloat(0, 360));
 		ao.AddEntity(hvt);
-		
+		AIGroup group = KSC_AIHelper.GetGroup(hvt);
+		AIWaypoint wp = KSC_GameTools.SpawnWaypointPrefab("{48434860342A60EC}Prefabs/AI/Waypoints/KSC_AIWaypoint_Defend_5m.et", pos);
+		group.AddWaypoint(wp);
+		ao.AddEntity(wp);
 		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), hvt));
 	}
 	

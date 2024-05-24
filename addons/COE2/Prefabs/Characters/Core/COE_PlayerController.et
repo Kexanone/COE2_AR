@@ -1,62 +1,9 @@
 COE_PlayerController : "{CD2B8EF361478648}Prefabs/Characters/Core/DefaultPlayerControllerMP_ScenarioFramework.et" {
  ID "1A9BA6BEFA06E3B1"
  components {
-  COE_PlayerControllerCommandingComponent "{5A7CC0F22BDDB868}" {
-   m_sCommandingMenuConfigPath "{56FAFB76048DE929}Configs/Commanding/COE_CommandingMenu.conf"
+  SCR_PlayerControllerCommandingComponent "{5A7CC0F22BDDB868}" {
+   m_sCommandingConfigActionPair "{B4859BD5EDB35D06}Configs/Commanding/COE_CommandingMenuActionConfigPairs.conf"
    m_sCommandingMapMenuConfigPath "{D6B0CB76B9131303}Configs/Commanding/COE_CommandingMapMenu.conf"
-   m_RadialMenuController SCR_RadialMenuController "{5CCE9580385FEDA6}" {
-    m_Data SCR_SelectionMenuData "{5CCE958004BE409A}" {
-    }
-   }
-   m_aCOE_RadialMenuEntries {
-    COE_SelectionMenuCategory "{609EE3A079BFF7E2}" {
-     Name "#COE-ActionCategory_CombatOpsCommands"
-     IconSetName "careerMenuIcon"
-     m_aEntries {
-      COE_ScenarioSettingsSelectionMenuEntry "{60A49EA4005A7CE5}" {
-       Name "#AR-KeybindEditor_ScenarioAttributes"
-       IconSetName "settings"
-      }
-      COE_SelectAOSelectionMenuEntry "{60A49EA40817BA51}" {
-       Name "#COE-Action_SelectAO"
-       IconSetName "faction"
-      }
-      COE_GenerateAOSelectionMenuEntry "{60A49EA4140CCBCD}" {
-       Name "#COE-Action_GenerateAO"
-      }
-      COE_DeploySelectionMenuEntry "{60A4C38EF5088820}" {
-       Name "#AR-ButtonSelectDeploy"
-       IconSetName "moveCommandAlt"
-      }
-      COE_CancelAOSelectionMenuCategory "{609EE3AC570269B1}" {
-       Name "#COE-Action_CancelAO"
-       IconSetName "disable"
-       m_aEntries {
-        COE_CancelAOSelectionMenuEntry "{609F29E29A11C5C0}" {
-         Name "#COE-Action_ConfirmCancelAO"
-         IconSetName "disable"
-        }
-        COE_SelectionMenuEntry "{609F29E397E570A5}" {
-         Name "#COE-Action_QuitCancelAO"
-         IconSetName "back-to-main-menu"
-        }
-       }
-      }
-     }
-    }
-   }
-   m_aCOE_MapRadialMenuEntries {
-    COE_SelectionMenuCategory "{609EE39673FC9E92}" {
-     Name "#COE-ActionCategory_CombatOpsCommands"
-     IconSetName "careerMenuIcon"
-     m_aEntries {
-      COE_SetInsertionPointSelectionMenuEntry "{609F29E3DF53083D}" {
-       Name "#COE-Action_SetInsertionPoint"
-       IconSetName "respawn"
-      }
-     }
-    }
-   }
   }
   SCR_SpawnerRequestComponent "{5F12A4F038B79C31}" {
   }

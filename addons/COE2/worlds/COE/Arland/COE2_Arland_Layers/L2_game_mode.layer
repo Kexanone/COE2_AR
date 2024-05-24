@@ -9,6 +9,5 @@ COE_GameMode COE_GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et"
   }
  }
  coords 935.815 42.872 2639.417
- m_pKSC_WorldSlotsConfig KSC_WorldSlotsConfig "{615E23D0E2278B0C}" : "{721FEF4568F1F815}Configs/Slots/Arland/KSC_Slots_Arland.conf" {
- }
+ m_sKSC_WorldSlotsConfigName "{721FEF4568F1F815}Configs/Slots/Arland/KSC_Slots_Arland.conf"
 }

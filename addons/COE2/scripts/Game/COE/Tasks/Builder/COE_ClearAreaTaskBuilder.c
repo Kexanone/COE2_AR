@@ -11,7 +11,7 @@ class COE_ClearAreaTaskBuilder : COE_BaseTaskBuilder
 		COE_GameMode gameMode = COE_GameMode.GetInstance();
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		
-		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), gameMode.GetCurrentLocation().m_vCenter, gameMode.GetAORadius(), m_fFriendlyRatioThreshold));
+		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), ao.GetOrigin(), gameMode.GetAORadius(), m_fFriendlyRatioThreshold));
 	}
 	
 	//------------------------------------------------------------------------------------------------
