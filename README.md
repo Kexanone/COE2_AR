@@ -8,10 +8,9 @@ Co-operative infantry gameplay with dynamic objectives for [Arma Reforger](https
 
 ## Features
 - **Replayability** - Dynamic generation of AOs
-- **Increased cooperativity** - Game mode is structured in briefing, execution, exfiltration, (_debriefing_)* and intermission
+- **Increased cooperativity** - Game mode is structured in (briefing)*, execution, exfiltration, (_debriefing_)* and intermission
 - **Ingame Configurability** - Scenario and AOs can be configured ingame by a votable commander role
 - **Compatibility** - Designed to be compatible with modded factions out of the box
-- **Fast set-up** - (_Terrain makers can use `Configs/Workbench/GameModeSetup/COE2.conf` in `Game Mode Setup` plugin to generate a scenario with little user input_)*
 
 \* Not yet implemented
 
@@ -21,11 +20,16 @@ _TBD_
 
 ## Mods JSON
 
-_TBD_
+```json
+{
+    "modId": "60926835F4A7B0CA",
+    "name": "COE2"
+}
 
 ## Scenario IDs
 
-_TBD_
+- COE2 - Arland: "{F239FD0036BD2C1E}Missions/COE2_Arland.conf"
+- COE2 - Everon: "{EE676FAB9DFA4CF7}Missions/COE2_Eden.conf"
 
 ## Mission Header
 
@@ -48,5 +52,3 @@ Please use our [Issue Tracker](https://github.com/Kexanone/COE2_AR/issues/new/ch
 
 ## License
 This mission is licensed under the Arma Public License Share Alike ([APL-SA](https://github.com/Kexanone/COE2_AR/blob/main/LICENSE.md)).
-
-
