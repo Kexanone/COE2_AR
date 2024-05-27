@@ -4,8 +4,20 @@ SCR_MapEntity MapEntity_Default1 : "{21C189074DAB7E90}Prefabs/World/DefaultWorld
 SCR_DestructibleBuildingEntity KEK : "{18B2439FBF6CADFD}Prefabs/Structures/Houses/Farm/FarmHouse_E_1L01/FarmHouse_E_1L01_Wood.et" {
  coords 81.575 0 155.536
 }
+Vehicle M923A1_arsenal1 : "{1FF144F8A209239D}Prefabs/Vehicles/Wheeled/M923A1/M923A1_arsenal.et" {
+ coords 106.566 1 171.172
+}
+Vehicle M923A1_tanker1 : "{2BE1F8B9299B67C1}Prefabs/Vehicles/Wheeled/M923A1/M923A1_tanker.et" {
+ coords 119.33 1 145.007
+}
+Vehicle M923A1_engineer1 : "{2D74C39A650A3030}Prefabs/Vehicles/Wheeled/M923A1/M923A1_engineer.et" {
+ coords 135.941 1 165.134
+}
 MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager_Base.et" {
  coords 113.358 3.15 186.92
+}
+Vehicle M923A1_command1 : "{36BDCC88B17B3BFA}Prefabs/Vehicles/Wheeled/M923A1/M923A1_command.et" {
+ coords 122.175 1 166.439
 }
 GenericEntity : "{485F978E315C6097}Prefabs/World/Locations/Eden/Urban/Moutains_East_quarry_01.et" {
  coords 117.638 1 199.395
@@ -21,6 +33,9 @@ GenericEntity : "{7492BAA88AFCEDCE}Prefabs/Compositions/Slotted/SlotFlatSmall/Bu
 }
 SCR_ChimeraCharacter D3 : "{854C04F0EA2129CC}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Unarmed.et" {
  coords 131.664 1 181.255
+}
+Vehicle M923A1_repair1 : "{A042ACE5C2B13206}Prefabs/Vehicles/Wheeled/M923A1/M923A1_repair.et" {
+ coords 107.459 1 140.648
 }
 GenericEntity : "{B40E827D2AC8F210}Prefabs/World/Locations/Eden/Urban/Erquy_Harbor_01.et" {
  coords 37.181 1 77.535

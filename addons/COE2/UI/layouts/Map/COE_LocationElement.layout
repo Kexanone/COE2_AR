@@ -28,9 +28,9 @@ FrameWidgetClass {
      }
      "Ignore Cursor" 0
      AllowWidthOverride 1
-     WidthOverride 90
+     WidthOverride 60
      AllowHeightOverride 1
-     HeightOverride 90
+     HeightOverride 60
      {
       OverlayWidgetClass "{6094B4FC76103F5A}" {
        Name "IconOverlay"
@@ -107,8 +107,8 @@ FrameWidgetClass {
          Clipping False
          Color 0 0 0 1
          Text "#ar-deploymenu_spawnpoint_name"
-         "Font Size" 30
-         "Min Font Size" 30
+         "Font Size" 20
+         "Min Font Size" 20
          "Horizontal Alignment" Center
          FontProperties FontProperties "{54C883806AE51B80}" {
           Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"

@@ -28,6 +28,7 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		{
 			structure = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
 			pos = structure.GetOrigin();
+			ao.AddPositionToDefend(pos);
 		}
 		
 		if (!structure)
@@ -41,9 +42,8 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		SCR_ChimeraCharacter hvt = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), pos, Math.RandomFloat(0, 360));
 		ao.AddEntity(hvt);
 		AIGroup group = KSC_AIHelper.GetGroup(hvt);
-		AIWaypoint wp = KSC_GameTools.SpawnWaypointPrefab("{48434860342A60EC}Prefabs/AI/Waypoints/KSC_AIWaypoint_Defend_5m.et", pos);
-		group.AddWaypoint(wp);
-		ao.AddEntity(wp);
+		KSC_AITasks.Defend(group, pos, 5);
+		ao.AddGroup(group);
 		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), hvt));
 	}
 	

@@ -16,7 +16,8 @@ class COE_DestroyInstallationTaskBuilder : COE_BaseTaskBuilder
 		IEntity hvt = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
 		if (!hvt)
 			return null;
-				
+		
+		ao.AddPositionToDefend(hvt.GetOrigin());	
 		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), hvt));
 	}
 	

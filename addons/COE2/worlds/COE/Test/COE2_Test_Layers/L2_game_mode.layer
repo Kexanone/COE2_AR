@@ -140,35 +140,12 @@ COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
     }
     m_MiddleColumn SCR_WelcomeScreenMissionObjectivesContent "{5E6F1867E2884A6C}" {
      m_sTitleText "Possible Objectives"
-     m_aMissionObjectives {
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A68}" {
-       m_sObjectiveQuadName "Seize"
-       m_sDescription "#AR-CombatScenario_Kill_Title"
-      }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A66}" {
-       m_sObjectiveQuadName "Custom"
-       m_sDescription "#AR-CombatScenario_Intel_Title"
-      }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A63}" {
-       m_sObjectiveQuadName "Seize"
-       m_sDescription "#AR-CombatScenario_ClearAreaTask_Title"
-      }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E289B940}" {
-       m_sObjectiveQuadName "Defend"
-       m_sDescription "#AR-Commanding_Command_SaD"
-      }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E289B95F}" {
-       m_sObjectiveQuadName "GetOut"
-       m_sDescription "#AR-CombatScenario_ExfilTask_Title"
-      }
-     }
     }
     m_RightColumn SCR_WelcomeScreenIntroductionContent "{5E6F1867E289B95B}" {
      m_sTitleText "Introduction"
      m_aIntroduction {
       SCR_WelcomeScreenIntroduction "{5E6F1867E289B951}" {
        m_sContentTitleText "#AR-Workshop_TabName_Briefing"
-       m_sContentDescriptionText "#AR-CombatScenario_Briefing"
       }
      }
     }

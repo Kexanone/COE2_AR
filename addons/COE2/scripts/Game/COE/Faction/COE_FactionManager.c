@@ -107,4 +107,10 @@ class COE_FactionManager : KSC_FactionManager
 	{
 		m_pEnemyFaction = GetFactionByIndex(m_iEnemyFactionId);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	Faction GetCivilianFaction()
+	{
+		return GetFactionByKey("CIV");
+	}
 }
