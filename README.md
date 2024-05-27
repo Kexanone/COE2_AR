@@ -25,6 +25,7 @@ _TBD_
     "modId": "60926835F4A7B0CA",
     "name": "COE2"
 }
+```
 
 ## Scenario IDs
 
