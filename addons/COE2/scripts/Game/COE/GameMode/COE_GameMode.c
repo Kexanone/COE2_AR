@@ -96,6 +96,8 @@ class COE_GameMode : SCR_BaseGameMode
 	//------------------------------------------------------------------------------------------------
 	void COE_GameMode(IEntitySource src, IEntity parent)
 	{
+		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Insert(ShowDocumentation);
+		
 		if (!GetGame().InPlayMode() || Replication.IsClient())
 			return;
 		
@@ -489,5 +491,12 @@ class COE_GameMode : SCR_BaseGameMode
 		}
 		
 		playerController.OnPlayerRoleChangeServer(roleFlags);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void ShowDocumentation()
+	{
+		SCR_FieldManualUI.Open(EFieldManualEntryId.COE_COMMANDER);
+		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Remove(ShowDocumentation);
 	}
 }

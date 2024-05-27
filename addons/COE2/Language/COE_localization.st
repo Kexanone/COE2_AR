@@ -64,6 +64,14 @@ StringTable {
    Author "kex"
    LastChanged "swellig"
   }
+  CustomStringTableItem "{6172533A32929855}" {
+   Id "COE-Briefing_Description"
+   Target_en_us "Co-operative infantry gameplay with dynamic objectives for Arma Reforger. Next generation of Combat Ops Enhanced with inspiration from mbrdmn's Dynamic Recon Ops from Arma 3."\
+   ""
+   Modified 1634888121
+   Author "Kex"
+   LastChanged "Kex"
+  }
   CustomStringTableItem "{6155376789FAB1FC}" {
    Id "COE-DeployScreen_NoFactionsAvailable"
    Target_en_us "There are no available factions. Please vote for a commander or wait for them to set a faction."
@@ -196,6 +204,55 @@ StringTable {
    Modified 1620643413
    Author "kex"
    LastChanged "kex"
+  }
+  CustomStringTableItem "{61729194C3C2777F}" {
+   Id "COE-FieldManual_Keybind_ShowScoreboard"
+   Target_en_us "Show player list for nominating yourself as commander"
+   Modified 1634906936
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{6172918012D7BC0E}" {
+   Id "COE-FieldManual_Page_Commander_Text_00"
+   Target_en_us "Commander is a votable role that can change the scenario properties, set up missions and place insertion points."
+   Modified 1634901572
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{61729182BBA06C85}" {
+   Id "COE-FieldManual_Page_Commander_Text_01"
+   Target_en_us "1. Set up AO"
+   Modified 1634906330
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{61729182D079A9C9}" {
+   Id "COE-FieldManual_Page_Commander_Text_02"
+   Target_en_us "Commanders can change the scenario properties, select the location and tasks and generate the AO via the board or commanding menu."
+   Modified 1634904088
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{617291820B539877}" {
+   Id "COE-FieldManual_Page_Commander_Text_03"
+   Target_en_us "2. Set up insertion point"
+   Modified 1634906267
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{6172918201FA959E}" {
+   Id "COE-FieldManual_Page_Commander_Text_04"
+   Target_en_us "Commanders can set up an insertion point via the map commanding menu once an AO has been generated."
+   Modified 1634906153
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{6172918F148C1106}" {
+   Id "COE-KeybindMap_MapContextualMenu"
+   Target_en_us "Map contextual menu"
+   Modified 1634903843
+   Author "Kex"
+   LastChanged "Kex"
   }
   CustomStringTableItem "{60A0A467427CC45C}" {
    Id "COE-MapLocation_Safehouse"

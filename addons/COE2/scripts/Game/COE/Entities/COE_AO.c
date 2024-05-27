@@ -8,6 +8,7 @@ class COE_AO : KSC_AO
 {
 	protected ref array<IEntity> m_aEntities = {};
 	protected ref array<KSC_BaseTask> m_aTasks = {};
+	protected ref array<SCR_MapMarkerBase> m_aMarkers = {};
 	protected COE_GameMode m_pGameMode;
 	protected COE_FactionManager m_pFactionManager;
 	protected COE_AOParams m_Params;
@@ -22,7 +23,11 @@ class COE_AO : KSC_AO
 	protected ref map<EEditableEntityLabel, ref array<ref Tuple2<IEntity, array<ref PointInfo>>>> m_mBuildingSlots = new map<EEditableEntityLabel, ref array<ref Tuple2<IEntity, array<ref PointInfo>>>>();
 	protected static ref map<EEditableEntityLabel, float> s_mSlotRadii;
 	
-	protected const int TERRAIN_DATA_BUFFER_SIZE = 1000000;
+	protected ref array<vector> m_aPositionsToDefend = {};
+	protected ref array<vector> m_aEnemyPositionsToReveal = {};
+	
+	protected static const int TERRAIN_DATA_BUFFER_SIZE = 1000000;
+	protected static const int MAX_ATTEMPTS = 10000;
 			
 	//------------------------------------------------------------------------------------------------
 	void COE_AO(IEntitySource src, IEntity parent)
@@ -55,7 +60,10 @@ class COE_AO : KSC_AO
 		SetUpFortifications();
 		SetUpRoadBlocks();
 		SetUpSnipers();
+		SetUpDefenders();
 		SetUpPatrols();
+		SetUpVehicles();
+		SetUpCivilians();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -176,9 +184,10 @@ class COE_AO : KSC_AO
 				if (!group)
 					return entry;
 				
-				AIWaypoint wp = KSC_GameTools.SpawnWaypointPrefab("{66D4C31DF8221C19}Prefabs/AI/Waypoints/KSC_AIWaypoint_Defend_10m.et", transform[3]);
-				group.AddWaypoint(wp);
-				AddEntity(wp);
+				PrintFormat("%1|%2", transform[3], group.GetOrigin());
+				
+				KSC_AITasks.Defend(group, transform[3], 10);
+				AddGroup(group);
 			}
 		}
 		
@@ -305,6 +314,7 @@ class COE_AO : KSC_AO
 				continue;
 			}
 			
+			m_aEnemyPositionsToReveal.Insert(structure.GetOrigin());
 			AddEntity(structure);
 						
 			if (!SpawnTurretOccupants(structure))
@@ -343,6 +353,7 @@ class COE_AO : KSC_AO
 				continue;
 			}
 			
+			m_aEnemyPositionsToReveal.Insert(structure.GetOrigin());
 			AddEntity(structure);
 			SpawnTurretOccupants(structure);
 			counter++;
@@ -350,7 +361,7 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected bool SpawnTurretOccupants(IEntity entity)
+	bool SpawnTurretOccupants(IEntity entity)
 	{
 		array<IEntity> turrets = {};
 		KSC_CompositionHelperT<Turret>.GetChildrenByType(entity, turrets);
@@ -405,14 +416,13 @@ class COE_AO : KSC_AO
 		if (!group)
 			return false;
 		
-		AIWaypoint wp = KSC_GameTools.SpawnWaypointPrefab("{48434860342A60EC}Prefabs/AI/Waypoints/KSC_AIWaypoint_Defend_5m.et", entity.GetOrigin());
-		group.AddWaypoint(wp);
-		AddEntity(wp);
+		KSC_AITasks.Defend(group, entity.GetOrigin(), 5);
+		AddGroup(group);
 		return true;	
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetUpPatrols()
+	void SetUpDefenders()
 	{
 		array<ResourceName> entries = {};
 		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.GROUPSIZE_MEDIUM, entries);
@@ -421,54 +431,164 @@ class COE_AO : KSC_AO
 		int aiCount = 0;
 		int maxAICount = m_pGameMode.GetTargetEnemyAICount();
 		
-		foreach (KSC_BaseTask task : m_aTasks)
+		foreach (vector posToDefend : m_aPositionsToDefend)
 		{
-			if (KSC_AreaTriggerTask.Cast(task))
-				continue;
-			
-			vector pos = task.GetOrigin();
-			SCR_WorldTools.FindEmptyTerrainPosition(pos, task.GetOrigin(), 10);
+			vector pos = posToDefend;
+			SCR_WorldTools.FindEmptyTerrainPosition(pos, posToDefend, 10);
 			SCR_AIGroup group = SpawnGroupPrefab(entries.GetRandomElement(), pos);
 			if (!group)
 				break;
 			
-			AIWaypoint wp = KSC_GameTools.SpawnWaypointPrefab("{2FCBE5C76E285A7B}Prefabs/AI/Waypoints/AIWaypoint_DefendSmall.et", task.GetOrigin());
-			group.AddWaypoint(wp);
-			AddEntity(wp);
+			KSC_AITasks.Defend(group, posToDefend, 15); 
+			AddGroup(group);
 		}
 		
 		entries.Clear();
 		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.ENTITYTYPE_GROUP, entries);
 		
-		while (m_iAiCount < m_iMaxAICount)
+		// Put half of AI inside inner area
+		while (m_iAiCount < m_iMaxAICount / 2)
 		{
-			SCR_AIGroup group = SpawnGroupPrefab(entries.GetRandomElement(), m_Area.SamplePointInArea());
+			SCR_AIGroup group = SpawnGroupPrefab(entries.GetRandomElement(), GetOrigin());
 			if (!group)
 				break;
 			
-			// Put half of AI inside inner area
-			if (m_iAiCount < m_iMaxAICount / 2)
-			{
-				KSC_AITasks.Patrol(group, m_Area);
-			}
-			else
-			{
-				KSC_AITasks.Patrol(group, KSC_CircleArea(GetOrigin(), m_pGameMode.GetAORadius()));
-			}
+			KSC_AITasks.Defend(group, m_Area);
+			AddGroup(group);
 			
-			array<AIWaypoint> wps = {};
-			group.GetWaypoints(wps);
+			array<AIWaypoint> waypoints = {};
+			group.GetWaypoints(waypoints);
 			
-			SCR_EditableGroupComponent editGroup = SCR_EditableGroupComponent.Cast(group.FindComponent(SCR_EditableGroupComponent));
-			vector transform[4];
-			wps[0].GetWorldTransform(transform);
-			editGroup.SetTransform(transform);
-			
-			foreach (AIWaypoint wp : wps)
+			if (!waypoints.IsEmpty())
 			{
-				AddEntity(wp);
+				KSC_SpawnGroupHelperComponent spawnGroupHelper = KSC_SpawnGroupHelperComponent.Cast(group.FindComponent(KSC_SpawnGroupHelperComponent));
+				spawnGroupHelper.SetCenter(waypoints[0].GetOrigin());
 			}
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetUpPatrols()
+	{
+		array<ResourceName> entries = {};
+		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.ENTITYTYPE_GROUP, entries);
+		
+		KSC_CircleArea patrolArea = KSC_CircleArea(GetOrigin(), m_pGameMode.GetAORadius());
+		
+		while (m_iAiCount < m_iMaxAICount)
+		{
+			SCR_AIGroup group = SpawnGroupPrefab(entries.GetRandomElement(), GetOrigin());
+			if (!group)
+				break;
+			
+			KSC_AITasks.Patrol(group, patrolArea);
+			AddGroup(group);
+			
+			array<AIWaypoint> waypoints = {};
+			group.GetWaypoints(waypoints);
+			
+			if (!waypoints.IsEmpty())
+			{
+				KSC_SpawnGroupHelperComponent spawnGroupHelper = KSC_SpawnGroupHelperComponent.Cast(group.FindComponent(KSC_SpawnGroupHelperComponent));
+				spawnGroupHelper.SetCenter(waypoints[0].GetOrigin());
+			}
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetUpCivilians()
+	{
+		array<ResourceName> entries = {};
+		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetCivilianFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.ENTITYTYPE_CHARACTER, entries);
+		int count = Math.RandomIntInclusive(8, 12);
+		int counter = 0;
+		
+		while (counter < count)
+		{
+			SCR_ChimeraCharacter char = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), GetOrigin());
+			if (!char)
+				break;
+			
+			AIGroup group = KSC_AIHelper.GetGroup(char);
+			if (!group)
+				break;
+			
+			KSC_AITasks.Patrol(group, m_Area);
+			AddGroup(group);
+			
+			array<AIWaypoint> waypoints = {};
+			group.GetWaypoints(waypoints);
+			
+			if (!waypoints.IsEmpty())
+				char.SetOrigin(waypoints[0].GetOrigin());
+			
+			counter++;
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetUpVehicles()
+	{
+		array<ResourceName> entries = {};
+		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetCivilianFaction(), EEntityCatalogType.VEHICLE, EEditableEntityLabel.ENTITYTYPE_VEHICLE, entries);
+		if (entries.IsEmpty())
+			return;
+		
+		int count = Math.RandomIntInclusive(3, 5);
+		int counter = 0;
+		
+		for (int i = 0; i < count; i++)
+		{
+			vector pos;
+			float rotation;
+			if (!GetRandomParkingSlot(pos, rotation))
+				return;
+			
+			IEntity vehicle = KSC_GameTools.SpawnVehiclePrefab(entries.GetRandomElement(), pos, rotation);
+			if (!vehicle)
+				return;
+			
+			AddEntity(vehicle);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetRandomParkingSlot(out vector pos, out float rotation, bool blockSlots = true)
+	{
+		array<EEditableEntityLabel> labels = {EEditableEntityLabel.SLOT_ROAD_SMALL, EEditableEntityLabel.SLOT_ROAD_MEDIUM, EEditableEntityLabel.SLOT_ROAD_LARGE};
+		
+		int attempt = 0;
+		while (attempt < MAX_ATTEMPTS)
+		{
+			if (labels.IsEmpty())
+				return false;
+			
+			EEditableEntityLabel label = labels.GetRandomElement();
+			if (!GetRandomTerrainSlot(pos, label, blockSlots))
+			{
+				labels.RemoveItem(label);
+				continue;
+			}
+			
+			rotation = pos[1] + 180 * Math.RandomIntInclusive(0, 1);
+			pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
+			
+			float radius = 1.5;
+			
+			if (label == EEditableEntityLabel.SLOT_ROAD_LARGE)
+			{
+				radius = 3.5;
+			}
+			else if (label == EEditableEntityLabel.SLOT_ROAD_MEDIUM)
+			{
+				radius = 2.5;
+			}
+			
+			pos += radius * Vector(Math.Cos(Math.DEG2RAD * rotation), 0, -Math.Sin(Math.DEG2RAD * rotation));
+			return true;
+		}
+		
+		return false;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -482,7 +602,6 @@ class COE_AO : KSC_AO
 		array<ResourceName> units;
 		container.Get("m_aUnitPrefabSlots", units);			
 		m_iAiCount += units.Count();
-		AddEntity(group);
 		return group;
 	}
 	
@@ -504,6 +623,26 @@ class COE_AO : KSC_AO
 		}
 		
 		return nearestTask;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void AddPositionToDefend(vector pos)
+	{
+		m_aPositionsToDefend.Insert(pos);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void AddGroup(AIGroup group)
+	{
+		array<AIWaypoint> waypoints = {};
+		group.GetWaypoints(waypoints);
+				
+		foreach (AIWaypoint waypoint : waypoints)
+		{
+			AddEntity(waypoint);
+		}
+		
+		m_aEntities.Insert(group);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -651,6 +790,10 @@ class COE_AO : KSC_AO
 		
 		m_iNumCompletedTasks++;
 		
+		// Reveal targets if intel was picked up
+		if (KSC_PickUpItemTask.Cast(task))
+			RevealEnemyPositions();			
+		
 		if (m_iNumTasks > m_iNumCompletedTasks)
 			return;
 		
@@ -679,6 +822,31 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void AddEnemyPositionToReveal(vector pos)
+	{
+		m_aEnemyPositionsToReveal.Insert(pos);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void RevealEnemyPositions()
+	{
+		SCR_MapMarkerManagerComponent markerManager = SCR_MapMarkerManagerComponent.Cast(GetGame().GetGameMode().FindComponent(SCR_MapMarkerManagerComponent));
+		if (!markerManager)
+			return;
+		
+		foreach (vector pos : m_aEnemyPositionsToReveal)
+		{
+			SCR_MapMarkerBase marker = new SCR_MapMarkerBase();
+			marker.SetType(SCR_EMapMarkerType.PLACED_CUSTOM);
+			marker.SetIconEntry(SCR_EScenarioFrameworkMarkerCustom.FORTIFICATION2);
+			marker.SetColorEntry(m_pFactionManager.GetMarkerCustomColorEntry(m_pFactionManager.GetEnemyFaction()));
+			marker.SetWorldPos(pos[0], pos[2]);
+			markerManager.InsertStaticMarker(marker, false, true);
+			m_aMarkers.Insert(marker);
+		}
+	}
+		
+	//------------------------------------------------------------------------------------------------
 	void ~COE_AO()
 	{
 		if (Replication.IsRunning() && !Replication.IsServer())
@@ -696,6 +864,15 @@ class COE_AO : KSC_AO
 		foreach (IEntity entity : m_aEntities)
 		{
 			SCR_EntityHelper.DeleteEntityAndChildren(entity);
+		}
+		
+		SCR_MapMarkerManagerComponent markerManager = SCR_MapMarkerManagerComponent.Cast(GetGame().GetGameMode().FindComponent(SCR_MapMarkerManagerComponent));
+		if (!markerManager)
+			return;
+				
+		foreach (SCR_MapMarkerBase marker : m_aMarkers)
+		{
+			markerManager.RemoveStaticMarker(marker);
 		}
 	}
 }

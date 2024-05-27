@@ -89,27 +89,6 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
      Description "#AR-CombatScenario_Briefing"
     }
    }
-   m_aWinConditions {
-    SCR_BriefingVictoryCondition "{5E6F1867E2884B80}" {
-     victoryCondition CUSTOM
-     name "#AR-CombatScenario_Intel_Title"
-     description "#AR-CombatScenario_Intel_Title"
-    }
-    SCR_BriefingVictoryCondition "{5E6F1867E2884B9C}" {
-     victoryCondition SEIZE
-     name "#AR-CombatScenario_ClearAreaTask_Title"
-     description "#AR-CombatScenario_ClearAreaTask_Title"
-    }
-    SCR_BriefingVictoryCondition "{5E6F1867E2884B99}" {
-     victoryCondition GUARD
-     name "#AR-EditableEntity_AIWaypoint_SearchAndDestroy_Name"
-     description "#AR-EditableEntity_AIWaypoint_SearchAndDestroy_Name"
-    }
-    SCR_BriefingVictoryCondition "{5E6F1867E2884B96}" {
-     name "#AR-CombatScenario_ExfilTask_Title"
-     description "#AR-CombatScenario_ExfilTask_Title"
-    }
-   }
   }
   SCR_RespawnSystemComponent "{56B2B4793051E7C9}" {
    m_SpawnLogic SCR_MenuSpawnLogic "{5D36888CC966608A}" {
@@ -180,25 +159,25 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
     m_MiddleColumn SCR_WelcomeScreenMissionObjectivesContent "{5E6F1867E2884A6C}" {
      m_sTitleText "Possible Objectives"
      m_aMissionObjectives {
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A68}" {
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A63}" {
        m_sObjectiveQuadName "Seize"
-       m_sDescription "#AR-CombatScenario_Kill_Title"
+       m_sDescription "#KSC-Task_ClearArea_Description"
+      }
+      SCR_WelcomeScreenMissionObjectives "{6172533B76692165}" {
+       m_sObjectiveQuadName "Eliminate"
+       m_sDescription "#KSC-Task_Destroy_Description"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A68}" {
+       m_sObjectiveQuadName "Eliminate"
+       m_sDescription "#KSC-Task_Kill_Description"
       }
       SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A66}" {
        m_sObjectiveQuadName "Custom"
-       m_sDescription "#AR-CombatScenario_Intel_Title"
+       m_sDescription "#KSC-Task_FindIntel_Description"
       }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E2884A63}" {
-       m_sObjectiveQuadName "Seize"
-       m_sDescription "#AR-CombatScenario_ClearAreaTask_Title"
-      }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E289B940}" {
-       m_sObjectiveQuadName "Defend"
-       m_sDescription "#AR-Commanding_Command_SaD"
-      }
-      SCR_WelcomeScreenMissionObjectives "{5E6F1867E289B95F}" {
+      SCR_WelcomeScreenMissionObjectives "{6172533ACFCFDC92}" {
        m_sObjectiveQuadName "GetOut"
-       m_sDescription "#AR-CombatScenario_ExfilTask_Title"
+       m_sDescription "#KSC-Task_ExfilFrom_Description"
       }
      }
     }
@@ -207,7 +186,7 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
      m_aIntroduction {
       SCR_WelcomeScreenIntroduction "{5E6F1867E289B951}" {
        m_sContentTitleText "#AR-Workshop_TabName_Briefing"
-       m_sContentDescriptionText "#AR-CombatScenario_Briefing"
+       m_sContentDescriptionText "#COE-Briefing_Description"
       }
      }
     }
@@ -232,6 +211,8 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
   COE_ClearAreaTaskBuilder "{61597E8E54065A21}" {
   }
   COE_DestroyInstallationTaskBuilder "{61597E8E4A6758CA}" {
+  }
+  COE_DestroyVehicleTaskBuilder "{6172533E07DA785A}" {
   }
   COE_KillOfficerTaskBuilder "{61597E8E486E53D3}" {
   }

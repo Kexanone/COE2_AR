@@ -28,6 +28,7 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 			structure = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
 			KSC_CompositionHelper.GetChildrenByXobSubstring(structure, "Table", tables);
 			KSC_CompositionHelper.GetChildrenByXobSubstring(structure, "Desk", tables);
+			ao.AddPositionToDefend(structure.GetOrigin());
 		}			
 		
 		if (!structure || tables.IsEmpty())
