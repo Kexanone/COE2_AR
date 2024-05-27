@@ -8,7 +8,7 @@ Co-operative infantry gameplay with dynamic objectives for [Arma Reforger](https
 
 ## Features
 - **Replayability** - Dynamic generation of AOs
-- **Increased cooperativity** - Game mode is structured in (briefing)*, execution, exfiltration, (_debriefing_)* and intermission
+- **Increased cooperativity** - Game mode is structured in (_briefing_)\*, execution, exfiltration, (_debriefing_)\* and intermission
 - **Ingame Configurability** - Scenario and AOs can be configured ingame by a votable commander role
 - **Compatibility** - Designed to be compatible with modded factions out of the box
 
