@@ -29,8 +29,8 @@ _TBD_
 
 ## Scenario IDs
 
-- COE2 - Arland: "{F239FD0036BD2C1E}Missions/COE2_Arland.conf"
-- COE2 - Everon: "{EE676FAB9DFA4CF7}Missions/COE2_Eden.conf"
+- COE2 - Arland: `"{F239FD0036BD2C1E}Missions/COE2_Arland.conf"`
+- COE2 - Everon: `"{EE676FAB9DFA4CF7}Missions/COE2_Eden.conf"`
 
 ## Mission Header
 
