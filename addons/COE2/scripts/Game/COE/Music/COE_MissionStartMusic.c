@@ -17,12 +17,12 @@ class COE_ExecutionMusic : ScriptedMusic
 		if (!gameMode)
 			return;
 		
-		vector insertionPos = gameMode.GetInsertionPos();
-		if (!insertionPos)
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		if (!insertionPoint)
 			return;
 		
 		// Play briefing music when spawned at main base
-		if (vector.DistanceXZ(insertionPos, SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 25)
+		if (vector.DistanceXZ(insertionPoint.GetOrigin(), SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 25)
 			return;
 		
 		m_MusicManager.Play("SOUND_COE_EXECUTION");	

@@ -1,0 +1,27 @@
+SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et" {
+ ID "52E65E9446A3DC1D"
+ components {
+  SCR_CampaignBuildingProviderComponent "{617E76A65EF823A8}" {
+   m_bCanCommandAI 1
+   m_fBuildingRadius 25
+   m_aAvailableTraits {
+    4 50 54 53
+   }
+  }
+  SCR_ResourceComponent "{5D8AF9E688DE2E69}" {
+   m_aContainers {
+    SCR_ResourceContainerVirtual "{617E76A63F905659}" {
+     m_eResourceRights SELF
+     m_eStorageType STORED
+     m_fResourceValueCurrent 10000
+     m_fResourceValueMax 10000
+    }
+   }
+  }
+  SCR_ServicePointComponent "{617E76A1424C46D4}" {
+   m_eType BARRACKS
+   m_eBuildingLabel SERVICE_LIVING_AREA
+   m_sDelegatePrefab "{A5EFF5B93C15728E}Prefabs/Systems/Services/ServicePointDelegate_Barracks.et"
+  }
+ }
+}

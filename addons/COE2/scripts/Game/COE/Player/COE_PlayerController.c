@@ -25,72 +25,50 @@ class COE_PlayerController : SCR_PlayerController
 	
 	//------------------------------------------------------------------------------------------------
 	//! Teleports player at an emtpy position at the given location and search radius
-	void RequestFastTravel(vector pos, float rotation = 0, float searchRadius = 10, bool includeAIMembers = true)
+	void RequestFastTravel(vector pos, float rotation = 0, float searchRadius = 10)
 	{
 		if (vector.DistanceXZ(m_MainEntity.GetOrigin(), pos) < FAST_TRAVEL_MIN_DISTANCE)
 			return;
 		
 		if (Replication.IsServer())
 		{
-			Rpc(RpcDo_Owner_FastTravel, pos, rotation, searchRadius, includeAIMembers);
+			Rpc(RpcDo_Owner_FastTravel, pos, rotation, searchRadius);
 		}
 		else
 		{
-			RpcDo_Owner_FastTravel(pos, rotation, searchRadius, includeAIMembers);
+			RpcDo_Owner_FastTravel(pos, rotation, searchRadius);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_Owner_FastTravel(vector pos, float rotation, float searchRadius, bool includeAIMembers)
+	protected void RpcDo_Owner_FastTravel(vector pos, float rotation, float searchRadius)
 	{
 		SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(GetGame().GetHUDManager().FindInfoDisplay(SCR_FadeInOutEffect));
 		fade.FadeOutEffect(true, FAST_TRAVEL_FADE_DURATION);
 		SCR_WorldTools.FindEmptyTerrainPosition(pos, pos, searchRadius);
-		GetGame().GetCallqueue().CallLater(FastTravelTeleport, (FAST_TRAVEL_FADE_DURATION + FAST_TRAVEL_BLACKSCREEN_DURATION) * 1000, false, pos, rotation, includeAIMembers);
+		GetGame().GetCallqueue().CallLater(FastTravelTeleport, (FAST_TRAVEL_FADE_DURATION + FAST_TRAVEL_BLACKSCREEN_DURATION) * 1000, false, pos, rotation);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Helper method for RequestFastTravel; Does the teleport, notifications and fade in effect
-	protected void FastTravelTeleport(vector pos, float rotation, bool includeAIMembers)
+	protected void FastTravelTeleport(vector pos, float rotation)
 	{
 		vector transform[4];
 		KSC_GameTools.GetTransformFromPosAndRot(transform, pos, rotation);
-		Rpc(RpcAsk_Server_FastTravelTeleport, transform, includeAIMembers);
+		Rpc(RpcAsk_Server_FastTravelTeleport, transform);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Helper method for RequestFastTravel; Does the teleport, notifications and fade in effect
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_Server_FastTravelTeleport(vector transform[4], bool includeAIMembers)
+	protected void RpcAsk_Server_FastTravelTeleport(vector transform[4])
 	{
 		if (m_MainEntity)
 		{
 			SCR_EditableCharacterComponent editChar = SCR_EditableCharacterComponent.Cast(m_MainEntity.FindComponent(SCR_EditableCharacterComponent));
 			if (editChar)
 				editChar.SetTransform(transform);
-			
-			if (includeAIMembers)
-			{
-				// Teleport all AI members in proximity
-				SCR_PlayerControllerGroupComponent groupController = SCR_PlayerControllerGroupComponent.Cast(FindComponent(SCR_PlayerControllerGroupComponent));
-				SCR_AIGroup group = groupController.GetPlayersGroup();
-				SCR_AIGroup slaveGroup = group.GetSlave();
-				if (slaveGroup && group && groupController.IsPlayerLeader(GetPlayerId(), group))
-				{
-					foreach (SCR_ChimeraCharacter member : slaveGroup.GetAIMembers())
-					{
-						if (vector.DistanceXZ(member.GetOrigin(), m_MainEntity.GetOrigin()) > FAST_TRAVEL_AI_MEMBER_RANGE)
-							continue;
-						
-						editChar = SCR_EditableCharacterComponent.Cast(member.FindComponent(SCR_EditableCharacterComponent));
-						if (!editChar)
-							continue;
-						
-						editChar.SetTransform(transform);
-					}
-				}
-			}
 		}
 		
 		Rpc(RpcDo_Owner_FastTravelTeleport, transform);

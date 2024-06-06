@@ -61,6 +61,16 @@ GenericEntity : "{C6B86C6BD76EA814}Prefabs/Structures/Civilian/BoardMap_01/Board
      Duration 0.5
      "Sort Priority" 4
     }
+    COE_OpenBuildingModeUserAction "{617E832C9A66B05B}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{617E832C986E0295}" {
+      Name "#AR-Campaign_Action_ShowBuildPreview_NoSupplies-UC"
+     }
+     Duration 0.5
+     "Sort Priority" 5
+    }
     COE_DeployUserAction "{6094DDB188A98196}" {
      ParentContextList {
       "default"
@@ -69,7 +79,7 @@ GenericEntity : "{C6B86C6BD76EA814}Prefabs/Structures/Civilian/BoardMap_01/Board
       Name "#AR-ButtonSelectDeploy"
      }
      Duration 0.5
-     "Sort Priority" 5
+     "Sort Priority" 6
     }
     COE_CancelAOUserAction "{609A2A3F65C0301C}" {
      ParentContextList {
@@ -79,7 +89,7 @@ GenericEntity : "{C6B86C6BD76EA814}Prefabs/Structures/Civilian/BoardMap_01/Board
       Name "#COE-Action_CancelAO"
      }
      Duration 2
-     "Sort Priority" 6
+     "Sort Priority" 7
     }
    }
   }

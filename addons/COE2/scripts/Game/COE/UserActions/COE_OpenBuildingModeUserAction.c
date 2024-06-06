@@ -1,19 +1,11 @@
 //------------------------------------------------------------------------------------------------
-class COE_DeployUserAction : COE_BaseBoardUserAction
+class COE_OpenBuildingModeUserAction : COE_BaseCommanderBoardUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity) 
-	{
-		COE_GameMode gameMode = COE_GameMode.GetInstance();
-		if (!gameMode)
-			return;
-		
-		KSC_Location location = gameMode.GetCurrentLocation();
-		if (!location)
-			return;
-		
-		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();		
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (location.m_vCenter - spawnPos).ToYaw());
+	{		
+		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(COE_GameMode.GetInstance().GetInsertionPoint().FindComponent(SCR_CampaignBuildingProviderComponent));
+		provider.RequestBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -29,9 +21,17 @@ class COE_DeployUserAction : COE_BaseBoardUserAction
 			return false;
 		}
 		
-		if (!gameMode.GetInsertionPoint())
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		if (!insertionPoint)
 		{
 			m_sCannotPerformReason = "#COE-Reason_NoInsertionPoint";
+			return false;
+		}
+		
+		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(SCR_CampaignBuildingProviderComponent));
+		if (provider.COE_IsBlockedByEnemy())
+		{
+			m_sCannotPerformReason = "#AR-Campaign_Action_ShowBuildPreviewEnemyPresence";
 			return false;
 		}
 		

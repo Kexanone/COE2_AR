@@ -71,8 +71,8 @@ class COE_FactionManager : KSC_FactionManager
 			gameMode.ExecuteCommanderRequest(COE_ECommanderRequest.CANCEL_AO);
 		
 		// Delete all AI immediately
-		gameMode.CollectAIForCleanUp(true);
-		gameMode.CleanUpAI();
+		gameMode.CollectBuiltEntitiesForCleanUp();
+		gameMode.CleanUpBuiltEntities();
 		
 		// Change affiliation of all objects at the player base
 		COE_MainBaseEntity mainBase = gameMode.GetMainBase();

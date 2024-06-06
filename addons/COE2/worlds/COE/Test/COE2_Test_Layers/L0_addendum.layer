@@ -7,9 +7,6 @@ SCR_DestructibleBuildingEntity KEK : "{18B2439FBF6CADFD}Prefabs/Structures/House
 Vehicle M923A1_arsenal1 : "{1FF144F8A209239D}Prefabs/Vehicles/Wheeled/M923A1/M923A1_arsenal.et" {
  coords 106.566 1 171.172
 }
-Vehicle M923A1_tanker1 : "{2BE1F8B9299B67C1}Prefabs/Vehicles/Wheeled/M923A1/M923A1_tanker.et" {
- coords 119.33 1 145.007
-}
 Vehicle M923A1_engineer1 : "{2D74C39A650A3030}Prefabs/Vehicles/Wheeled/M923A1/M923A1_engineer.et" {
  coords 135.941 1 165.134
 }
@@ -34,8 +31,8 @@ GenericEntity : "{7492BAA88AFCEDCE}Prefabs/Compositions/Slotted/SlotFlatSmall/Bu
 SCR_ChimeraCharacter D3 : "{854C04F0EA2129CC}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_Unarmed.et" {
  coords 131.664 1 181.255
 }
-Vehicle M923A1_repair1 : "{A042ACE5C2B13206}Prefabs/Vehicles/Wheeled/M923A1/M923A1_repair.et" {
- coords 107.459 1 140.648
+GenericEntity : "{A5EFF5B93C15728E}Prefabs/Systems/Services/ServicePointDelegate_Barracks.et" {
+ coords 118.563 1.05 112.455
 }
 GenericEntity : "{B40E827D2AC8F210}Prefabs/World/Locations/Eden/Urban/Erquy_Harbor_01.et" {
  coords 37.181 1 77.535
