@@ -14,7 +14,7 @@ class COE_DeploySelectionMenuEntry : COE_SelectionMenuEntry
 			return;
 		
 		vector locationPos = location.m_vCenter;
-		vector spawnPos = gameMode.GetInsertionPos();
+		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
 		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (locationPos - spawnPos).ToYaw());
 	}
 	
@@ -28,7 +28,7 @@ class COE_DeploySelectionMenuEntry : COE_SelectionMenuEntry
 		if (gameMode.COE_GetState() == COE_EGameModeState.INTERMISSION)
 			return false;
 		
-		if (!gameMode.GetInsertionPos())
+		if (!gameMode.GetInsertionPoint())
 			return false;
 		
 		if (vector.DistanceXZ(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalControlledEntity().GetOrigin()) > 25)

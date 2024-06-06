@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class COE_DeployCommand : SCR_BaseRadialCommand
+class COE_OpenBuildingModeCommand : SCR_BaseRadialCommand
 {
 	//------------------------------------------------------------------------------------------------
 	override bool Execute(IEntity cursorTarget, IEntity target, vector targetPosition, int playerID, bool isClient)
@@ -8,17 +8,8 @@ class COE_DeployCommand : SCR_BaseRadialCommand
 		if (playerID != SCR_PlayerController.GetLocalPlayerId())
 			return true;
 		
-		COE_GameMode gameMode = COE_GameMode.GetInstance();
-		if (!gameMode)
-			return false;
-		
-		KSC_Location location = gameMode.GetCurrentLocation();
-		if (!location)
-			return false;
-		
-		vector locationPos = location.m_vCenter;
-		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (locationPos - spawnPos).ToYaw());
+		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(COE_GameMode.GetInstance().GetInsertionPoint().FindComponent(SCR_CampaignBuildingProviderComponent));
+		provider.RequestBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
 		return true;
 	}
 	
@@ -32,10 +23,12 @@ class COE_DeployCommand : SCR_BaseRadialCommand
 		if (gameMode.COE_GetState() == COE_EGameModeState.INTERMISSION)
 			return false;
 		
-		if (!gameMode.GetInsertionPoint())
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		if (!insertionPoint)
 			return false;
 		
-		if (vector.DistanceXZ(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalControlledEntity().GetOrigin()) > 25)
+		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(SCR_CampaignBuildingProviderComponent));
+		if (provider.COE_IsBlockedByEnemy())
 			return false;
 		
 		return true;

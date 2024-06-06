@@ -81,9 +81,9 @@ class COE_GameMode : SCR_BaseGameMode
 	protected ref COE_AOParams m_pNextAOParams = new COE_AOParams();
 	protected COE_AO m_pCurrentAO;
 	
-	[RplProp()]
-	protected vector m_vInsertionPos;
-	protected SCR_SpawnPoint m_pInsertionPoint;
+	[RplProp(onRplName: "OnInsertionPointUpdated")]
+	protected RplId m_iInsertionPointId;
+	protected IEntity m_pInsertionPoint;
 	
 	[RplProp(onRplName: "COE_OnStateChanged")]
 	protected COE_EGameModeState m_eCOE_CurrentState = COE_EGameModeState.INTERMISSION;
@@ -291,7 +291,7 @@ class COE_GameMode : SCR_BaseGameMode
 		COE_SetState(COE_EGameModeState.EXECUTION);
 	}
 	
-	protected ref array<IEntity> m_aAIToDelete;
+	protected ref array<IEntity> m_aEntitiesToDelete = {};
 	
 	//------------------------------------------------------------------------------------------------
 	protected void DeleteAO()
@@ -312,50 +312,43 @@ class COE_GameMode : SCR_BaseGameMode
 				continue;
 			
 			COE_PlayerController playerCtrl = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
-			playerCtrl.RequestFastTravel(m_vMainBasePos, 0, 5, false);
+			playerCtrl.RequestFastTravel(m_vMainBasePos, 0, 5);
 			
 			SCR_DamageManagerComponent damageManager = player.GetDamageManager();
 			damageManager.FullHeal();
 		}
 		
-		CollectAIForCleanUp();
+		CollectBuiltEntitiesForCleanUp();
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 3000, false, m_pCurrentAO);
-		GetGame().GetCallqueue().CallLater(CleanUpAI, 4000);
+		GetGame().GetCallqueue().CallLater(CleanUpBuiltEntities, 4000);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Delete all AI outside main base
-	void CollectAIForCleanUp(bool collectInsideMainBase = false)
+	void CollectBuiltEntitiesForCleanUp()
 	{
-		array<AIAgent> agents = {};
-		GetGame().GetAIWorld().GetAIAgents(agents);
-		m_aAIToDelete = {};
-		foreach (AIAgent agent : agents)
+		SCR_EditableEntityCore core = SCR_EditableEntityCore.Cast(SCR_EditableEntityCore.GetInstance(SCR_EditableEntityCore));
+		set<SCR_EditableEntityComponent> entities = new set<SCR_EditableEntityComponent>();
+		core.GetAllEntities(entities, true, true);
+		m_aEntitiesToDelete.Resize(entities.Count());
+		
+		foreach (SCR_EditableEntityComponent entity : entities)
 		{
-			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
-			if (!char)
-				continue;
-			
-			if (EntityUtils.IsPlayer(char))
-				continue;
-			
-			if (!collectInsideMainBase && vector.DistanceXZ(char.GetOrigin(), m_vMainBasePos) <= MAIN_BASE_RANGE)
-				continue;
-			
-			m_aAIToDelete.Insert(char);
+			if (SCR_EditableVehicleComponent.Cast(entity) || SCR_EditableGroupComponent.Cast(entity))
+				m_aEntitiesToDelete.Insert(entity.GetOwner());
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Delete all AI outside main base
-	void CleanUpAI()
+	void CleanUpBuiltEntities()
 	{
-		array<AIAgent> agents = {};
-		GetGame().GetAIWorld().GetAIAgents(agents);
-		foreach (IEntity entity : m_aAIToDelete)
+		foreach (IEntity entity : m_aEntitiesToDelete)
 		{
 			SCR_EntityHelper.DeleteEntityAndChildren(entity);
 		}
+		
+		m_aEntitiesToDelete.Clear();
 	}
 		
 	//------------------------------------------------------------------------------------------------
@@ -366,7 +359,10 @@ class COE_GameMode : SCR_BaseGameMode
 		
 		if (!m_pInsertionPoint)
 		{
-			m_pInsertionPoint = KSC_GameTools.SpawnSpawnPointPrefab("{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et", pos, dir.ToYaw());
+			m_pInsertionPoint = KSC_GameTools.SpawnSpawnPointPrefab("{A99028D5E6D1B04D}PrefabsEditable/SpawnPoints/E_COE_InsertionPoint.et", pos, dir.ToYaw());
+			RplComponent rpl = RplComponent.Cast(m_pInsertionPoint.FindComponent(RplComponent));
+			m_iInsertionPointId = rpl.Id();
+			Replication.BumpMe();	
 		}
 		else
 		{
@@ -380,22 +376,21 @@ class COE_GameMode : SCR_BaseGameMode
 		
 		SCR_FactionAffiliationComponent factionAffiliation = SCR_FactionAffiliationComponent.Cast(m_pInsertionPoint.FindComponent(SCR_FactionAffiliationComponent));
 		factionAffiliation.SetAffiliatedFaction(m_pFactionManager.GetPlayerFaction());
-		m_vInsertionPos = pos;
-		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void DeleteInsertionPoint()
 	{
 		SCR_EntityHelper.DeleteEntityAndChildren(m_pInsertionPoint);
-		m_vInsertionPos = vector.Zero;
+		m_pInsertionPoint = null;
+		m_iInsertionPointId = Replication.INVALID_ID;
 		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	vector GetInsertionPos()
+	IEntity GetInsertionPoint()
 	{
-		return m_vInsertionPos;
+		return m_pInsertionPoint;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -444,6 +439,22 @@ class COE_GameMode : SCR_BaseGameMode
 	int GetTargetEnemyAICount()
 	{
 		return Math.Max(m_fEnemyAICountMultiplier * GetGame().GetPlayerManager().GetPlayerCount(), m_iMinEnemyAICount);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnInsertionPointUpdated()
+	{
+		if (!Replication.IsRunning() || Replication.IsServer())
+			return;
+		
+		RplComponent rpl = RplComponent.Cast(Replication.FindItem(m_iInsertionPointId));
+		if (!rpl)
+		{
+			m_pInsertionPoint = null;
+			return;
+		}
+		
+		m_pInsertionPoint = rpl.GetEntity();
 	}
 	
 	//------------------------------------------------------------------------------------------------
