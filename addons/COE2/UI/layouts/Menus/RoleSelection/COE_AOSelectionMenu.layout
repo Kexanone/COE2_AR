@@ -1,23 +1,6 @@
 FrameWidgetClass {
  Name "rootFrame"
  "Ignore Cursor" 0
- components {
-  SCR_DeployMenuHandler "{5CA8F209C29BD30B}" {
-   Enabled 0
-   m_sFactionUIHandler ""
-   m_sLoadoutUIHandler ""
-   m_sGroupUIHandler ""
-   m_sSpawnPointUIHandler ""
-   m_sFactionPlayerList ""
-   m_sGroupPlayerList ""
-   m_aHiddenWidgetsOnPause {
-    "MenuFrame"
-   }
-   m_aDisabledWidgetsOnPause {
-    "UIIconsContainer"
-   }
-  }
- }
  {
   OverlayWidgetClass "{6094B4F8B609F8D2}" {
    Name "Overlay0"
@@ -244,11 +227,6 @@ FrameWidgetClass {
                 OverlayWidgetClass "{6094B4F8B609F80C}" {
                  Name "RightSelectorsMenu"
                  Slot LayoutSlot "{5D6E72AE311E98F6}" {
-                 }
-                 components {
-                  SCR_RespawnMenuWidgetHandler "{5D6CA9014ACF272E}" {
-                   Enabled 0
-                  }
                  }
                  {
                   ImageWidgetClass "{6094B4F8B609F80B}" {
