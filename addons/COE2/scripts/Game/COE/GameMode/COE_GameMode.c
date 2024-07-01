@@ -447,6 +447,12 @@ class COE_GameMode : SCR_BaseGameMode
 		if (!Replication.IsRunning() || Replication.IsServer())
 			return;
 		
+		GetGame().GetCallqueue().CallLater(OnInsertionPointUpdatedDelayed, 1000);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnInsertionPointUpdatedDelayed()
+	{
 		RplComponent rpl = RplComponent.Cast(Replication.FindItem(m_iInsertionPointId));
 		if (!rpl)
 		{
@@ -455,7 +461,7 @@ class COE_GameMode : SCR_BaseGameMode
 		}
 		
 		m_pInsertionPoint = rpl.GetEntity();
-	}
+	}	
 	
 	//------------------------------------------------------------------------------------------------
 	protected void COE_OnStateChanged()
