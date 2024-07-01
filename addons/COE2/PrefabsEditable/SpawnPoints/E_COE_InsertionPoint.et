@@ -5,7 +5,7 @@ SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et"
    m_bCanCommandAI 1
    m_fBuildingRadius 25
    m_aAvailableTraits {
-    4 50 54 53
+    4 50 54 53 51
    }
   }
   SCR_ResourceComponent "{5D8AF9E688DE2E69}" {
