@@ -34,30 +34,65 @@ COE_MainBaseEntity {
    }
    m_fSpawnPositionUsageRange 5
   }
-  GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
-   ID "60A0A47B59D705C4"
-   components {
-    SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
-     m_eArsenalSaveType NO_RESTRICTIONS
-    }
-    SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
-     m_Flags 789
-    }
-    SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
-     m_aContainers {
-      SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
-       m_eResourceRights SELF
-       m_eStorageType STORED
-       m_fResourceValueCurrent 10000
-       m_fResourceValueMax 1000
-       m_bEnableResourceGain 1
-       m_fResourceGain 1000
-       m_fResourceGainTickrate 1
+  GenericEntity : "{A6D232BFD42A52FC}Prefabs/Structures/Civilian/BoardMap_01/COE_ObjectiveBoard_Everon.et" {
+   ID "61BB7B9B4E3D25BF"
+   coords -3 0 3
+   angleY 180
+  }
+  $grp GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
+   {
+    ID "60A0A47B59D705C4"
+    components {
+     SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+      m_eArsenalSaveType NO_RESTRICTIONS
+     }
+     SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+      m_Flags 789
+     }
+     SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+      m_aContainers {
+       SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
+        m_eResourceRights SELF
+        m_eStorageType STORED
+        m_fResourceValueCurrent 10000
+        m_fResourceValueMax 1000
+        m_bEnableResourceGain 1
+        m_fResourceGain 1000
+        m_fResourceGainTickrate 1
+       }
       }
      }
     }
+    coords 0 0 3
    }
-   coords 0 0 3
+   {
+    ID "61BB7B9B2A263B83"
+    components {
+     SCR_ArsenalComponent "{56F2C6D1431AD9AF}" {
+      m_eArsenalSaveType NO_RESTRICTIONS
+     }
+     SCR_EditableSystemComponent "{5D64773494F5BBAB}" {
+      m_Flags 789
+     }
+     SCR_FactionAffiliationComponent "{5A50E7655452A21D}" {
+      m_bCOE_VanillaFactionOnly 1
+     }
+     SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+      m_aContainers {
+       SCR_ResourceContainerVirtual "{6098DB711F8B68BB}" {
+        m_eResourceRights SELF
+        m_eStorageType STORED
+        m_fResourceValueCurrent 10000
+        m_fResourceValueMax 1000
+        m_bEnableResourceGain 1
+        m_fResourceGain 1000
+        m_fResourceGainTickrate 1
+       }
+      }
+     }
+    }
+    coords 2 0 3
+   }
   }
  }
 }
