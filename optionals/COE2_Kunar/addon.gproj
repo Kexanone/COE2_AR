@@ -1,0 +1,8 @@
+GameProject {
+ ID "COE2_Kunar"
+ GUID "61BB79ADF3596AEA"
+ TITLE "COE2 - Kunar Province"
+ Dependencies {
+  "58D0FB3206B6F859" "60926835F4A7B0CA" "5C9691EA7FD7A79F"
+ }
+}

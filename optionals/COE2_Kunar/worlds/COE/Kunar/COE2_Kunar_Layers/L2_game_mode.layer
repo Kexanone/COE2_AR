@@ -1,0 +1,4 @@
+COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
+ coords 2713.679 10 3103.105
+ m_sKSC_WorldSlotsConfigName "{1BC40E8F5B9EF674}Configs/Slots/KunarRegion/KSC_Slots_KunarRegion.conf"
+}
