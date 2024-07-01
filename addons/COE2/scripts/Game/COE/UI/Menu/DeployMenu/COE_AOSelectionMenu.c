@@ -96,6 +96,17 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	protected void OnMapOpen(MapConfiguration config)
 	{
 		m_MapEntity.SetZoom(1);
+
+		// note@lk: temporary hotfix for duplicite journal entries, better solution is on the way
+		Widget toolMenu = GetRootWidget().FindAnyWidget("ToolMenuVert");
+		Widget child = toolMenu.GetChildren();
+		while (child)
+		{
+			Widget sibling = child.GetSibling();
+			child.RemoveFromHierarchy();
+			child = sibling;
+		}		
+		
 		m_UIElementContainer = COE_MapUIElementContainer.Cast(m_MapEntity.GetMapUIComponent(COE_MapUIElementContainer));
 		if (m_UIElementContainer)
 			m_UIElementContainer.GetOnLocationSelected().Insert(SetLocationExt);
