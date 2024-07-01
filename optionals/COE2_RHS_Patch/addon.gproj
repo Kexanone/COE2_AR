@@ -1,0 +1,22 @@
+GameProject {
+ ID "COE2_RHS_Patch"
+ GUID "61BCC264BD3DB22E"
+ TITLE "COE2 - RHS Patch"
+ Dependencies {
+  "58D0FB3206B6F859" "60926835F4A7B0CA" "595F2BF2F44836FB"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}
