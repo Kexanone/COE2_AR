@@ -4,8 +4,13 @@ SCR_MapEntity MapEntity_Default1 : "{21C189074DAB7E90}Prefabs/World/DefaultWorld
 SCR_DestructibleBuildingEntity KEK : "{18B2439FBF6CADFD}Prefabs/Structures/Houses/Farm/FarmHouse_E_1L01/FarmHouse_E_1L01_Wood.et" {
  coords 81.575 0 155.536
 }
-Vehicle M923A1_arsenal1 : "{1FF144F8A209239D}Prefabs/Vehicles/Wheeled/M923A1/M923A1_arsenal.et" {
- coords 106.566 1 171.172
+$grp Vehicle : "{1FF144F8A209239D}Prefabs/Vehicles/Wheeled/M923A1/M923A1_arsenal.et" {
+ M923A1_arsenal1 {
+  coords 106.566 1 171.172
+ }
+ M923A1_arsenal2 {
+  coords 111.498 1 179.982
+ }
 }
 Vehicle M923A1_engineer1 : "{2D74C39A650A3030}Prefabs/Vehicles/Wheeled/M923A1/M923A1_engineer.et" {
  coords 135.941 1 165.134
