@@ -60,7 +60,7 @@ FrameWidgetClass {
            }
            components {
             SCR_InputButtonComponent "{5D346C3DD81D95CD}" {
-             m_sActionName "EditorAttributes"
+             m_sActionName "MenuConfigure"
              m_sLabel "#AR-KeybindEditor_ScenarioAttributes"
             }
             COE_ScenarioSettingsButtonUIComponent "{60986DADA4E5DC33}" {
