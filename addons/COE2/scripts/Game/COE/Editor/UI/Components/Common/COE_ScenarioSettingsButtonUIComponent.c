@@ -1,3 +1,4 @@
+//------------------------------------------------------------------------------------------------
 class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 {
 	protected Widget m_Widget;
@@ -13,22 +14,32 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnPlayerRoleChange(EPlayerRole roles)
 	{
+		GetGame().GetInputManager().RemoveActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);
+		m_Widget.SetVisible(false);
+		
 		// Only available during intermission
 		if (m_pGameMode.COE_GetState() != COE_EGameModeState.INTERMISSION)
-		{
-			m_Widget.SetVisible(false);
 			return;
-		};
 		
 		// Only available to commanders and admins
-		m_Widget.SetVisible(roles & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR));
+		if ((roles & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR)) == EPlayerRole.NONE)
+			return;
+		
+		GetGame().GetInputManager().AddActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);
+		m_Widget.SetVisible(true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override bool OnClick(Widget w, int x, int y, int button)
 	{
-		COE_EditorModeCommanderEntity.StartEditingAttributes(GetGame().GetGameMode());
+		PerformAction();
 		return false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void PerformAction()
+	{
+		COE_EditorModeCommanderEntity.StartEditingAttributes(GetGame().GetGameMode());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -47,7 +58,6 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 		OnGameStateChange();
 		m_pGameMode.COE_GetOnStateChanged().Insert(OnGameStateChange);
 		m_pPlayerController.GetOnLocalPlayerRoleChange().Insert(OnPlayerRoleChange);
-		
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -55,5 +65,6 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 	{
 		m_pGameMode.COE_GetOnStateChanged().Remove(OnGameStateChange);
 		m_pPlayerController.GetOnLocalPlayerRoleChange().Remove(OnPlayerRoleChange);
+		GetGame().GetInputManager().RemoveActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);
 	}
-};
+}
