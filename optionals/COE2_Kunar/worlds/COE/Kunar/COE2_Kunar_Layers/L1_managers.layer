@@ -37,9 +37,6 @@ ScriptedChatEntity ChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity
 COE_FactionManager FactionManager : "{F9A08100A9E20FB5}Prefabs/Managers/COE_FactionManager.et" {
  coords 2702.033 10 3110.474
 }
-MusicManager MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager_Base.et" {
- coords 2701.84 10 3110.984
-}
 SCR_LoadoutManager LoadoutManager : "{B54D08AEA74A5354}Prefabs/MP/Managers/Loadouts/LoadoutManager_Editor.et" {
  coords 2708.528 10 3106.889
 }
