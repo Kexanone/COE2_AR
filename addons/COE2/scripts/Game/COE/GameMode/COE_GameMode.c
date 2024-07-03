@@ -354,7 +354,17 @@ class COE_GameMode : SCR_BaseGameMode
 	//------------------------------------------------------------------------------------------------
 	protected void CreateInsertionPoint(vector pos)
 	{
-		pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
+		if (KSC_TerrainHelper.SurfaceIsWater(pos))
+		{
+			EWaterSurfaceType surfaceType;
+			float area;
+			pos[1] =  SCR_WorldTools.GetWaterSurfaceY(GetWorld(), pos, surfaceType, area);
+		}
+		else
+		{
+			pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
+		}
+		
 		vector dir = (GetCurrentLocation().m_vCenter - pos);
 		
 		if (!m_pInsertionPoint)
