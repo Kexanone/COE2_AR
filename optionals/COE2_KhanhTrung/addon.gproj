@@ -1,0 +1,8 @@
+GameProject {
+ ID "COE2_KhanhTrung"
+ GUID "61C57D80C78AE1C1"
+ TITLE "COE2 - Khanh Trung"
+ Dependencies {
+  "60783B6B15354220" "58D0FB3206B6F859" "60926835F4A7B0CA"
+ }
+}
