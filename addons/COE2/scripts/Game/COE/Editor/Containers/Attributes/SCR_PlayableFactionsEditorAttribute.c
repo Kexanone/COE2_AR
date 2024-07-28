@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Ensure that GM factions properties are disabled
+[BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
 modded class SCR_PlayableFactionsEditorAttribute : SCR_BaseMultiSelectPresetsEditorAttribute
 {
 	//------------------------------------------------------------------------------------------------
