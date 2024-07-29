@@ -1,0 +1,22 @@
+GameProject {
+ ID "COE2_Mussalo"
+ GUID "61C7786BB6B29693"
+ TITLE "COE2 - Mussalo"
+ Dependencies {
+  "59CF333B3A309D6E" "60926835F4A7B0CA" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}
