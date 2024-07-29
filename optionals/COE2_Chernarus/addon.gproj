@@ -1,0 +1,22 @@
+GameProject {
+ ID "COE2_Chernarus"
+ GUID "61C773CD9CF0560F"
+ TITLE "COE2 - Chernarus"
+ Dependencies {
+  "5A56FA0AC53F8C80" "60926835F4A7B0CA" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}
