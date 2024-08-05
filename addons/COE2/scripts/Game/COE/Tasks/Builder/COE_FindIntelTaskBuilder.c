@@ -73,7 +73,8 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 			return true;
 		
 		ResourceName xobName = vObject.GetResourceName();
-		if (xobName.IndexOf("Table") >= 0 || xobName.IndexOf("Desk") >= 0)
+		xobName.ToLower();
+		if (xobName.IndexOf("table") >= 0 || xobName.IndexOf("desk") >= 0)
 			m_aTables.Insert(entity);
 		
 		return true;
