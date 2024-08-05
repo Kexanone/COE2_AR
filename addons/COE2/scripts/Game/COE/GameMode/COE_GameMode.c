@@ -282,6 +282,7 @@ class COE_GameMode : SCR_BaseGameMode
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		params.Transform[3] = GetCurrentLocation().m_vCenter;
+		SCR_TerrainHelper.SnapToTerrain(params.Transform);
 		m_pCurrentAO = COE_AO.Cast(GetGame().SpawnEntity(COE_AO, GetWorld(), params));
 	}
 	
