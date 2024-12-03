@@ -1,7 +1,3 @@
-GenericEntity : "{1236588FCEA4848F}PrefabsEditable/Auto/Compositions/Slotted/SlotRoadMedium/E_Barricade_M_USSR_01.et" {
- coords 3097.795 17.305 2665.63
- angleY 29.194
-}
 COE_MainBaseEntity COE_Hideout_1 : "{18DC5F13245A8BCB}Prefabs/Compositions/Misc/COE/COE_Hideout_01.et" {
  components {
   SCR_EditableCommentComponent "{609E5DF69A2A8499}" {
@@ -16,23 +12,5 @@ COE_MainBaseEntity COE_Hideout_1 : "{18DC5F13245A8BCB}Prefabs/Compositions/Misc/
   SCR_DestructibleBuildingEntity {
    ID "60A042236B7D1D3B"
   }
- }
-}
-SCR_DefendWaypoint W3 : "{93291E72AC23930F}Prefabs/AI/Waypoints/AIWaypoint_Defend.et" {
- coords 3092.744 18.062 2658.447
-}
-SCR_BoardingTimedWaypoint W1 : "{B049D4C74FBC0C4D}Prefabs/AI/Waypoints/AIWaypoint_GetInNearest.et" {
- coords 3011.734 46.094 2448.764
-}
-SCR_BoardingWaypoint W2 : "{C40316EE26846CAB}Prefabs/AI/Waypoints/AIWaypoint_GetOut.et" {
- coords 3092.708 18.063 2658.468
-}
-Vehicle Ural4320_transport_covered1 : "{D9B91FAB817A6033}Prefabs/Vehicles/Wheeled/Ural4320/Ural4320_transport_covered.et" {
- coords 3010.932 44.678 2449.363
-}
-SCR_AIGroup : "{E552DABF3636C2AD}Prefabs/Groups/OPFOR/Group_USSR_RifleSquad.et" {
- coords 3012.578 47.279 2443.252
- m_aStaticWaypoints {
-  "W1" "W2" "W3"
  }
 }

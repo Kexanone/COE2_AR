@@ -1,0 +1,14 @@
+COE_FactionManager : "{4A188E44289B9A50}Prefabs/MP/Managers/Factions/FactionManager_Editor.et" {
+ ID "56B2B4776E6E4499"
+ Factions {
+  SCR_Faction "{5978B9CE6585BBE8}" {
+   m_iOrder -2
+  }
+  SCR_Faction "{5CC8DE37E1FF0F7A}" {
+   m_iOrder -3
+  }
+  SCR_Faction "{623962205CE2B89C}" {
+   m_iOrder -1
+  }
+ }
+}

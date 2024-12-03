@@ -32,7 +32,7 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	void COE_AO(IEntitySource src, IEntity parent)
 	{
-		if (Replication.IsRunning() && !Replication.IsServer())
+		if (!Replication.IsServer())
 			return;
 		
 		GetGame().GetCallqueue().CallLater(DelayedInit, 100);
@@ -63,7 +63,9 @@ class COE_AO : KSC_AO
 		SetUpDefenders();
 		SetUpPatrols();
 		SetUpVehicles();
-		SetUpCivilians();
+		
+		if (m_pGameMode.CiviliansEnabled())
+			SetUpCivilians();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -849,7 +851,7 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	void ~COE_AO()
 	{
-		if (Replication.IsRunning() && !Replication.IsServer())
+		if (!Replication.IsServer())
 			return;
 		
 		foreach (KSC_BaseTask task : m_aTasks)

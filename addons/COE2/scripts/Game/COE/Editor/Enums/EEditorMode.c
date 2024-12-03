@@ -1,4 +1,4 @@
 modded enum EEditorMode
 {
-	COE_COMMANDER = 64
+	COE_COMMANDER = 1 << 13
 }
