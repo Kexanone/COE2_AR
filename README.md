@@ -50,6 +50,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 ## Optional Addons
 
 - COE2 - Chernarus: https://reforger.armaplatform.com/workshop/61C773CD9CF0560F
+- COE2 - Fallujah: https://reforger.armaplatform.com/workshop/21209DA9CF32FBE9
 - COE2 - Khanh Trung: https://reforger.armaplatform.com/workshop/61C57D80C78AE1C1
 - COE2 - Kunar Province: https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
 - COE2 - Mogadishu: https://reforger.armaplatform.com/workshop/61C80A73A70724EE

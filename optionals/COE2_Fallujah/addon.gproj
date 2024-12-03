@@ -1,0 +1,22 @@
+GameProject {
+ ID "COE2_Fallujah"
+ GUID "21209DA9CF32FBE9"
+ TITLE "COE2 - Fallujah"
+ Dependencies {
+  "5F04F5A0383C44B1" "60926835F4A7B0CA" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}
