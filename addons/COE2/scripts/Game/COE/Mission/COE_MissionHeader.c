@@ -1,20 +1,23 @@
 class COE_MissionHeader : SCR_MissionHeader
 {
-	[Attribute(defvalue: "3", desc: "Total number of objectives to be generated")]
-	int m_iCOE_NumberOfObjectives;
+	[Attribute(defvalue: "", desc: "Default faction for the players. None if empty")]
+	string m_sCOE_DefaultPlayerFactionKey;
 	
-	[Attribute(defvalue: "3", desc: "Number of AI groups to be generated for an objectives")]
-	int m_iCOE_NumberOfGroupsPerObjective;
+	[Attribute(defvalue: "", desc: "Default faction for the enemy AI. None if empty")]
+	string m_sCOE_DefaultEnemyFactionKey;
 	
-	[Attribute(defvalue: "3", desc: "Maximum number of roadblocks for an objectives")]
-	int m_iCOE_MaxNumberOfRoadblocks;
+	[Attribute(defvalue: "0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(EAISkill), desc: "Default skill for enemy AI.")]
+	EAISkill m_eCOE_DefaultEnemyAiSkill;
 	
-	[Attribute(defvalue: "2", desc: "Minimum number of roadblocks for an objectives")]
-	int m_iCOE_MinNumberOfRoadblocks;
+	[Attribute(defvalue: "-1", desc: "Default radius of the AI in meters.")]
+	float m_fCOE_DefaultAORadius;
 	
-	[Attribute(defvalue: "1", desc: "Maximum number of APCs for a clear task")]
-	int m_iCOE_MaxNumberOfAPCs;
+	[Attribute(defvalue: "-1", desc: "Default minimum enemy AI count for an AO.")]
+	int m_iCOE_DefaultMinEnemyAICount;
 	
-	[Attribute(defvalue: "0", desc: "Minimum number of APCs for a clear task")]
-	int m_iCOE_MinNumberOfAPCs;
+	[Attribute(defvalue: "-1", desc: "Default total enemy AI count for an AO will be this multiplier times the total player count (ignored when below minimum count).")]
+	float m_fCOE_DefaultEnemyAICountMultiplier;
+	
+	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs")]
+	bool m_bCOE_CiviliansEnabled;
 }

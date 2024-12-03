@@ -72,6 +72,9 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "2.5", desc: "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below m_iMinEnemyAICount)", category: "Default Scenario Properties")]
 	protected float m_fEnemyAICountMultiplier;
 	
+	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
+	protected bool m_bCiviliansEnabled;
+	
 	[RplProp()]
 	protected vector m_vMainBasePos;
 	protected COE_MainBaseEntity m_pMainBase;
@@ -98,14 +101,33 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Insert(ShowDocumentation);
 		
-		if (!GetGame().InPlayMode() || Replication.IsClient())
+		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 		
 		// Read mission header
 		COE_MissionHeader header = COE_MissionHeader.Cast(GetGame().GetMissionHeader());
 		if (header)
 		{
-		};
+			if (!header.m_sCOE_DefaultPlayerFactionKey.IsEmpty())
+				m_sDefaultPlayerFactionKey = header.m_sCOE_DefaultPlayerFactionKey;
+			
+			if (!header.m_sCOE_DefaultEnemyFactionKey.IsEmpty())
+				m_sDefaultEnemyFactionKey = header.m_sCOE_DefaultEnemyFactionKey;
+			
+			if (header.m_eCOE_DefaultEnemyAiSkill != EAISkill.NONE)
+				m_eEnemyAISkill = header.m_eCOE_DefaultEnemyAiSkill;
+			
+			if (header.m_fCOE_DefaultAORadius > 0)
+				m_fAORadius = header.m_fCOE_DefaultAORadius;
+			
+			if (header.m_iCOE_DefaultMinEnemyAICount >= 0)
+				m_iMinEnemyAICount = header.m_iCOE_DefaultMinEnemyAICount;
+			
+			if (header.m_fCOE_DefaultEnemyAICountMultiplier >= 0)
+				m_fEnemyAICountMultiplier = header.m_fCOE_DefaultEnemyAICountMultiplier;
+			
+			m_bCiviliansEnabled = header.m_bCOE_CiviliansEnabled;
+		}
 	}
 	
 	static COE_GameMode GetInstance()
@@ -453,9 +475,20 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetCiviliansEnabled(bool enabled)
+	{
+		m_bCiviliansEnabled = enabled;
+	}	
+	//------------------------------------------------------------------------------------------------
+	bool CiviliansEnabled()
+	{
+		return m_bCiviliansEnabled;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	protected void OnInsertionPointUpdated()
 	{
-		if (!Replication.IsRunning() || Replication.IsServer())
+		if (Replication.IsServer())
 			return;
 		
 		GetGame().GetCallqueue().CallLater(OnInsertionPointUpdatedDelayed, 1000);

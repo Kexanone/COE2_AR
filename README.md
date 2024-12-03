@@ -16,7 +16,7 @@ Co-operative infantry gameplay with dynamic objectives for [Arma Reforger](https
 
 ## Workshop Link
 
-_TBD_
+https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 ## Mods JSON
 
@@ -34,15 +34,32 @@ _TBD_
 
 ## Mission Header
 
-_TBD_
+```json
+"missionHeader":
+{
+    "m_sCOE_DefaultPlayerFactionKey": "",
+    "m_sCOE_DefaultEnemyFactionKey": "",
+    "m_eCOE_DefaultEnemyAiSkill": 50,
+    "m_fCOE_DefaultAORadius": 250,
+    "m_iCOE_DefaultMinEnemyAICount": 30,
+    "m_fCOE_DefaultEnemyAICountMultiplier": 2.5
+    "m_bCOE_CiviliansEnabled": 1
+}
+```
 
 ## Optional Addons
 
-_TBD_
+- COE2 - Chernarus: https://reforger.armaplatform.com/workshop/61C773CD9CF0560F
+- COE2 - Khanh Trung: https://reforger.armaplatform.com/workshop/61C57D80C78AE1C1
+- COE2 - Kunar Province: https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
+- COE2 - Mogadishu: https://reforger.armaplatform.com/workshop/61C80A73A70724EE
+- COE2 - Mussalo: https://reforger.armaplatform.com/workshop/61C7786BB6B29693
+- COE2 - Serhiivka: https://reforger.armaplatform.com/workshop/61CA3BE5820E8113
+- COE2 - Worthy Islands: https://reforger.armaplatform.com/workshop/61C769418AA32E81
 
 ## Compatibility Addons
 
-_TBD_
+- COE2 - RHS Patch: https://reforger.armaplatform.com/workshop/61BCC264BD3DB22E
 
 ## Submitting Issues
 

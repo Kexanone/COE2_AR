@@ -5,6 +5,7 @@ SCR_AIWorld AIWorld : "{70CCCF16487C927F}Prefabs/AI/SCR_AIWorld_Eden.et" {
     NavmeshFilesConfig BaseNavmeshFilesConfig "{61BB7B9AC5D0CA92}" {
      NavmeshFile "{6B86C8A4A0525B02}worlds/GameMaster/GM_KunarRagion_Navmesh.nmn"
     }
+    UseNavmeshStreaming 0
    }
   }
   NavmeshWorldComponent "{5584F30EEFEE1223}" {
@@ -12,6 +13,7 @@ SCR_AIWorld AIWorld : "{70CCCF16487C927F}Prefabs/AI/SCR_AIWorld_Eden.et" {
     NavmeshFilesConfig BaseNavmeshFilesConfig "{5CF6FEFBD1A09749}" {
      NavmeshFile "{49780D68232A7C67}worlds/GameMaster/GM_KunarRagion_BTRlike.nmn"
     }
+    UseNavmeshStreaming 0
    }
   }
   NavmeshWorldComponent "{5C8C9B750D124A63}" {

@@ -107,6 +107,20 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{630708E9CB6A6A2D}" {
+   Id "COE-Editor_CiviliansEnabled_Attribute_Description"
+   Target_en_us "Set whether civilians should be spawned"
+   Modified 1661407709
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{630708E9D59FD9AC}" {
+   Id "COE-Editor_CiviliansEnabled_Attribute_Name"
+   Target_en_us "Spawn civilians"
+   Modified 1661407688
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6098EB54F6C1E4B8}" {
    Id "COE-Editor_CommanderMode_Name"
    Target_en_us "Commander"
