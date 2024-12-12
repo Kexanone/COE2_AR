@@ -698,14 +698,16 @@ class COE_AO : KSC_AO
 		
 		if (!trees.IsEmpty())
 		{
-			array<vector> treePositions = {};
-			treePositions.Reserve(trees.Count());
+			array<EntityID> treeIDs = {};
+			treeIDs.Reserve(trees.Count());
 			foreach (IEntity tree : trees)
 			{
-				treePositions.Insert(tree.GetOrigin());
+				treeIDs.Insert(tree.GetID());
 			}
 		
-			m_pGameMode.ACE_DeleteEntitiesAtPositionsGlobal(treePositions);	
+			ACE_LoadtimeEntityManager entityManager = ACE_LoadtimeEntityManager.GetInstance();
+			if (entityManager)
+				entityManager.DeleteEntitiesByIdGlobal(treeIDs);	
 		}
 		
 		AddEntity(structure);
