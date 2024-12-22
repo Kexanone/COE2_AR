@@ -162,6 +162,11 @@ class COE_GameMode : SCR_BaseGameMode
 		KSC_GameTools.SetAISkill(m_eEnemyAISkill);
 		
 		COE_SetState(COE_EGameModeState.INTERMISSION);
+		
+		// Make server host commander
+		int playerID = SCR_PlayerController.GetLocalPlayerId();
+		if (playerID > 0)
+			GetGame().GetPlayerManager().GivePlayerRole(playerID, EPlayerRole.COE_COMMANDER);
 	}
 	
 	//------------------------------------------------------------------------------------------------
