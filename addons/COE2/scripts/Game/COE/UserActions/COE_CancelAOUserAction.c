@@ -14,7 +14,7 @@ class COE_CancelAOUserAction : COE_BaseCommanderBoardUserAction
 		{
 			m_sCannotPerformReason = "#COE-Reason_NoAO";
 			return false;
-		};
+		}
 		
 		return true;
 	}
