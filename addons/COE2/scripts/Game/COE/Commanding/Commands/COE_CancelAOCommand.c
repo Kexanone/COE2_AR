@@ -13,8 +13,14 @@ class COE_CancelAOCommand : COE_BaseRadialCommanderCommand
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override bool CanBePerformed()
+	override bool CanBePerformed(notnull SCR_ChimeraCharacter user)
 	{
-		return (COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION);
+		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.INTERMISSION)
+		{
+			m_sCannotPerformReason = "#COE-Reason_NoAO";
+			return false;
+		}
+		
+		return true;
 	}
 }

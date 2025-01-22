@@ -12,8 +12,20 @@ class COE_ScenarioSettingsCommand : COE_BaseRadialCommanderCommand
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override bool CanBePerformed()
+	override bool CanBePerformed(notnull SCR_ChimeraCharacter user)
 	{
-		return (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.INTERMISSION);
+		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.BRIEFING)
+		{
+			m_sCannotPerformReason = "#COE-Reason_OngoingBriefing";
+			return false;
+		}
+		
+		if (COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION)
+		{
+			m_sCannotPerformReason = "#COE-Reason_OngoingAO";
+			return false;
+		}
+		
+		return true;
 	}
 }

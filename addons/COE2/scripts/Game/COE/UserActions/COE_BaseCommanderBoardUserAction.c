@@ -19,13 +19,13 @@ class COE_BaseCommanderBoardUserAction : COE_BaseBoardUserAction
 		{
 			m_sCannotPerformReason = "#COE-Reason_OngoingBriefing";
 			return false;
-		};
+		}
 		
 		if (COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION)
 		{
 			m_sCannotPerformReason = "#COE-Reason_OngoingAO";
 			return false;
-		};
+		}
 		
 		return true;
 	}
