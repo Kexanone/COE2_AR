@@ -383,7 +383,7 @@ namespace libksc {
             }
 
             for (int i = 0; i < patch.rows(); i++) {
-                out(patch(i, 0), patch(i, 1)) = dir;
+                out(static_cast<int>(patch(i, 0)), static_cast<int>(patch(i, 1))) = dir;
             }
         }
 
