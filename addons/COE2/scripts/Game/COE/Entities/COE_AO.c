@@ -301,7 +301,7 @@ class COE_AO : KSC_AO
 			
 			EEditableEntityLabel label = labels.GetRandomElement();
 			array<ResourceName> entries = {};
-			m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, {label, EEditableEntityLabel.TRAIT_FORTIFICATION}, {}, entries);
+			m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, {label, EEditableEntityLabel.TRAIT_FORTIFICATION}, {EEditableEntityLabel.TRAIT_MORTAR}, entries);
 			
 			if (entries.IsEmpty())
 			{
