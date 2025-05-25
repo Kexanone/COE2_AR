@@ -13,7 +13,5 @@ MetaFileClass {
   }
   ENTResourceClass HEADLESS : PC {
   }
-  ENTResourceClass Xbox : PC {
-  }
  }
 }
