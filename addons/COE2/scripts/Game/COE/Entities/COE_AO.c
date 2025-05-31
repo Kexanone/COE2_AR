@@ -489,10 +489,15 @@ class COE_AO : KSC_AO
 			array<AIWaypoint> waypoints = {};
 			group.GetWaypoints(waypoints);
 			
+			// Move group to position of last waypoint
 			if (!waypoints.IsEmpty())
 			{
+				AIWaypointCycle wpCycle = AIWaypointCycle.Cast(waypoints[0]);
+				if (wpCycle)
+					wpCycle.GetWaypoints(waypoints);
+				
 				KSC_SpawnGroupHelperComponent spawnGroupHelper = KSC_SpawnGroupHelperComponent.Cast(group.FindComponent(KSC_SpawnGroupHelperComponent));
-				spawnGroupHelper.SetCenter(waypoints[0].GetOrigin());
+				spawnGroupHelper.SetCenter(waypoints[waypoints.Count() - 1].GetOrigin());
 			}
 		}
 	}
@@ -521,8 +526,15 @@ class COE_AO : KSC_AO
 			array<AIWaypoint> waypoints = {};
 			group.GetWaypoints(waypoints);
 			
+			// Move character to position of last waypoint
 			if (!waypoints.IsEmpty())
-				char.SetOrigin(waypoints[0].GetOrigin());
+			{
+				AIWaypointCycle wpCycle = AIWaypointCycle.Cast(waypoints[0]);
+				if (wpCycle)
+					wpCycle.GetWaypoints(waypoints);
+				
+				char.SetOrigin(waypoints[waypoints.Count() - 1].GetOrigin());
+			}
 			
 			counter++;
 		}
