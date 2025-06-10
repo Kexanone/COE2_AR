@@ -44,8 +44,13 @@ class COE_PlayerController : SCR_PlayerController
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void RpcDo_Owner_FastTravel(vector pos, float rotation, float searchRadius)
 	{
-		SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(GetGame().GetHUDManager().FindInfoDisplay(SCR_FadeInOutEffect));
-		fade.FadeOutEffect(true, FAST_TRAVEL_FADE_DURATION);
+		SCR_ScreenEffectsManager manager = SCR_ScreenEffectsManager.GetScreenEffectsDisplay();
+		if (manager)
+		{
+			SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(manager.GetEffect(SCR_FadeInOutEffect));
+			fade.FadeOutEffect(true, FAST_TRAVEL_FADE_DURATION);
+		}
+		
 		SCR_WorldTools.FindEmptyTerrainPosition(pos, pos, searchRadius);
 		GetGame().GetCallqueue().CallLater(FastTravelTeleport, (FAST_TRAVEL_FADE_DURATION + FAST_TRAVEL_BLACKSCREEN_DURATION) * 1000, false, pos, rotation);
 	}
@@ -81,8 +86,13 @@ class COE_PlayerController : SCR_PlayerController
 	{
 
 		s_OnLocalPlayerFastTraveled.Invoke(m_MainEntity, transform);
-		SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(GetGame().GetHUDManager().FindInfoDisplay(SCR_FadeInOutEffect));
-		fade.FadeOutEffect(false, FAST_TRAVEL_FADE_DURATION);
+		
+		SCR_ScreenEffectsManager manager = SCR_ScreenEffectsManager.GetScreenEffectsDisplay();
+		if (manager)
+		{
+			SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(manager.GetEffect(SCR_FadeInOutEffect));
+			fade.FadeOutEffect(false, FAST_TRAVEL_FADE_DURATION);
+		}
 		
 		SCR_PlayerTeleportedFeedbackComponent teleportFeedback = SCR_PlayerTeleportedFeedbackComponent.Cast(FindComponent(SCR_PlayerTeleportedFeedbackComponent));
 		if (teleportFeedback)
