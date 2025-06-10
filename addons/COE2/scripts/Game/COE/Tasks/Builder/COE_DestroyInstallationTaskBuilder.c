@@ -9,7 +9,15 @@ class COE_DestroyInstallationTaskBuilder : COE_BaseTaskBuilder
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		
 		array<ResourceName> entries = {};
-		factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_HVT, entries);
+		array<Faction> factionsToConsider = {factionManager.GetEnemyFaction(), factionManager.GetFactionByKey("FIA")}; // If not available for selection faction, get the ones of FIA
+		foreach (Faction faction : factionsToConsider)
+		{
+			factionManager.GetFactionEntityListWithLabels(faction, EEntityCatalogType.COMPOSITION, {EEditableEntityLabel.SERVICE_ANTENNA, EEditableEntityLabel.TRAIT_DESTRUCTABLE}, {}, entries);
+			
+			if (!entries.IsEmpty())
+				break;
+		}
+		
 		if (entries.IsEmpty())
 			return null;
 				
