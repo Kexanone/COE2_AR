@@ -19,23 +19,23 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		
 		array<ResourceName> entries = {};
 		
-		int attempt = 0;
-		while (attempt < MAX_ATTEMPTS)
+		while (!labels.IsEmpty())
 		{
-			if (labels.IsEmpty())
-				return null;
-			
 			EEditableEntityLabel label = labels.GetRandomElement();
 			
 			factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE, label, entries);
-			if (entries.IsEmpty())
-			{
-				labels.RemoveItem(label);
-				continue;
-			}
+			if (!entries.IsEmpty())
+				break;
 			
-			attempt++;
+			labels.RemoveItem(label);
 		}
+		
+		// Consider light armed vehicles if no others were found
+		if (entries.IsEmpty())
+			factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE, EEditableEntityLabel.TRAIT_ARMED, entries);
+		
+		if (entries.IsEmpty())
+			return null;
 		
 		vector pos;
 		float rotation;

@@ -14,11 +14,11 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 			return null;
 		
 		IEntity structure; vector pos;
-		Tuple2<IEntity, array<ref PointInfo>> entry = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.ROLE_SCOUT);
-		if (entry)
+		Tuple2<IEntity, array<ref PointInfo>> slot = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.ROLE_SCOUT);
+		if (slot)
 		{
-			structure = entry.param1;
-			PointInfo point = entry.param2.GetRandomElement();
+			structure = slot.param1;
+			PointInfo point = slot.param2.GetRandomElement();
 			point.Init(structure);
 			vector transform[4];
 			point.GetWorldTransform(transform);
@@ -35,9 +35,20 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 			return null;
 		
 		entries.Clear();
-		factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.KSC_TRAIT_HVT, entries);
+		factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.ROLE_LEADER, entries);
 		if (entries.IsEmpty())
 			return null;
+		
+		array<ResourceName> filteredEntities = {};
+		filteredEntities.Reserve(entries.Count());
+		foreach (ResourceName entry : entries)
+		{
+			if (entry.Contains("Officer"))
+				filteredEntities.Insert(entry);
+		}
+		
+		if (!filteredEntities.IsEmpty())
+			entries = filteredEntities;
 		
 		SCR_ChimeraCharacter hvt = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), pos, Math.RandomFloat(0, 360));
 		ao.AddEntity(hvt);
