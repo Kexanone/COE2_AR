@@ -14,6 +14,10 @@ class COE_FactionManager : KSC_FactionManager
 	protected int m_iEnemyFactionId;
 	protected Faction m_pEnemyFaction;
 	
+	[RplProp(onRplName: "OnCivilianFactionChanged")]
+	protected int m_iCivilianFactionId;
+	protected Faction m_pCivilianFaction;
+	
 	protected SCR_DelegateFactionManagerComponent m_pDelegateFactionManager;
 	
 	//------------------------------------------------------------------------------------------------
@@ -109,8 +113,23 @@ class COE_FactionManager : KSC_FactionManager
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetCivilianFaction(SCR_Faction faction)
+	{
+		m_pCivilianFaction = faction;
+		m_iCivilianFactionId = GetFactionIndex(faction);
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	Faction GetCivilianFaction()
 	{
-		return GetFactionByKey("CIV");
+		return m_pCivilianFaction;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Called on clients when civilian faction has changed
+	protected void OnCivilianFactionChanged()
+	{
+		m_pCivilianFaction = GetFactionByIndex(m_iCivilianFactionId);
 	}
 }
