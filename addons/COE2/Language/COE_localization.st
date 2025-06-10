@@ -107,6 +107,20 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{6594C0799DBF5B9D}" {
+   Id "COE-Editor_CivilianFaction_Attribute_Description"
+   Target_en_us "Set faction for civilian AI"
+   Modified 1704248386
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{6594C0799BF012BF}" {
+   Id "COE-Editor_CivilianFaction_Attribute_Name"
+   Target_en_us "Civilian faction"
+   Modified 1704248370
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{630708E9CB6A6A2D}" {
    Id "COE-Editor_CiviliansEnabled_Attribute_Description"
    Target_en_us "Set whether civilians should be spawned"

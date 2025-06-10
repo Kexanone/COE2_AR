@@ -6,6 +6,9 @@ class COE_MissionHeader : SCR_MissionHeader
 	[Attribute(defvalue: "", desc: "Default faction for the enemy AI. None if empty")]
 	string m_sCOE_DefaultEnemyFactionKey;
 	
+	[Attribute(defvalue: "", desc: "Default faction for the civilian AI. None if empty")]
+	string m_sCOE_DefaultCivilianFactionKey;
+	
 	[Attribute(defvalue: "0", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(EAISkill), desc: "Default skill for enemy AI.")]
 	EAISkill m_eCOE_DefaultEnemyAiSkill;
 	

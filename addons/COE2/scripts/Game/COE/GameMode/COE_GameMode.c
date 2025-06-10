@@ -56,6 +56,9 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "FIA", desc: "Default faction key of the enemy AI", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultEnemyFactionKey;
 	
+	[Attribute(defvalue: "CIV", desc: "Default faction key of the civilian AI", category: "Default Scenario Properties")]
+	protected FactionKey m_sDefaultCivilianFactionKey;
+	
 	[Attribute(defvalue: "-1", uiwidget: UIWidgets.Slider, params: "-1 3 1", desc: "Number of tasks per objective. Random if -1.", category: "Default Scenario Properties")]
 	protected int m_iTasksPerObjective;
 	protected int m_iMaxTasksPerObjective = 3;
@@ -114,6 +117,9 @@ class COE_GameMode : SCR_BaseGameMode
 			if (!header.m_sCOE_DefaultEnemyFactionKey.IsEmpty())
 				m_sDefaultEnemyFactionKey = header.m_sCOE_DefaultEnemyFactionKey;
 			
+			if (!header.m_sCOE_DefaultCivilianFactionKey.IsEmpty())
+				m_sDefaultCivilianFactionKey = header.m_sCOE_DefaultCivilianFactionKey;
+			
 			if (header.m_eCOE_DefaultEnemyAiSkill != EAISkill.NONE)
 				m_eEnemyAISkill = header.m_eCOE_DefaultEnemyAiSkill;
 			
@@ -158,6 +164,9 @@ class COE_GameMode : SCR_BaseGameMode
 		
 		if (!m_sDefaultEnemyFactionKey.IsEmpty())
 			m_pFactionManager.SetEnemyFaction(SCR_Faction.Cast(m_pFactionManager.GetFactionByKey(m_sDefaultEnemyFactionKey)));
+		
+		if (!m_sDefaultCivilianFactionKey.IsEmpty())
+			m_pFactionManager.SetCivilianFaction(SCR_Faction.Cast(m_pFactionManager.GetFactionByKey(m_sDefaultCivilianFactionKey)));
 		
 		KSC_GameTools.SetAISkill(m_eEnemyAISkill);
 		

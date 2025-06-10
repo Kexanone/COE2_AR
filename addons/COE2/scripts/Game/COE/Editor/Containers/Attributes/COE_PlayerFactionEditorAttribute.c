@@ -1,18 +1,22 @@
+//------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
-class COE_PlayerFactionEditorAttribute: COE_BaseFactionEditorAttribute
-{		
-	override SCR_Faction GetFaction(COE_GameMode gameMode)
+class COE_PlayerFactionEditorAttribute : COE_BaseFactionEditorAttribute
+{
+	//------------------------------------------------------------------------------------------------
+	override SCR_Faction GetFaction(COE_FactionManager factionManager)
 	{
-		return m_pFactionManager.GetPlayerFaction();
+		return factionManager.GetPlayerFaction();
 	}
 	
-	override void SetFaction(COE_GameMode gameMode, SCR_Faction faction, int playerID)
+	//------------------------------------------------------------------------------------------------
+	override void SetFaction(COE_FactionManager factionManager, SCR_Faction faction, int playerID)
 	{
-		m_pFactionManager.SetPlayerFaction(faction);
+		factionManager.SetPlayerFaction(faction);
 		SCR_NotificationsComponent.SendToEveryone(ENotification.EDITOR_ATTRIBUTES_FACTION_CHANGED, playerID);
 	}
 	
-	override typename GetTypeLinkedAttribute()
+	//------------------------------------------------------------------------------------------------
+	override typename GetLinkedAttributeType()
 	{
 		return COE_EnemyFactionEditorAttribute;
 	}

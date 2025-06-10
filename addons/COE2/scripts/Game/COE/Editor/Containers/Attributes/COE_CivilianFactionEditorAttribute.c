@@ -1,22 +1,16 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
-class COE_EnemyFactionEditorAttribute : COE_BaseFactionEditorAttribute
+class COE_CivilianFactionEditorAttribute : COE_BaseFactionEditorAttribute
 {
 	//------------------------------------------------------------------------------------------------
 	override Faction GetFaction(COE_FactionManager factionManager)
 	{
-		return factionManager.GetEnemyFaction();
+		return factionManager.GetCivilianFaction();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void SetFaction(COE_FactionManager factionManager, SCR_Faction faction, int playerID)
 	{
-		factionManager.SetEnemyFaction(faction);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override typename GetLinkedAttributeType()
-	{
-		return COE_PlayerFactionEditorAttribute;
+		factionManager.SetCivilianFaction(faction);
 	}
 }
