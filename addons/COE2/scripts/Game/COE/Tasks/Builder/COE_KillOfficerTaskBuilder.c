@@ -9,9 +9,6 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		
 		array<ResourceName> entries = {};
-		factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_TENT, entries);
-		if (entries.IsEmpty())
-			return null;
 		
 		IEntity structure; vector pos;
 		Tuple2<IEntity, array<ref PointInfo>> slot = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.ROLE_SCOUT);
@@ -26,6 +23,18 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		}
 		else
 		{
+			array<Faction> factionsToConsider = {factionManager.GetEnemyFaction(), factionManager.GetFactionByKey("FIA")}; // If not available for selection faction, get the ones of FIA
+			foreach (Faction faction : factionsToConsider)
+			{
+				factionManager.GetFactionEntityListWithLabel(faction, EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_TENT, entries);
+				
+				if (!entries.IsEmpty())
+					break;
+			}
+			
+			if (entries.IsEmpty())
+				return null;
+			
 			structure = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
 			pos = structure.GetOrigin();
 			ao.AddPositionToDefend(pos);

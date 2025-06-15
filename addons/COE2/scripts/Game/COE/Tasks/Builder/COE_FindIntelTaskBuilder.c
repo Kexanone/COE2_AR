@@ -21,7 +21,16 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 		else
 		{
 			array<ResourceName> entries = {};
-			factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_TENT, entries);
+			
+			array<Faction> factionsToConsider = {factionManager.GetEnemyFaction(), factionManager.GetFactionByKey("FIA")}; // If not available for selection faction, get the ones of FIA
+			foreach (Faction faction : factionsToConsider)
+			{
+				factionManager.GetFactionEntityListWithLabel(faction, EEntityCatalogType.COMPOSITION, EEditableEntityLabel.KSC_TRAIT_TENT, entries);
+				
+				if (!entries.IsEmpty())
+					break;
+			}
+			
 			if (entries.IsEmpty())
 				return null;
 			
