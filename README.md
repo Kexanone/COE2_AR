@@ -39,6 +39,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 {
     "m_sCOE_DefaultPlayerFactionKey": "",
     "m_sCOE_DefaultEnemyFactionKey": "",
+    "m_sCOE_DefaultCivilianFactionKey": "",
     "m_eCOE_DefaultEnemyAiSkill": 50,
     "m_fCOE_DefaultAORadius": 250,
     "m_iCOE_DefaultMinEnemyAICount": 30,
@@ -49,14 +50,16 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 ## Optional Addons
 
-- COE2 - Chernarus: https://reforger.armaplatform.com/workshop/61C773CD9CF0560F
-- COE2 - Fallujah: https://reforger.armaplatform.com/workshop/21209DA9CF32FBE9
-- COE2 - Khanh Trung: https://reforger.armaplatform.com/workshop/61C57D80C78AE1C1
-- COE2 - Kunar Province: https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
-- COE2 - Mogadishu: https://reforger.armaplatform.com/workshop/61C80A73A70724EE
-- COE2 - Mussalo: https://reforger.armaplatform.com/workshop/61C7786BB6B29693
-- COE2 - Serhiivka: https://reforger.armaplatform.com/workshop/61CA3BE5820E8113
-- COE2 - Worthy Islands: https://reforger.armaplatform.com/workshop/61C769418AA32E81
+- COE2 Anizay: https://reforger.armaplatform.com/workshop/65734D75BC584950
+- COE2 Denali: https://reforger.armaplatform.com/workshop/657407A89697A1BF
+- COE2 Fallujah: https://reforger.armaplatform.com/workshop/21209DA9CF32FBE9
+- COE2 Khanh Trung: https://reforger.armaplatform.com/workshop/61C57D80C78AE1C1
+- COE2 Kunar Province: https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
+- COE2 Mussalo: https://reforger.armaplatform.com/workshop/61C7786BB6B29693
+- COE2 Novka: https://reforger.armaplatform.com/workshop/65E57B4395A36FE9
+- COE2 Serhiivka: https://reforger.armaplatform.com/workshop/61CA3BE5820E8113
+- COE2 Worthy Islands: https://reforger.armaplatform.com/workshop/61C769418AA32E81
+- COE2 Zimnitrita: https://reforger.armaplatform.com/workshop/6311625CDE04C97B
 
 ## Compatibility Addons
 
