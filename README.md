@@ -43,8 +43,10 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
     "m_eCOE_DefaultEnemyAiSkill": 50,
     "m_fCOE_DefaultAORadius": 250,
     "m_iCOE_DefaultMinEnemyAICount": 30,
-    "m_fCOE_DefaultEnemyAICountMultiplier": 2.5
-    "m_bCOE_CiviliansEnabled": 1
+    "m_fCOE_DefaultEnemyAICountMultiplier": 2.5,
+    "m_iCOE_EnemyArmedVehicleCount": 0,
+    "m_bCOE_CiviliansEnabled": 1,
+    "m_bCOE_CommanderBecomesGM": 0
 }
 ```
 
@@ -57,6 +59,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Kunar Province: https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
 - COE2 Mussalo: https://reforger.armaplatform.com/workshop/61C7786BB6B29693
 - COE2 Novka: https://reforger.armaplatform.com/workshop/65E57B4395A36FE9
+- COE2 Ruha: https://reforger.armaplatform.com/workshop/65EB440190E0B2DF
 - COE2 Serhiivka: https://reforger.armaplatform.com/workshop/61CA3BE5820E8113
 - COE2 Worthy Islands: https://reforger.armaplatform.com/workshop/61C769418AA32E81
 - COE2 Zimnitrita: https://reforger.armaplatform.com/workshop/6311625CDE04C97B
