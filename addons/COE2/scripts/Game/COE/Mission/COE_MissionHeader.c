@@ -1,3 +1,4 @@
+//------------------------------------------------------------------------------------------------
 class COE_MissionHeader : SCR_MissionHeader
 {
 	[Attribute(defvalue: "", desc: "Default faction for the players. None if empty")]
@@ -20,6 +21,9 @@ class COE_MissionHeader : SCR_MissionHeader
 	
 	[Attribute(defvalue: "-1", desc: "Default total enemy AI count for an AO will be this multiplier times the total player count (ignored when below minimum count).")]
 	float m_fCOE_DefaultEnemyAICountMultiplier;
+	
+	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.")]
+	int m_iCOE_EnemyArmedVehicleCount;
 	
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs")]
 	bool m_bCOE_CiviliansEnabled;
