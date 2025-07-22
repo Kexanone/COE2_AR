@@ -26,6 +26,8 @@ class COE_AO : KSC_AO
 	protected ref array<vector> m_aPositionsToDefend = {};
 	protected ref array<vector> m_aEnemyPositionsToReveal = {};
 	
+	protected ref array<ref Tuple2<Turret, AIGroup>> m_aMortars = {};
+	
 	protected static const int TERRAIN_DATA_BUFFER_SIZE = 1000000;
 	protected static const int MAX_ATTEMPTS = 10000;
 			
@@ -63,6 +65,7 @@ class COE_AO : KSC_AO
 		SetUpDefenders();
 		SetUpPatrols();
 		SetUpArmedVehicles();
+		SetUpMortars();
 		
 		SetUpCivlianVehicles();
 		
@@ -570,6 +573,42 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetUpMortars()
+	{
+		array<ResourceName> mortarEntries = {};
+		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, EEditableEntityLabel.TRAIT_MORTAR, mortarEntries);
+		if (!mortarEntries)
+			return;
+		
+		array<ResourceName> gunnerEntries = {};
+		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.ROLE_RIFLEMAN, gunnerEntries);
+		if (!gunnerEntries)
+			return;
+		
+		for (int i = 0; i < m_pGameMode.GetEnemyMortarCount(); ++i)
+		{
+			IEntity structure = SpawnInRandomFlatSlot(mortarEntries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL);
+			if (!structure)
+				return;
+			
+			AddEntity(structure);
+			
+			array<Turret> turrets = {};
+			KSC_CompositionHelperT<Turret>.GetChildrenByType(structure, turrets);
+			if (turrets.IsEmpty())
+				return;
+			
+			Turret mortar = turrets.GetRandomElement();
+			SCR_ChimeraCharacter char = KSC_GameTools.SpawnCharacterPrefab(gunnerEntries.GetRandomElement(), mortar.GetOrigin());
+			AddEntity(char);
+			
+			AIGroup group = KSC_AIHelper.GetGroup(char);
+			KSC_AITasks.Defend(group, mortar.GetOrigin(), 5);
+			m_aMortars.Insert(new Tuple2<Turret, AIGroup>(mortar, group));
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void SetUpCivilians()
 	{
 		array<ResourceName> entries = {};
@@ -733,6 +772,12 @@ class COE_AO : KSC_AO
 	void AddEntity(IEntity entity)
 	{
 		m_aEntities.Insert(entity);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	array<ref Tuple2<Turret, AIGroup>> GetMortars()
+	{
+		return m_aMortars;
 	}
 	
 	//------------------------------------------------------------------------------------------------

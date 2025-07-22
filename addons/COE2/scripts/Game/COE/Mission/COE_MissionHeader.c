@@ -25,6 +25,9 @@ class COE_MissionHeader : SCR_MissionHeader
 	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.")]
 	int m_iCOE_EnemyArmedVehicleCount;
 	
+	[Attribute(defvalue: "0", desc: "Number of enemy mortars.")]
+	int m_iCOE_EnemyMortarCount;
+	
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs")]
 	bool m_bCOE_CiviliansEnabled;
 	
