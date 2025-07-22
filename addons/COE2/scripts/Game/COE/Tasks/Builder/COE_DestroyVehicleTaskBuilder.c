@@ -23,7 +23,11 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		{
 			EEditableEntityLabel label = labels.GetRandomElement();
 			
-			factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE, label, entries);
+			factionManager.GetFactionEntityListWithLabels(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE,
+				includedLabels: {label},
+				excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER},
+			entries);
+			
 			if (!entries.IsEmpty())
 				break;
 			
@@ -32,7 +36,10 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		
 		// Consider light armed vehicles if no others were found
 		if (entries.IsEmpty())
-			factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE, EEditableEntityLabel.TRAIT_ARMED, entries);
+			factionManager.GetFactionEntityListWithLabels(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE,
+				includedLabels: {EEditableEntityLabel.TRAIT_ARMED},
+				excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER},
+			entries);
 		
 		if (entries.IsEmpty())
 			return null;
