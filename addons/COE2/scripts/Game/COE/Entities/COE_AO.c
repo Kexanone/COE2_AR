@@ -411,10 +411,16 @@ class COE_AO : KSC_AO
 			foreach (BaseCompartmentSlot slot : slots)
 			{
 				SCR_ChimeraCharacter char = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), turret.GetOrigin());
+				
+				AIAgent agent = char.GetAIControlComponent().GetAIAgent();
+				if (agent)
+				{
+					SCR_AIConfigComponent aiConfig = SCR_AIConfigComponent.Cast(agent.FindComponent(SCR_AIConfigComponent));
+					if (aiConfig)
+						aiConfig.m_bKSC_EnableGetOutVehicle = false;
+				}
+
 				AddEntity(char);
-				AIWaypoint wp = KSC_GameTools.SpawnWaypointPrefab("{84FB298EA1F2C7CE}Prefabs/AI/Waypoints/KSC_AIWaypoint_Defend_0m.et", turret.GetOrigin());
-				KSC_AIHelper.GetGroup(char).AddWaypoint(wp);
-				AddEntity(wp);
 				CompartmentAccessComponent compartmentAccess = char.GetCompartmentAccessComponent();
 				GetGame().GetCallqueue().CallLater(compartmentAccess.GetInVehicle, 1000, false, turret, slot, true, -1, ECloseDoorAfterActions.CLOSE_DOOR, true);
 			}
