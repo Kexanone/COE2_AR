@@ -1,8 +1,10 @@
+//------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
 class COE_EnemyAISkillEditorAttribute : SCR_BaseFloatValueHolderEditorAttribute
 {
 	protected static ref array<EAISkill> s_aSkills = {};
 	
+	//------------------------------------------------------------------------------------------------
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
@@ -21,6 +23,7 @@ class COE_EnemyAISkillEditorAttribute : SCR_BaseFloatValueHolderEditorAttribute
 		return null;
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override void WriteVariable(Managed item, SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, int playerID)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
@@ -33,6 +36,7 @@ class COE_EnemyAISkillEditorAttribute : SCR_BaseFloatValueHolderEditorAttribute
 		KSC_GameTools.SetAISkill(s_aSkills[var.GetInt()]);
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override int GetEntries(notnull array<ref SCR_BaseEditorAttributeEntry> outEntries)
 	{
 		FillValues();
@@ -40,6 +44,7 @@ class COE_EnemyAISkillEditorAttribute : SCR_BaseFloatValueHolderEditorAttribute
 		return outEntries.Count();
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	protected void FillValues()
 	{
 		m_aValues.Clear();	
