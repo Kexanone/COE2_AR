@@ -860,7 +860,7 @@ class COE_AO : KSC_AO
 		{
 			SCR_MapMarkerBase marker = new SCR_MapMarkerBase();
 			marker.SetType(SCR_EMapMarkerType.PLACED_CUSTOM);
-			marker.SetIconEntry(SCR_EScenarioFrameworkMarkerCustom.FORTIFICATION2);
+			marker.SetIconEntry(SCR_EScenarioFrameworkMarkerCustom.MARK_QUESTION);
 			marker.SetColorEntry(m_pFactionManager.GetMarkerCustomColorEntry(m_pFactionManager.GetEnemyFaction()));
 			marker.SetWorldPos(pos[0], pos[2]);
 			markerManager.InsertStaticMarker(marker, false, true);
