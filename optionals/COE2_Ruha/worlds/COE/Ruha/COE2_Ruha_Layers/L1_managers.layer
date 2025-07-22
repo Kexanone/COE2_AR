@@ -1,0 +1,25 @@
+SCR_AIWorld AIWorld : "{65DEC16960498027}Prefabs/AI/SCR_AIWorld_Ruha.et" {
+ coords 2702.329 65.302 3110.688
+}
+PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+ coords 2709.92 64.858 3104.316
+}
+RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+ coords 2713.548 64.69 3102.813
+}
+ScriptedChatEntity ChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+ Flags 0
+ coords 2707.398 65.039 3106.644
+}
+COE_FactionManager FactionManager : "{F9A08100A9E20FB5}Prefabs/Managers/COE_FactionManager.et" {
+ coords 2702.033 65.311 3110.474
+}
+ChimeraAIAgent : "{3C04D2994CF9F7EF}AI/AIAgents/ChimeraAIAgentVehicle.et" {
+ coords 1750 62.344 1400
+}
+SCR_LoadoutManager LoadoutManager : "{B54D08AEA74A5354}Prefabs/MP/Managers/Loadouts/LoadoutManager_Editor.et" {
+ coords 2708.528 65.003 3106.889
+}
+SCR_BaseTaskManager TaskManager : "{F73FF9A9DC8F1B7A}Prefabs/MP/Managers/Tasks/KSC_TaskManager.et" {
+ coords 2701.956 65.315 3110.972
+}
