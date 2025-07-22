@@ -1,6 +1,8 @@
+//------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
 class COE_MinEnemyAICountEditorAttribute : SCR_BaseValueListEditorAttribute
 {		
+	//------------------------------------------------------------------------------------------------
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
@@ -10,6 +12,7 @@ class COE_MinEnemyAICountEditorAttribute : SCR_BaseValueListEditorAttribute
 		return SCR_BaseEditorAttributeVar.CreateFloat(gameMode.GetMinEnemyAiCount());
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override void WriteVariable(Managed item, SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, int playerID)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
@@ -23,9 +26,11 @@ class COE_MinEnemyAICountEditorAttribute : SCR_BaseValueListEditorAttribute
 	}
 }
 
+//------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseEditorAttributeCustomTitle()]
 class COE_EnemyAICountMultiplierEditorAttribute : SCR_BaseValueListEditorAttribute
-{		
+{
+	//------------------------------------------------------------------------------------------------
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
@@ -35,6 +40,7 @@ class COE_EnemyAICountMultiplierEditorAttribute : SCR_BaseValueListEditorAttribu
 		return SCR_BaseEditorAttributeVar.CreateFloat(gameMode.GetEnemyAiCountMultiplier());
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override void WriteVariable(Managed item, SCR_BaseEditorAttributeVar var, SCR_AttributesManagerEditorComponent manager, int playerID)
 	{
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
