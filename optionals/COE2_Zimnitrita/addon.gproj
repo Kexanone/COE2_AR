@@ -1,0 +1,22 @@
+GameProject {
+ ID "COE2_Zimnitrita"
+ GUID "6311625CDE04C97B"
+ TITLE "COE2 Zimnitrita"
+ Dependencies {
+  "597697D81A1EA202" "58D0FB3206B6F859" "60926835F4A7B0CA"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

@@ -1,0 +1,26 @@
+COE_MainBaseEntity : "{313B826EE1AB4F28}Prefabs/Compositions/Misc/COE/COE_MainBase_Base.et" {
+ coords 8707.482 76.982 13369.393
+ angleY 165.966
+ {
+  GenericEntity {
+   ID "60A0A47B59D705C4"
+   coords 8.432 0 2.955
+   angleY -79.393
+  }
+  GenericEntity {
+   ID "61BB7B9B2A263B83"
+   coords 7.975 0 0.523
+   angleY -79.393
+  }
+  GenericEntity {
+   ID "61BB7B9B4E3D25BF"
+   coords 8.893 0 5.432
+   angleY -79.393
+   {
+    GenericEntity {
+     ID "5E20C6B32D5DB6DB"
+    }
+   }
+  }
+ }
+}
