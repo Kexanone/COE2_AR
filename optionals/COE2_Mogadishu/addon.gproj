@@ -1,8 +1,0 @@
-GameProject {
- ID "COE2_Mogadishu"
- GUID "61C80A73A70724EE"
- TITLE "COE2 - Mogadishu"
- Dependencies {
-  "5F1D02080409E128" "60926835F4A7B0CA" "58D0FB3206B6F859"
- }
-}
