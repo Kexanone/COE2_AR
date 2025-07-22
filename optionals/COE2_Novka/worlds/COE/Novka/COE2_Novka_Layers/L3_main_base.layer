@@ -1,0 +1,36 @@
+COE_MainBaseEntity : "{313B826EE1AB4F28}Prefabs/Compositions/Misc/COE/COE_MainBase_Base.et" {
+ coords 2718.938 492.156 2467.497
+ angleY -37.466
+ {
+  GenericEntity {
+   ID "61BB7B9B4E3D25BF"
+   coords 1.702 0 -2.759
+   angleY 0
+   {
+    $grp GenericEntity {
+     {
+      coords -2.932 0 -0.001
+     }
+     {
+      coords -5.364 0 0.001
+     }
+    }
+   }
+  }
+  GenericEntity {
+   ID "60A0A47B59D705C4"
+   coords -1.058 0 -3.033
+   angleY -180
+  }
+  GenericEntity {
+   ID "61BB7B9B2A263B83"
+   coords -3.057 0 -2.984
+   angleY -180
+  }
+  SCR_SpawnPoint {
+   ID "60A0A47B59D705B8"
+   coords 1.302 0.094 3.882
+   angleY 180
+  }
+ }
+}

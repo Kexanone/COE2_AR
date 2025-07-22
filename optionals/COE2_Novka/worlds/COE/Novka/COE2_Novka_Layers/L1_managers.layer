@@ -1,0 +1,40 @@
+PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+ coords 2709.92 798.365 3104.316
+ angleX 0.08
+ angleY -0.047
+ angleZ -30.299
+}
+RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
+ coords 2713.548 800.488 3102.813
+ angleX 0.162
+ angleY -0.095
+ angleZ -30.435
+}
+ScriptedChatEntity ChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+ Flags 0
+ coords 2707.398 796.896 3106.644
+ angleX 0.08
+ angleY -0.047
+ angleZ -30.299
+}
+COE_FactionManager FactionManager : "{F9A08100A9E20FB5}Prefabs/Managers/COE_FactionManager.et" {
+ coords 2702.033 793.779 3110.474
+ angleX 0.114
+ angleY -0.066
+ angleZ -30.134
+}
+ChimeraAIAgent : "{3C04D2994CF9F7EF}AI/AIAgents/ChimeraAIAgentVehicle.et" {
+ coords 1750 2.25 1400
+}
+SCR_LoadoutManager LoadoutManager : "{B54D08AEA74A5354}Prefabs/MP/Managers/Loadouts/LoadoutManager_Editor.et" {
+ coords 2708.528 797.556 3106.889
+ angleX 0.08
+ angleY -0.047
+ angleZ -30.299
+}
+SCR_BaseTaskManager TaskManager : "{F73FF9A9DC8F1B7A}Prefabs/MP/Managers/Tasks/KSC_TaskManager.et" {
+ coords 2701.956 793.736 3110.972
+ angleX 0.114
+ angleY -0.066
+ angleZ -30.134
+}
