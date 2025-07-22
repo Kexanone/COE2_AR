@@ -44,7 +44,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
     "m_fCOE_DefaultAORadius": 250,
     "m_iCOE_DefaultMinEnemyAICount": 30,
     "m_fCOE_DefaultEnemyAICountMultiplier": 2.5,
-    "m_iCOE_EnemyArmedVehicleCount",
+    "m_iCOE_EnemyArmedVehicleCount": 0,
     "m_bCOE_CiviliansEnabled": 1,
     "m_bCOE_CommanderBecomesGM": 0
 }
