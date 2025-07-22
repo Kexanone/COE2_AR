@@ -324,8 +324,8 @@ class COE_AO : KSC_AO
 			m_aEnemyPositionsToReveal.Insert(structure.GetOrigin());
 			AddEntity(structure);
 						
-			if (!SpawnTurretOccupants(structure))
-				SpawnSmartInteractionOccupants(structure);
+			SpawnTurretOccupants(structure);
+			SpawnSmartInteractionOccupants(structure);
 			
 			counter++;
 		}
@@ -363,6 +363,7 @@ class COE_AO : KSC_AO
 			m_aEnemyPositionsToReveal.Insert(structure.GetOrigin());
 			AddEntity(structure);
 			SpawnTurretOccupants(structure);
+			SpawnSmartInteractionOccupants(structure);
 			counter++;
 		}
 	}
@@ -411,7 +412,8 @@ class COE_AO : KSC_AO
 	{
 		array<Managed> sentinels = {};
 		KSC_CompositionHelper.GetChildComponentsByType(entity, SCR_AISmartActionSentinelComponent, sentinels);
-		if (sentinels.IsEmpty())
+		// Exclude interaction points on barricades
+		if (sentinels.IsEmpty() || entity.GetPrefabData().GetPrefabName().IndexOf("Barricade") >= 0)
 			return false;
 
 		array<ResourceName> entries = {};
