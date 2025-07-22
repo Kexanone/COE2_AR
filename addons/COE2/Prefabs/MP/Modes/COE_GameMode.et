@@ -218,5 +218,7 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
   }
   COE_FindIntelTaskBuilder "{61597E8E4968BB4B}" {
   }
+  COE_FreeHostageTaskBuilder "{65ECF99ECA58094A}" {
+  }
  }
 }
