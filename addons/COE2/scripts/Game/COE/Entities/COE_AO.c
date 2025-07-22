@@ -387,8 +387,15 @@ class COE_AO : KSC_AO
 			if (slots.IsEmpty())
 				continue;
 			
+			EEditableEntityLabel roleLabel = EEditableEntityLabel.ROLE_RIFLEMAN;
+			if (Vehicle.Cast(entity))
+				roleLabel = EEditableEntityLabel.TRAIT_VEHICLE_CREW;
+			
 			array<ResourceName> entries = {};
-			m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.ROLE_RIFLEMAN, entries);
+			m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, roleLabel, entries);
+			if (entries.IsEmpty())
+				m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.CHARACTER, EEditableEntityLabel.ROLE_RIFLEMAN, entries);
+			
 			if (entries.IsEmpty())
 				continue;
 			
