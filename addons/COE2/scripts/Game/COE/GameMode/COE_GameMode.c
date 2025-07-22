@@ -78,6 +78,9 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.")]
 	protected int m_iEnemyArmedVehicleCount;
 	
+	[Attribute(defvalue: "0", desc: "Number of enemy mortars.")]
+	protected int m_iEnemyMortarCount;
+	
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
 	protected bool m_bCiviliansEnabled;
 	
@@ -140,6 +143,7 @@ class COE_GameMode : SCR_BaseGameMode
 				m_fEnemyAICountMultiplier = header.m_fCOE_DefaultEnemyAICountMultiplier;
 			
 			m_iEnemyArmedVehicleCount = header.m_iCOE_EnemyArmedVehicleCount;
+			m_iEnemyMortarCount = header.m_iCOE_EnemyMortarCount;
 			m_bCiviliansEnabled = header.m_bCOE_CiviliansEnabled;
 			m_bCommanderBecomesGM = header.m_bCOE_CommanderBecomesGM;
 		}
@@ -492,6 +496,18 @@ class COE_GameMode : SCR_BaseGameMode
 	int GetEnemyArmedVehicleCount()
 	{
 		return m_iEnemyArmedVehicleCount;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetEnemyMortarCount(int count)
+	{
+		m_iEnemyMortarCount = count;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetEnemyMortarCount()
+	{
+		return m_iEnemyMortarCount;
 	}
 	
 	//------------------------------------------------------------------------------------------------
