@@ -301,7 +301,10 @@ class COE_AO : KSC_AO
 			
 			EEditableEntityLabel label = labels.GetRandomElement();
 			array<ResourceName> entries = {};
-			m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION, {label, EEditableEntityLabel.TRAIT_FORTIFICATION}, {EEditableEntityLabel.TRAIT_MORTAR}, entries);
+			m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.COMPOSITION,
+				includedLabels: {label, EEditableEntityLabel.TRAIT_FORTIFICATION},
+				excludedLabels: {EEditableEntityLabel.TRAIT_MORTAR},
+			entries);
 			
 			if (entries.IsEmpty())
 			{
@@ -544,12 +547,15 @@ class COE_AO : KSC_AO
 	void SetUpVehicles()
 	{
 		array<ResourceName> entries = {};
-		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetCivilianFaction(), EEntityCatalogType.VEHICLE, EEditableEntityLabel.ENTITYTYPE_VEHICLE, entries);
+		m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetCivilianFaction(), EEntityCatalogType.VEHICLE,
+			includedLabels: {EEditableEntityLabel.ENTITYTYPE_VEHICLE},
+			excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER},
+		entries);
+		
 		if (entries.IsEmpty())
 			return;
 		
 		int count = Math.RandomIntInclusive(3, 5);
-		int counter = 0;
 		
 		for (int i = 0; i < count; i++)
 		{
