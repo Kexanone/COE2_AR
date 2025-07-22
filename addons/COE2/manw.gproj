@@ -1,0 +1,137 @@
+GameProject {
+ ID "COE2_MANW"
+ GUID "65E6D81099BCCC52"
+ TITLE "COE2 MANW"
+ Dependencies {
+  "58D0FB3206B6F859" "65E6D81E99232CD9" "65E6D7299CF309FD"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{60AC9C2E87D88511}" {
+      StringTableSource "{C8FF460ACD54C25F}Language/KSC_localization.st"
+      Languages {
+       LanguageDefinition "{60AC9C2E82552879}" {
+        Code "cs_cz"
+        StringTableRuntime "{F908482FAD44FAF9}Language/KSC_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{60AC9C2E825529C8}" {
+        Code "de_de"
+        StringTableRuntime "{2C76521CBEE7EBD9}Language/KSC_localization.de_de.conf"
+       }
+       LanguageDefinition "{60AC9C2E825529E0}" {
+        Code "en_us"
+        StringTableRuntime "{7286D857D414EED8}Language/KSC_localization.en_us.conf"
+       }
+       LanguageDefinition "{60AC9C2E825529F9}" {
+        Code "es_es"
+        StringTableRuntime "{B7CA95DE3A1685C7}Language/KSC_localization.es_es.conf"
+       }
+       LanguageDefinition "{60AC9C2E82552916}" {
+        Code "fr_fr"
+        StringTableRuntime "{0C6260E9DC9566C5}Language/KSC_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{60AC9C2E8255292B}" {
+        Code "it_it"
+        StringTableRuntime "{8C7EEFDD71B7E53C}Language/KSC_localization.it_it.conf"
+       }
+       LanguageDefinition "{60AC9C2E825526F0}" {
+        Code "ja_jp"
+        StringTableRuntime "{9C65524F4FC6D597}Language/KSC_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{60AC9C2E8255260D}" {
+        Code "ko_kr"
+        StringTableRuntime "{3CDB7AE3DCEBD6A8}Language/KSC_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{60AC9C2E82552619}" {
+        Code "pl_pl"
+        StringTableRuntime "{60AADC1962044AD4}Language/KSC_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{60AC9C2E82552633}" {
+        Code "pt_br"
+        StringTableRuntime "{B5DD46D559FA806E}Language/KSC_localization.pt_br.conf"
+       }
+       LanguageDefinition "{60AC9C2E82552657}" {
+        Code "ru_ru"
+        StringTableRuntime "{E09C527DC483E518}Language/KSC_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{60AC9C2E825522D3}" {
+        Code "uk_ua"
+        StringTableRuntime "{6AC4078BA8AD5B4D}Language/KSC_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{60AC9C2E825522EF}" {
+        Code "zh_cn"
+        StringTableRuntime "{B07469B6910D8B50}Language/KSC_localization.zh_cn.conf"
+       }
+      }
+     }
+     StringTableDefinition "{6098EB41F15B02E6}" {
+      StringTableSource "{B03E06F7A63745FA}Language/COE_localization.st"
+      Languages {
+       LanguageDefinition "{6098EB41FF119D74}" {
+        Code "cs_cz"
+        StringTableRuntime "{3162FC9E63AAEC8F}Language/COE_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AB7}" {
+        Code "de_de"
+        StringTableRuntime "{E41CE6AD7009FDAF}Language/COE_localization.de_de.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AC5}" {
+        Code "en_us"
+        StringTableRuntime "{BAEC6CE61AFAF8AE}Language/COE_localization.en_us.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AD5}" {
+        Code "es_es"
+        StringTableRuntime "{7FA0216FF4F893B1}Language/COE_localization.es_es.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AE4}" {
+        Code "fr_fr"
+        StringTableRuntime "{C408D458127B70B3}Language/COE_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{6098EB41FF119AFF}" {
+        Code "it_it"
+        StringTableRuntime "{44145B6CBF59F34A}Language/COE_localization.it_it.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A0D}" {
+        Code "ja_jp"
+        StringTableRuntime "{540FE6FE8128C3E1}Language/COE_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A1D}" {
+        Code "ko_kr"
+        StringTableRuntime "{F4B1CE521205C0DE}Language/COE_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A2E}" {
+        Code "pl_pl"
+        StringTableRuntime "{A8C068A8ACEA5CA2}Language/COE_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A3F}" {
+        Code "pt_br"
+        StringTableRuntime "{7DB7F26497149618}Language/COE_localization.pt_br.conf"
+       }
+       LanguageDefinition "{6098EB41FF119A49}" {
+        Code "ru_ru"
+        StringTableRuntime "{28F6E6CC0A6DF36E}Language/COE_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{6098EB41FF119B08}" {
+        Code "zh_cn"
+        StringTableRuntime "{781EDD075FE39D26}Language/COE_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+   PlatformHardware PS5
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}
