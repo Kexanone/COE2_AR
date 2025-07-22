@@ -807,7 +807,7 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	void OnTaskStateChanged(SCR_BaseTask task, SCR_TaskState previousState, SCR_TaskState newState)
 	{
-		if (newState != SCR_TaskState.FINISHED)
+		if (newState != SCR_TaskState.FINISHED && newState != SCR_TaskState.CANCELLED)
 			return;
 		
 		m_iNumCompletedTasks++;
