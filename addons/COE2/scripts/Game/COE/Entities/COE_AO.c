@@ -475,6 +475,7 @@ class COE_AO : KSC_AO
 			
 			KSC_AITasks.Defend(group, posToDefend, 15); 
 			AddGroup(group);
+			m_aEnemyPositionsToReveal.Insert(posToDefend);
 		}
 		
 		entries.Clear();
@@ -487,8 +488,9 @@ class COE_AO : KSC_AO
 			if (!group)
 				break;
 			
-			KSC_AITasks.Defend(group, m_Area);
+			vector pos = KSC_AITasks.Defend(group, m_Area);
 			AddGroup(group);
+			m_aEnemyPositionsToReveal.Insert(pos);
 			
 			array<AIWaypoint> waypoints = {};
 			group.GetWaypoints(waypoints);
