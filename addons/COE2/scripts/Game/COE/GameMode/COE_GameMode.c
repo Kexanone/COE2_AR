@@ -75,6 +75,9 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "2.5", desc: "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below m_iMinEnemyAICount)", category: "Default Scenario Properties")]
 	protected float m_fEnemyAICountMultiplier;
 	
+	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.")]
+	protected int m_iEnemyArmedVehicleCount;
+	
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
 	protected bool m_bCiviliansEnabled;
 	
@@ -132,10 +135,12 @@ class COE_GameMode : SCR_BaseGameMode
 			if (header.m_fCOE_DefaultEnemyAICountMultiplier >= 0)
 				m_fEnemyAICountMultiplier = header.m_fCOE_DefaultEnemyAICountMultiplier;
 			
+			m_iEnemyArmedVehicleCount = header.m_iCOE_EnemyArmedVehicleCount;
 			m_bCiviliansEnabled = header.m_bCOE_CiviliansEnabled;
 		}
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	static COE_GameMode GetInstance()
 	{
 		return COE_GameMode.Cast(GetGame().GetGameMode());
@@ -486,6 +491,18 @@ class COE_GameMode : SCR_BaseGameMode
 	int GetTargetEnemyAICount()
 	{
 		return Math.Max(m_fEnemyAICountMultiplier * GetGame().GetPlayerManager().GetPlayerCount(), m_iMinEnemyAICount);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetEnemyArmedVehicleCount(int count)
+	{
+		m_iEnemyArmedVehicleCount = count;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetEnemyArmedVehicleCount()
+	{
+		return m_iEnemyArmedVehicleCount;
 	}
 	
 	//------------------------------------------------------------------------------------------------

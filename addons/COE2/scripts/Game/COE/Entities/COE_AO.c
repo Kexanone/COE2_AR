@@ -62,7 +62,9 @@ class COE_AO : KSC_AO
 		SetUpSnipers();
 		SetUpDefenders();
 		SetUpPatrols();
-		SetUpVehicles();
+		SetUpArmedVehicles();
+		
+		SetUpCivlianVehicles();
 		
 		if (m_pGameMode.CiviliansEnabled())
 			SetUpCivilians();
@@ -506,6 +508,44 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetUpArmedVehicles()
+	{
+		// Only include cars if no tanks or APCs are available
+		array<ResourceName> entries = {};
+		m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE,
+			includedLabels: {EEditableEntityLabel.TRAIT_ARMED},
+			excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER, EEditableEntityLabel.VEHICLE_CAR},
+		entries);
+		
+		if (entries.IsEmpty())
+		{
+			m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE,
+				includedLabels: {EEditableEntityLabel.TRAIT_ARMED},
+				excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER},
+			entries);
+		}
+		
+		if (entries.IsEmpty())
+			return;
+		
+		for (int i = 0; i < m_pGameMode.GetEnemyArmedVehicleCount(); i++)
+		{
+			vector pos;
+			float rotation;
+			if (!GetRandomParkingSlot(pos, rotation))
+				return;
+			
+			IEntity vehicle = KSC_GameTools.SpawnVehiclePrefab(entries.GetRandomElement(), pos, rotation);
+			if (!vehicle)
+				return;
+			
+			AddEntity(vehicle);
+			SpawnTurretOccupants(vehicle);
+			m_aEnemyPositionsToReveal.Insert(pos);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void SetUpCivilians()
 	{
 		array<ResourceName> entries = {};
@@ -544,7 +584,7 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetUpVehicles()
+	void SetUpCivlianVehicles()
 	{
 		array<ResourceName> entries = {};
 		m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetCivilianFaction(), EEntityCatalogType.VEHICLE,

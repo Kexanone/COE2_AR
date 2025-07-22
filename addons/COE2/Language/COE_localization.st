@@ -170,6 +170,20 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{65EB691767D4BEBC}" {
+   Id "COE-Editor_EnemyArmoredVehicleCount_Attribute_Description"
+   Target_en_us "Number of enemy armored vehicles to spawn for an AO"
+   Modified 1709932015
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EB691760944E2D}" {
+   Id "COE-Editor_EnemyArmoredVehicleCount_Attribute_Name"
+   Target_en_us "Enemy armoed vehicle count"
+   Modified 1709931992
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6098EB5536406790}" {
    Id "COE-Editor_EnemyFaction_Attribute_Description"
    Target_en_us "Set faction for enemy AI"
