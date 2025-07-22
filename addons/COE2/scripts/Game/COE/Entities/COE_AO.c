@@ -371,12 +371,12 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	bool SpawnTurretOccupants(IEntity entity)
 	{
-		array<IEntity> turrets = {};
+		array<Turret> turrets = {};
 		KSC_CompositionHelperT<Turret>.GetChildrenByType(entity, turrets);
 		if (turrets.IsEmpty())
 			return false;
 		
-		foreach (IEntity turret : turrets)
+		foreach (Turret turret : turrets)
 		{
 			SCR_BaseCompartmentManagerComponent compartmentManager = SCR_BaseCompartmentManagerComponent.Cast(turret.FindComponent(SCR_BaseCompartmentManagerComponent));
 			if (!compartmentManager)
@@ -385,6 +385,15 @@ class COE_AO : KSC_AO
 			array<BaseCompartmentSlot> slots = {};
 			compartmentManager.GetCompartmentsOfType(slots, ECompartmentType.TURRET);
 			if (slots.IsEmpty())
+				continue;
+			
+			BaseWeaponManagerComponent weaponManager = BaseWeaponManagerComponent.Cast(turret.FindComponent(BaseWeaponManagerComponent));
+			if (!weaponManager)
+				continue;
+			
+			// Exclude commander turrets that have only dummy weapons
+			BaseWeaponComponent weapon = weaponManager.GetCurrent();
+			if (!weapon || weapon.GetWeaponType() == EWeaponType.WT_NONE)
 				continue;
 			
 			EEditableEntityLabel roleLabel = EEditableEntityLabel.ROLE_RIFLEMAN;
