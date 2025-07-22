@@ -1,4 +1,0 @@
-COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
- coords 2713.679 10 3103.105
- m_sKSC_WorldSlotsConfigName "{DCDC988F8453F6B6}Configs/Slots/Mogadishu/KSC_Slots_Mogadishu.conf"
-}
