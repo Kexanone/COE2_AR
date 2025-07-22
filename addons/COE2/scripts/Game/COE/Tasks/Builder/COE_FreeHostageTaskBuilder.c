@@ -48,8 +48,10 @@ class COE_FreeHostageTaskBuilder : COE_BaseTaskBuilder
 		if (entries.IsEmpty())
 			return null;
 		
+		float y = pos[1];
 		KSC_CircleArea area = KSC_CircleArea(pos, 5);
 		pos = area.SamplePointInArea();
+		pos[1] = y;
 		SCR_WorldTools.FindEmptyTerrainPosition(pos, pos, 5);
 		SCR_ChimeraCharacter hostage = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), pos, Math.RandomFloat(0, 360));
 		ao.AddEntity(hostage);
