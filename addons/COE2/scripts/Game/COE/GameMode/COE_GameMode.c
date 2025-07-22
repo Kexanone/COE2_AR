@@ -315,7 +315,24 @@ class COE_GameMode : SCR_BaseGameMode
 		// Heal and teleport all players to main base
 		array<int> playerIds = {};
 		GetGame().GetPlayerManager().GetPlayers(playerIds);
-		foreach (int playerId : playerIds)
+		
+		// Generate a grid for players to be teleported to
+		array<vector> targetPositions = {};
+		targetPositions.Reserve(playerIds.Count());
+		int nGrid = Math.Ceil(Math.Sqrt(playerIds.Count()));
+		float offset = 0.3 * Math.Floor(nGrid / 2);
+		vector startPos = m_vMainBasePos - Vector(offset, 0, offset);
+		
+        for (int i = 0; i < nGrid; ++i)
+		{
+			for (int j = 0; j < nGrid; ++j)
+			{
+				targetPositions.Insert(startPos + 0.3 * Vector(i, 0, j));
+			}
+		}
+		
+
+		foreach (int i, int playerId : playerIds)
 		{
 			SCR_ChimeraCharacter player = SCR_ChimeraCharacter.Cast(GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId));
 			if (!player)
@@ -326,7 +343,7 @@ class COE_GameMode : SCR_BaseGameMode
 				continue;
 			
 			COE_PlayerController playerCtrl = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
-			playerCtrl.RequestFastTravel(m_vMainBasePos, 0, 5);
+			playerCtrl.RequestFastTravel(targetPositions[i], 0, 5);
 			
 			SCR_DamageManagerComponent damageManager = player.GetDamageManager();
 			damageManager.FullHeal();
