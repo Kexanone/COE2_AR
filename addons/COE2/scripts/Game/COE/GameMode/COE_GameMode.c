@@ -81,6 +81,9 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
 	protected bool m_bCiviliansEnabled;
 	
+	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM")]
+	protected bool m_bCommanderBecomesGM;
+	
 	[RplProp()]
 	protected vector m_vMainBasePos;
 	protected COE_MainBaseEntity m_pMainBase;
@@ -138,6 +141,7 @@ class COE_GameMode : SCR_BaseGameMode
 			
 			m_iEnemyArmedVehicleCount = header.m_iCOE_EnemyArmedVehicleCount;
 			m_bCiviliansEnabled = header.m_bCOE_CiviliansEnabled;
+			m_bCommanderBecomesGM = header.m_bCOE_CommanderBecomesGM;
 		}
 	}
 	
@@ -483,6 +487,12 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		return m_bCiviliansEnabled;
 	}
+
+	//------------------------------------------------------------------------------------------------
+	bool CommanderBecomesGM()
+	{
+		return m_bCommanderBecomesGM;
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void OnInsertionPointUpdated()
@@ -540,14 +550,14 @@ class COE_GameMode : SCR_BaseGameMode
 			SCR_EditorManagerCore core = SCR_EditorManagerCore.Cast(SCR_EditorManagerCore.GetInstance(SCR_EditorManagerCore));
 			SCR_EditorManagerEntity editorManager = core.GetEditorManager(playerId);
 			
+			EEditorMode modes = EEditorMode.COE_COMMANDER;
+			if (m_bCommanderBecomesGM)
+				modes |= EEditorMode.EDIT;
+			
 			if (becomesCommanderOrAdmin)
-			{
-				editorManager.AddEditorModes(EEditorModeAccess.BASE, EEditorMode.COE_COMMANDER);
-			}
+				editorManager.AddEditorModes(EEditorModeAccess.BASE, modes);
 			else
-			{
-				editorManager.RemoveEditorModes(EEditorModeAccess.BASE, EEditorMode.COE_COMMANDER);
-			};
+				editorManager.RemoveEditorModes(EEditorModeAccess.BASE, modes);
 		}
 		
 		playerController.OnPlayerRoleChangeServer(roleFlags);
