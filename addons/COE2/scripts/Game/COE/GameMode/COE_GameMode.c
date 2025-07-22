@@ -99,6 +99,7 @@ class COE_GameMode : SCR_BaseGameMode
 	protected ref ScriptInvoker m_pCOE_OnStateChanged = new ScriptInvoker();
 	
 	protected COE_FactionManager m_pFactionManager;
+	protected ref array<IEntity> m_aEntitiesToDelete = {};
 	
 	protected const float MAIN_BASE_RANGE = 25;
 		
@@ -205,39 +206,8 @@ class COE_GameMode : SCR_BaseGameMode
 	//------------------------------------------------------------------------------------------------
 	array<ref KSC_Location> GetAvailableLocations()
 	{
-		/*
-		if (!m_aAvailableLocations)
-		{
-			vector mins, maxs;
-			GetGame().GetWorld().GetBoundBox(mins, maxs);
-			m_aAvailableLocations = {};
-			GetGame().GetWorld().QueryEntitiesByAABB(mins, maxs, QueryLocationEntitiesCallback, null, EQueryEntitiesFlags.STATIC);
-		}
-		*/
-		
 		return m_pKSC_WorldSlotsConfig.m_aLocations;
 	}
-	
-	//------------------------------------------------------------------------------------------------
-	/*
-	protected bool QueryLocationEntitiesCallback(IEntity entity)
-	{
-		if (!SCR_EditableCommentComponent.Cast(entity.FindComponent(SCR_EditableCommentComponent)))
-			return true;
-		
-		if (!MapDescriptorComponent.Cast(entity.FindComponent(MapDescriptorComponent)))
-			return true;
-		
-		foreach (COE_MapDescriptorType type : m_aBlacklistedDescriptorTypes)
-		{
-			if (type.IsType(entity))
-				return true;
-		};
-		
-		m_aAvailableLocations.Insert(entity);
-		return true;
-	}
-	*/
 	
 	//------------------------------------------------------------------------------------------------
 	COE_AOParams GetNextAOParams()
@@ -332,8 +302,6 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		COE_SetState(COE_EGameModeState.EXECUTION);
 	}
-	
-	protected ref array<IEntity> m_aEntitiesToDelete = {};
 	
 	//------------------------------------------------------------------------------------------------
 	protected void DeleteAO()
