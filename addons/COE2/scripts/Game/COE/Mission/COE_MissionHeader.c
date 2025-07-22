@@ -27,4 +27,7 @@ class COE_MissionHeader : SCR_MissionHeader
 	
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs")]
 	bool m_bCOE_CiviliansEnabled;
+	
+	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM")]
+	bool m_bCOE_CommanderBecomesGM;
 }
