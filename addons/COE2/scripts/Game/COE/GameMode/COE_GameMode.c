@@ -75,16 +75,25 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "2.5", desc: "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below m_iMinEnemyAICount)", category: "Default Scenario Properties")]
 	protected float m_fEnemyAICountMultiplier;
 	
-	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.")]
+	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.", category: "Default Scenario Properties")]
 	protected int m_iEnemyArmedVehicleCount;
 	
-	[Attribute(defvalue: "0", desc: "Number of enemy mortars.")]
-	protected int m_iEnemyMortarCount;
+	[Attribute(defvalue: "false", desc: "Whether enemy can support their AOs.", category: "Default Support Settings")]
+	bool m_bEnemySupportEnabled;
 	
-	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
+	[Attribute(defvalue: "3", desc: "Number of enemy mortars for support.", category: "Default Support Settings")]
+	int m_iEnemyMortarCount;
+	
+	[Attribute(defvalue: "5", desc: "Minimum time in minutes required for the enemy to send reinforcements.", category: "Default Support Settings")]
+	float m_fMinEnemyReinforcementTime;
+	
+	[Attribute(defvalue: "15", desc: "Maximum time in minutes required for the enemy to send reinforcements.", category: "Default Support Settings")]
+	float m_fMaxEnemyReinforcementTime;
+	
+	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties", category: "Default Scenario Properties")]
 	protected bool m_bCiviliansEnabled;
 	
-	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM")]
+	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM", category: "Default Scenario Properties")]
 	protected bool m_bCommanderBecomesGM;
 	
 	[RplProp()]
@@ -143,7 +152,10 @@ class COE_GameMode : SCR_BaseGameMode
 				m_fEnemyAICountMultiplier = header.m_fCOE_DefaultEnemyAICountMultiplier;
 			
 			m_iEnemyArmedVehicleCount = header.m_iCOE_EnemyArmedVehicleCount;
+			m_bEnemySupportEnabled = header.m_bCOE_EnemySupportEnabled;
 			m_iEnemyMortarCount = header.m_iCOE_EnemyMortarCount;
+			m_fMinEnemyReinforcementTime = header.m_fCOE_MinEnemyReinforcementTime;
+			m_fMaxEnemyReinforcementTime = header.m_fCOE_MaxEnemyReinforcementTime;
 			m_bCiviliansEnabled = header.m_bCOE_CiviliansEnabled;
 			m_bCommanderBecomesGM = header.m_bCOE_CommanderBecomesGM;
 		}
@@ -499,6 +511,18 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetEnemySupportEnabled(bool enable)
+	{
+		m_bEnemySupportEnabled = enable;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsEnemySupportEnabled()
+	{
+		return m_bEnemySupportEnabled;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void SetEnemyMortarCount(int count)
 	{
 		m_iEnemyMortarCount = count;
@@ -508,6 +532,30 @@ class COE_GameMode : SCR_BaseGameMode
 	int GetEnemyMortarCount()
 	{
 		return m_iEnemyMortarCount;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetMinEnemyReinforcementTime(float time)
+	{
+		m_fMinEnemyReinforcementTime = time;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetMinEnemyReinforcementTime()
+	{
+		return m_fMinEnemyReinforcementTime;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetMaxEnemyReinforcementTime(float time)
+	{
+		m_fMaxEnemyReinforcementTime = time;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetMaxEnemyReinforcementTime()
+	{
+		return m_fMaxEnemyReinforcementTime;
 	}
 	
 	//------------------------------------------------------------------------------------------------

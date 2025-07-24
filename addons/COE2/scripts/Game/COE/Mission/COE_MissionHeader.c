@@ -25,8 +25,17 @@ class COE_MissionHeader : SCR_MissionHeader
 	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.")]
 	int m_iCOE_EnemyArmedVehicleCount;
 	
-	[Attribute(defvalue: "0", desc: "Number of enemy mortars.")]
+	[Attribute(defvalue: "false", desc: "Whether enemy can support their AOs.")]
+	bool m_bCOE_EnemySupportEnabled;
+	
+	[Attribute(defvalue: "3", desc: "Number of enemy mortars for support.")]
 	int m_iCOE_EnemyMortarCount;
+	
+	[Attribute(defvalue: "5", desc: "Minimum time in minutes required for the enemy to send reinforcements.")]
+	float m_fCOE_MinEnemyReinforcementTime;
+	
+	[Attribute(defvalue: "15", desc: "Maximum time in minutes required for the enemy to send reinforcements.")]
+	float m_fCOE_MaxEnemyReinforcementTime;
 	
 	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs")]
 	bool m_bCOE_CiviliansEnabled;
