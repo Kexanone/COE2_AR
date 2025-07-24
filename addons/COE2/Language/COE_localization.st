@@ -198,6 +198,48 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{65EF37288E0EE5A8}" {
+   Id "COE-Editor_EnemyMortarCount_Attribute_Description"
+   Target_en_us "Number of enemy mortars for support"
+   Modified 1710180455
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EF372881BCE7EF}" {
+   Id "COE-Editor_EnemyMortarCount_Attribute_Name"
+   Target_en_us "Enemy mortar count"
+   Modified 1710180471
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EF3727E8B545D4}" {
+   Id "COE-Editor_EnemySupportEnabled_Attribute_Description"
+   Target_en_us "Whether enemy can support their AOs"
+   Modified 1710179976
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EF3727EE3C913A}" {
+   Id "COE-Editor_EnemySupportEnabled_Attribute_Name"
+   Target_en_us "Enemy Support"
+   Modified 1710179938
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EF3728A02571A0}" {
+   Id "COE-Editor_MaxEnemyReinforcementTime_Attribute_Description"
+   Target_en_us "Maximum time in minutes required for the enemy to send reinforcements"
+   Modified 1710180580
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EF3728D595124A}" {
+   Id "COE-Editor_MaxEnemyReinforcementTime_Attribute_Name"
+   Target_en_us "Max reinforcement time"
+   Modified 1710180612
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{609C9CFFB03B11FC}" {
    Id "COE-Editor_MinEnemyAICount_Attribute_Description"
    Target_en_us "Minimum enemy AI count for an AO"
@@ -211,6 +253,20 @@ StringTable {
    Modified 1620882678
    Author "kex"
    LastChanged "kex"
+  }
+  CustomStringTableItem "{65EF3728AD02A735}" {
+   Id "COE-Editor_MinEnemyReinforcementTime_Attribute_Description"
+   Target_en_us "Minimum time in minutes required for the enemy to send reinforcements"
+   Modified 1710180601
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65EF3728AB7704FC}" {
+   Id "COE-Editor_MinEnemyReinforcementTime_Attribute_Name"
+   Target_en_us "Min reinforcement time"
+   Modified 1710180603
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{6098EB5564A954FF}" {
    Id "COE-Editor_NumRemObjectives_Attribute_Description"
