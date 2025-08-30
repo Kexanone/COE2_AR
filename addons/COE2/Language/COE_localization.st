@@ -179,7 +179,7 @@ StringTable {
   }
   CustomStringTableItem "{65EB691760944E2D}" {
    Id "COE-Editor_EnemyArmoredVehicleCount_Attribute_Name"
-   Target_en_us "Enemy armoed vehicle count"
+   Target_en_us "Enemy armored vehicle count"
    Modified 1709931992
    Author "Kexanone"
    LastChanged "Kexanone"
