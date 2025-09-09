@@ -65,12 +65,14 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Zimnitrita: https://reforger.armaplatform.com/workshop/6311625CDE04C97B
 
 ## Optional Scenario IDs
+
 - COE2 Anizay: `{C36DE963B8856E2B}Missions/COE2_Anizay.conf`
 - COE2 Denali: `{042F5F64C6D96785}Missions/COE2_Denali.conf`
 - COE2 Fallujah: `{B70881ACF0DB5033}Missions/COE2_Fallujah.conf`
 - COE2 Khanh Trung: `{9BA76CEE010CCF5C}Missions/COE2_KhanhTrung.conf`
 - COE2 Kunar Provincey: `{8DAFAB41500D7985}Missions/COE2_Kunar.conf`
 - COE2 Mussalo: `{6EADDAED4B365710}Missions/COE2_Mussalo.conf`
+- COE2 Nizla Island: `{A168E25F63A7DD82}Missions/COE2_NizlaIsland.conf`
 - COE2 Novka: `{9728C488D74C7CF5}Missions/COE2_Novka.conf`
 - COE2 Ruha: `{645FDAD743C488D4}Missions/COE2_Ruha.conf`
 - COE2 Serhiivka: `UNKNOWN`
