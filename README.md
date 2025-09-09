@@ -60,7 +60,6 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Mussalo: https://reforger.armaplatform.com/workshop/61C7786BB6B29693
 - COE2 Novka: https://reforger.armaplatform.com/workshop/65E57B4395A36FE9
 - COE2 Ruha: https://reforger.armaplatform.com/workshop/65EB440190E0B2DF
-- COE2 Serhiivka: https://reforger.armaplatform.com/workshop/61CA3BE5820E8113
 - COE2 Worthy Islands: https://reforger.armaplatform.com/workshop/61C769418AA32E81
 - COE2 Zimnitrita: https://reforger.armaplatform.com/workshop/6311625CDE04C97B
 
@@ -75,7 +74,6 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Nizla Island: `{A168E25F63A7DD82}Missions/COE2_NizlaIsland.conf`
 - COE2 Novka: `{9728C488D74C7CF5}Missions/COE2_Novka.conf`
 - COE2 Ruha: `{645FDAD743C488D4}Missions/COE2_Ruha.conf`
-- COE2 Serhiivka: `UNKNOWN`
 - COE2 Worthy Islands: `{CC1F3802A3EDDBD1}Missions/COE2_WorthyIslands.conf`
 - COE2 Zimnitrita: `{8E801F0D8414B499}Missions/COE2_Zimnitrita.conf`
 
