@@ -28,7 +28,7 @@ class COE_MissionHeader : SCR_MissionHeader
 	[Attribute(defvalue: "false", desc: "Whether enemy can support their AOs.")]
 	bool m_bCOE_EnemySupportEnabled;
 	
-	[Attribute(defvalue: "3", desc: "Number of enemy mortars for support.")]
+	[Attribute(defvalue: "0", desc: "Number of enemy mortars for support.")]
 	int m_iCOE_EnemyMortarCount;
 	
 	[Attribute(defvalue: "5", desc: "Minimum time in minutes required for the enemy to send reinforcements.")]
