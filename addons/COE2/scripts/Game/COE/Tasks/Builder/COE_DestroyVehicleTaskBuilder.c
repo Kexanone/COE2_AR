@@ -4,9 +4,13 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
 	{
-		KSC_DestroyObjectTaskSupportEntity supportEntity = KSC_DestroyObjectTaskSupportEntity.Cast(GetTaskManager().FindSupportEntity(KSC_DestroyObjectTaskSupportEntity));
 		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return null;
+		
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+		if (!factionManager)
+			return null;
 		
 		array<EEditableEntityLabel> labels = {
 			EEditableEntityLabel.TRAIT_MANAGEMENT_BASE,
@@ -56,7 +60,13 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		ao.AddEntity(hvt);
 		ao.AddPositionToDefend(hvt.GetOrigin());
 		ao.SpawnTurretOccupants(hvt);
-		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), hvt));
+				
+		KSC_DestroyObjectTask task = KSC_DestroyObjectTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
+		if (!task)
+			return null;
+		
+		task.SetParams(factionManager.GetPlayerFaction(), hvt);
+		return task;
 	}
 	
 	//------------------------------------------------------------------------------------------------

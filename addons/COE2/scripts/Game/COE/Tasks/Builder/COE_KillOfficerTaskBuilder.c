@@ -4,9 +4,13 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
 	{
-		KSC_KillTaskSupportEntity supportEntity = KSC_KillTaskSupportEntity.Cast(GetTaskManager().FindSupportEntity(KSC_KillTaskSupportEntity));
 		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return null;
+		
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+		if (!factionManager)
+			return null;
 		
 		array<ResourceName> entries = {};
 		
@@ -64,7 +68,13 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		AIGroup group = KSC_AIHelper.GetGroup(hvt);
 		KSC_AITasks.Defend(group, pos, 5);
 		ao.AddGroup(group);
-		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), hvt));
+		
+		KSC_KillTask task = KSC_KillTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
+		if (!task)
+			return null;
+		
+		task.SetParams(factionManager.GetPlayerFaction(), hvt);
+		return task;
 	}
 	
 	//------------------------------------------------------------------------------------------------

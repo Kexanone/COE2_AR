@@ -6,6 +6,8 @@ class COE_AOClass : KSC_AOClass
 //------------------------------------------------------------------------------------------------
 class COE_AO : KSC_AO
 {
+	protected static const ResourceName EXFIL_TASK_PREFAB_NAME = "{8458A6174F12C732}Prefabs/Tasks/KSC_LeaveAreaTesk.et";
+	
 	protected ref array<IEntity> m_aEntities = {};
 	protected ref array<KSC_BaseTask> m_aTasks = {};
 	protected ref array<SCR_MapMarkerBase> m_aMarkers = {};
@@ -916,9 +918,9 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void OnTaskStateChanged(SCR_BaseTask task, SCR_TaskState previousState, SCR_TaskState newState)
+	void OnTaskStateChanged(SCR_Task task, SCR_ETaskState newState)
 	{
-		if (newState != SCR_TaskState.FINISHED && newState != SCR_TaskState.CANCELLED)
+		if (newState != SCR_ETaskState.COMPLETED && newState != SCR_ETaskState.FAILED)
 			return;
 		
 		m_iNumCompletedTasks++;
@@ -930,8 +932,11 @@ class COE_AO : KSC_AO
 		if (m_iNumTasks > m_iNumCompletedTasks)
 			return;
 		
-		KSC_LeaveAreaTaskSupportEntity supportEntity = KSC_LeaveAreaTaskSupportEntity.Cast(GetTaskManager().FindSupportEntity(KSC_LeaveAreaTaskSupportEntity));
-		KSC_BaseTask exfilTask = KSC_BaseTask.Cast(supportEntity.CreateTask(m_pFactionManager.GetPlayerFaction(), GetOrigin(), m_pGameMode.GetAORadius()));
+		KSC_AreaTriggerTask exfilTask =  KSC_AreaTriggerTask.Cast(KSC_GameTools.SpawnPrefab(EXFIL_TASK_PREFAB_NAME, GetOrigin()));
+		if (!exfilTask)
+			return;
+		
+		exfilTask.SetParams(m_pFactionManager.GetPlayerFaction(), m_pGameMode.GetAORadius());
 		exfilTask.GetOnStateChanged().Insert(OnExfilStateChanged);
 		m_aTasks.Insert(exfilTask);
 		
@@ -946,9 +951,9 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void OnExfilStateChanged(SCR_BaseTask task, SCR_TaskState previousState, SCR_TaskState newState)
+	void OnExfilStateChanged(SCR_Task task, SCR_ETaskState newState)
 	{
-		if (newState != SCR_TaskState.FINISHED)
+		if (newState != SCR_ETaskState.COMPLETED)
 			return;
 		
 		m_pGameMode.ExecuteCommanderRequest(COE_ECommanderRequest.CANCEL_AO);
@@ -985,13 +990,20 @@ class COE_AO : KSC_AO
 		if (!Replication.IsServer())
 			return;
 		
-		foreach (KSC_BaseTask task : m_aTasks)
+		SCR_TaskSystem taskSystem = SCR_TaskSystem.GetInstance();
+		if (taskSystem)
 		{
-			if (!task)
-				continue;
-			
-			KSC_BaseTaskSupportEntity supportEntity = task.GetSupportEntity();
-			supportEntity.CancelTask(task.GetTaskID());
+			foreach (KSC_BaseTask task : m_aTasks)
+			{
+				if (!task)
+					continue;
+				
+				SCR_ETaskState taskState = taskSystem.GetTaskState(task);
+				if ((taskState == SCR_ETaskState.CREATED) || (taskState == SCR_ETaskState.ASSIGNED))
+					taskSystem.SetTaskState(task, SCR_ETaskState.CANCELLED);
+				
+				SCR_EntityHelper.DeleteEntityAndChildren(task);
+			}
 		}
 		
 		foreach (IEntity entity : m_aEntities)
