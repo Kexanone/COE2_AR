@@ -16,8 +16,8 @@ COE_MainBaseEntity {
   Hierarchy "{6098B5F3B93033CA}" {
   }
  }
+ Flags 0x403 0
  coords 111.653 1 150.752
- Flags 1027
  {
   SCR_SpawnPoint : "{987991DCED3DC197}PrefabsEditable/SpawnPoints/E_SpawnPoint.et" {
    ID "60A042236B7D1D38"
@@ -28,11 +28,11 @@ COE_MainBaseEntity {
      m_Flags 32855
     }
    }
-   coords -10.446 -0.001 1.341
-   m_fSpawnRadius 5
+   coords -10.446 0.075 1.341
    m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
    }
    m_fSpawnPositionUsageRange 5
+   m_fRandomSpawnSafeRange 5
   }
   SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
    ID "60A042236B7D1D3B"
@@ -207,7 +207,7 @@ COE_MainBaseEntity {
       coords -13.044 5.645 -0.096
      }
     }
-    EnvironmentProbeEntity : "{C0499303ABB1E8A7}Prefabs/Structures/Industrial/Houses/Warehouse_01/Probe_Warehouse_01.et" {
+    GameEnvironmentProbeEntity : "{C0499303ABB1E8A7}Prefabs/Structures/Industrial/Houses/Warehouse_01/HouseAddons/Probe_Warehouse_01.et" {
      ID "60A042236B7DEC07"
      coords 0 3.618 0
      LVDiffuseBrightness 2
@@ -315,7 +315,7 @@ COE_MainBaseEntity {
     }
    }
    coords -9.487 -0.001 6.38
-   angleY -180
+   angles 0 -180 0
   }
   $grp GenericEntity : "{E105D2F87098E1D8}Prefabs/Systems/Compositions/PatrolPoint/PatrolPoint_LoiterPoint.et" {
    {
@@ -326,7 +326,7 @@ COE_MainBaseEntity {
      }
     }
     coords -9.86 0.05 -6.162
-    angleY 0
+    angles 0 0 0
    }
    {
     ID "60A042236B7DEC32"
@@ -336,7 +336,7 @@ COE_MainBaseEntity {
      }
     }
     coords -5.572 0.05 -6.162
-    angleY 0
+    angles 0 0 0
    }
    {
     ID "60A042236B7DEC33"
@@ -346,7 +346,7 @@ COE_MainBaseEntity {
      }
     }
     coords -15.774 0.05 -6.162
-    angleY 0
+    angles 0 0 0
    }
   }
   $grp GenericEntity : "{E83944C37C6FA465}PrefabsEditable/Auto/Props/Military/Compositions/FIA/E_ArsenalBox_FIA.et" {
@@ -361,7 +361,7 @@ COE_MainBaseEntity {
      }
      SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
       m_aDisabledResourceTypes {
-       0
+       SUPPLIES
       }
      }
     }
@@ -381,7 +381,7 @@ COE_MainBaseEntity {
      }
      SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
       m_aDisabledResourceTypes {
-       0
+       SUPPLIES
       }
      }
     }
