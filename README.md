@@ -41,7 +41,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
     "m_sCOE_DefaultEnemyFactionKey": "",
     "m_sCOE_DefaultCivilianFactionKey": "",
     "m_eCOE_DefaultEnemyAiSkill": 50,
-    "m_fCOE_DefaultAORadius": 250,
+    "m_fCOE_DefaultAORadius": 250.0,
     "m_iCOE_DefaultMinEnemyAICount": 30,
     "m_fCOE_DefaultEnemyAICountMultiplier": 2.5,
     "m_iCOE_EnemyArmedVehicleCount": 0,
@@ -58,11 +58,25 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Khanh Trung: https://reforger.armaplatform.com/workshop/61C57D80C78AE1C1
 - COE2 Kunar Province: https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
 - COE2 Mussalo: https://reforger.armaplatform.com/workshop/61C7786BB6B29693
+- COE2 Nizla Island: https://reforger.armaplatform.com/workshop/6649632799B81411
 - COE2 Novka: https://reforger.armaplatform.com/workshop/65E57B4395A36FE9
 - COE2 Ruha: https://reforger.armaplatform.com/workshop/65EB440190E0B2DF
-- COE2 Serhiivka: https://reforger.armaplatform.com/workshop/61CA3BE5820E8113
 - COE2 Worthy Islands: https://reforger.armaplatform.com/workshop/61C769418AA32E81
 - COE2 Zimnitrita: https://reforger.armaplatform.com/workshop/6311625CDE04C97B
+
+## Optional Scenario IDs
+
+- COE2 Anizay: `{C36DE963B8856E2B}Missions/COE2_Anizay.conf`
+- COE2 Denali: `{042F5F64C6D96785}Missions/COE2_Denali.conf`
+- COE2 Fallujah: `{B70881ACF0DB5033}Missions/COE2_Fallujah.conf`
+- COE2 Khanh Trung: `{9BA76CEE010CCF5C}Missions/COE2_KhanhTrung.conf`
+- COE2 Kunar Provincey: `{8DAFAB41500D7985}Missions/COE2_Kunar.conf`
+- COE2 Mussalo: `{6EADDAED4B365710}Missions/COE2_Mussalo.conf`
+- COE2 Nizla Island: `{A168E25F63A7DD82}Missions/COE2_NizlaIsland.conf`
+- COE2 Novka: `{9728C488D74C7CF5}Missions/COE2_Novka.conf`
+- COE2 Ruha: `{645FDAD743C488D4}Missions/COE2_Ruha.conf`
+- COE2 Worthy Islands: `{CC1F3802A3EDDBD1}Missions/COE2_WorthyIslands.conf`
+- COE2 Zimnitrita: `{8E801F0D8414B499}Missions/COE2_Zimnitrita.conf`
 
 ## Compatibility Addons
 
