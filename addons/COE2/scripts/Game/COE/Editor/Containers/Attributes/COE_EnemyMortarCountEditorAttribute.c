@@ -5,6 +5,9 @@ class COE_EnemyMortarCountEditorAttribute : SCR_BaseValueListEditorAttribute
 	//------------------------------------------------------------------------------------------------
 	override SCR_BaseEditorAttributeVar ReadVariable(Managed item, SCR_AttributesManagerEditorComponent manager)
 	{
+		// DISABLED
+		return null;
+		
 		COE_GameMode gameMode = COE_GameMode.Cast(item);
 		if (!gameMode)
 			return null;

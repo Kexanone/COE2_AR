@@ -29,6 +29,8 @@ class COE_AO : KSC_AO
 	protected ref array<vector> m_aEnemyPositionsToReveal = {};
 	
 	protected ref array<ref Tuple2<Turret, AIGroup>> m_aMortars = {};
+	protected ref array<AIGroup> m_aAllGroups = {};
+	protected ref array<AIGroup> m_aQRFGroups = {};
 	
 	protected static const int TERRAIN_DATA_BUFFER_SIZE = 1000000;
 	protected static const int MAX_ATTEMPTS = 10000;
@@ -372,6 +374,26 @@ class COE_AO : KSC_AO
 			counter++;
 		}
 	}
+	
+	/*
+	//------------------------------------------------------------------------------------------------
+	bool SpawnDriver(IEntity entity)
+	{
+		SCR_ChimeraCharacter char = KSC_GameTools.SpawnCharacterPrefab(entries.GetRandomElement(), turret.GetOrigin());
+		
+		AIAgent agent = char.GetAIControlComponent().GetAIAgent();
+		if (agent)
+		{
+			SCR_AIConfigComponent aiConfig = SCR_AIConfigComponent.Cast(agent.FindComponent(SCR_AIConfigComponent));
+			if (aiConfig)
+				aiConfig.m_bKSC_EnableGetOutVehicle = false;
+		}
+
+		AddEntity(char);
+		CompartmentAccessComponent compartmentAccess = char.GetCompartmentAccessComponent();
+		GetGame().GetCallqueue().CallLater(compartmentAccess.GetInVehicle, 1000, false, turret, slot, true, -1, ECloseDoorAfterActions.CLOSE_DOOR, true);
+	}
+	*/
 	
 	//------------------------------------------------------------------------------------------------
 	bool SpawnTurretOccupants(IEntity entity)
@@ -773,15 +795,35 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	array<AIGroup> GetAllGroups()
+	{
+		return m_aAllGroups;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void AddEntity(IEntity entity)
 	{
 		m_aEntities.Insert(entity);
+		
+		AIGroup group = AIGroup.Cast(entity);
+		if (group)
+			m_aAllGroups.Insert(group);
+		
+		ChimeraCharacter char = ChimeraCharacter.Cast(entity);
+		if (char)
+			m_aAllGroups.Insert(KSC_GroupHelper.GetGroup(char));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	array<ref Tuple2<Turret, AIGroup>> GetMortars()
 	{
 		return m_aMortars;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	array<AIGroup> GetQRFGroups()
+	{
+		return m_aQRFGroups;
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -50,18 +50,14 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(desc: "Available task builders", category: "Tasks")]
 	protected ref array<ref COE_BaseTaskBuilder> m_aAvailableTaskBuilders;
 	
-	[Attribute(desc: "Default faction key for the players", category: "Default Scenario Properties")]
+	[Attribute(defvalue: "", desc: "Default faction key for the players", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultPlayerFactionKey;
 	
-	[Attribute(defvalue: "FIA", desc: "Default faction key of the enemy AI", category: "Default Scenario Properties")]
+	[Attribute(defvalue: "", desc: "Default faction key of the enemy AI", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultEnemyFactionKey;
 	
 	[Attribute(defvalue: "CIV", desc: "Default faction key of the civilian AI", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultCivilianFactionKey;
-	
-	[Attribute(defvalue: "-1", uiwidget: UIWidgets.Slider, params: "-1 3 1", desc: "Number of tasks per objective. Random if -1.", category: "Default Scenario Properties")]
-	protected int m_iTasksPerObjective;
-	protected int m_iMaxTasksPerObjective = 3;
 	
 	[Attribute(defvalue: "250", desc: "Radius of AO", category: "Default Scenario Properties")]
 	protected float m_fAORadius;
@@ -75,13 +71,13 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "2.5", desc: "Total enemy AI count for an AO will be this multiplier times the total player count (ignored when below m_iMinEnemyAICount)", category: "Default Scenario Properties")]
 	protected float m_fEnemyAICountMultiplier;
 	
-	[Attribute(defvalue: "0", desc: "Default number of enemy armed vehicles for an AO.", category: "Default Scenario Properties")]
+	[Attribute(defvalue: "2", desc: "Default number of enemy armed vehicles for an AO.", category: "Default Scenario Properties")]
 	protected int m_iEnemyArmedVehicleCount;
 	
-	[Attribute(defvalue: "false", desc: "Whether enemy can support their AOs.", category: "Default Support Settings")]
+	[Attribute(defvalue: "true", desc: "Whether enemy can support their AOs.", category: "Default Support Settings")]
 	bool m_bEnemySupportEnabled;
 	
-	[Attribute(defvalue: "3", desc: "Number of enemy mortars for support.", category: "Default Support Settings")]
+	[Attribute(defvalue: "0", desc: "Number of enemy mortars for support.", category: "Default Support Settings")]
 	int m_iEnemyMortarCount;
 	
 	[Attribute(defvalue: "5", desc: "Minimum time in minutes required for the enemy to send reinforcements.", category: "Default Support Settings")]
@@ -315,6 +311,9 @@ class COE_GameMode : SCR_BaseGameMode
 		params.Transform[3] = GetCurrentLocation().m_vCenter;
 		SCR_TerrainHelper.SnapToTerrain(params.Transform);
 		m_pCurrentAO = COE_AO.Cast(GetGame().SpawnEntity(COE_AO, GetWorld(), params));
+		
+		if (m_bEnemySupportEnabled)
+			COE_EnemySupportSystem.GetInstance().Register(m_pCurrentAO);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -327,6 +326,9 @@ class COE_GameMode : SCR_BaseGameMode
 	protected void DeleteAO()
 	{
 		COE_SetState(COE_EGameModeState.INTERMISSION);
+		
+		if (m_bEnemySupportEnabled)
+			COE_EnemySupportSystem.GetInstance().Unregister(m_pCurrentAO);
 		
 		// Heal and teleport all players to main base
 		array<int> playerIds = {};
