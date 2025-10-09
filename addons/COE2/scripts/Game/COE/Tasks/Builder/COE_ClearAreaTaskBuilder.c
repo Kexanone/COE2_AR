@@ -7,11 +7,20 @@ class COE_ClearAreaTaskBuilder : COE_BaseTaskBuilder
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
 	{
-		KSC_ClearAreaTaskSupportEntity supportEntity = KSC_ClearAreaTaskSupportEntity.Cast(GetTaskManager().FindSupportEntity(KSC_ClearAreaTaskSupportEntity));
-		COE_GameMode gameMode = COE_GameMode.GetInstance();
-		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+		KSC_ClearAreaTask task = KSC_ClearAreaTask.Cast(SpawnTaskEntity(ao.GetOrigin()));
+		if (!task)
+			return null;
 		
-		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), ao.GetOrigin(), gameMode.GetAORadius(), m_fFriendlyRatioThreshold));
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return null;
+		
+		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+		if (!factionManager)
+			return null;
+		
+		task.SetParams(factionManager.GetPlayerFaction(), gameMode.GetAORadius(), m_fFriendlyRatioThreshold);
+		return task;
 	}
 	
 	//------------------------------------------------------------------------------------------------

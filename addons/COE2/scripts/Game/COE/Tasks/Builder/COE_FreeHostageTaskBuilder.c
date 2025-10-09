@@ -4,9 +4,13 @@ class COE_FreeHostageTaskBuilder : COE_BaseTaskBuilder
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
 	{
-		KSC_FreeHostageTaskSupportEntity supportEntity = KSC_FreeHostageTaskSupportEntity.Cast(GetTaskManager().FindSupportEntity(KSC_FreeHostageTaskSupportEntity));
 		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return null;
+		
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+		if (!factionManager)
+			return null;
 		
 		array<ResourceName> entries = {};
 		
@@ -57,7 +61,13 @@ class COE_FreeHostageTaskBuilder : COE_BaseTaskBuilder
 		ao.AddEntity(hostage);
 		SCR_CharacterControllerComponent hostageCharController = SCR_CharacterControllerComponent.Cast(hostage.GetCharacterController());
 		hostageCharController.ACE_Captives_SetCaptive(true);
-		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), hostage));
+		
+		KSC_FreeHostageTask task = KSC_FreeHostageTask.Cast(SpawnTaskEntity(hostage.GetOrigin()));
+		if (!task)
+			return null;
+		
+		task.SetParams(factionManager.GetPlayerFaction(), hostage);
+		return task;
 	}
 	
 	//------------------------------------------------------------------------------------------------

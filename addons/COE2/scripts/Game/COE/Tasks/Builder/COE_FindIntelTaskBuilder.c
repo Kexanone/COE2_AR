@@ -7,9 +7,13 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
 	{
-		KSC_FindIntelTaskSupportEntity supportEntity = KSC_FindIntelTaskSupportEntity.Cast(GetTaskManager().FindSupportEntity(KSC_FindIntelTaskSupportEntity));
 		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return null;
+		
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+		if (!factionManager)
+			return null;
 		
 		IEntity structure; array<IEntity> tables = {};
 		Tuple2<IEntity, array<ref PointInfo>> entry = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.ROLE_SCOUT);
@@ -51,7 +55,12 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 		intel.GetPhysics().SetActive(ActiveState.ACTIVE);
 		ao.AddEntity(intel);
 		
-		return KSC_BaseTask.Cast(supportEntity.CreateTask(factionManager.GetPlayerFaction(), intel));
+		KSC_PickUpItemTask task = KSC_PickUpItemTask.Cast(SpawnTaskEntity(intel.GetOrigin()));
+		if (!task)
+			return null;
+		
+		task.SetParams(factionManager.GetPlayerFaction(), intel);
+		return task;
 	}
 	
 	//------------------------------------------------------------------------------------------------
