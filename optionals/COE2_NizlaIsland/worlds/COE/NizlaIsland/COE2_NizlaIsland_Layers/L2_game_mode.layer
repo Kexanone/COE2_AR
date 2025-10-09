@@ -1,0 +1,4 @@
+COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
+ coords 2713.679 13.082 3103.105
+ m_sKSC_WorldSlotsConfigName "{DB5F98FBD3616DF9}Configs/Slots/NizlaIsland/KSC_Slots_NizlaIsland.conf"
+}
