@@ -1,0 +1,21 @@
+FrameWidgetClass {
+ {
+  CanvasWidgetClass "{623CEAD902B92D32}" {
+   Name "COE_Canvas"
+   Slot FrameWidgetSlot "{623CEAD902B92D1F}" {
+    Anchor 0 0 1 1
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX -1820
+    OffsetRight 0
+    SizeY -1050
+    OffsetBottom 0
+   }
+   "Z Order" 9
+   SizeInUnits 1024 1024
+   Clear 1
+  }
+ }
+}

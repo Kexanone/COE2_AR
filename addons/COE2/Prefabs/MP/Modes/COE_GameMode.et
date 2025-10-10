@@ -19,6 +19,7 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
   COE_MapConfigComponent "{5C669498E250A34B}" {
    m_sGadgetMapConfigPath "{A092C0660C5FBA20}Configs/Map/COE_MapFullscreen.conf"
    m_sSpawnMapConfigPath "{AB17A0C35CDB53A1}Configs/Map/COE_MapSpawnMenu.conf"
+   m_sEditorMapConfigPath "{8729417C7971D7F5}Configs/Map/COE_MapEditor.conf"
   }
   SCR_CampaignBuildingManagerComponent "{616A2D22D895D15C}" {
    m_sFreeRoamBuildingClientTrigger "{5E191CEAF4B95816}Prefabs/MP/FreeRoamBuildingClientTrigger.et"

@@ -59,7 +59,7 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "CIV", desc: "Default faction key of the civilian AI", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultCivilianFactionKey;
 	
-	[Attribute(defvalue: "250", desc: "Radius of AO", category: "Default Scenario Properties")]
+	[RplProp(), Attribute(defvalue: "250", desc: "Radius of AO", category: "Default Scenario Properties")]
 	protected float m_fAORadius;
 	
 	[Attribute(defvalue: "50", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(EAISkill), desc: "Enemy AI Skill Level", category: "Default Scenario Properties")]
@@ -462,6 +462,7 @@ class COE_GameMode : SCR_BaseGameMode
 	void SetAORadius(float radius)
 	{
 		m_fAORadius = radius;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
