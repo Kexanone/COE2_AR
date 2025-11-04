@@ -30,6 +30,22 @@ ScriptedChatEntity ChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity
 COE_FactionManager FactionManager : "{F9A08100A9E20FB5}Prefabs/Managers/COE_FactionManager.et" {
  coords 4784.233 27.103 11840.561
 }
+KSC_CustomLocationEntity {
+ components {
+  Hierarchy "{66975429F90C9652}" {
+  }
+ }
+ coords 5666.024 420.364 6930.339
+ {
+  PolylineShapeEntity {
+   components {
+    Hierarchy "{66975429F4D98B0D}" {
+    }
+   }
+   coords -1.178 0.164 -5.248
+  }
+ }
+}
 MusicManager MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager_Base.et" {
  coords 4805.56 0 11850.431
 }
