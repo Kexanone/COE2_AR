@@ -2,7 +2,6 @@ COE_MainBaseEntity COE_MainBase_1 : "{18DC5F13245A8BCB}Prefabs/Compositions/Misc
  coords 122.198 1 108.731
  {
   GenericEntity {
-   ID "616A2D203BA331DE"
    components {
     SCR_CampaignBuildingProviderComponent "{5ED7185081A6289C}" {
      m_aBudgetsToEvaluate {
@@ -10,11 +9,17 @@ COE_MainBaseEntity COE_MainBase_1 : "{18DC5F13245A8BCB}Prefabs/Compositions/Misc
        m_eBudget PROPS
       }
      }
-     m_aAvailableTraits + {
-      50 54 53
+     m_aAvailableTraits {
+      VEHICLE_CAR
+      VEHICLE_TRUCK
+      VEHICLE_APC
      }
     }
    }
+  }
+  SCR_SpawnPoint {
+   ID "60A042236B7D1D38"
+   coords -10.446 0.05 1.341
   }
  }
 }
