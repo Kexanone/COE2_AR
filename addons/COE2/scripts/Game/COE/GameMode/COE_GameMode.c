@@ -92,6 +92,8 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM", category: "Default Scenario Properties")]
 	protected bool m_bCommanderBecomesGM;
 	
+	protected ref array<ref KSC_Location> m_aAvailableLocations;
+	
 	[RplProp()]
 	protected vector m_vMainBasePos;
 	protected COE_MainBaseEntity m_pMainBase;
@@ -222,7 +224,24 @@ class COE_GameMode : SCR_BaseGameMode
 	//------------------------------------------------------------------------------------------------
 	array<ref KSC_Location> GetAvailableLocations()
 	{
-		return m_pKSC_WorldSlotsConfig.m_aLocations;
+		if (!m_aAvailableLocations)
+		{
+			array<KSC_CustomLocationEntity> customLocations = KSC_CustomLocationEntity.GetInstances();
+			m_aAvailableLocations = {};
+			m_aAvailableLocations.Reserve(m_pKSC_WorldSlotsConfig.m_aLocations.Count() + customLocations.Count());
+			
+			foreach (KSC_Location location : m_pKSC_WorldSlotsConfig.m_aLocations)
+			{
+				m_aAvailableLocations.Insert(location);
+			}
+			
+			foreach (KSC_CustomLocationEntity customLocation : customLocations)
+			{
+				m_aAvailableLocations.Insert(customLocation.GetLocationData());
+			}
+		}
+		
+		return m_aAvailableLocations;
 	}
 	
 	//------------------------------------------------------------------------------------------------
