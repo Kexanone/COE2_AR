@@ -31,6 +31,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 - COE2 - Arland: `"{F239FD0036BD2C1E}Missions/COE2_Arland.conf"`
 - COE2 - Everon: `"{EE676FAB9DFA4CF7}Missions/COE2_Eden.conf"`
+- COE2 - Kolguyev: `"{4D4780DB775BFF64}Missions/COE2_Cain.conf"`
 
 ## Mission Header
 
@@ -41,12 +42,15 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
     "m_sCOE_DefaultEnemyFactionKey": "",
     "m_sCOE_DefaultCivilianFactionKey": "",
     "m_eCOE_DefaultEnemyAiSkill": 50,
-    "m_fCOE_DefaultAORadius": 250.0,
-    "m_iCOE_DefaultMinEnemyAICount": 30,
-    "m_fCOE_DefaultEnemyAICountMultiplier": 2.5,
+    "m_fCOE_DefaultAORadius": -1,
+    "m_iCOE_DefaultMinEnemyAICount": -1,
+    "m_fCOE_DefaultEnemyAICountMultiplier": -1,
     "m_iCOE_EnemyArmedVehicleCount": 0,
-    "m_bCOE_CiviliansEnabled": 1,
-    "m_bCOE_CommanderBecomesGM": 0
+    "m_bCOE_EnemySupportEnabled": false,
+    "m_fCOE_MinEnemyReinforcementTime": 5,
+    "m_fCOE_MaxEnemyReinforcementTime": 15,
+    "m_bCOE_CiviliansEnabled": true,
+    "m_bCOE_CommanderBecomesGM": false
 }
 ```
 
