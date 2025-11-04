@@ -155,4 +155,5 @@ COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
  coords 118.45 1 205.011
  m_sKSC_WorldSlotsConfigName "{CC5657883F3EE57B}Configs/Slots/Test/KSC_Slots_Test.conf"
  m_sDefaultPlayerFactionKey "US"
+ m_sDefaultEnemyFactionKey "USSR"
 }
