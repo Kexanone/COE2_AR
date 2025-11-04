@@ -1,0 +1,81 @@
+KSC_CustomLocationEntity COE_PikPobedy {
+ components {
+  Hierarchy "{66974C31B49917E6}" {
+  }
+ }
+ coords 5059.417 698.513 6321.766
+ {
+  PolylineShapeEntity {
+   components {
+    Hierarchy "{66974C313EA9858B}" {
+    }
+   }
+   coords -34.37 -9.227 26.248
+   Points {
+    ShapePoint "{6697386E5D18283A}" {
+     Position 1.979 1.175 -6.189
+    }
+    ShapePoint "{6697386E5D19C2CB}" {
+     Position -1.602 -3.58 13.346
+    }
+    ShapePoint "{6697542C9AFC62B2}" {
+     Position -18.514 -6.383 23.006
+    }
+    ShapePoint "{6697542C99E47917}" {
+     Position -4.153 -5.291 23.089
+    }
+    ShapePoint "{6697386E47E88C34}" {
+     Position 12.087 -14.449 45.814
+    }
+    ShapePoint "{6697542C853DA4D4}" {
+     Position 51.392 -14.604 51.859
+    }
+    ShapePoint "{6697542CBBE770A9}" {
+     Position 72.383 -16.398 63.652
+    }
+    ShapePoint "{6697542CB8A3ED75}" {
+     Position 91.559 -21.233 64.334
+    }
+    ShapePoint "{6697542CBC6F5ACC}" {
+     Position 111.472 -20.747 74.536
+    }
+    ShapePoint "{6697386E459A84DD}" {
+     Position 133.817 -22.912 75.851
+    }
+    ShapePoint "{6697542CB33C9CE1}" {
+     Position 143.761 -24.677 66.336
+    }
+    ShapePoint "{6697542CB19243E7}" {
+     Position 151.283 -25.544 40.202
+    }
+    ShapePoint "{6697386E7B2CE6BC}" {
+     Position 150.394 -20.314 24.577
+    }
+    ShapePoint "{6697386E7F56F63F}" {
+     Position 110.476 -8.75 24.274
+    }
+    ShapePoint "{6697386E7DC06426}" {
+     Position 82.523 -1.681 6.633
+    }
+    ShapePoint "{6697542CAC781ED9}" {
+     Position 81.701 -1.521 -2.664
+    }
+    ShapePoint "{6697542CAD724846}" {
+     Position 67.786 -0.822 -15.318
+    }
+    ShapePoint "{6697386E7335B477}" {
+     Position 52.378 2.296 -46.824
+    }
+    ShapePoint "{6697386E70E2854E}" {
+     Position 33.281 2.132 -62.745
+    }
+    ShapePoint "{6697386E7169E50E}" {
+     Position 22.707 1.554 -54.59
+    }
+    ShapePoint "{6697386E6B8C0AF7}" {
+     Position 11.636 2.268 -28.231
+    }
+   }
+  }
+ }
+}
