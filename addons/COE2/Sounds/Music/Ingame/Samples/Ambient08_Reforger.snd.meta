@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{941B861E78BEE805}Sounds/Music/Ingame/Samples/Ambient08_Reforger.snd"
+ Configurations {
+  SNDResourceClass PC {
+   AudioFile "{43576F8954191503}Sounds/Music/Ingame/Samples/Ambient08_Reforger.wav"
+   TargetFormat OPUS
+  }
+  SNDResourceClass XBOX_ONE : PC {
+  }
+  SNDResourceClass XBOX_SERIES : PC {
+  }
+  SNDResourceClass PS4 : PC {
+  }
+  SNDResourceClass PS5 : PC {
+  }
+  SNDResourceClass HEADLESS : PC {
+  }
+ }
+}

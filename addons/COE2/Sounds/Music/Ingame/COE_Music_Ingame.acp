@@ -1,101 +1,110 @@
 AudioClass {
  sounds {
-  SoundClass {
+  SoundClass "71689" {
    id 71689
    name "SOUND_COE_EXECUTION"
-   version 0
+   version 5
    tl 58.937 -843.25
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:64" {
      id 64
      links {
-      ConnectionClass connection {
+      ConnectionClass "74756:65" {
        id 74756
        port 65
       }
      }
     }
    }
-   outState 6155
+   outState 76811
    outStatePort 22535
   }
-  SoundClass {
+  SoundClass "73737" {
    id 73737
    name "SOUND_COE_INTERMISSION"
-   version 0
+   version 5
    tl 61.437 -975.5
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:64" {
      id 64
      links {
-      ConnectionClass connection {
+      ConnectionClass "72708:65" {
        id 72708
        port 65
       }
      }
     }
    }
-   outState 6155
+   outState 76811
    outStatePort 22535
   }
  }
  mixers {
-  MixerClass {
-   id 6155
-   name "OutputState"
+  MixerClass "76811" {
+   id 76811
+   name "OutputState 75"
    version 4
-   tl 418.206 -894.111
-   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   tl 361.994 -903.077
+   res "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:22535" {
      id 22535
      links {
-      ConnectionClass connection {
-       id 71689
+      ConnectionClass "73737:65" {
+       id 73737
        port 65
       }
-      ConnectionClass connection {
-       id 73737
+      ConnectionClass "71689:65" {
+       id 71689
        port 65
       }
      }
     }
    }
    pi {
-    2048
+    1 0
    }
-   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   path "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    inputs {
-    "ANM_Footsteps" "ANM_Voice" "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct"
+    "Music" "UI"
+   }
+   visiblePorts {
+    22535
    }
   }
  }
  banks_local {
-  BankLocalClass {
+  BankLocalClass "72708" {
    id 72708
    name "Bank 1"
-   version 0
+   version 7
    tl -439.526 -979.643
    Volume -18
+   "Termination Fade Out" 3000
    "Fade out function" SCurve
-   "Fade out time" 3000
    Samples {
-    AudioBankSampleClass Sample {
-     Filename "{43576F8954191503}Sounds/Music/Ingame/Samples/A2_Reforger.wav"
+    AudioBankSampleClass "Ambient08_Reforger.snd" {
+     Filename "{941B861E78BEE805}Sounds/Music/Ingame/Samples/Ambient08_Reforger.snd"
+     Probability 100
+     Index 1
+     SampleMetadata ""
     }
    }
   }
-  BankLocalClass {
+  BankLocalClass "74756" {
    id 74756
    name "Bank 2"
-   version 0
+   version 7
    tl -441.562 -845.75
    Volume -14
+   "Termination Fade Out" 3000
    "Fade out function" SCurve
-   "Fade out time" 3000
    Samples {
-    AudioBankSampleClass Sample {
-     Filename "{25857955EC47E83B}Sounds/Music/Ingame/Samples/A2OAPMC_NoMansLand.wav"
+    AudioBankSampleClass "PMC_Track02_NoMansLand.snd" {
+     Filename "{F78A0F0796851E53}Sounds/Music/Ingame/Samples/PMC_Track02_NoMansLand.snd"
+     Probability 100
+     Index 1
+     SampleMetadata ""
     }
    }
   }

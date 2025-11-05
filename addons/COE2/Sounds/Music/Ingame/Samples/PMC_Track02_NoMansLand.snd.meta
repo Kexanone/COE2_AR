@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{F78A0F0796851E53}Sounds/Music/Ingame/Samples/PMC_Track02_NoMansLand.snd"
+ Configurations {
+  SNDResourceClass PC {
+   AudioFile "{25857955EC47E83B}Sounds/Music/Ingame/Samples/PMC_Track02_NoMansLand.wav"
+   TargetFormat OPUS
+  }
+  SNDResourceClass XBOX_ONE : PC {
+  }
+  SNDResourceClass XBOX_SERIES : PC {
+  }
+  SNDResourceClass PS4 : PC {
+  }
+  SNDResourceClass PS5 : PC {
+  }
+  SNDResourceClass HEADLESS : PC {
+  }
+ }
+}
