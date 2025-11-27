@@ -1,4 +1,44 @@
 AudioClass {
+ signals {
+  SignalClass "94221" {
+   id 94221
+   name "Random"
+   tl -434.917 -855.91
+   res "{B93D2FDABA806077}Sounds/Music/Ingame/COE_Random.sig"
+   conns {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 8
+       links {
+        ConnectionClass "97292:1" {
+         id 97292
+         port 1
+        }
+       }
+      }
+     }
+    }
+   }
+   inputsport {
+    1
+   }
+   outputsport {
+    2
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    1
+   }
+   path "{B93D2FDABA806077}Sounds/Music/Ingame/COE_Random.sig"
+  }
+ }
  sounds {
   SoundClass "71689" {
    id 71689
@@ -9,8 +49,8 @@ AudioClass {
     ConnectionsClass "con:64" {
      id 64
      links {
-      ConnectionClass "74756:65" {
-       id 74756
+      ConnectionClass "90118:65" {
+       id 90118
        port 65
       }
      }
@@ -38,11 +78,102 @@ AudioClass {
    outState 76811
    outStatePort 22535
   }
+  SoundClass "101385" {
+   id 101385
+   name "SOUND_RESPAWNMENU"
+   version 5
+   tl 62.613 -1109.545
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "102404:65" {
+       id 102404
+       port 65
+      }
+     }
+    }
+   }
+   outState 76811
+   outStatePort 22535
+  }
+ }
+ selectors {
+  SelectorClass "90118" {
+   id 90118
+   name "Selector"
+   version 5
+   tl -256.314 -806.067
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "94221:2" {
+       id 94221
+       port 2
+      }
+     }
+    }
+    ConnectionsClass "con:4304" {
+     id 4304
+     links {
+      ConnectionClass "74756:65" {
+       id 74756
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:4305" {
+     id 4305
+     links {
+      ConnectionClass "80900:65" {
+       id 80900
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:4306" {
+     id 4306
+     links {
+      ConnectionClass "98308:65" {
+       id 98308
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:4307" {
+     id 4307
+     links {
+      ConnectionClass "100356:65" {
+       id 100356
+       port 65
+      }
+     }
+    }
+   }
+   ports {
+    PortClass s1 {
+     max 1
+    }
+    PortClass s2 {
+     min 1
+     max 2
+    }
+    PortClass s3 {
+     min 2
+     max 3
+    }
+    PortClass s4 {
+     min 3
+     max 4
+    }
+   }
+  }
  }
  mixers {
   MixerClass "76811" {
    id 76811
-   name "OutputState 75"
+   name "OutputState"
    version 4
    tl 361.994 -903.077
    res "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
@@ -56,6 +187,10 @@ AudioClass {
       }
       ConnectionClass "71689:65" {
        id 71689
+       port 65
+      }
+      ConnectionClass "101385:65" {
+       id 101385
        port 65
       }
      }
@@ -73,12 +208,25 @@ AudioClass {
    }
   }
  }
+ constants {
+  ConstantClass "97292" {
+   id 97292
+   version 5
+   tl -610.342 -855.91
+   "Constant values" {
+    IOPConstantsValueClass Count {
+     Key "Count"
+     Value 4
+     Port 1
+    }
+   }
+  }
+ }
  banks_local {
   BankLocalClass "72708" {
    id 72708
-   name "Bank 1"
    version 7
-   tl -439.526 -979.643
+   tl -604.743 -979.643
    Volume -18
    "Termination Fade Out" 3000
    "Fade out function" SCurve
@@ -93,9 +241,8 @@ AudioClass {
   }
   BankLocalClass "74756" {
    id 74756
-   name "Bank 2"
    version 7
-   tl -441.562 -845.75
+   tl -608.518 -761.402
    Volume -14
    "Termination Fade Out" 3000
    "Fade out function" SCurve
@@ -104,6 +251,70 @@ AudioClass {
      Filename "{F78A0F0796851E53}Sounds/Music/Ingame/Samples/PMC_Track02_NoMansLand.snd"
      Probability 100
      Index 1
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "80900" {
+   id 80900
+   version 7
+   tl -607.123 -679.302
+   Volume -4
+   "Termination Fade Out" 3000
+   "Fade out function" SCurve
+   Samples {
+    AudioBankSampleClass "MU_02_TheDigZone.snd" {
+     Filename "{57C9951F151C99DE}Sounds/Music/KS/Samples/MU_02_TheDigZone.snd"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "98308" {
+   id 98308
+   version 7
+   tl -605.302 -587.625
+   Volume -15
+   "Termination Fade Out" 3000
+   "Fade out function" SCurve
+   Samples {
+    AudioBankSampleClass "MU_BeneathTheSludge_B.snd" {
+     Filename "{3346CC1C6C01CF89}Sounds/Music/KS/Samples/MU_BeneathTheSludge_B.snd"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "100356" {
+   id 100356
+   version 7
+   tl -606.537 -497.169
+   Volume -4
+   "Termination Fade Out" 3000
+   "Fade out function" SCurve
+   Samples {
+    AudioBankSampleClass "MU_TheHumanSea_Rhythmic.snd" {
+     Filename "{AA67C3B27F0A79A8}Sounds/Music/Campaign/Samples/Layers/MU_TheHumanSea_Rhythmic.snd"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "102404" {
+   id 102404
+   version 7
+   tl -603.567 -1113.688
+   Volume -10
+   "Termination Fade Out" 3000
+   "Fade out function" SCurve
+   Samples {
+    AudioBankSampleClass "MU_Respawn_02.snd" {
+     Filename "{2562416447A61278}Sounds/Music/KS/Samples/MU_Respawn_02.snd"
+     Probability 100
+     Index 0
      SampleMetadata ""
     }
    }
