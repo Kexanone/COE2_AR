@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class COE_SetInsertionPointCommand : SCR_BaseRadialCommand
+class COE_SetInsertionPointCommand : COE_BaseRadialCommanderCommand
 {
 	override bool Execute(IEntity cursorTarget, IEntity target, vector targetPosition, int playerID, bool isClient)
 	{
@@ -13,8 +13,14 @@ class COE_SetInsertionPointCommand : SCR_BaseRadialCommand
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override bool CanShowOnMap()
+	override bool CanBePerformed(notnull SCR_ChimeraCharacter user)
 	{
-		return (COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION);
+		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.INTERMISSION)
+		{
+			m_sCannotPerformReason = "#COE-Reason_NoAO";
+			return false;
+		}
+
+		return true;
 	}
 }

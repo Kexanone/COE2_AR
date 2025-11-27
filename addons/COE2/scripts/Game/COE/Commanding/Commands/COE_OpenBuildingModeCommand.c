@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class COE_OpenBuildingModeCommand : SCR_BaseRadialCommand
+class COE_OpenBuildingModeCommand : COE_BaseRadialCommanderCommand
 {
 	//------------------------------------------------------------------------------------------------
 	override bool Execute(IEntity cursorTarget, IEntity target, vector targetPosition, int playerID, bool isClient)
