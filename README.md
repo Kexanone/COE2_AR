@@ -29,9 +29,9 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 ## Scenario IDs
 
-- COE2 - Arland: `"{F239FD0036BD2C1E}Missions/COE2_Arland.conf"`
-- COE2 - Everon: `"{EE676FAB9DFA4CF7}Missions/COE2_Eden.conf"`
-- COE2 - Kolguyev: `"{4D4780DB775BFF64}Missions/COE2_Cain.conf"`
+- COE2 Arland: `"{F239FD0036BD2C1E}Missions/COE2_Arland.conf"`
+- COE2 Everon: `"{EE676FAB9DFA4CF7}Missions/COE2_Eden.conf"`
+- COE2 Kolguyev: `"{4D4780DB775BFF64}Missions/COE2_Cain.conf"`
 
 ## Mission Header
 
@@ -54,7 +54,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 }
 ```
 
-## Optional Addons
+## Optional Addons and Scenario IDs
 
 - COE2 Anizay:
     - https://reforger.armaplatform.com/workshop/65734D75BC584950<br>
