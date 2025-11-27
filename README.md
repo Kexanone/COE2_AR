@@ -91,7 +91,8 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 Please use our [Issue Tracker](https://github.com/Kexanone/COE2_AR/issues/new/choose) to report a bug, propose a feature, or suggest changes to the existing ones.
 
 ## Acknowledgements
-- Includes OST from Arma Licensed Data Pack A2 and A2OADLC.
+- Includes OST from [Arma Licensed Data Pack A2 and A2OADLC](https://www.bohemia.net/community/licenses/licensed-data-packages).
+- Includes parachute model from [Arma 2 Sample Models](https://www.bohemia.net/community/licenses/licensed-data-packages).
 
 ## License
 This mission is licensed under the Arma Public License Share Alike ([APL-SA](https://github.com/Kexanone/COE2_AR/blob/main/LICENSE.md)).
