@@ -1,19 +1,22 @@
-MusicManager {
+MusicManager : "{359452CCDBDD03F6}Prefabs/Sounds/Music/MusicManager_Base.et" {
  ID "59D0D1B72A5A2189"
  Music {
+  SCR_RespawnMusic "{59CEAEC5D2396983}" {
+   Acp "{B801B53B98A1C5F8}Sounds/Music/Ingame/COE_Music_Ingame.acp"
+  }
   COE_IntermissionMusic "{609411A44D97B0B5}" {
    Acp "{B801B53B98A1C5F8}Sounds/Music/Ingame/COE_Music_Ingame.acp"
    "Music Name" "SOUND_COE_INTERMISSION"
    Priority 999
    Interruptible 0
-   Categories 4
+   Categories 0x8 0
   }
   COE_ExecutionMusic "{609411A19EA515A6}" {
    Acp "{B801B53B98A1C5F8}Sounds/Music/Ingame/COE_Music_Ingame.acp"
    "Music Name" "SOUND_COE_EXECUTION"
    Priority 999
    Interruptible 0
-   Categories 4
+   Categories 0x8 0
   }
  }
 }
