@@ -1,0 +1,62 @@
+FrameWidgetClass : "{E1D446FCFA9DF389}UI/layouts/Campaign/CommandPostMapUI.layout" {
+ components {
+  COE_MapCommandPostUI "{61FA8BEC47180833}" {
+  }
+ }
+ {
+  VerticalLayoutWidgetClass "{65ECBD214422814D}" {
+   Prefab "{65ECBD214422814D}"
+   {
+    HorizontalLayoutWidgetClass "{65ECBD2BDF5C42CD}" {
+     Prefab "{65ECBD2BDF5C42CD}"
+     {
+      OverlayWidgetClass "{65ECBD21D2C4F155}" {
+       Prefab "{65ECBD21D2C4F155}"
+       {
+        ButtonWidgetClass "{61EEC5DBA06CF594}" {
+         Prefab "{61EEC5DBA06CF594}"
+         {
+          SizeLayoutWidgetClass "{5D991DEB252617A1}" {
+           Prefab "{5D991DEB252617A1}"
+           {
+            OverlayWidgetClass "{5D991DEB3B9EE0A8}" {
+             Prefab "{5D991DEB3B9EE0A8}"
+             {
+              HorizontalLayoutWidgetClass "{5D991DEAC6B57AF7}" {
+               Prefab "{5D991DEAC6B57AF7}"
+               {
+                HorizontalLayoutWidgetClass "{5D991DECE90A4B77}" {
+                 Prefab "{5D991DECE90A4B77}"
+                 {
+                  TextWidgetClass "{5E64C181CBC524EF}" {
+                   Prefab "{5E64C181CBC524EF}"
+                   Text "#ar-attributesdialog_buttonclose"
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      OverlayWidgetClass "{65ECBD2048300484}" {
+       Prefab "{65ECBD2048300484}"
+       {
+        HorizontalLayoutWidgetClass "{66367BC99CFA4BCA}" {
+         Prefab "{66367BC99CFA4BCA}"
+         "Is Enabled" 0
+         "Is Visible" 0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

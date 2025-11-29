@@ -20,12 +20,6 @@ class COE_OpenBuildingModeCommand : COE_BaseRadialCommanderCommand
 		if (!gameMode)
 			return false;
 		
-		if (gameMode.COE_GetState() == COE_EGameModeState.INTERMISSION)
-		{
-			m_sCannotPerformReason = "#COE-Reason_NoAO";
-			return false;
-		}
-		
 		IEntity insertionPoint = gameMode.GetInsertionPoint();
 		if (!insertionPoint)
 		{

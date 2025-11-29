@@ -8,12 +8,13 @@ class COE_DeployUserAction : COE_BaseBoardUserAction
 		if (!gameMode)
 			return;
 		
-		KSC_Location location = gameMode.GetCurrentLocation();
-		if (!location)
+		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
+		
+		COE_AO closestAO = gameMode.GetClosestAO(spawnPos);
+		if (!closestAO)
 			return;
 		
-		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();		
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (location.m_vCenter - spawnPos).ToYaw());
+		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAO.GetOrigin() - spawnPos).ToYaw());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -25,11 +26,12 @@ class COE_DeployUserAction : COE_BaseBoardUserAction
 		
 		if (gameMode.COE_GetState() == COE_EGameModeState.INTERMISSION)
 		{
-			m_sCannotPerformReason = "#COE-Reason_NoAO";
+			m_sCannotPerformReason = "#COE-Reason_NoAOGenerated";
 			return false;
 		}
 		
-		if (!gameMode.GetInsertionPoint())
+		SCR_SpawnPoint insertionPoint = gameMode.GetInsertionPoint();
+		if (!insertionPoint || !insertionPoint.IsSpawnPointEnabled())
 		{
 			m_sCannotPerformReason = "#COE-Reason_NoInsertionPoint";
 			return false;

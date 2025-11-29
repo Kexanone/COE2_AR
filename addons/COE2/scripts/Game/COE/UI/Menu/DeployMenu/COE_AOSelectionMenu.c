@@ -2,6 +2,7 @@
 //! --- TO DO: Handle case where player loses commander role while the menu is open or the scenario has been created
 class COE_AOSelectionMenu : ChimeraMenuBase
 {
+	/*****
 	protected COE_GameMode m_GameMode;
 	protected SCR_MapEntity m_MapEntity;
 	protected ref MapConfiguration m_MapConfigDeploy = new MapConfiguration();
@@ -225,4 +226,5 @@ class COE_AOSelectionMenu : ChimeraMenuBase
 	{
 		return m_OnConfirm;
 	}
+	*****/
 }

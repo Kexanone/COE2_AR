@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 //! Handler for an objective location element used in COE_MapUIElementContainer
-class COE_MapUILocation : SCR_MapUIElement
+class COE_MapUILocation : COE_MapUIElement
 {
 	protected KSC_Location m_Location;
-	protected string m_sFactionKey;
 	protected TextWidget m_wLocationName;
+	protected FactionKey m_sOwnerFactionKey;
+	protected ref array<COE_BaseTaskBuilder> m_aTaskBuilders = {};
 	protected Widget m_wImageOverlay;
 	protected OverlayWidget m_wSymbolOverlay;
 	protected SCR_MilitarySymbolUIComponent m_MilitarySymbolComponent;
@@ -16,12 +17,6 @@ class COE_MapUILocation : SCR_MapUIElement
 	{
 		m_Location = location;		
 		m_wLocationName.SetText(location.m_sName);
-		
-		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
-		if (!factionManager)
-			return;
-		
-		m_sFactionKey = factionManager.GetEnemyFaction().GetFactionKey();
 		UpdateIcon();
 	}
 
@@ -34,22 +29,16 @@ class COE_MapUILocation : SCR_MapUIElement
 	//------------------------------------------------------------------------------
 	void UpdateIcon()
 	{
+		SCR_Faction faction = SCR_Faction.Cast(GetGame().GetFactionManager().GetFactionByKey(m_sOwnerFactionKey));
 		SCR_MilitarySymbol symbol = new SCR_MilitarySymbol();
 		
 		SCR_GroupIdentityCore core = SCR_GroupIdentityCore.Cast(SCR_GroupIdentityCore.GetInstance(SCR_GroupIdentityCore));
 		if (!core)
 			return;
 		
-		SCR_Faction faction = SCR_Faction.Cast(GetGame().GetFactionManager().GetFactionByKey(m_sFactionKey));
-		if (faction)
-		{
-			SCR_MilitarySymbolRuleSet ruleSet = core.GetSymbolRuleSet();
+		SCR_MilitarySymbolRuleSet ruleSet = core.GetSymbolRuleSet();
+		if (ruleSet)
 			ruleSet.UpdateSymbol(symbol, faction);
-		}
-		else
-		{
-			symbol.SetIdentity(EMilitarySymbolIdentity.UNKNOWN);
-		}
 		
 		//Selection visuals 
 		string selection;
@@ -87,12 +76,15 @@ class COE_MapUILocation : SCR_MapUIElement
 		m_wSelectImg.LoadImageFromSet(0, m_sImageSetARO, selection);
 		symbol.SetIcons(0);
 		
-		m_wSymbolOverlay.SetColor(GetColorForFaction(m_sFactionKey));
+		Color color = GetColorForFaction(m_sOwnerFactionKey);
+		
+		if (m_wSymbolOverlay)
+			m_wSymbolOverlay.SetColor(color);
+		
 		if (m_wGradient)
-			m_wGradient.SetColor(GetColorForFaction(m_sFactionKey));
+			m_wGradient.SetColor(color);
 
-		if (faction)
-			m_MilitarySymbolComponent.Update(symbol);
+		m_MilitarySymbolComponent.Update(symbol);
 	}
 
 	//------------------------------------------------------------------------------
@@ -136,9 +128,6 @@ class COE_MapUILocation : SCR_MapUIElement
 		m_wSelectImg.SetVisible(true);
 		if (m_wGradient)
 			m_wGradient.SetVisible(true);
-
-		if (m_bIsSelected && invoke)
-			COE_MapUIElementContainer.Cast(m_Parent).OnLocationSelected(m_Location);
 	}
 
 	//------------------------------------------------------------------------------
@@ -180,8 +169,64 @@ class COE_MapUILocation : SCR_MapUIElement
 		return false;
 	}
 
+	//------------------------------------------------------------------------------
 	KSC_Location GetLocation()
 	{
 		return m_Location;
 	}
-};
+	
+	//------------------------------------------------------------------------------
+	void SetOwnerFactionKey(FactionKey factionKey)
+	{
+		m_sOwnerFactionKey = factionKey;
+	}
+	
+	//------------------------------------------------------------------------------
+	FactionKey GetOwnerFactionKey()
+	{
+		return m_sOwnerFactionKey;
+	}
+	
+	//------------------------------------------------------------------------------
+	int AddTaskBuilder(COE_BaseTaskBuilder builder, bool isInit = false)
+	{
+		if (m_aTaskBuilders.IsEmpty())
+		{
+			COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
+			if (factionManager)
+				m_sOwnerFactionKey = factionManager.GetEnemyFaction().GetFactionKey();
+			
+			UpdateIcon();
+		}
+		
+		int idx =  m_aTaskBuilders.Insert(builder);
+		
+		COE_MapUIElementContainerV2 container = COE_MapUIElementContainerV2.Cast(m_Parent);
+		if (!isInit && container)
+			container.UpdateAOParams();
+				
+		return idx;
+	}
+	
+	//------------------------------------------------------------------------------
+	void RemoveTaskBuilder(int idx)
+	{
+		m_aTaskBuilders.Remove(idx);
+		
+		if (m_aTaskBuilders.IsEmpty())
+		{
+			m_sOwnerFactionKey = "";
+			UpdateIcon();
+		}
+		
+		COE_MapUIElementContainerV2 container = COE_MapUIElementContainerV2.Cast(m_Parent);
+		if (container)
+			container.UpdateAOParams();
+	}
+	
+	//------------------------------------------------------------------------------
+	array<COE_BaseTaskBuilder> GetTaskBuilders()
+	{
+		return m_aTaskBuilders;
+	}
+}
