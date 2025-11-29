@@ -25,9 +25,6 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 	//------------------------------------------------------------------------------------------------
 	override void OnMapClose(MapConfiguration config)
 	{
-		if (m_bShowAvailableLocations)
-			UpdateAOParams();
-		
 		super.OnMapClose(config);
 		m_HoveredElement = null;
 	}
