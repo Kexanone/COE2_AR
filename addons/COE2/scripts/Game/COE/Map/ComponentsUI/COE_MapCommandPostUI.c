@@ -45,6 +45,6 @@ class COE_MapCommandPostUI : SCR_MapCommandPostUI
 	override protected void CloseMenu()
 	{
 		MenuManager menuManager = GetGame().GetMenuManager();
-		menuManager.CloseMenuByPreset(ChimeraMenuPreset.COE_AOSelectionMenuV2);
+		menuManager.CloseMenuByPreset(ChimeraMenuPreset.COE_AOSelectionMenu);
 	}
 }

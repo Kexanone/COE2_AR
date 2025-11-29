@@ -12,7 +12,7 @@ class COE_MapCommanderRadialMenu : SCR_MapUIBaseComponent
 	//------------------------------------------------------------------------------------------------
 	override void OnMapOpen(MapConfiguration config)
 	{
-		COE_MapUIElementContainerV2 mapElementContainer = COE_MapUIElementContainerV2.Cast(m_MapEntity.GetMapUIComponent(COE_MapUIElementContainerV2));
+		COE_MapUIElementContainer mapElementContainer = COE_MapUIElementContainer.Cast(m_MapEntity.GetMapUIComponent(COE_MapUIElementContainer));
 		if (mapElementContainer)
 			mapElementContainer.GetOnElementHovered().Insert(OnMapElementHovered);
 		
@@ -28,7 +28,7 @@ class COE_MapCommanderRadialMenu : SCR_MapUIBaseComponent
 	{
 		m_HoveredMapElement = null;
 		
-		COE_MapUIElementContainerV2 mapElementContainer = COE_MapUIElementContainerV2.Cast(m_MapEntity.GetMapUIComponent(COE_MapUIElementContainerV2));
+		COE_MapUIElementContainer mapElementContainer = COE_MapUIElementContainer.Cast(m_MapEntity.GetMapUIComponent(COE_MapUIElementContainer));
 		if (mapElementContainer)
 			mapElementContainer.GetOnElementHovered().Remove(OnMapElementHovered);
 		

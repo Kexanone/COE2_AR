@@ -2,7 +2,7 @@
 //! Map UI component that can be added via map config
 //! Extends SCR_MapUIElementContainer for drawing and handling available objective
 //! locations that can be picked in COE_AOSelectionMenu
-class COE_MapUIElementContainerV2 : SCR_MapUIElementContainer
+class COE_MapUIElementContainer : SCR_MapUIElementContainer
 {
 	[Attribute("{764EA71E6CAA60AF}UI/layouts/Map/COE_LocationElement.layout", params: "layout")]
 	protected ResourceName m_sCOE_LocationElement;

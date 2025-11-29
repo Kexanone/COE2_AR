@@ -201,7 +201,7 @@ class COE_MapUILocation : COE_MapUIElement
 		
 		int idx =  m_aTaskBuilders.Insert(builder);
 		
-		COE_MapUIElementContainerV2 container = COE_MapUIElementContainerV2.Cast(m_Parent);
+		COE_MapUIElementContainer container = COE_MapUIElementContainer.Cast(m_Parent);
 		if (!isInit && container)
 			container.UpdateAOParams();
 				
@@ -219,7 +219,7 @@ class COE_MapUILocation : COE_MapUIElement
 			UpdateIcon();
 		}
 		
-		COE_MapUIElementContainerV2 container = COE_MapUIElementContainerV2.Cast(m_Parent);
+		COE_MapUIElementContainer container = COE_MapUIElementContainer.Cast(m_Parent);
 		if (container)
 			container.UpdateAOParams();
 	}

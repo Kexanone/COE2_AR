@@ -97,7 +97,7 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 	//------------------------------------------------------------------------------------------------
 	static void StartSelectingAO()
 	{
-		GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.COE_AOSelectionMenuV2, DialogPriority.INFORMATIVE, 0, true);
+		GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.COE_AOSelectionMenu, DialogPriority.INFORMATIVE, 0, true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
