@@ -101,6 +101,7 @@ class COE_GameMode : SCR_BaseGameMode
 	
 	[RplProp()]
 	protected ref array<ref COE_AOParams> m_aNextAOParams = {};
+	
 	protected ref array<COE_AO> m_aCurrentAOs = {};
 	
 	[RplProp(onRplName: "OnInsertionPointUpdated")]
@@ -272,26 +273,31 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	COE_AO GetClosestAO(vector pos)
-	{		
-		COE_AO closestAO;
+	bool GetClosestAOPos(vector refPos, out vector closestPos)
+	{
+		bool found = false;
 		float closestLocationDistance = float.INFINITY;
 		
-		foreach (COE_AO ao : m_aCurrentAOs)
+		foreach (COE_AOParams params : m_aNextAOParams)
 		{
-			if (!ao)
+			if (!params)
 				continue;
 			
-			float distance = vector.DistanceSqXZ(ao.GetOrigin(), pos);
+			KSC_Location location = params.GetLocation();
+			if (!location)
+				continue;
+			
+			float distance = vector.DistanceSqXZ(location.m_vCenter, refPos);
 			
 			if (distance < closestLocationDistance)
 			{
-				closestAO = ao;
+				closestPos = location.m_vCenter;
 				closestLocationDistance = distance;
+				found = true;
 			}
 		}
 		
-		return closestAO;
+		return found;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -482,9 +488,9 @@ class COE_GameMode : SCR_BaseGameMode
 		
 		float dir;
 		
-		COE_AO closestAO = GetClosestAO(pos);
-		if (closestAO)
-			dir = (closestAO.GetOrigin() - pos).ToYaw();
+		vector closestAOPos;
+		if (GetClosestAOPos(pos, closestAOPos))
+			dir = (closestAOPos - pos).ToYaw();
 		
 		if (!m_pInsertionPoint)
 		{
@@ -516,9 +522,9 @@ class COE_GameMode : SCR_BaseGameMode
 		float newDir;
 		
 		// Rotate in direction of closest AO if one exists
-		COE_AO closestAO = GetClosestAO(newPos);
-		if (closestAO)
-			newDir = (closestAO.GetOrigin() - newPos).ToYaw();
+		vector closestAOPos;
+		if (GetClosestAOPos(newPos, closestAOPos))
+			newDir = (closestAOPos - newPos).ToYaw();
 		else
 			newDir = m_pInsertionPoint.GetTransformAxis(2).ToYaw();
 		

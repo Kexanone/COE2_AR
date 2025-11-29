@@ -10,11 +10,11 @@ class COE_DeployUserAction : COE_BaseBoardUserAction
 		
 		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
 		
-		COE_AO closestAO = gameMode.GetClosestAO(spawnPos);
-		if (!closestAO)
+		vector closestAOPos;
+		if (!gameMode.GetClosestAOPos(spawnPos, closestAOPos))
 			return;
 		
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAO.GetOrigin() - spawnPos).ToYaw());
+		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAOPos - spawnPos).ToYaw());
 	}
 	
 	//------------------------------------------------------------------------------------------------

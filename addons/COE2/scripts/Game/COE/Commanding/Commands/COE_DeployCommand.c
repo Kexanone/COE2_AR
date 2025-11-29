@@ -14,11 +14,11 @@ class COE_DeployCommand : SCR_BaseRadialCommand
 		
 		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
 		
-		COE_AO closestAO = gameMode.GetClosestAO(spawnPos);
-		if (!closestAO)
+		vector closestAOPos;
+		if (!gameMode.GetClosestAOPos(spawnPos, closestAOPos))
 			return false;
 		
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAO.GetOrigin() - spawnPos).ToYaw());
+		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAOPos - spawnPos).ToYaw());
 		return true;
 	}
 	
