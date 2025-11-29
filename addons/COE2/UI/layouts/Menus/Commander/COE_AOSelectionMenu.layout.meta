@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{5F7188CDD6BEF399}UI/layouts/Menus/RoleSelection/COE_ObjectiveSelectionMenu.layout"
+ Name "{8746D5BDD583B688}UI/layouts/Menus/Commander/COE_AOSelectionMenu.layout"
  Configurations {
   LayoutResourceClass PC {
   }
@@ -8,6 +8,8 @@ MetaFileClass {
   LayoutResourceClass XBOX_SERIES : PC {
   }
   LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass PS5 : PC {
   }
   LayoutResourceClass HEADLESS : PC {
   }
