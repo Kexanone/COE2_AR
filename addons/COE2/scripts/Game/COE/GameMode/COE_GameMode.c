@@ -16,7 +16,8 @@ enum COE_ECommanderRequest
 	GENERATE_AO, // Request to generate an AO
 	CANCEL_AO, // Request to cancel current AO
 	END_BRIEFING, // Request to end the briefing and start execution
-	INSERTION_POINT // Request to set an insertion point at the specified position
+	INSERTION_POINT, // Request to set an insertion point at the specified position
+	EXFIL_POINT, // Request to set an exfil point at the specified position
 }
 
 //------------------------------------------------------------------------------------------------
@@ -44,11 +45,11 @@ class COE_GameModeClass : SCR_BaseGameModeClass
 //------------------------------------------------------------------------------------------------
 class COE_GameMode : SCR_BaseGameMode
 {
-	[Attribute(desc: "Location types to be excluded", category: "Locations")]
-	protected ref array<ref COE_MapDescriptorType> m_aBlacklistedDescriptorTypes;
-	
 	[Attribute(desc: "Available task builders", category: "Tasks")]
 	protected ref array<ref COE_BaseTaskBuilder> m_aAvailableTaskBuilders;
+	
+	[Attribute(defvalue: "{73F871FEDE53CD1F}Prefabs/Tasks/KSC_ExfilTask.et", desc: "Prefab of the exfil task", params: "et", category: "Tasks")]
+	protected ResourceName m_sExfilTaskPrefabName;
 	
 	[Attribute(defvalue: "", desc: "Default faction key for the players", category: "Default Scenario Properties")]
 	protected FactionKey m_sDefaultPlayerFactionKey;
@@ -86,7 +87,7 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "15", desc: "Maximum time in minutes required for the enemy to send reinforcements.", category: "Default Support Settings")]
 	float m_fMaxEnemyReinforcementTime;
 	
-	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties", category: "Default Scenario Properties")]
+	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
 	protected bool m_bCiviliansEnabled;
 	
 	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM", category: "Default Scenario Properties")]
@@ -99,13 +100,16 @@ class COE_GameMode : SCR_BaseGameMode
 	protected COE_MainBaseEntity m_pMainBase;
 	
 	[RplProp()]
-	protected ref COE_AOParams m_pCurrentAOParams = new COE_AOParams();
-	protected ref COE_AOParams m_pNextAOParams = new COE_AOParams();
-	protected COE_AO m_pCurrentAO;
+	protected ref array<ref COE_AOParams> m_aNextAOParams = {};
+	
+	protected ref array<COE_AO> m_aCurrentAOs = {};
 	
 	[RplProp(onRplName: "OnInsertionPointUpdated")]
 	protected RplId m_iInsertionPointId;
-	protected IEntity m_pInsertionPoint;
+	protected SCR_SpawnPoint m_pInsertionPoint;
+	
+	[RplProp()]
+	protected bool m_bHasExfilPoint = false;
 	
 	[RplProp(onRplName: "COE_OnStateChanged")]
 	protected COE_EGameModeState m_eCOE_CurrentState = COE_EGameModeState.INTERMISSION;
@@ -113,6 +117,8 @@ class COE_GameMode : SCR_BaseGameMode
 	
 	protected COE_FactionManager m_pFactionManager;
 	protected ref array<IEntity> m_aEntitiesToDelete = {};
+	protected ref array<ref SCR_MapMarkerBase> m_aExfilMarkers;
+	protected KSC_CountdownAreaTriggerTask m_ExfilTask;
 	
 	protected const float MAIN_BASE_RANGE = 25;
 		
@@ -245,30 +251,53 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	COE_AOParams GetNextAOParams()
+	array<ref COE_AOParams> GetNextAOParams()
 	{
-		return m_pNextAOParams;
+		return m_aNextAOParams;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetNextAOParams(COE_AOParams params)
+	void SetNextAOParams(array<ref COE_AOParams> params)
 	{
-		m_pNextAOParams.Copy(params);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	KSC_Location GetCurrentLocation()
-	{
-		if (m_pCurrentAOParams.m_iLocationIdx < 0)
-			return null;
+		m_aNextAOParams.Clear();
+		m_aNextAOParams.Reserve(params.Count());
 		
-		return GetAvailableLocations()[m_pCurrentAOParams.m_iLocationIdx];
+		foreach (COE_AOParams entry : params)
+		{
+			COE_AOParams copy = new COE_AOParams();
+			copy.Copy(entry);
+			m_aNextAOParams.Insert(copy);
+		}
+		
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	COE_AOParams GetCurrentAOParams()
+	bool GetClosestAOPos(vector refPos, out vector closestPos)
 	{
-		return m_pCurrentAOParams;
+		bool found = false;
+		float closestLocationDistance = float.INFINITY;
+		
+		foreach (COE_AOParams params : m_aNextAOParams)
+		{
+			if (!params)
+				continue;
+			
+			KSC_Location location = params.GetLocation();
+			if (!location)
+				continue;
+			
+			float distance = vector.DistanceSqXZ(location.m_vCenter, refPos);
+			
+			if (distance < closestLocationDistance)
+			{
+				closestPos = location.m_vCenter;
+				closestLocationDistance = distance;
+				found = true;
+			}
+		}
+		
+		return found;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -280,6 +309,7 @@ class COE_GameMode : SCR_BaseGameMode
 			case COE_ECommanderRequest.CANCEL_AO: { DeleteAO(); break; };
 			case COE_ECommanderRequest.END_BRIEFING: { StartAO(); break; };
 			case COE_ECommanderRequest.INSERTION_POINT: { CreateInsertionPoint(pos); break; };
+			case COE_ECommanderRequest.EXFIL_POINT: { CreateExfilPoint(pos); break; };
 		};
 	}
 	
@@ -298,24 +328,22 @@ class COE_GameMode : SCR_BaseGameMode
 		{
 			case COE_EGameModeState.INTERMISSION:
 			{
-				// Select random mission and objective
-				m_pNextAOParams.m_eTaskTypes = 1 << Math.RandomInt(0, m_aAvailableTaskBuilders.Count());
-				array<ref KSC_Location> locations = GetAvailableLocations();
-				m_pNextAOParams.m_iLocationIdx = Math.RandomInt(0, locations.Count());
-				
-				// Clear old AO;
-				DeleteInsertionPoint();
-				m_pCurrentAOParams.Clear();
+				m_aNextAOParams.Clear();
 				break;
 			}
 			//case COE_EGameModeState.BRIEFING:
 			case COE_EGameModeState.EXECUTION:
 			{
-				// Copy AO params
-				m_pCurrentAOParams.Copy(m_pNextAOParams);
+				if (m_pInsertionPoint)
+				{
+					m_pInsertionPoint.SetSpawnPointEnabled_S(true);
+					// Update rotation with respect to new AOs
+					UpdateInsertionPointPosAndDir(m_pInsertionPoint.GetOrigin());
+				}
+				
 				break;
 			}
-		};
+		}
 		
 		Replication.BumpMe();
 	}
@@ -325,14 +353,21 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		//COE_SetState(COE_EGameModeState.BRIEFING);
 		COE_SetState(COE_EGameModeState.EXECUTION);
-		EntitySpawnParams params = new EntitySpawnParams();
-		params.TransformMode = ETransformMode.WORLD;
-		params.Transform[3] = GetCurrentLocation().m_vCenter;
-		SCR_TerrainHelper.SnapToTerrain(params.Transform);
-		m_pCurrentAO = COE_AO.Cast(GetGame().SpawnEntity(COE_AO, GetWorld(), params));
+		EntitySpawnParams spawnParams = new EntitySpawnParams();
+		spawnParams.TransformMode = ETransformMode.WORLD;
 		
-		if (m_bEnemySupportEnabled)
-			COE_EnemySupportSystem.GetInstance().Register(m_pCurrentAO);
+		foreach (COE_AOParams entry : m_aNextAOParams)
+		{
+			spawnParams.Transform[3] = entry.GetLocation().m_vCenter;
+			SCR_TerrainHelper.SnapToTerrain(spawnParams.Transform);
+			COE_AO ao = COE_AO.Cast(GetGame().SpawnEntity(COE_AO, GetWorld(), spawnParams));
+			ao.SetParams(entry);
+			ao.GetOnAllTasksFinished().Insert(OnAOFinished);
+			m_aCurrentAOs.Insert(ao);
+			
+			if (m_bEnemySupportEnabled)
+				COE_EnemySupportSystem.GetInstance().Register(ao);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -347,7 +382,12 @@ class COE_GameMode : SCR_BaseGameMode
 		COE_SetState(COE_EGameModeState.INTERMISSION);
 		
 		if (m_bEnemySupportEnabled)
-			COE_EnemySupportSystem.GetInstance().Unregister(m_pCurrentAO);
+		{
+			foreach (COE_AO ao : m_aCurrentAOs)
+			{
+				COE_EnemySupportSystem.GetInstance().Unregister(ao);
+			}
+		}
 		
 		// Heal and teleport all players to main base
 		array<int> playerIds = {};
@@ -367,7 +407,6 @@ class COE_GameMode : SCR_BaseGameMode
 				targetPositions.Insert(startPos + 0.3 * Vector(i, 0, j));
 			}
 		}
-		
 
 		foreach (int i, int playerId : playerIds)
 		{
@@ -387,7 +426,7 @@ class COE_GameMode : SCR_BaseGameMode
 		}
 		
 		CollectBuiltEntitiesForCleanUp();
-		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 3000, false, m_pCurrentAO);
+		GetGame().GetCallqueue().CallLater(CleanUpAOs, 3000);
 		GetGame().GetCallqueue().CallLater(CleanUpBuiltEntities, 4000);
 	}
 	
@@ -398,13 +437,27 @@ class COE_GameMode : SCR_BaseGameMode
 		SCR_EditableEntityCore core = SCR_EditableEntityCore.Cast(SCR_EditableEntityCore.GetInstance(SCR_EditableEntityCore));
 		set<SCR_EditableEntityComponent> entities = new set<SCR_EditableEntityComponent>();
 		core.GetAllEntities(entities, true, true);
-		m_aEntitiesToDelete.Resize(entities.Count());
+		m_aEntitiesToDelete.Reserve(entities.Count());
 		
 		foreach (SCR_EditableEntityComponent entity : entities)
 		{
 			if (SCR_EditableVehicleComponent.Cast(entity) || SCR_EditableGroupComponent.Cast(entity))
 				m_aEntitiesToDelete.Insert(entity.GetOwner());
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void CleanUpAOs()
+	{
+		DeleteInsertionPoint();
+		DeleteExfilPoint();
+		
+		foreach (COE_AO ao : m_aCurrentAOs)
+		{
+			SCR_EntityHelper.DeleteEntityAndChildren(ao);
+		}
+		
+		m_aCurrentAOs.Clear();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -433,11 +486,19 @@ class COE_GameMode : SCR_BaseGameMode
 			pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
 		}
 		
-		vector dir = (GetCurrentLocation().m_vCenter - pos);
+		float dir;
+		
+		vector closestAOPos;
+		if (GetClosestAOPos(pos, closestAOPos))
+			dir = (closestAOPos - pos).ToYaw();
 		
 		if (!m_pInsertionPoint)
 		{
-			m_pInsertionPoint = KSC_GameTools.SpawnSpawnPointPrefab("{A99028D5E6D1B04D}PrefabsEditable/SpawnPoints/E_COE_InsertionPoint.et", pos, dir.ToYaw());
+			m_pInsertionPoint = KSC_GameTools.SpawnSpawnPointPrefab("{A99028D5E6D1B04D}PrefabsEditable/SpawnPoints/E_COE_InsertionPoint.et", pos, dir);
+			
+			if (m_eCOE_CurrentState == COE_EGameModeState.INTERMISSION || m_eCOE_CurrentState == COE_EGameModeState.BRIEFING)
+				m_pInsertionPoint.SetSpawnPointEnabled_S(false);
+			
 			RplComponent rpl = RplComponent.Cast(m_pInsertionPoint.FindComponent(RplComponent));
 			m_iInsertionPointId = rpl.Id();
 			Replication.BumpMe();	
@@ -445,15 +506,35 @@ class COE_GameMode : SCR_BaseGameMode
 		else
 		{
 			// Reuse the existing point by moving it to the new position
-			SCR_EditableSpawnPointComponent editable = SCR_EditableSpawnPointComponent.Cast(m_pInsertionPoint.FindComponent(SCR_EditableSpawnPointComponent));
-			vector transform[4];
-			KSC_GameTools.GetTransformFromPosAndRot(transform, pos, dir.ToYaw());
-			editable.SetTransform(transform);
-			editable.UpdateNearestLocation(pos);
-		};
+			UpdateInsertionPointPosAndDir(pos);
+		}
 		
 		SCR_FactionAffiliationComponent factionAffiliation = SCR_FactionAffiliationComponent.Cast(m_pInsertionPoint.FindComponent(SCR_FactionAffiliationComponent));
 		factionAffiliation.SetAffiliatedFaction(m_pFactionManager.GetPlayerFaction());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateInsertionPointPosAndDir(vector newPos)
+	{
+		if (!m_pInsertionPoint)
+			return;
+		
+		float newDir;
+		
+		// Rotate in direction of closest AO if one exists
+		vector closestAOPos;
+		if (GetClosestAOPos(newPos, closestAOPos))
+			newDir = (closestAOPos - newPos).ToYaw();
+		else
+			newDir = m_pInsertionPoint.GetTransformAxis(2).ToYaw();
+		
+		SCR_EditableSpawnPointComponent editable = SCR_EditableSpawnPointComponent.Cast(SCR_EditableSpawnPointComponent.GetEditableEntity(m_pInsertionPoint));
+		if (!editable)
+			return;
+		
+		vector transform[4];
+		KSC_GameTools.GetTransformFromPosAndRot(transform, newPos, newDir);
+		editable.SetTransform(transform);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -466,15 +547,102 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	IEntity GetInsertionPoint()
+	SCR_SpawnPoint GetInsertionPoint()
 	{
 		return m_pInsertionPoint;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	COE_AO GetCurrentAO()
+	protected void CreateExfilPoint(vector pos)
 	{
-		return m_pCurrentAO;
+		bool hasExfiltask = (m_ExfilTask != null);
+		DeleteExfilPoint();
+		
+		if (hasExfiltask)
+			CreateExfilTask(pos);
+		
+		SCR_MapMarkerManagerComponent markerManager = SCR_MapMarkerManagerComponent.GetInstance();
+		if (!markerManager)
+			return;
+				
+		m_aExfilMarkers = {new SCR_MapMarkerBase(), new SCR_MapMarkerBase()};
+		
+		foreach (SCR_MapMarkerBase marker : m_aExfilMarkers)
+		{
+			marker.SetType(SCR_EMapMarkerType.PLACED_CUSTOM);
+			marker.SetColorEntry(m_pFactionManager.GetMarkerCustomColorEntry(m_pFactionManager.GetPlayerFaction()));
+			marker.SetWorldPos(pos[0], pos[2]);
+			marker.SetCanBeRemovedByOwner(false);
+		}
+		
+		m_aExfilMarkers[0].SetIconEntry(SCR_EScenarioFrameworkMarkerCustom.CIRCLE);
+		m_aExfilMarkers[1].SetIconEntry(SCR_EScenarioFrameworkMarkerCustom.ARROW_SMALL3);
+		m_aExfilMarkers[1].SetRotation(-90);
+		
+		foreach (SCR_MapMarkerBase marker : m_aExfilMarkers)
+		{
+			markerManager.InsertStaticMarker(marker, false, true);
+		}
+		
+		m_bHasExfilPoint = true;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void CreateExfilTask(vector pos)
+	{
+		if (KSC_TerrainHelper.SurfaceIsWater(pos))
+		{
+			EWaterSurfaceType surfaceType;
+			float area;
+			pos[1] =  SCR_WorldTools.GetWaterSurfaceY(GetWorld(), pos, surfaceType, area);
+		}
+		else
+		{
+			pos[1] = SCR_TerrainHelper.GetTerrainY(pos);
+		}
+		
+		m_ExfilTask = KSC_CountdownAreaTriggerTask.Cast(KSC_GameTools.SpawnPrefab(m_sExfilTaskPrefabName, pos));
+		m_ExfilTask.SetParams(m_pFactionManager.GetPlayerFaction(), 30);
+		SCR_Task.GetOnTaskStateChanged().Insert(OnExfilStateChanged);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool HasExfilPoint()
+	{
+		return m_bHasExfilPoint;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void DeleteExfilPoint()
+	{
+		SCR_MapMarkerManagerComponent markerManager = SCR_MapMarkerManagerComponent.GetInstance();
+		if (!markerManager)
+			return;
+		
+		if (m_aExfilMarkers)
+		{
+			foreach (SCR_MapMarkerBase marker : m_aExfilMarkers)
+			{
+				markerManager.RemoveStaticMarker(marker);
+			}
+		}
+		
+		if (m_ExfilTask)
+		{
+			SCR_EntityHelper.DeleteEntityAndChildren(m_ExfilTask);
+			SCR_Task.GetOnTaskStateChanged().Remove(OnExfilStateChanged);
+		}
+		
+		m_aExfilMarkers = null;
+		m_bHasExfilPoint = false;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	array<COE_AO> GetCurrentAOs()
+	{
+		return m_aCurrentAOs;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -616,7 +784,7 @@ class COE_GameMode : SCR_BaseGameMode
 			return;
 		}
 		
-		m_pInsertionPoint = rpl.GetEntity();
+		m_pInsertionPoint = SCR_SpawnPoint.Cast(rpl.GetEntity());
 	}	
 	
 	//------------------------------------------------------------------------------------------------
@@ -664,6 +832,34 @@ class COE_GameMode : SCR_BaseGameMode
 		}
 		
 		playerController.OnPlayerRoleChangeServer(roleFlags);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[Friend(COE_AO)]
+	protected void OnAOFinished(COE_AO completedAO)
+	{
+		foreach (COE_AO ao : m_aCurrentAOs)
+		{
+			if (ao && !ao.AreAllTasksFinished())
+				return;
+		}
+		
+		int markerPos[2];
+		m_aExfilMarkers[0].GetWorldPos(markerPos);
+		vector pos = Vector(markerPos[0], 0, markerPos[1]);
+		CreateExfilTask(pos);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void OnExfilStateChanged(SCR_Task task, SCR_ETaskState newState)
+	{
+		if (task != m_ExfilTask)
+			return;
+		
+		if (newState != SCR_ETaskState.COMPLETED)
+			return;
+				
+		ExecuteCommanderRequest(COE_ECommanderRequest.CANCEL_AO);
 	}
 	
 	//------------------------------------------------------------------------------------------------

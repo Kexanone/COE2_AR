@@ -50,6 +50,14 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
+  CustomStringTableItem "{66FB2482928FE156}" {
+   Id "COE-Action_SetExfilPoint"
+   Target_en_us "Set exfil point"
+   Target_de_de "S"
+   Modified 1727742336
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{609F29E3E0663A77}" {
    Id "COE-Action_SetInsertionPoint"
    Target_en_us "Set insertion point"
@@ -458,11 +466,25 @@ StringTable {
    LastChanged "kex"
   }
   CustomStringTableItem "{609A2A3512083599}" {
-   Id "COE-Reason_NoAO"
-   Target_en_us "No AO"
-   Modified 1620741206
-   Author "kex"
-   LastChanged "kex"
+   Id "COE-Reason_NoAOGenerated"
+   Target_en_us "No AO Generated"
+   Modified 1727743061
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66FB249D34DDF4F7}" {
+   Id "COE-Reason_NoAOSelected"
+   Target_en_us "No AO Selected"
+   Modified 1727743084
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66FB2482B7F8AB77}" {
+   Id "COE-Reason_NoExfilPoint"
+   Target_en_us "No Exfil Point"
+   Modified 1727742403
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{612881F66CCCA0B3}" {
    Id "COE-Reason_NoInsertionPoint"
