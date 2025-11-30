@@ -167,7 +167,7 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	Tuple2<IEntity, array<ref PointInfo>> GetRandomBuildingWithSlots(EEditableEntityLabel label, bool addGarrison = true)
+	Tuple2<IEntity, array<ref PointInfo>> GetRandomBuildingWithSlots(EEditableEntityLabel label, bool addGarrison = true, bool blockSlot = false)
 	{
 		array<ref Tuple2<IEntity, array<ref PointInfo>>> buildingEntries;
 		if (!m_mBuildingSlots.Find(label, buildingEntries))
@@ -177,6 +177,9 @@ class COE_AO : KSC_AO
 			return null;
 		
 		Tuple2<IEntity, array<ref PointInfo>> entry = buildingEntries.GetRandomElement();
+		
+		if (blockSlot)
+			buildingEntries.RemoveItem(entry);
 		
 		if (addGarrison)
 		{			
@@ -194,8 +197,6 @@ class COE_AO : KSC_AO
 				SCR_AIGroup group = SpawnGroupPrefab(entries.GetRandomElement(), transform[3]);
 				if (!group)
 					return entry;
-				
-				PrintFormat("%1|%2", transform[3], group.GetOrigin());
 				
 				KSC_AITasks.Defend(group, transform[3], 10);
 				AddGroup(group);
