@@ -1,4 +1,5 @@
 //------------------------------------------------------------------------------------------------
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_DestroyCacheTaskBuilder : COE_BaseTaskBuilder
 {
 	//------------------------------------------------------------------------------------------------
@@ -74,11 +75,5 @@ class COE_DestroyCacheTaskBuilder : COE_BaseTaskBuilder
 		
 		task.SetParams(factionManager.GetPlayerFaction(), cache);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Destroy Cache";
 	}
 }

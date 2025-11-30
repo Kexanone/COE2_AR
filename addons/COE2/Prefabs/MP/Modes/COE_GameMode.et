@@ -203,24 +203,35 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
  m_aAvailableTaskBuilders {
   COE_ClearAreaTaskBuilder "{61597E8E54065A21}" {
    m_sTaskPrefabName "{2B6E6196395E9C08}Prefabs/Tasks/KSC_ClearAreaTask.et"
+   m_sTaskName "Clear Area"
   }
   COE_DestroyInstallationTaskBuilder "{61597E8E4A6758CA}" {
-   m_sTaskPrefabName "{40E7AF0D1DC74D51}Prefabs/Tasks/KSC_DestroyTask.et"
+   m_sTaskPrefabName "{8512884F22024411}Prefabs/Tasks/KSC_SabotageTask.et"
+   m_sTaskName "Sabotage Installation"
   }
   COE_DestroyVehicleTaskBuilder "{6172533E07DA785A}" {
    m_sTaskPrefabName "{40E7AF0D1DC74D51}Prefabs/Tasks/KSC_DestroyTask.et"
-  }
-  COE_KillOfficerTaskBuilder "{61597E8E486E53D3}" {
-   m_sTaskPrefabName "{5474FE33D55AB461}Prefabs/Tasks/KSC_KillTask.et"
-  }
-  COE_FindIntelTaskBuilder "{61597E8E4968BB4B}" {
-   m_sTaskPrefabName "{0F28CBE570B9F96A}Prefabs/Tasks/KSC_FindIntelTask.et"
-  }
-  COE_FreeHostageTaskBuilder "{65ECF99ECA58094A}" {
-   m_sTaskPrefabName "{F0E8904855918E15}Prefabs/Tasks/KSC_FreeHostageTask.et"
+   m_sTaskName "Destroy Vehicle"
   }
   COE_DestroyCacheTaskBuilder "{66FC0A16C998A130}" {
    m_sTaskPrefabName "{40E7AF0D1DC74D51}Prefabs/Tasks/KSC_DestroyTask.et"
+   m_sTaskName "Destroy Cache"
+  }
+  COE_EnemyOfficerTaskBuilder "{61597E8E486E53D3}" {
+   m_sTaskPrefabName "{5474FE33D55AB461}Prefabs/Tasks/KSC_KillTask.et"
+   m_sTaskName "Kill Officer"
+  }
+  COE_EnemyOfficerTaskBuilder "{66FC0A74A5A8753D}" {
+   m_sTaskPrefabName "{DE9C612D13BF9B18}Prefabs/Tasks/KSC_TakeCaptiveTask.et"
+   m_sTaskName "Capture Officer"
+  }
+  COE_FreeHostageTaskBuilder "{65ECF99ECA58094A}" {
+   m_sTaskPrefabName "{F0E8904855918E15}Prefabs/Tasks/KSC_FreeHostageTask.et"
+   m_sTaskName "Free Hostage"
+  }
+  COE_FindIntelTaskBuilder "{61597E8E4968BB4B}" {
+   m_sTaskPrefabName "{0F28CBE570B9F96A}Prefabs/Tasks/KSC_FindIntelTask.et"
+   m_sTaskName "Find Intel"
   }
  }
 }

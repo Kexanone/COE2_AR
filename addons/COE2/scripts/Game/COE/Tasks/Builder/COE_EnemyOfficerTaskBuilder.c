@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------------------------
-class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
+class COE_EnemyOfficerTaskBuilder : COE_BaseTaskBuilder
 {
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
@@ -69,17 +70,11 @@ class COE_KillOfficerTaskBuilder : COE_BaseTaskBuilder
 		KSC_AITasks.Defend(group, pos, 5);
 		ao.AddGroup(group);
 		
-		KSC_KillTask task = KSC_KillTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
+		KSC_SubjectBaseTask task = KSC_SubjectBaseTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
 		if (!task)
 			return null;
 		
 		task.SetParams(factionManager.GetPlayerFaction(), hvt);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Kill Officer";
 	}
 }

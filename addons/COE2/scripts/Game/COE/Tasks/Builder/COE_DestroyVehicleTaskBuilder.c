@@ -1,4 +1,5 @@
 //------------------------------------------------------------------------------------------------
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 {
 	//------------------------------------------------------------------------------------------------
@@ -67,11 +68,5 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		
 		task.SetParams(factionManager.GetPlayerFaction(), hvt);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Destroy Vehicle";
 	}
 }

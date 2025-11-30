@@ -1,4 +1,5 @@
 //------------------------------------------------------------------------------------------------
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_FreeHostageTaskBuilder : COE_BaseTaskBuilder
 {
 	//------------------------------------------------------------------------------------------------
@@ -68,11 +69,5 @@ class COE_FreeHostageTaskBuilder : COE_BaseTaskBuilder
 		
 		task.SetParams(factionManager.GetPlayerFaction(), hostage);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Free Hostage";
 	}
 }

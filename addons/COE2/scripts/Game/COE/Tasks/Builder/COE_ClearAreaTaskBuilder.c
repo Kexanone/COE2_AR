@@ -1,4 +1,5 @@
 //------------------------------------------------------------------------------------------------
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_ClearAreaTaskBuilder : COE_BaseTaskBuilder
 {
 	[Attribute(defvalue: "0.666", uiwidget: UIWidgets.Slider, desc: "Prefab name of the intel object", params: "0 1")]
@@ -21,11 +22,5 @@ class COE_ClearAreaTaskBuilder : COE_BaseTaskBuilder
 		
 		task.SetParams(factionManager.GetPlayerFaction(), gameMode.GetAORadius(), m_fFriendlyRatioThreshold);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Clear Area";
 	}
 }
