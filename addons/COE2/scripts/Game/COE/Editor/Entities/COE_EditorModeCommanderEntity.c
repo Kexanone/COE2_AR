@@ -49,7 +49,7 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 	//! Makes sure to switch to an editor with full support for attributes if possible
 	static void StartEditingAttributes(Managed entity)
 	{
-		m_pEditorManagerEntity = SCR_EditorManagerEntity.Cast(SCR_EditorManagerEntity.GetInstance());
+		m_pEditorManagerEntity = SCR_EditorManagerEntity.GetInstance();
 		if (!m_pEditorManagerEntity)
 			return;
 		

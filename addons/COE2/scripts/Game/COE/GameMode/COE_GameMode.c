@@ -87,7 +87,7 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "15", desc: "Maximum time in minutes required for the enemy to send reinforcements.", category: "Default Support Settings")]
 	float m_fMaxEnemyReinforcementTime;
 	
-	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties", category: "Default Scenario Properties")]
+	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs", category: "Default Scenario Properties")]
 	protected bool m_bCiviliansEnabled;
 	
 	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM", category: "Default Scenario Properties")]

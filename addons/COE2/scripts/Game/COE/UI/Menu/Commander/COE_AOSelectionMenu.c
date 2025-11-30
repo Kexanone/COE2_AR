@@ -1,7 +1,5 @@
 class COE_AOSelectionMenu : SCR_CommandPostMapMenuUI
 {
-	protected COE_MapUIElementContainer m_UIElementContainer;
-	
 	//------------------------------------------------------------------------------------------------
 	override protected void OpenMap()
 	{

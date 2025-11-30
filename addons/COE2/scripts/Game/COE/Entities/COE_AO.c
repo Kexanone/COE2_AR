@@ -30,7 +30,6 @@ class COE_AO : KSC_AO
 	protected ref ScriptInvoker<COE_AO> m_OnAllTasksFinished = new ScriptInvoker<COE_AO>();
 	
 	protected static const int TERRAIN_DATA_BUFFER_SIZE = 1000000;
-	protected static const int MAX_ATTEMPTS = 10000;
 			
 	//------------------------------------------------------------------------------------------------
 	void COE_AO(IEntitySource src, IEntity parent)
@@ -51,7 +50,6 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	void DelayedInit()
 	{
-		Math.Randomize(-1);
 		m_pGameMode = COE_GameMode.GetInstance();
 		m_pFactionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		m_iMaxAICount = m_pGameMode.GetTargetEnemyAICount();
@@ -485,9 +483,6 @@ class COE_AO : KSC_AO
 		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.GROUPSIZE_MEDIUM, entries);
 		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.GROUPSIZE_LARGE, entries);
 		
-		int aiCount = 0;
-		int maxAICount = m_pGameMode.GetTargetEnemyAICount();
-		
 		foreach (vector posToDefend : m_aPositionsToDefend)
 		{
 			vector pos = posToDefend;
@@ -705,12 +700,8 @@ class COE_AO : KSC_AO
 	{
 		array<EEditableEntityLabel> labels = {EEditableEntityLabel.SLOT_ROAD_SMALL, EEditableEntityLabel.SLOT_ROAD_MEDIUM, EEditableEntityLabel.SLOT_ROAD_LARGE};
 		
-		int attempt = 0;
-		while (attempt < MAX_ATTEMPTS)
+		while (!labels.IsEmpty())
 		{
-			if (labels.IsEmpty())
-				return false;
-			
 			EEditableEntityLabel label = labels.GetRandomElement();
 			if (!GetRandomTerrainSlot(pos, label, blockSlots))
 			{
