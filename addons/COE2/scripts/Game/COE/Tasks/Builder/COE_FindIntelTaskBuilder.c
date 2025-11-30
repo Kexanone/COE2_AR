@@ -1,4 +1,5 @@
 //------------------------------------------------------------------------------------------------
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 {
 	[Attribute(defvalue: "{6BDCF13C3C65DC1F}Prefabs/Items/Misc/IntelligenceFolder_E_01/KSC_IntelligenceFolder_E_01.et", desc: "Prefab name of the intel object")]
@@ -61,12 +62,6 @@ class COE_FindIntelTaskBuilder : COE_BaseTaskBuilder
 		
 		task.SetParams(factionManager.GetPlayerFaction(), intel);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Find Intel";
 	}
 	
 	protected ref array<IEntity> m_aTables;

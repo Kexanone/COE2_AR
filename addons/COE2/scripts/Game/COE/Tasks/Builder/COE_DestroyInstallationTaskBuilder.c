@@ -1,4 +1,5 @@
 //------------------------------------------------------------------------------------------------
+[SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_DestroyInstallationTaskBuilder : COE_BaseTaskBuilder
 {
 	//------------------------------------------------------------------------------------------------
@@ -53,11 +54,5 @@ class COE_DestroyInstallationTaskBuilder : COE_BaseTaskBuilder
 		
 		task.SetParams(factionManager.GetPlayerFaction(), hvt);
 		return task;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override LocalizedString GetTaskName()
-	{
-		return "Destroy Installation";
 	}
 }
