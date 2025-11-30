@@ -2,6 +2,9 @@
 [SCR_BaseContainerLocalizedTitleField(propertyName: "m_sTaskName")]
 class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 {
+	[Attribute(defvalue: "0.5", desc: "Chance for spawning a helo if a helipad is available", params: "0 1")]
+	protected float m_fHeloSpawnChance;
+	
 	//------------------------------------------------------------------------------------------------
 	override KSC_BaseTask Build(COE_AO ao)
 	{
@@ -12,6 +15,18 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		if (!factionManager)
 			return null;
+		
+		if (Math.RandomFloat(0, 1) < m_fHeloSpawnChance)
+		{
+			Tuple2<IEntity, array<ref PointInfo>> slot = ao.GetRandomBuildingWithSlots(EEditableEntityLabel.VEHICLE_HELICOPTER, addGarrison: true, blockSlot: true);
+			if (slot)
+			{
+				array<ResourceName> entries = {};
+				factionManager.GetFactionEntityListWithLabel(factionManager.GetEnemyFaction(), EEntityCatalogType.VEHICLE, EEditableEntityLabel.VEHICLE_HELICOPTER, entries);
+				if (!entries.IsEmpty())
+					return SpawnHeloDestroyTaskInSlot(ao, factionManager, slot, entries.GetRandomElement());
+			}
+		}
 		
 		array<EEditableEntityLabel> labels = {
 			EEditableEntityLabel.TRAIT_MANAGEMENT_BASE,
@@ -62,6 +77,25 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		ao.AddPositionToDefend(hvt.GetOrigin());
 		ao.SpawnTurretOccupants(hvt);
 				
+		KSC_DestroyObjectTask task = KSC_DestroyObjectTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
+		if (!task)
+			return null;
+		
+		task.SetParams(factionManager.GetPlayerFaction(), hvt);
+		return task;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected KSC_BaseTask SpawnHeloDestroyTaskInSlot(COE_AO ao, COE_FactionManager factionManager, Tuple2<IEntity, array<ref PointInfo>> slot, ResourceName heloPrefab)
+	{
+		PointInfo point = slot.param2.GetRandomElement();
+		point.Init(slot.param1);
+		vector transform[4];
+		point.GetWorldTransform(transform);
+		
+		IEntity hvt = KSC_GameTools.SpawnPrefab(heloPrefab, transform);
+		ao.AddEntity(hvt);
+		
 		KSC_DestroyObjectTask task = KSC_DestroyObjectTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
 		if (!task)
 			return null;
