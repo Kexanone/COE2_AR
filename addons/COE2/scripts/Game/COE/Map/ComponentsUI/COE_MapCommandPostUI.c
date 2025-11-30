@@ -44,6 +44,13 @@ class COE_MapCommandPostUI : SCR_MapCommandPostUI
 	//------------------------------------------------------------------------------------------------
 	override protected void CloseMenu()
 	{
+		// Delay closing to prevent opening of escape menu
+		GetGame().GetCallqueue().CallLater(CloseMenuDelayed, 100);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void CloseMenuDelayed()
+	{
 		MenuManager menuManager = GetGame().GetMenuManager();
 		menuManager.CloseMenuByPreset(ChimeraMenuPreset.COE_AOSelectionMenu);
 	}
