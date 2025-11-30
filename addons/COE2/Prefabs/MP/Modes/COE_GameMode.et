@@ -200,14 +200,6 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
  m_aDisabledResourceTypes {
   SUPPLIES
  }
- m_aBlacklistedDescriptorTypes {
-  COE_MapDescriptorType "{6094DDD7F4523371}" {
-   m_iType MDT_NAME_SEA_MINOR
-  }
-  COE_MapDescriptorType "{6094DDD704E08A01}" {
-   m_iType MDT_NAME_SEA_MAJOR
-  }
- }
  m_aAvailableTaskBuilders {
   COE_ClearAreaTaskBuilder "{61597E8E54065A21}" {
    m_sTaskPrefabName "{2B6E6196395E9C08}Prefabs/Tasks/KSC_ClearAreaTask.et"
@@ -226,6 +218,9 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
   }
   COE_FreeHostageTaskBuilder "{65ECF99ECA58094A}" {
    m_sTaskPrefabName "{F0E8904855918E15}Prefabs/Tasks/KSC_FreeHostageTask.et"
+  }
+  COE_DestroyCacheTaskBuilder "{66FC0A16C998A130}" {
+   m_sTaskPrefabName "{40E7AF0D1DC74D51}Prefabs/Tasks/KSC_DestroyTask.et"
   }
  }
 }
