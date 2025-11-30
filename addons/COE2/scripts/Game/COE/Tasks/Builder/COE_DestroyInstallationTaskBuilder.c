@@ -24,8 +24,24 @@ class COE_DestroyInstallationTaskBuilder : COE_BaseTaskBuilder
 		
 		if (entries.IsEmpty())
 			return null;
-				
-		IEntity hvt = ao.SpawnInRandomFlatSlot(entries.GetRandomElement(), EEditableEntityLabel.SLOT_FLAT_SMALL, false);
+		
+		IEntity hvt;
+		
+		while (!entries.IsEmpty())
+		{
+			ResourceName entry = entries.GetRandomElement();
+			EEditableEntityLabel slotLabel;
+			
+			if (KSC_TerrainSlotTools.GetSlotLabel(entry, slotLabel))
+			{
+				hvt = ao.SpawnInRandomFlatSlot(entry, slotLabel, false);
+				if (hvt)
+					break;
+			}
+			
+			entries.RemoveItem(entry);
+		}
+			
 		if (!hvt)
 			return null;
 		
