@@ -8,11 +8,15 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnGameStateChange()
 	{
-		OnPlayerRoleChange(m_pPlayerController.GetPlayerRoles());
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return;
+		
+		OnPlayerCommanderRoleChanged(gameMode.IsCommander(SCR_PlayerController.GetLocalPlayerId()));
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void OnPlayerRoleChange(EPlayerRole roles)
+	protected void OnPlayerCommanderRoleChanged(bool isCommander)
 	{
 		GetGame().GetInputManager().RemoveActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);
 		m_Widget.SetVisible(false);
@@ -22,7 +26,7 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 			return;
 		
 		// Only available to commanders and admins
-		if ((roles & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR)) == EPlayerRole.NONE)
+		if (!isCommander)
 			return;
 		
 		GetGame().GetInputManager().AddActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);
@@ -57,7 +61,7 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 		
 		OnGameStateChange();
 		m_pGameMode.COE_GetOnStateChanged().Insert(OnGameStateChange);
-		m_pPlayerController.GetOnLocalPlayerRoleChange().Insert(OnPlayerRoleChange);
+		m_pPlayerController.GetOnLocalCommanderRoleChanged().Insert(OnPlayerCommanderRoleChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -67,7 +71,7 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 			return;
 		
 		m_pGameMode.COE_GetOnStateChanged().Remove(OnGameStateChange);
-		m_pPlayerController.GetOnLocalPlayerRoleChange().Remove(OnPlayerRoleChange);
+		m_pPlayerController.GetOnLocalCommanderRoleChanged().Remove(OnPlayerCommanderRoleChanged);
 		GetGame().GetInputManager().RemoveActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);
 	}
 }

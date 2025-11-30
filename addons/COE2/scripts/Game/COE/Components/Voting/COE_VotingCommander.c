@@ -14,9 +14,13 @@ class COE_VotingCommanderIn: SCR_VotingReferendum
 		COE_PlayerController playerController = COE_PlayerController.Cast(GetGame().GetPlayerController());
 		if (!playerController || playerController.GetPlayerId() != value)
 			return false;
-
+		
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return false;
+		
 		//--- Can only vote for players that are not yet commanders
-		return !playerController.HasPlayerRole(EPlayerRole.COE_COMMANDER);
+		return !gameMode.IsCommander(value);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -62,12 +66,12 @@ class COE_VotingCommanderOut: COE_VotingCommanderIn
 		if (!votingManager || votingManager.GetHostPlayerID() == value || GetGame().GetPlayerManager().HasPlayerRole(value, EPlayerRole.ADMINISTRATOR))
 			return false;
 		
-		COE_PlayerController subjectPlayerController = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(value));
-		if (!subjectPlayerController)
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
 			return false;
 		
 		//--- Can only vote for players that are commanders
-		return subjectPlayerController.HasPlayerRole(EPlayerRole.COE_COMMANDER);
+		return gameMode.IsCommander(value);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -110,8 +114,12 @@ class COE_VotingCommanderWithdraw: COE_VotingCommanderIn
 		if (!votingManager || votingManager.GetHostPlayerID() == value || GetGame().GetPlayerManager().HasPlayerRole(value, EPlayerRole.ADMINISTRATOR))
 			return false;
 		
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return false;
+		
 		//--- Can only vote for players that are not yet commanders
-		return playerController.HasPlayerRole(EPlayerRole.COE_COMMANDER);
+		return gameMode.IsCommander(value);
 	}
 	
 	//------------------------------------------------------------------------------------------------

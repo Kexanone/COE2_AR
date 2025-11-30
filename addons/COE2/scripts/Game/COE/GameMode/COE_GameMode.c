@@ -96,6 +96,9 @@ class COE_GameMode : SCR_BaseGameMode
 	protected ref array<ref KSC_Location> m_aAvailableLocations;
 	
 	[RplProp()]
+	protected ref array<int> m_aCommanderPlayerIDs = {};
+	
+	[RplProp()]
 	protected vector m_vMainBasePos;
 	protected COE_MainBaseEntity m_pMainBase;
 	
@@ -805,18 +808,13 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		super.OnPlayerRoleChange(playerId, roleFlags);
 		
-		if (Replication.IsClient())
-			return;
-					
-		
-		COE_PlayerController playerController = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
-		if (!playerController)
+		if (!Replication.IsServer())
 			return;
 		
-		bool wasCommanderOrAdmin = (playerController.GetPlayerRoles() & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR));
-		bool becomesCommanderOrAdmin = (roleFlags & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR));
+		bool wasCommander = IsCommander(playerId);
+		bool becomesCommander = (roleFlags & (EPlayerRole.COE_COMMANDER | EPlayerRole.ADMINISTRATOR));
 		// Check if commander flag was changed
-		if (wasCommanderOrAdmin != becomesCommanderOrAdmin)
+		if (wasCommander != becomesCommander)
 		{
 			SCR_EditorManagerCore core = SCR_EditorManagerCore.Cast(SCR_EditorManagerCore.GetInstance(SCR_EditorManagerCore));
 			SCR_EditorManagerEntity editorManager = core.GetEditorManager(playerId);
@@ -825,13 +823,29 @@ class COE_GameMode : SCR_BaseGameMode
 			if (m_bCommanderBecomesGM)
 				modes |= EEditorMode.EDIT;
 			
-			if (becomesCommanderOrAdmin)
+			if (becomesCommander)
+			{
 				editorManager.AddEditorModes(EEditorModeAccess.BASE, modes);
+				m_aCommanderPlayerIDs.Insert(playerId);
+			}
 			else
+			{
 				editorManager.RemoveEditorModes(EEditorModeAccess.BASE, modes);
+				m_aCommanderPlayerIDs.RemoveItem(playerId);
+			}
+			
+			COE_PlayerController playerController = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
+			if (playerController)
+				playerController.OnCommanderRoleChangedServer(becomesCommander);
+			
+			Replication.BumpMe();
 		}
-		
-		playerController.OnPlayerRoleChangeServer(roleFlags);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsCommander(int playerID)
+	{
+		return m_aCommanderPlayerIDs.Contains(playerID);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -867,5 +881,14 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		SCR_FieldManualUI.Open(EFieldManualEntryId.COE_COMMANDER);
 		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Remove(ShowDocumentation);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// Update list of commanders
+	override protected void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
+	{
+		super.OnPlayerDisconnected(playerId, cause, timeout);
+		m_aCommanderPlayerIDs.RemoveItem(playerId);
+		Replication.BumpMe();
 	}
 }
