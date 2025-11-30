@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{E48D3044D429BDC1}UI/Textures/FieldManual/MPModes/COE2/Images/CommandingBoard.edds"
+ Name "{219B5199F146D39D}UI/Textures/FieldManual/MPModes/COE2/Images/AddInsertionPointCommand.edds"
  Configurations {
   PNGResourceClass PC : "{DC555BD399D92412}Configs/System/ResourceTypes/PC/TextureUnspecified.conf" {
    ColorSpace ToSRGB
