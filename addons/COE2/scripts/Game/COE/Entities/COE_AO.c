@@ -6,8 +6,6 @@ class COE_AOClass : KSC_AOClass
 //------------------------------------------------------------------------------------------------
 class COE_AO : KSC_AO
 {
-	protected static const ResourceName EXFIL_TASK_PREFAB_NAME = "{8458A6174F12C732}Prefabs/Tasks/KSC_LeaveAreaTesk.et";
-	
 	protected ref array<IEntity> m_aEntities = {};
 	protected ref array<KSC_BaseTask> m_aTasks = {};
 	protected ref array<SCR_MapMarkerBase> m_aMarkers = {};
@@ -15,8 +13,6 @@ class COE_AO : KSC_AO
 	protected COE_FactionManager m_pFactionManager;
 	protected COE_AOParams m_Params;
 	protected ref KSC_AreaBase m_Area;
-	protected int m_iNumTasks = 0;
-	protected int m_iNumCompletedTasks = 0;
 	
 	protected int m_iAiCount = 0;
 	protected int m_iMaxAICount;
@@ -31,9 +27,9 @@ class COE_AO : KSC_AO
 	protected ref array<ref Tuple2<Turret, AIGroup>> m_aMortars = {};
 	protected ref array<AIGroup> m_aAllGroups = {};
 	protected ref array<AIGroup> m_aQRFGroups = {};
+	protected ref ScriptInvoker<COE_AO> m_OnAllTasksFinished = new ScriptInvoker<COE_AO>();
 	
 	protected static const int TERRAIN_DATA_BUFFER_SIZE = 1000000;
-	protected static const int MAX_ATTEMPTS = 10000;
 			
 	//------------------------------------------------------------------------------------------------
 	void COE_AO(IEntitySource src, IEntity parent)
@@ -45,13 +41,17 @@ class COE_AO : KSC_AO
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetParams(COE_AOParams params)
+	{
+		m_Params = params;
+		m_Area = params.GetLocation().m_Area;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void DelayedInit()
 	{
-		Math.Randomize(-1);
 		m_pGameMode = COE_GameMode.GetInstance();
 		m_pFactionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
-		m_Params = m_pGameMode.GetCurrentAOParams();
-		m_Area = m_pGameMode.GetCurrentLocation().m_Area;
 		m_iMaxAICount = m_pGameMode.GetTargetEnemyAICount();
 		ScanTerrainSlots();
 		ScanBuildingSlots();
@@ -280,19 +280,16 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	void SetUpTasks()
 	{
-		foreach (int i, COE_BaseTaskBuilder builder : m_pGameMode.GetAvailableTaskBuilders())
+		foreach (COE_BaseTaskBuilder taskBuilder : m_Params.GetTaskBuilders())
 		{
-			if (!KSC_BitTools.IsBitSet(m_Params.m_eTaskTypes, i))
-				continue;
-			
-			KSC_BaseTask task = builder.Build(this);
+			KSC_BaseTask task = taskBuilder.Build(this);
 			if (!task)
 				continue;
 			
-			task.GetOnStateChanged().Insert(OnTaskStateChanged);
 			m_aTasks.Insert(task);
-			m_iNumTasks++;
 		}
+		
+		SCR_Task.GetOnTaskStateChanged().Insert(OnTaskStateChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -485,9 +482,6 @@ class COE_AO : KSC_AO
 		array<ResourceName> entries = {};
 		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.GROUPSIZE_MEDIUM, entries);
 		m_pFactionManager.GetFactionEntityListWithLabel(m_pFactionManager.GetEnemyFaction(), EEntityCatalogType.GROUP, EEditableEntityLabel.GROUPSIZE_LARGE, entries);
-		
-		int aiCount = 0;
-		int maxAICount = m_pGameMode.GetTargetEnemyAICount();
 		
 		foreach (vector posToDefend : m_aPositionsToDefend)
 		{
@@ -706,12 +700,8 @@ class COE_AO : KSC_AO
 	{
 		array<EEditableEntityLabel> labels = {EEditableEntityLabel.SLOT_ROAD_SMALL, EEditableEntityLabel.SLOT_ROAD_MEDIUM, EEditableEntityLabel.SLOT_ROAD_LARGE};
 		
-		int attempt = 0;
-		while (attempt < MAX_ATTEMPTS)
+		while (!labels.IsEmpty())
 		{
-			if (labels.IsEmpty())
-				return false;
-			
 			EEditableEntityLabel label = labels.GetRandomElement();
 			if (!GetRandomTerrainSlot(pos, label, blockSlots))
 			{
@@ -962,27 +952,23 @@ class COE_AO : KSC_AO
 	//------------------------------------------------------------------------------------------------
 	void OnTaskStateChanged(SCR_Task task, SCR_ETaskState newState)
 	{
-		if (newState != SCR_ETaskState.COMPLETED && newState != SCR_ETaskState.FAILED)
+		if (!m_aTasks.Contains(KSC_BaseTask.Cast(task)))
 			return;
 		
-		m_iNumCompletedTasks++;
-		
+		if (newState != SCR_ETaskState.COMPLETED && newState != SCR_ETaskState.FAILED)
+			return;
+				
 		// Reveal targets if intel was picked up
 		if (KSC_PickUpItemTask.Cast(task))
 			RevealEnemyPositions();			
 		
-		if (m_iNumTasks > m_iNumCompletedTasks)
+		if (!AreAllTasksFinished())
 			return;
 		
-		KSC_AreaTriggerTask exfilTask =  KSC_AreaTriggerTask.Cast(KSC_GameTools.SpawnPrefab(EXFIL_TASK_PREFAB_NAME, GetOrigin()));
-		if (!exfilTask)
-			return;
+		if (m_OnAllTasksFinished)
+			m_OnAllTasksFinished.Invoke(this);
 		
-		exfilTask.SetParams(m_pFactionManager.GetPlayerFaction(), m_pGameMode.GetAORadius());
-		exfilTask.GetOnStateChanged().Insert(OnExfilStateChanged);
-		m_aTasks.Insert(exfilTask);
-		
-		for (int i = m_aEntities.Count() - 1; i >= 0; i--)
+		for (int i = m_aEntities.Count() - 1; i >= 0; --i)
 		{
 			if (!AIWaypoint.Cast(m_aEntities[i]))
 				continue;
@@ -990,15 +976,8 @@ class COE_AO : KSC_AO
 			SCR_EntityHelper.DeleteEntityAndChildren(m_aEntities[i]);
 			m_aEntities.Remove(i);
 		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void OnExfilStateChanged(SCR_Task task, SCR_ETaskState newState)
-	{
-		if (newState != SCR_ETaskState.COMPLETED)
-			return;
 		
-		m_pGameMode.ExecuteCommanderRequest(COE_ECommanderRequest.CANCEL_AO);
+		SCR_Task.GetOnTaskStateChanged().Remove(OnTaskStateChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -1024,6 +1003,25 @@ class COE_AO : KSC_AO
 			markerManager.InsertStaticMarker(marker, false, true);
 			m_aMarkers.Insert(marker);
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvoker<COE_AO> GetOnAllTasksFinished()
+	{
+		return m_OnAllTasksFinished;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool AreAllTasksFinished()
+	{
+		foreach (KSC_BaseTask task : m_aTasks)
+		{
+			SCR_ETaskState state = task.GetTaskState();
+			if (state != SCR_ETaskState.COMPLETED && state != SCR_ETaskState.FAILED)
+				return false;
+		}
+		
+		return true;
 	}
 		
 	//------------------------------------------------------------------------------------------------

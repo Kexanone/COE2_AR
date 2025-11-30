@@ -10,24 +10,23 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 	[Attribute("0")]
 	protected bool m_bShowAvailableLocations;
 	
-	[Attribute("0")]
-	protected bool m_bShowCurrentLocation;
-	
-	protected ref ScriptInvoker m_OnLocationSelected;
-
-	protected void AddLocation(KSC_Location location)
-	{
-		ShowLocation(location);
-		UpdateIcons();
-	}
-
+	protected COE_MapUIElement m_HoveredElement;
+	protected ref ScriptInvoker<COE_MapUIElement> m_OnElementHovered;
+		
 	//------------------------------------------------------------------------------------------------
 	override void OnMapOpen(MapConfiguration config)
 	{
 		super.OnMapOpen(config);
 		
-		if (m_bShowAvailableLocations || m_bShowCurrentLocation)
+		if (m_bShowAvailableLocations)
 			InitLocations();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnMapClose(MapConfiguration config)
+	{
+		super.OnMapClose(config);
+		m_HoveredElement = null;
 	}
 
 	//------------------------------------------------------------------------------
@@ -41,22 +40,26 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 		{
 			foreach (KSC_Location location : gameMode.GetAvailableLocations())
 			{
-				ShowLocation(location);
+				array<COE_BaseTaskBuilder> taskBuilders;
+				
+				foreach (COE_AOParams entry : gameMode.GetNextAOParams())
+				{
+					if (entry.GetLocation() == location)
+					{
+						taskBuilders = entry.GetTaskBuilders();
+						break;
+					}
+				}
+				
+				ShowLocation(location, taskBuilders);
 			}
-		}
-		
-		if (m_bShowCurrentLocation)
-		{
-			KSC_Location location = gameMode.GetCurrentLocation();
-			if (location)
-				ShowLocation(location);
 		}
 
 		UpdateIcons();
 	}
 
 	//------------------------------------------------------------------------------
-	protected void ShowLocation(notnull KSC_Location location)
+	protected void ShowLocation(notnull KSC_Location location, array<COE_BaseTaskBuilder> taskBuilders = null)
 	{
 		Widget w = GetGame().GetWorkspace().CreateWidgets(m_sCOE_LocationElement, m_wIconsContainer);
 		COE_MapUILocation handler = COE_MapUILocation.Cast(w.FindHandler(COE_MapUILocation));
@@ -69,20 +72,48 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 
 		FrameSlot.SetSizeToContent(w, true);
 		FrameSlot.SetAlignment(w, 0.5, 0.5);
-	}
-
-	//------------------------------------------------------------------------------
-	void OnLocationSelectedExt(KSC_Location location) // called when selected via deploy menu spinbox
-	{
-		SCR_MapUIElement icon = FindLocationIcon(location);
-		if (icon)
-			icon.SelectIcon(false);
+		
+		if (taskBuilders)
+		{
+			foreach (COE_BaseTaskBuilder taskBuilder : taskBuilders)
+			{
+				handler.AddTaskBuilder(taskBuilder, isInit: true);
+			}
+		}
 	}
 	
 	//------------------------------------------------------------------------------
-	void OnLocationSelected(KSC_Location location = null)
+	[Friend(COE_MapUILocation)]
+	protected void UpdateAOParams()
 	{
-		GetOnLocationSelected().Invoke(location);
+		array<ref COE_AOParams> params = {};
+
+		foreach (Widget w, SCR_MapUIElement e : m_mIcons)
+		{
+			COE_MapUILocation locationHandler = COE_MapUILocation.Cast(e);
+			if (!locationHandler)
+				continue;
+			
+			array<COE_BaseTaskBuilder> taskBuilders = locationHandler.GetTaskBuilders();
+			if (taskBuilders.IsEmpty())
+				continue;
+			
+			COE_AOParams entry = new COE_AOParams();
+			entry.SetLocation(locationHandler.GetLocation());
+			entry.SetTaskBuilders(taskBuilders);
+			params.Insert(entry);
+		}
+		
+		COE_EditorModeCommanderEntity.RequestUpdateAOParams(params);
+	}
+	
+	//------------------------------------------------------------------------------
+	void SetHoveredElement(COE_MapUIElement element)
+	{
+		m_HoveredElement = element;
+		
+		if (m_OnElementHovered)
+			m_OnElementHovered.Invoke(element);
 	}
 	
 	//------------------------------------------------------------------------------
@@ -100,12 +131,13 @@ class COE_MapUIElementContainer : SCR_MapUIElementContainer
 
 		return null;
 	}
-
-	ScriptInvoker GetOnLocationSelected()
+	
+	//------------------------------------------------------------------------------
+	ScriptInvoker<COE_MapUIElement> GetOnElementHovered()
 	{
-		if (!m_OnLocationSelected)
-			m_OnLocationSelected = new ScriptInvoker();
-
-		return m_OnLocationSelected;
+		if (!m_OnElementHovered)
+			m_OnElementHovered = new ScriptInvoker<COE_MapUIElement>();
+		
+		return m_OnElementHovered;
 	}
 }

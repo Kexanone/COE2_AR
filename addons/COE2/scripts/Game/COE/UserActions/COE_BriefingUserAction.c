@@ -12,7 +12,7 @@ class COE_BriefingUserAction : COE_BaseBoardUserAction
 	{
 		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.INTERMISSION)
 		{
-			m_sCannotPerformReason = "#COE-Reason_NoAO";
+			m_sCannotPerformReason = "#COE-Reason_NoAOGenerated";
 			return false;
 		};
 		

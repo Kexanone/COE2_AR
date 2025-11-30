@@ -49,7 +49,7 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 	//! Makes sure to switch to an editor with full support for attributes if possible
 	static void StartEditingAttributes(Managed entity)
 	{
-		m_pEditorManagerEntity = SCR_EditorManagerEntity.Cast(SCR_EditorManagerEntity.GetInstance());
+		m_pEditorManagerEntity = SCR_EditorManagerEntity.GetInstance();
 		if (!m_pEditorManagerEntity)
 			return;
 		
@@ -97,41 +97,22 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 	//------------------------------------------------------------------------------------------------
 	static void StartSelectingAO()
 	{
+		GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.COE_AOSelectionMenu, DialogPriority.INFORMATIVE, 0, true);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static void RequestUpdateAOParams(array<ref COE_AOParams> params)
+	{
 		COE_EditorModeCommanderEntity editorEntity = COE_EditorModeCommanderEntity.Cast(COE_EditorModeCommanderEntity.GetInstance());
 		if (!editorEntity)
 			return;
 		
-		editorEntity.Rpc(editorEntity.StartSelectingAOServer);
+		editorEntity.Rpc(editorEntity.RpcDo_UpdateAOParamsServer, params);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void StartSelectingAOServer()
-	{
-		Rpc(StartSelectingAOOwner, m_pGameMode.GetNextAOParams());
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	void StartSelectingAOOwner(COE_AOParams params)
-	{
-		COE_AOSelectionMenu dialog = COE_AOSelectionMenu.Cast(GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.COE_AOSelectionMenu, DialogPriority.INFORMATIVE, 0, true));
-		if (!dialog)
-			return;
-		
-		dialog.SetParams(params);
-		dialog.GetOnConfirm().Insert(ConfirmSelectingAO);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void ConfirmSelectingAO(COE_AOParams params)
-	{
-		Rpc(ConfirmSelectingAOServer, params);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void ConfirmSelectingAOServer(COE_AOParams params)
+	protected void RpcDo_UpdateAOParamsServer(array<ref COE_AOParams> params)
 	{
 		m_pGameMode.SetNextAOParams(params);
 	}

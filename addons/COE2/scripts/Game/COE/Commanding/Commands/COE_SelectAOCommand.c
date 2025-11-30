@@ -15,13 +15,11 @@ class COE_SelectAOCommand : COE_BaseRadialCommanderCommand
 	//------------------------------------------------------------------------------------------------
 	override bool CanBePerformed(notnull SCR_ChimeraCharacter user)
 	{
-		if (COE_GameMode.GetInstance().COE_GetState() == COE_EGameModeState.BRIEFING)
-		{
-			m_sCannotPerformReason = "#COE-Reason_OngoingBriefing";
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
 			return false;
-		}
 		
-		if (COE_GameMode.GetInstance().COE_GetState() != COE_EGameModeState.INTERMISSION)
+		if (gameMode.COE_GetState() != COE_EGameModeState.INTERMISSION)
 		{
 			m_sCannotPerformReason = "#COE-Reason_OngoingAO";
 			return false;

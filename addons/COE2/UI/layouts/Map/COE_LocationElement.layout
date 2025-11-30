@@ -4,6 +4,7 @@ FrameWidgetClass {
  Clipping False
  components {
   COE_MapUILocation "{6094BED44AC74379}" {
+   m_UnknownFactionColor 0.947 0.644 0.136 1
   }
  }
  {
