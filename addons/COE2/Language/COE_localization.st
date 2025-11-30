@@ -10,24 +10,17 @@ StringTable {
   }
   CustomStringTableItem "{609A2A3C8BABD4C6}" {
    Id "COE-Action_CancelAO"
-   Target_en_us "Cancel AO"
-   Modified 1620744428
+   Target_en_us "Cancel all AOs"
+   Modified 1727862254
    Author "kex"
-   LastChanged "kex"
-  }
-  CustomStringTableItem "{609F29E24795601A}" {
-   Id "COE-Action_ConfirmCancelAO"
-   Target_en_us "CONFIRM CANCEL AO"
-   Modified 1621047048
-   Author "kex"
-   LastChanged "kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{6099212B7E1B92EE}" {
    Id "COE-Action_GenerateAO"
-   Target_en_us "Generate AO"
-   Modified 1620742993
+   Target_en_us "Generate AOs and tasks"
+   Modified 1727862294
    Author "kex"
-   LastChanged "kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{6098EB566634958C}" {
    Id "COE-Action_ObjectiveAttributes"
@@ -36,25 +29,17 @@ StringTable {
    Author "kex"
    LastChanged "kex"
   }
-  CustomStringTableItem "{609F29E23AC05072}" {
-   Id "COE-Action_QuitCancelAO"
-   Target_en_us "Quit cancel AO"
-   Modified 1621047068
-   Author "kex"
-   LastChanged "kex"
-  }
   CustomStringTableItem "{6098EB56B679A6E9}" {
    Id "COE-Action_SelectAO"
-   Target_en_us "Select AO"
-   Modified 1620742934
+   Target_en_us "Select AOs and tasks"
+   Modified 1727862300
    Author "kex"
-   LastChanged "kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{66FB2482928FE156}" {
    Id "COE-Action_SetExfilPoint"
    Target_en_us "Set exfil point"
-   Target_de_de "S"
-   Modified 1727742336
+   Modified 1727861882
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -320,38 +305,52 @@ StringTable {
   }
   CustomStringTableItem "{6172918012D7BC0E}" {
    Id "COE-FieldManual_Page_Commander_Text_00"
-   Target_en_us "Commander is a votable role that can change the scenario properties, set up missions and place insertion points."
-   Modified 1634901572
+   Target_en_us "Commander is a votable role that can change the scenario properties, set up missions and place insertion and exfil points."
+   Modified 1727861908
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{61729182BBA06C85}" {
    Id "COE-FieldManual_Page_Commander_Text_01"
-   Target_en_us "1. Set up AO"
-   Modified 1634906330
+   Target_en_us "Commander Actions"
+   Modified 1727862134
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{61729182D079A9C9}" {
    Id "COE-FieldManual_Page_Commander_Text_02"
-   Target_en_us "Commanders can change the scenario properties, select the location and tasks and generate the AO via the board or commanding menu."
-   Modified 1634904088
+   Target_en_us "Commander can execute actions such as setting up tasks via the board or commanding menu."
+   Modified 1727863725
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{617291820B539877}" {
    Id "COE-FieldManual_Page_Commander_Text_03"
-   Target_en_us "2. Set up insertion point"
-   Modified 1634906267
+   Target_en_us "1. Select AOs and tasks"
+   Modified 1727862536
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{6172918201FA959E}" {
    Id "COE-FieldManual_Page_Commander_Text_04"
-   Target_en_us "Commanders can set up an insertion point via the map commanding menu once an AO has been generated."
-   Modified 1634906153
+   Target_en_us "Commander can select tasks by opening the selection menu on the board or commanding menu. Then open the map context menu on a location icon to add tasks."
+   Modified 1727862509
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66FD131FF9CA0521}" {
+   Id "COE-FieldManual_Page_Commander_Text_05"
+   Target_en_us "2. Set up insertion and exfil points"
+   Modified 1727862531
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66FD131FFF014623}" {
+   Id "COE-FieldManual_Page_Commander_Text_06"
+   Target_en_us "Commanders can set up insertion and exfil points via the map context menu, either inside the AO selection menu or on the regular map."
+   Modified 1727862600
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{6172918F148C1106}" {
    Id "COE-KeybindMap_MapContextualMenu"
