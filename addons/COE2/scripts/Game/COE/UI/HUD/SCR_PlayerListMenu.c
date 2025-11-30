@@ -8,15 +8,10 @@ modded class SCR_PlayerListMenu : SCR_SuperMenuBase
 	{
 		super.UpdateGameMasterIndicator(entry, editorIslimited);
 		
-		if (!editorIslimited)
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
 			return;
 				
-		COE_PlayerController playerController = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(entry.m_iID));
-		if (!playerController)
-			return;
-		
-		Widget gameMasterIndicator = entry.m_wRow.FindAnyWidget(m_sGameMasterIndicatorName);
-		if (gameMasterIndicator)
-			gameMasterIndicator.SetVisible(playerController.HasPlayerRole(EPlayerRole.COE_COMMANDER));
+		ToggleCommanderIndicator(entry, gameMode.IsCommander(entry.m_iID));
 	}
 }

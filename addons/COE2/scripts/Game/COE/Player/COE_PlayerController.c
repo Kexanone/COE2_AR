@@ -6,10 +6,7 @@ class COE_PlayerControllerClass : SCR_PlayerControllerClass
 //------------------------------------------------------------------------------------------------
 class COE_PlayerController : SCR_PlayerController
 {
-	[RplProp(onRplName: "OnLocalPlayerRoleChange")]
-	protected EPlayerRole m_iPlayerRoles = EPlayerRole.NONE;
-	
-	protected ref ScriptInvoker m_OnLocalPlayerRoleChange = new ScriptInvoker();
+	protected ref ScriptInvoker<bool> m_OnLocalCommanderRoleChanged = new ScriptInvoker<bool>();
 	static ref ScriptInvoker s_OnLocalPlayerFastTraveled = new ScriptInvoker();
 	
 	protected const float FAST_TRAVEL_FADE_DURATION = 1.5;
@@ -102,42 +99,26 @@ class COE_PlayerController : SCR_PlayerController
 	}
 
 	//------------------------------------------------------------------------------------------------
-	void OnPlayerRoleChangeServer(EPlayerRole roles)
+	[Friend(COE_GameMode)]
+	protected void OnCommanderRoleChangedServer(bool isCommander)
 	{
-		m_iPlayerRoles = roles;
-
-		// Only act to change locally if not dedicated
-		if (RplSession.Mode() != RplMode.Dedicated)
-			OnLocalPlayerRoleChange();
+		Rpc(RpcDo_OnCommanderRoleChangedOwner, isCommander);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_OnCommanderRoleChangedOwner(bool isCommander)
+	{
+		if (m_OnLocalCommanderRoleChanged)
+			m_OnLocalCommanderRoleChanged.Invoke(isCommander);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvoker<bool> GetOnLocalCommanderRoleChanged()
+	{
+		if (!m_OnLocalCommanderRoleChanged)
+			m_OnLocalCommanderRoleChanged = new ScriptInvoker<bool>();
 		
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void OnLocalPlayerRoleChange()
-	{
-		RplComponent rpl = RplComponent.Cast(FindComponent(RplComponent));
-		if (!rpl || !rpl.IsOwner())
-			return;
-		
-		m_OnLocalPlayerRoleChange.Invoke(m_iPlayerRoles);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	EPlayerRole GetPlayerRoles()
-	{
-		return m_iPlayerRoles;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool HasPlayerRole(EPlayerRole role)
-	{
-		return m_iPlayerRoles & role;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	ScriptInvoker GetOnLocalPlayerRoleChange()
-	{
-		return m_OnLocalPlayerRoleChange;
+		return m_OnLocalCommanderRoleChanged;
 	}
 }

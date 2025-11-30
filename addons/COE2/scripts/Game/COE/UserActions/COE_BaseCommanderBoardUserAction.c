@@ -5,10 +5,10 @@ class COE_BaseCommanderBoardUserAction : COE_BaseBoardUserAction
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
-		COE_PlayerController playerController = COE_PlayerController.Cast(GetGame().GetPlayerController());
-		if (!playerController)
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
 			return false;
 		
-		return (playerController.HasPlayerRole(EPlayerRole.COE_COMMANDER) || playerController.HasPlayerRole(EPlayerRole.ADMINISTRATOR));
+		return gameMode.IsCommander(SCR_PlayerController.GetLocalPlayerId());
 	}
 }
