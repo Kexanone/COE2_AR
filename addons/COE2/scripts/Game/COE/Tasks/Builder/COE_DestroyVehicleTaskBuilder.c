@@ -68,7 +68,7 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 		float rotation;
 		if (!ao.GetRandomParkingSlot(pos, rotation))
 			return null;
-				
+		
 		IEntity hvt = KSC_GameTools.SpawnVehiclePrefab(entries.GetRandomElement(), pos, rotation);
 		if (!hvt)
 			return null;
@@ -90,10 +90,7 @@ class COE_DestroyVehicleTaskBuilder : COE_BaseTaskBuilder
 	{
 		PointInfo point = slot.param2.GetRandomElement();
 		point.Init(slot.param1);
-		vector transform[4];
-		point.GetWorldTransform(transform);
-		
-		IEntity hvt = KSC_GameTools.SpawnPrefab(heloPrefab, transform);
+		IEntity hvt = KSC_GameTools.SpawnVehiclePrefab(heloPrefab, point.GetWorldTransformAxis(3), point.GetWorldTransformAxis(2).ToYaw());
 		ao.AddEntity(hvt);
 		
 		KSC_DestroyObjectTask task = KSC_DestroyObjectTask.Cast(SpawnTaskEntity(hvt.GetOrigin()));
