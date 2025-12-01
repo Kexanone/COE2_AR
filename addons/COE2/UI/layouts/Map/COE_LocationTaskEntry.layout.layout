@@ -1,0 +1,44 @@
+FrameWidgetClass {
+ Name "TaskEntry"
+ Slot LayoutSlot "{67021A129BFC856F}" {
+  Padding 8 4 8 2
+ }
+ components {
+  COE_LocationTaskUIEntry "{67021A0E07F59CD5}" {
+  }
+ }
+ {
+  HorizontalLayoutWidgetClass "{67021A13BED59751}" {
+   Name "HorizontalLayout0"
+   Slot FrameWidgetSlot "{5E3EAB571CC90C7A}" {
+    OffsetLeft 0
+    OffsetTop 0
+    OffsetRight -100
+    OffsetBottom -30
+    SizeToContent 1
+   }
+   {
+    ImageWidgetClass "{67021A13BED59748}" {
+     Name "TaskIcon"
+     Slot LayoutSlot "{67021A0E03168B75}" {
+     }
+     Texture "{10C0A9A305E8B3A4}UI/Imagesets/Tasks/Task_Icons.imageset"
+     Image "Icon_Task_Sabotage_UI"
+     Size 24 24
+    }
+    TextWidgetClass "{67021A13BEDA3698}" {
+     Name "TaskName"
+     Slot LayoutSlot "{66365A2F1BE815AE}" {
+      VerticalAlign 1
+      Padding 4 0 0 0
+     }
+     "Z Order" 11
+     Text "Sabotage Installation"
+     "Font Size" 16
+     "Min Font Size" 16
+     "Vertical Alignment" Center
+    }
+   }
+  }
+ }
+}
