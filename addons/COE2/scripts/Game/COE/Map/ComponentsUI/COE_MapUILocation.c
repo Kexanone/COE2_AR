@@ -2,15 +2,19 @@
 //! Handler for an objective location element used in COE_MapUIElementContainer
 class COE_MapUILocation : COE_MapUIElement
 {
+	[Attribute("{3FAF784F537B325A}UI/layouts/Map/COE_LocationTaskEntry.layout.layout", params: "layout")]
+	protected ResourceName m_sTaskElementLayoutName;
+	
 	protected KSC_Location m_Location;
 	protected TextWidget m_wLocationName;
 	protected FactionKey m_sOwnerFactionKey;
 	protected ref array<COE_BaseTaskBuilder> m_aTaskBuilders = {};
+	protected ref array<Widget> m_aTaskWidgets = {};
 	protected Widget m_wImageOverlay;
 	protected OverlayWidget m_wSymbolOverlay;
 	protected SCR_MilitarySymbolUIComponent m_MilitarySymbolComponent;
-	protected ButtonWidget m_wButton;
-	protected SizeLayoutWidget m_wSizeLayout;
+	protected Widget m_wTaskFrame;
+	protected Widget m_wTaskList;
 	
 	//------------------------------------------------------------------------------
 	void Init(notnull KSC_Location location)
@@ -93,25 +97,15 @@ class COE_MapUILocation : COE_MapUIElement
 		super.HandlerAttached(w);
 
 		m_wImageOverlay = w.FindAnyWidget("IconOverlay");
-		m_wSizeLayout = SizeLayoutWidget.Cast(w.FindAnyWidget("SizeLayout"));
 		m_wLocationName = TextWidget.Cast(w.FindAnyWidget("Name"));
 		m_wSymbolOverlay = OverlayWidget.Cast(m_wImageOverlay.FindWidget("Symbol"));
+		m_wTaskFrame = w.FindAnyWidget("TaskFrame");
+		m_wTaskList = m_wTaskFrame.FindAnyWidget("TaskList");
 
 		if (!m_wSymbolOverlay)
 			return;
 		
 		m_MilitarySymbolComponent = SCR_MilitarySymbolUIComponent.Cast(m_wSymbolOverlay.FindHandler(SCR_MilitarySymbolUIComponent));
-		
-		m_wButton = ButtonWidget.Cast(w.FindAnyWidget("Button"));
-
-		if (m_wButton)
-			m_wButton.SetEnabled(false);
-	}
-
-	//------------------------------------------------------------------------------------------------
-	override void HandlerDeattached(Widget w)
-	{
-		super.HandlerDeattached(w);
 	}
 
 	//------------------------------------------------------------------------------
@@ -133,9 +127,6 @@ class COE_MapUILocation : COE_MapUIElement
 	//------------------------------------------------------------------------------
 	override bool OnMouseEnter(Widget w, int x, int y)
 	{
-		if (m_wSizeLayout && w == m_wSizeLayout && m_wButton)
-			m_wButton.SetEnabled(true);
-		
 		GetGame().GetWorkspace().SetFocusedWidget(w);
 		super.OnMouseEnter(w, x, y);
 		m_wRoot.SetZOrder(1);
@@ -162,9 +153,6 @@ class COE_MapUILocation : COE_MapUIElement
 		{
 			AnimCollapse();
 		}
-		
-		if (RenderTargetWidget.Cast(enterW) && m_wButton.IsEnabled())
-			m_wButton.SetEnabled(false);
 
 		return false;
 	}
@@ -197,14 +185,20 @@ class COE_MapUILocation : COE_MapUIElement
 				m_sOwnerFactionKey = factionManager.GetEnemyFaction().GetFactionKey();
 			
 			UpdateIcon();
+			m_wTaskFrame.SetVisible(true);
 		}
 		
-		int idx =  m_aTaskBuilders.Insert(builder);
+		Widget taskWidget = GetGame().GetWorkspace().CreateWidgets(m_sTaskElementLayoutName, m_wTaskList);
+		COE_LocationTaskUIEntry handler = COE_LocationTaskUIEntry.Cast(taskWidget.FindHandler(COE_LocationTaskUIEntry));
+		handler.SetTaskBuilder(builder);
+		m_aTaskWidgets.Insert(taskWidget);
+		
+		int idx = m_aTaskBuilders.Insert(builder);
 		
 		COE_MapUIElementContainer container = COE_MapUIElementContainer.Cast(m_Parent);
 		if (!isInit && container)
 			container.UpdateAOParams();
-				
+		
 		return idx;
 	}
 	
@@ -217,7 +211,11 @@ class COE_MapUILocation : COE_MapUIElement
 		{
 			m_sOwnerFactionKey = "";
 			UpdateIcon();
+			m_wTaskFrame.SetVisible(false);
 		}
+		
+		m_wTaskList.RemoveChild(m_aTaskWidgets[idx]);
+		m_aTaskWidgets.Remove(idx);
 		
 		COE_MapUIElementContainer container = COE_MapUIElementContainer.Cast(m_Parent);
 		if (container)

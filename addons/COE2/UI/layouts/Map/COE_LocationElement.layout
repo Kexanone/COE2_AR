@@ -23,22 +23,24 @@ FrameWidgetClass {
     Alignment 0.5 0.5
    }
    {
-    SizeLayoutWidgetClass "{6094B4FC76103F5B}" {
-     Name "SizeLayout"
-     Slot OverlayWidgetSlot "{5A7494430A5DF5B2}" {
+    FrameWidgetClass "{67021A15F9A4F8EF}" {
+     Name "FrameLayout"
+     Slot OverlayWidgetSlot "{67021A129BFCA924}" {
      }
-     "Ignore Cursor" 0
-     AllowWidthOverride 1
-     WidthOverride 60
-     AllowHeightOverride 1
-     HeightOverride 60
      {
       OverlayWidgetClass "{6094B4FC76103F5A}" {
        Name "IconOverlay"
-       Slot AlignableSlot "{5A74824A63E50D09}" {
-        HorizontalAlign 3
-        VerticalAlign 3
+       Slot FrameWidgetSlot "{67021A15E25E31E6}" {
+        Anchor 0.5 0.5 0.5 0.5
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 60
+        OffsetRight -60
+        SizeY 60
+        OffsetBottom -60
+        Alignment 0.5 0.5
        }
+       "Ignore Cursor" 0
        {
         ImageWidgetClass "{6094B4FC76103F58}" {
          Name "BackgroundGradient"
@@ -118,6 +120,51 @@ FrameWidgetClass {
           ShadowSize 8
           ShadowColor 1 1 1 1
           ShadowOffset 10 7
+         }
+        }
+       }
+      }
+      FrameWidgetClass "{67021A145479668B}" {
+       Name "TaskFrame"
+       Slot FrameWidgetSlot "{67021A1448B8FDD4}" {
+        Anchor 0.5 1 0.5 1
+        OffsetLeft 0
+        OffsetTop 0
+        OffsetRight -100
+        OffsetBottom -30
+        Alignment 0.5 0
+       }
+       "Z Order" 10
+       "Is Visible" 0
+       {
+        OverlayWidgetClass "{67021A13C3B8F549}" {
+         Name "Overlay0"
+         Slot FrameWidgetSlot "{67021A13140352D6}" {
+          Anchor 0.5 0 0.5 0
+          OffsetLeft 0
+          PositionY 0
+          OffsetTop 0
+          OffsetRight -100
+          OffsetBottom -30
+          Alignment 0.5 0
+          SizeToContent 1
+         }
+         {
+          SmartPanelWidgetClass "{67021A13F9ED1EE3}" {
+           Name "SmartPanel0"
+           Slot OverlayWidgetSlot "{5E486A94045E375A}" {
+            HorizontalAlign 3
+            VerticalAlign 3
+           }
+           Color 0.007 0.012 0.014 1
+           style rounded_2px
+          }
+          VerticalLayoutWidgetClass "{67021A1466CA38FE}" {
+           Name "TaskList"
+           Slot OverlayWidgetSlot "{67021A129BFC855B}" {
+            Padding 0 0 0 2
+           }
+          }
          }
         }
        }

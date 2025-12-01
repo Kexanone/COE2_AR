@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{764EA71E6CAA60AF}UI/layouts/Map/COE_LocationElement.layout"
+ Name "{3FAF784F537B325A}UI/layouts/Map/COE_LocationTaskEntry.layout.layout"
  Configurations {
   LayoutResourceClass PC {
   }
@@ -9,9 +9,9 @@ MetaFileClass {
   }
   LayoutResourceClass PS4 : PC {
   }
-  LayoutResourceClass HEADLESS : PC {
-  }
   LayoutResourceClass PS5 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
   }
  }
 }
