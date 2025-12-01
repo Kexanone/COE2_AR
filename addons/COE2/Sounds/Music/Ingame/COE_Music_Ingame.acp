@@ -4,7 +4,7 @@ AudioClass {
    id 94221
    name "Random"
    tl -434.917 -855.91
-   res "{B93D2FDABA806077}Sounds/Music/Ingame/COE_Random.sig"
+   res "{B93D2FDABA806077}Sounds/_SharedData/Signals/SimpleHelpers/COE_Random.sig"
    conns {
     IOPConnectionClass iopConnection {
      port 1
@@ -36,7 +36,7 @@ AudioClass {
    inputvaluesmax {
     1
    }
-   path "{B93D2FDABA806077}Sounds/Music/Ingame/COE_Random.sig"
+   path "{B93D2FDABA806077}Sounds/_SharedData/Signals/SimpleHelpers/COE_Random.sig"
   }
  }
  sounds {
@@ -308,7 +308,8 @@ AudioClass {
    version 7
    tl -603.567 -1113.688
    Volume -10
-   "Termination Fade Out" 3000
+   "Loop count" 255
+   "Infinite loop" 1
    "Fade out function" SCurve
    Samples {
     AudioBankSampleClass "MU_Respawn_02.snd" {
