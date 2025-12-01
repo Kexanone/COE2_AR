@@ -1,0 +1,17 @@
+$grp StaticModelEntity : "{E95CB8F4C4B2C210}Prefabs/Decals/Markings/Runway/Decal_Helipad_01.et" {
+ {
+  Flags 0 0x3
+  coords 2635.005 24.218 5517.751
+  angles 0 90 0
+ }
+ {
+  Flags 0 0x3
+  coords 2635.919 24.218 5466.462
+  angles 0 90 0
+ }
+ {
+  Flags 0 0x3
+  coords 7627.236 17.593 4753.369
+  angles 0 9.659 0
+ }
+}
