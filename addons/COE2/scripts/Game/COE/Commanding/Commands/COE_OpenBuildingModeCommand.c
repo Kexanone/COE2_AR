@@ -9,7 +9,7 @@ class COE_OpenBuildingModeCommand : COE_BaseRadialCommanderCommand
 			return true;
 		
 		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(COE_GameMode.GetInstance().GetInsertionPoint().FindComponent(SCR_CampaignBuildingProviderComponent));
-		provider.RequestBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
+		provider.RequestEnterBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
 		return true;
 	}
 	
