@@ -94,6 +94,12 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 - COE2 - RHS Patch: https://reforger.armaplatform.com/workshop/61BCC264BD3DB22E
 
+## Community Addons and Scenario IDs
+
+- COE2 Faircroft Islands:
+    - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
+    - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
+
 ## Submitting Issues
 
 Please use our [Issue Tracker](https://github.com/Kexanone/COE2_AR/issues/new/choose) to report a bug, propose a feature, or suggest changes to the existing ones.
