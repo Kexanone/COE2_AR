@@ -90,10 +90,6 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
     - https://reforger.armaplatform.com/workshop/6311625CDE04C97B
     - `"{8E801F0D8414B499}Missions/COE2_Zimnitrita.conf"`
 
-## Compatibility Addons
-
-- COE2 - RHS Patch: https://reforger.armaplatform.com/workshop/61BCC264BD3DB22E
-
 ## Community Addons and Scenario IDs
 
 - COE2 Faircroft Islands:
