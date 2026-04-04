@@ -62,9 +62,6 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Denali:
     - https://reforger.armaplatform.com/workshop/657407A89697A1BF
     - `"{042F5F64C6D96785}Missions/COE2_Denali.conf"`
-- COE2 Faircroft Islands:
-    - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
-    - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
 - COE2 Fallujah:
     - https://reforger.armaplatform.com/workshop/21209DA9CF32FBE9
     - `"{B70881ACF0DB5033}Missions/COE2_Fallujah.conf"`
@@ -96,6 +93,12 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 ## Compatibility Addons
 
 - COE2 - RHS Patch: https://reforger.armaplatform.com/workshop/61BCC264BD3DB22E
+
+## Community Addons
+
+- COE2 Faircroft Islands:
+    - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
+    - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
 
 ## Submitting Issues
 
