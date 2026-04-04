@@ -92,9 +92,18 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 ## Community Addons and Scenario IDs
 
+- COE2 Bad Orb:
+    - https://reforger.armaplatform.com/workshop/68E004E05029F56A
+    - `"{E9FC6D7C36631E27}Missions/COE2_BadOrb.conf"`
+- COE2 Chernarus:
+    - https://reforger.armaplatform.com/workshop/68FA54AA7CEFA005
+    - `"{4D4780DB775BFF64}Missions/COE2_Chernarus.conf"`
 - COE2 Faircroft Islands:
     - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
     - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
+- COE2 Serhiivka:
+    - https://reforger.armaplatform.com/workshop/688739EDF5FF6043
+    - `"{DCEECBDE7E21AB90}Missions/COE2_Serhiivka.conf"`
 
 ## Submitting Issues
 
