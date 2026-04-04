@@ -94,7 +94,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 - COE2 - RHS Patch: https://reforger.armaplatform.com/workshop/61BCC264BD3DB22E
 
-## Community Addons
+## Community Addons and Scenario IDs
 
 - COE2 Faircroft Islands:
     - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
