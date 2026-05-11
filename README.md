@@ -92,6 +92,9 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 
 ## Community Addons and Scenario IDs
 
+- COE2 Armenhof:
+    - https://reforger.armaplatform.com/workshop/694354A25436615C
+    - `"{E6A8B6AE7085F010}Missions/COE2_Armenhof.conf"`
 - COE2 Bad Orb:
     - https://reforger.armaplatform.com/workshop/68E004E05029F56A
     - `"{E9FC6D7C36631E27}Missions/COE2_BadOrb.conf"`
