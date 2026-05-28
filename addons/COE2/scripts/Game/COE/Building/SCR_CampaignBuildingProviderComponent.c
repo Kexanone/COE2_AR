@@ -2,7 +2,7 @@
 modded class SCR_CampaignBuildingProviderComponent : SCR_MilitaryBaseLogicComponent
 {
 	//------------------------------------------------------------------------------------------------
-	override bool IsEnemyFaction(notnull ChimeraCharacter char)
+	override bool IsEnemyFaction(notnull SCR_ChimeraCharacter char)
 	{
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		if (!factionManager)
