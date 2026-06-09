@@ -59,9 +59,6 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Anizay:
     - https://reforger.armaplatform.com/workshop/65734D75BC584950<br>
     - `"{C36DE963B8856E2B}Missions/COE2_Anizay.conf"`
-- COE2 Denali:
-    - https://reforger.armaplatform.com/workshop/657407A89697A1BF
-    - `"{042F5F64C6D96785}Missions/COE2_Denali.conf"`
 - COE2 Fallujah:
     - https://reforger.armaplatform.com/workshop/21209DA9CF32FBE9
     - `"{B70881ACF0DB5033}Missions/COE2_Fallujah.conf"`
