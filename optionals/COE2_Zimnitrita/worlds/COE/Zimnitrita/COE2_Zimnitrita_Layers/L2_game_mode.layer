@@ -1,4 +1,5 @@
 COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
- coords 2713.679 10 3103.105
+ coords 2641.547 246.59 3098.522
+ angles -1.342 0.021 -0.895
  m_sKSC_WorldSlotsConfigName "{D23B4889D4155C7B}Configs/Slots/Zimnitrita/KSC_Slots_Zimnitrita.conf"
 }

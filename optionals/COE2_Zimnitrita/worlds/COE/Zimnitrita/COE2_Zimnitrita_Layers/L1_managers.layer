@@ -22,24 +22,27 @@ SCR_AIWorld AIWorld : "{70CCCF16487C927F}Prefabs/AI/SCR_AIWorld_Eden.et" {
    }
   }
  }
- coords 2708.407 10 3107.505
+ coords 2640.38 246.518 3100.832
+ angles -1.342 0.021 -0.895
 }
 PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
- coords 2709.92 10 3104.316
+ coords 2641.893 246.62 3097.643
+ angles -1.79 0.014 -0.448
 }
-RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Radio/RadioManager.et" {
- coords 2713.548 10 3102.813
+RadioManagerEntity RadioManager : "{B8E09FAB91C4ECCD}Prefabs/Systems/Radio/RadioManager.et" {
+ coords 2645.521 246.708 3096.14
+ angles -1.342 0.021 -0.895
 }
 ScriptedChatEntity ChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
- Flags 0
- coords 2707.398 10 3106.644
+ Flags 0 0x3
+ coords 2639.371 246.518 3099.971
+ angles -1.789 0.042 -1.343
 }
 COE_FactionManager FactionManager : "{F9A08100A9E20FB5}Prefabs/Managers/COE_FactionManager.et" {
- coords 2702.033 10 3110.474
+ coords 2634.006 246.179 3103.801
+ angles -2.23 0.122 -3.133
 }
 SCR_LoadoutManager LoadoutManager : "{B54D08AEA74A5354}Prefabs/MP/Managers/Loadouts/LoadoutManager_Editor.et" {
- coords 2708.528 10 3106.889
-}
-SCR_BaseTaskManager TaskManager : "{F73FF9A9DC8F1B7A}Prefabs/MP/Managers/Tasks/KSC_TaskManager.et" {
- coords 2701.956 10 3110.972
+ coords 2640.501 246.534 3100.216
+ angles -1.342 0.021 -0.895
 }
