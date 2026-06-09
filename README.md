@@ -71,6 +71,9 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Kunar Province:
     - https://reforger.armaplatform.com/workshop/61BB79ADF3596AEA
     - `"{8DAFAB41500D7985}Missions/COE2_Kunar.conf"`
+- COE2 Mogadishu:
+    - https://reforger.armaplatform.com/workshop/61C80A73A70724EE
+    - `"{9166343CE3B6C085}Missions/COE2_Mogadishu.conf"`
 - COE2 Mussalo:
     - https://reforger.armaplatform.com/workshop/61C7786BB6B29693
     - `"{6EADDAED4B365710}Missions/COE2_Mussalo.conf"`
