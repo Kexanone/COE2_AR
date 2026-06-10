@@ -104,6 +104,9 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Faircroft Islands:
     - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
     - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
+- COE2 Mogadishu:
+    - https://reforger.armaplatform.com/workshop/61C80A73A70724EE
+    - `"{9166343CE3B6C085}Missions/COE2_Mogadishu.conf"`
 - COE2 Serhiivka:
     - https://reforger.armaplatform.com/workshop/688739EDF5FF6043
     - `"{DCEECBDE7E21AB90}Missions/COE2_Serhiivka.conf"`
