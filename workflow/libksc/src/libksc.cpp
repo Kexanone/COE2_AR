@@ -29,14 +29,16 @@ namespace libksc {
             stream.open(path, std::ios_base::binary);
             Header header;
             stream.read(reinterpret_cast<char*>(&header), sizeof(header));
-            int n_elements;
-            stream.read(reinterpret_cast<char*>(&n_elements), sizeof(n_elements));
             MatrixXui8 data = MatrixXui8::Zero(header.x_size, header.z_size);
 
-            for (int i = 0; i < n_elements; i++) {
-                int x, z;
-                stream.read(reinterpret_cast<char*>(&x), sizeof(x));
-                stream.read(reinterpret_cast<char*>(&z), sizeof(z));
+            // We no longer count the elements in the exporter, so n_elements is 0 and can be disregarded
+            int n_elements;
+            stream.read(reinterpret_cast<char*>(&n_elements), sizeof(n_elements));
+
+            int x, z;
+            while (stream.read(reinterpret_cast<char*>(&x), sizeof(x)) &&
+                   stream.read(reinterpret_cast<char*>(&z), sizeof(z))
+            ) {
                 data(x - header.x_min, z - header.z_min) = 1;
             }
 
