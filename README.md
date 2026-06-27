@@ -101,6 +101,9 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Bad Orb:
     - https://reforger.armaplatform.com/workshop/68E004E05029F56A
     - `"{E9FC6D7C36631E27}Missions/COE2_BadOrb.conf"`
+- COE2 Belleau Wood:
+    - https://reforger.armaplatform.com/workshop/6710196714C33712
+    - `"{6CEBAC1C6E73A083}Missions/COE2_BelleauWood.conf"`
 - COE2 Faircroft Islands:
     - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
     - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
