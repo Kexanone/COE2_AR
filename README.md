@@ -57,8 +57,11 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 ## Optional Addons and Scenario IDs
 
 - COE2 Anizay:
-    - https://reforger.armaplatform.com/workshop/65734D75BC584950<br>
+    - https://reforger.armaplatform.com/workshop/65734D75BC584950
     - `"{C36DE963B8856E2B}Missions/COE2_Anizay.conf"`
+- COE2 Chernarus:
+    - https://reforger.armaplatform.com/workshop/61C773CD9CF0560F
+    - `"{FB11D7259EE9186D}Missions/COE2_Chernarus.conf"`
 - COE2 Fallujah:
     - https://reforger.armaplatform.com/workshop/21209DA9CF32FBE9
     - `"{B70881ACF0DB5033}Missions/COE2_Fallujah.conf"`
@@ -98,9 +101,6 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Bad Orb:
     - https://reforger.armaplatform.com/workshop/68E004E05029F56A
     - `"{E9FC6D7C36631E27}Missions/COE2_BadOrb.conf"`
-- COE2 Chernarus:
-    - https://reforger.armaplatform.com/workshop/68FA54AA7CEFA005
-    - `"{4D4780DB775BFF64}Missions/COE2_Chernarus.conf"`
 - COE2 Faircroft Islands:
     - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
     - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
