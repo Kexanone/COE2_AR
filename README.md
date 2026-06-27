@@ -98,6 +98,9 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Bad Orb:
     - https://reforger.armaplatform.com/workshop/68E004E05029F56A
     - `"{E9FC6D7C36631E27}Missions/COE2_BadOrb.conf"`
+- COE2 Belleau Wood:
+    - https://reforger.armaplatform.com/workshop/6710196714C33712
+    - `"{6CEBAC1C6E73A083}Missions/COE2_BelleauWood.conf"`
 - COE2 Chernarus:
     - https://reforger.armaplatform.com/workshop/68FA54AA7CEFA005
     - `"{4D4780DB775BFF64}Missions/COE2_Chernarus.conf"`
