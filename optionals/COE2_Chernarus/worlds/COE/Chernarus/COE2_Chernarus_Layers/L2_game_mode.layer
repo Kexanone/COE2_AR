@@ -1,0 +1,5 @@
+COE_GameMode GameMode : "{9EDD3A569D1FE096}Prefabs/MP/Modes/COE_GameMode.et" {
+ coords 2713.679 128.257 3103.105
+ angles 0.894 -0.028 -1.79
+ m_sKSC_WorldSlotsConfigName "{4FAE946D365ECED5}Configs/Slots/Chernarus/KSC_Slots_Chernarus.conf"
+}
