@@ -107,6 +107,12 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
 - COE2 Faircroft Islands:
     - https://reforger.armaplatform.com/workshop/68FF69F743919FF2
     - `"{CC469DCCF4F5D6B5}Missions/COE2_Faircroft.conf"`
+- COE2 Gogland:
+	- https://reforger.armaplatform.com/workshop/69AF4C2617D7D41E
+	- `"{1DA238154C5DE4FF}Missions/COE2_Gogland.conf"`
+- COE2 Ogami Island:
+	- https://reforger.armaplatform.com/workshop/69A54B761D9B14AC
+	- `"{372B763C3A6E9C47}Missions/COE2_Ogami.conf"`
 - COE2 Serhiivka:
     - https://reforger.armaplatform.com/workshop/688739EDF5FF6043
     - `"{DCEECBDE7E21AB90}Missions/COE2_Serhiivka.conf"`
