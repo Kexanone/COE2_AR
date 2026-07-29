@@ -3,7 +3,7 @@
 class COE_SelectAOCommand : COE_BaseRadialCommanderCommand
 {
 	//------------------------------------------------------------------------------------------------
-	override bool Execute(IEntity cursorTarget, IEntity target, vector targetPosition, int playerID, bool isClient)
+	override bool Execute(IEntity cursorTarget, IEntity groupEnt, vector targetPosition, int playerID, bool isClient)
 	{
 		if (playerID != SCR_PlayerController.GetLocalPlayerId())
 			return true;
