@@ -15,7 +15,7 @@ $grp Vehicle : "{1FF144F8A209239D}Prefabs/Vehicles/Wheeled/M923A1/M923A1_arsenal
 Vehicle M923A1_engineer1 : "{2D74C39A650A3030}Prefabs/Vehicles/Wheeled/M923A1/M923A1_engineer.et" {
  coords 135.941 1 165.134
 }
-MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager_Base.et" {
+MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/COE_MusicManager.et" {
  coords 113.358 3.15 186.92
 }
 Vehicle M923A1_command1 : "{36BDCC88B17B3BFA}Prefabs/Vehicles/Wheeled/M923A1/M923A1_command.et" {
