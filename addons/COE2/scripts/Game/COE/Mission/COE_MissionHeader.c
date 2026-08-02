@@ -42,4 +42,7 @@ class COE_MissionHeader : SCR_MissionHeader
 	
 	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM")]
 	bool m_bCOE_CommanderBecomesGM;
+	
+	[Attribute(defvalue: "true", desc: "Whether placed AI gets automatically recruited by the commander that placed them.")]
+	bool m_bCOE_AutorecruitAI;
 }

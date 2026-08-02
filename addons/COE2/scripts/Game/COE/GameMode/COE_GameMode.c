@@ -93,6 +93,9 @@ class COE_GameMode : SCR_BaseGameMode
 	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM", category: "Default Scenario Properties")]
 	protected bool m_bCommanderBecomesGM;
 	
+	[Attribute(defvalue: "true", desc: "Whether placed AI gets automatically recruited by the commander that placed them.", category: "Default Scenario Properties")]
+	protected bool m_bAutorecruitAI;
+	
 	protected ref array<ref KSC_Location> m_aAvailableLocations;
 	
 	[RplProp()]
@@ -165,6 +168,7 @@ class COE_GameMode : SCR_BaseGameMode
 			m_fMaxEnemyReinforcementTime = header.m_fCOE_MaxEnemyReinforcementTime;
 			m_bCiviliansEnabled = header.m_bCOE_CiviliansEnabled;
 			m_bCommanderBecomesGM = header.m_bCOE_CommanderBecomesGM;
+			m_bAutorecruitAI = header.m_bCOE_AutorecruitAI;
 		}
 	}
 	
@@ -766,6 +770,12 @@ class COE_GameMode : SCR_BaseGameMode
 	bool CommanderBecomesGM()
 	{
 		return m_bCommanderBecomesGM;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool ShouldAutorecruitAI()
+	{
+		return m_bAutorecruitAI;
 	}
 	
 	//------------------------------------------------------------------------------------------------
