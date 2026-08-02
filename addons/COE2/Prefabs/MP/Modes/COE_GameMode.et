@@ -233,5 +233,9 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
    m_sTaskPrefabName "{0F28CBE570B9F96A}Prefabs/Tasks/KSC_FindIntelTask.et"
    m_sTaskName "Find Intel"
   }
+  COE_DemineEffectModuleTaskBuilder "{6A0506356AEBDF7D}" {
+   m_sTaskPrefabName "{000F95D79A62B523}Prefabs/Tasks/KSC_DemineEffectModuleTask.et"
+   m_sTaskName "Demine"
+  }
  }
 }
