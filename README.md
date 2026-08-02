@@ -51,7 +51,7 @@ https://reforger.armaplatform.com/workshop/60926835F4A7B0CA
     "m_fCOE_MaxEnemyReinforcementTime": 15,
     "m_bCOE_CiviliansEnabled": true,
     "m_bCOE_CommanderBecomesGM": false,
-    "m_bCOE_AutorecruitAI": false
+    "m_bCOE_AutorecruitAI": true
 }
 ```
 
