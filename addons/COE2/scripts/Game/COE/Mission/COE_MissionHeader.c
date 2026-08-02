@@ -37,10 +37,10 @@ class COE_MissionHeader : SCR_MissionHeader
 	[Attribute(defvalue: "15", desc: "Maximum time in minutes required for the enemy to send reinforcements.")]
 	float m_fCOE_MaxEnemyReinforcementTime;
 	
-	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs")]
+	[Attribute(defvalue: "true", desc: "Whether civilians spawn on the AOs.")]
 	bool m_bCOE_CiviliansEnabled;
 	
-	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM")]
+	[Attribute(defvalue: "false", desc: "Whether a voted in commander also becomes GM.")]
 	bool m_bCOE_CommanderBecomesGM;
 	
 	[Attribute(defvalue: "true", desc: "Whether placed AI gets automatically recruited by the commander that placed them.")]
