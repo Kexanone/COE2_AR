@@ -9,6 +9,20 @@ class COE_CampaignBuildingProviderComponent : SCR_CampaignBuildingProviderCompon
 	protected bool m_bIsBlockedByEnemy;
 	
 	//------------------------------------------------------------------------------------------------
+	//! Force characters to be always recruitable
+	override protected void OnTrackedGroupAgentAdded(AIAgent agent)
+	{
+		super.OnTrackedGroupAgentAdded(agent);
+		
+		if (!agent)
+			return;
+
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
+		if (char)
+			char.SetRecruitable(true);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override bool IsEnemyFaction(notnull SCR_ChimeraCharacter char)
 	{
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
