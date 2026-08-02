@@ -39,14 +39,9 @@ modded class SCR_CampaignBuildingPlacingEditorComponent : SCR_PlacingEditorCompo
 		if (!groupController)
 			return;
 		
-		array<AIAgent> agents = {};
-		group.GetAgents(agents);
-		
-		foreach (AIAgent agent : agents)
+		foreach (SCR_ChimeraCharacter char : KSC_GroupHelper.GetUnits(group))
 		{
-			SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(agent.GetControlledEntity());
-			if (char)
-				groupController.RequestAddAIAgent(char);
+			groupController.RequestAddAIAgent(char);
 		}
 		
 		group.GetOnInit().Remove(COE_RecruitAIAgents);

@@ -43,12 +43,9 @@ class COE_DismissAllAICommand : SCR_BaseGroupCommand
 		if (!slaveGroup)
 			return false;
 		
-		array<AIAgent> agents = {};
-		slaveGroup.GetAgents(agents);
-		
-		foreach (AIAgent agent : agents)
+		foreach (SCR_ChimeraCharacter char : KSC_GroupHelper.GetUnits(slaveGroup))
 		{
-			SCR_EntityHelper.DeleteEntityAndChildren(agent.GetControlledEntity());
+			SCR_EntityHelper.DeleteEntityAndChildren(char);
 		}
 		
 		return true;
