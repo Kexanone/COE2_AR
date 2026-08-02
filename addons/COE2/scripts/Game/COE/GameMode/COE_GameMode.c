@@ -448,8 +448,31 @@ class COE_GameMode : SCR_BaseGameMode
 		
 		foreach (SCR_EditableEntityComponent entity : entities)
 		{
-			if (SCR_EditableVehicleComponent.Cast(entity) || SCR_EditableGroupComponent.Cast(entity))
+			// Clear vehicles
+			if (SCR_EditableVehicleComponent.Cast(entity))
+			{
 				m_aEntitiesToDelete.Insert(entity.GetOwner());
+				continue;
+			}
+			
+			SCR_EditableGroupComponent editableGroup = SCR_EditableGroupComponent.Cast(entity);
+			if (!editableGroup)
+				continue;
+			
+			// Clear all groups, except critical ones (i.e. player-led)
+			SCR_AIGroup group = editableGroup.GetAIGroupComponent();
+			if (group.GetImportance() != SCR_EAISpawnImportance.CRITICAL)
+			{
+				m_aEntitiesToDelete.Insert(group);
+				continue;
+			}
+			
+			// Clear all AI members of player-led groups
+			foreach (SCR_ChimeraCharacter char : KSC_GroupHelper.GetUnits(group))
+			{
+				if (!ACE_EntityUtils.IsPlayer(char))
+					m_aEntitiesToDelete.Insert(char);
+			}
 		}
 	}
 	
