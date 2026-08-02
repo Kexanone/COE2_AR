@@ -27,8 +27,8 @@ class COE_OpenBuildingModeCommand : COE_BaseRadialCommanderCommand
 			return false;
 		}
 		
-		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(SCR_CampaignBuildingProviderComponent));
-		if (provider.COE_IsBlockedByEnemy())
+		COE_CampaignBuildingProviderComponent provider = COE_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(COE_CampaignBuildingProviderComponent));
+		if (provider.IsBlockedByEnemy())
 		{
 			m_sCannotPerformReason = "#AR-Campaign_Action_ShowBuildPreviewEnemyPresence";
 			return false;

@@ -1,12 +1,19 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_CampaignBuildingProviderComponent : SCR_MilitaryBaseLogicComponent
+class COE_CampaignBuildingProviderComponentClass : SCR_CampaignBuildingProviderComponentClass
 {
+}
+
+//------------------------------------------------------------------------------------------------
+class COE_CampaignBuildingProviderComponent : SCR_CampaignBuildingProviderComponent
+{
+	protected bool m_bIsBlockedByEnemy;
+	
 	//------------------------------------------------------------------------------------------------
 	override bool IsEnemyFaction(notnull SCR_ChimeraCharacter char)
 	{
 		COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
 		if (!factionManager)
-			return super.IsEnemyFaction(char);
+			return false;
 		
 		FactionAffiliationComponent factionComponent = FactionAffiliationComponent.Cast(char.FindComponent(FactionAffiliationComponent));
 		if (!factionComponent)
@@ -15,26 +22,24 @@ modded class SCR_CampaignBuildingProviderComponent : SCR_MilitaryBaseLogicCompon
 		return factionManager.GetEnemyFaction() == factionComponent.GetAffiliatedFaction();
 	}
 	
-	protected bool m_bCOE_IsBlockedByEnemy;
-	
 	//------------------------------------------------------------------------------------------------
-	bool COE_IsBlockedByEnemy()
+	bool IsBlockedByEnemy()
 	{
-		m_bCOE_IsBlockedByEnemy = false;
-		GetGame().GetWorld().QueryEntitiesBySphere(GetOwner().GetOrigin(), m_fBuildingRadius, COE_EvaluateEntityCallback, null, EQueryEntitiesFlags.DYNAMIC);
-		return m_bCOE_IsBlockedByEnemy;
+		m_bIsBlockedByEnemy = false;
+		GetGame().GetWorld().QueryEntitiesBySphere(GetOwner().GetOrigin(), m_fBuildingRadius, CheckForEnemyCallback, null, EQueryEntitiesFlags.DYNAMIC);
+		return m_bIsBlockedByEnemy;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected bool COE_EvaluateEntityCallback(IEntity entity)
+	protected bool CheckForEnemyCallback(IEntity entity)
 	{
 		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(entity);
 		if (!char)
 			return true;
 		
 		if (IsEnemyFaction(char))
-			m_bCOE_IsBlockedByEnemy = true;
+			m_bIsBlockedByEnemy = true;
 		
-		return !m_bCOE_IsBlockedByEnemy;
+		return !m_bIsBlockedByEnemy;
 	}
 }
