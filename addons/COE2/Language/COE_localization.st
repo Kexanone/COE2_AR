@@ -15,6 +15,13 @@ StringTable {
    Author "kex"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{6A042B69EB2191AD}" {
+   Id "COE-Action_DismissAllAI"
+   Target_en_us "Dismiss all"
+   Modified 1778659420
+   Author "Kex"
+   LastChanged "Kex"
+  }
   CustomStringTableItem "{6099212B7E1B92EE}" {
    Id "COE-Action_GenerateAO"
    Target_en_us "Generate AOs and tasks"
