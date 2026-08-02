@@ -31,7 +31,7 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
   }
   SCR_CommandingManagerComponent "{5E6F1867E2884BA4}" {
    m_sCommandsConfigPath "{7F7CE136B89ABDC8}Configs/Commanding/COE_Commands.conf"
-   m_iMaxAIPerGroup 10
+   m_iMaxAIPerGroup -1
   }
   SCR_CompositionSlotManagerComponent "{5E8ED61996D6450A}" {
   }
