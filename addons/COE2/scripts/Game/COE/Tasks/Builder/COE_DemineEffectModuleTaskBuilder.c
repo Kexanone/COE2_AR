@@ -46,7 +46,7 @@ class COE_DemineEffectModuleTaskBuilder : COE_BaseTaskBuilder
 	//------------------------------------------------------------------------------------------------
 	protected IEntity TrySpawnAPMineField(COE_AO ao)
 	{
-		return ao.SpawnInRandomRoadSlot(m_sAPMineFieldPrefabName, EEditableEntityLabel.SLOT_FLAT_SMALL, false);
+		return ao.SpawnInRandomFlatSlot(m_sAPMineFieldPrefabName, EEditableEntityLabel.SLOT_FLAT_SMALL, false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ class COE_DemineEffectModuleTaskBuilder : COE_BaseTaskBuilder
 		{
 			EEditableEntityLabel label = labels.GetRandomElement();
 			
-			IEntity mineField = ao.SpawnInRandomRoadSlot(m_sATMineFieldPrefabName, label);
+			IEntity mineField = ao.SpawnInRandomRoadSlot(m_sATMineFieldPrefabName, label, false);
 			if (mineField)
 				return mineField;
 			
