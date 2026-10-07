@@ -8,13 +8,18 @@ class COE_DeployUserAction : COE_BaseBoardUserAction
 		if (!gameMode)
 			return;
 		
-		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
-		
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		COE_PlayerController playerController = COE_PlayerController.GetInstance();
+		if (!insertionPoint || !playerController)
+			return;
+
+		vector spawnPos = insertionPoint.GetOrigin();
+
 		vector closestAOPos;
 		if (!gameMode.GetClosestAOPos(spawnPos, closestAOPos))
 			return;
-		
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAOPos - spawnPos).ToYaw());
+
+		playerController.RequestFastTravel(spawnPos, (closestAOPos - spawnPos).ToYaw());
 	}
 	
 	//------------------------------------------------------------------------------------------------

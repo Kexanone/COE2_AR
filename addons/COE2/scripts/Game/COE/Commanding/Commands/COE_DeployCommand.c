@@ -12,13 +12,19 @@ class COE_DeployCommand : SCR_BaseRadialCommand
 		if (!gameMode)
 			return false;
 		
-		vector spawnPos = gameMode.GetInsertionPoint().GetOrigin();
-		
+		// The insertion point can be gone by the time the command comes back from the server
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		COE_PlayerController playerController = COE_PlayerController.GetInstance();
+		if (!insertionPoint || !playerController)
+			return false;
+
+		vector spawnPos = insertionPoint.GetOrigin();
+
 		vector closestAOPos;
 		if (!gameMode.GetClosestAOPos(spawnPos, closestAOPos))
 			return false;
-		
-		COE_PlayerController.GetInstance().RequestFastTravel(spawnPos, (closestAOPos - spawnPos).ToYaw());
+
+		playerController.RequestFastTravel(spawnPos, (closestAOPos - spawnPos).ToYaw());
 		return true;
 	}
 	
@@ -42,7 +48,7 @@ class COE_DeployCommand : SCR_BaseRadialCommand
 			return false;
 		}
 		
-		if (vector.DistanceXZ(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalControlledEntity().GetOrigin()) > 25)
+		if (vector.DistanceXZ(gameMode.GetMainBasePos(), user.GetOrigin()) > 25)
 			return false;
 		
 		return true;
