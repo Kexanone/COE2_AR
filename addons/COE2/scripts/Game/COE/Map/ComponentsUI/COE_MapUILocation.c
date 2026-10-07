@@ -181,7 +181,7 @@ class COE_MapUILocation : COE_MapUIElement
 		if (m_aTaskBuilders.IsEmpty())
 		{
 			COE_FactionManager factionManager = COE_FactionManager.Cast(GetGame().GetFactionManager());
-			if (factionManager)
+			if (factionManager && factionManager.GetEnemyFaction())
 				m_sOwnerFactionKey = factionManager.GetEnemyFaction().GetFactionKey();
 			
 			UpdateIcon();

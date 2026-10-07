@@ -17,11 +17,48 @@ class COE_IntermissionMusic : ScriptedMusic
 		if (!gameMode)
 			return;
 		
-		// Play briefing music when spawned at main base
-		if (vector.DistanceXZ(gameMode.GetMainBasePos(), SCR_PlayerController.GetLocalMainEntity().GetOrigin()) > 25)
+		// On clients the character can come under the player's control after the spawn event; check again then
+		IEntity player = SCR_PlayerController.GetLocalMainEntity();
+		if (!player)
+		{
+			WaitForControlledEntity();
 			return;
-		
-		m_MusicManager.Play("SOUND_COE_INTERMISSION");	
+		}
+
+		// Play briefing music when spawned at main base
+		if (vector.DistanceXZ(gameMode.GetMainBasePos(), player.GetOrigin()) > 25)
+			return;
+
+		m_MusicManager.Play("SOUND_COE_INTERMISSION");
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void WaitForControlledEntity()
+	{
+		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
+		if (!playerController)
+			return;
+
+		playerController.m_OnControlledEntityChanged.Remove(OnControlledEntityChanged);
+		playerController.m_OnControlledEntityChanged.Insert(OnControlledEntityChanged);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void OnControlledEntityChanged(IEntity from, IEntity to)
+	{
+		if (!to)
+			return;
+
+		StopWaitingForControlledEntity();
+		CheckLocationAndPlay();
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void StopWaitingForControlledEntity()
+	{
+		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
+		if (playerController)
+			playerController.m_OnControlledEntityChanged.Remove(OnControlledEntityChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -43,9 +80,11 @@ class COE_IntermissionMusic : ScriptedMusic
 	//------------------------------------------------------------------------------------------------
 	override void OnDelete()
 	{
+		StopWaitingForControlledEntity();
+
 		if (!m_MusicManager)
 			return;
-		
+
 		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Remove(OnPlayerSpawned);
 		COE_PlayerController.s_OnLocalPlayerFastTraveled.Remove(OnPlayerSpawned);
 	}

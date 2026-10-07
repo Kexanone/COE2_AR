@@ -68,8 +68,13 @@ class COE_EditorModeCommanderEntity : SCR_EditorModeEntity
 		else if (m_pEditorManagerEntity.HasMode(EEditorMode.COE_COMMANDER))
 		{
 			m_pEditorManagerEntity.SetCurrentMode(EEditorMode.COE_COMMANDER);
+		}
+		else
+		{
+			// No mode with attribute support (yet): waiting for a mode change would open the window on an unrelated one
+			return;
 		};
-		
+
 		if (Replication.IsClient())
 		{
 			m_pEditorManagerEntity.GetOnModeChange().Insert(StartEditingOnModeChange);
