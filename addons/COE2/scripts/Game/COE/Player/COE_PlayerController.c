@@ -24,7 +24,9 @@ class COE_PlayerController : SCR_PlayerController
 	//! Teleports player at an emtpy position at the given location and search radius
 	void RequestFastTravel(vector pos, float rotation = 0, float searchRadius = 10)
 	{
-		if (vector.DistanceXZ(m_MainEntity.GetOrigin(), pos) < FAST_TRAVEL_MIN_DISTANCE)
+		// m_MainEntity can be null on the owner: its replicated ID may arrive before the entity streams in
+		IEntity mainEntity = GetMainEntity();
+		if (!mainEntity || vector.DistanceXZ(mainEntity.GetOrigin(), pos) < FAST_TRAVEL_MIN_DISTANCE)
 			return;
 		
 		if (Replication.IsServer())
@@ -45,7 +47,8 @@ class COE_PlayerController : SCR_PlayerController
 		if (manager)
 		{
 			SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(manager.GetEffect(SCR_FadeInOutEffect));
-			fade.FadeOutEffect(true, FAST_TRAVEL_FADE_DURATION);
+			if (fade)
+				fade.FadeOutEffect(true, FAST_TRAVEL_FADE_DURATION);
 		}
 		
 		SCR_WorldTools.FindEmptyTerrainPosition(pos, pos, searchRadius);
@@ -82,18 +85,20 @@ class COE_PlayerController : SCR_PlayerController
 	protected void RpcDo_Owner_FastTravelTeleport(vector transform[4])
 	{
 
-		s_OnLocalPlayerFastTraveled.Invoke(m_MainEntity, transform);
-		
+		IEntity mainEntity = GetMainEntity();
+		s_OnLocalPlayerFastTraveled.Invoke(mainEntity, transform);
+
 		SCR_ScreenEffectsManager manager = SCR_ScreenEffectsManager.GetScreenEffectsDisplay();
 		if (manager)
 		{
 			SCR_FadeInOutEffect fade = SCR_FadeInOutEffect.Cast(manager.GetEffect(SCR_FadeInOutEffect));
-			fade.FadeOutEffect(false, FAST_TRAVEL_FADE_DURATION);
+			if (fade)
+				fade.FadeOutEffect(false, FAST_TRAVEL_FADE_DURATION);
 		}
-		
+
 		SCR_PlayerTeleportedFeedbackComponent teleportFeedback = SCR_PlayerTeleportedFeedbackComponent.Cast(FindComponent(SCR_PlayerTeleportedFeedbackComponent));
-		if (teleportFeedback)
-			teleportFeedback.PlayerTeleported(m_MainEntity, false, SCR_EPlayerTeleportedReason.FAST_TRAVEL);
+		if (teleportFeedback && mainEntity)
+			teleportFeedback.PlayerTeleported(mainEntity, false, SCR_EPlayerTeleportedReason.FAST_TRAVEL);
 		
 		SCR_NotificationsComponent.SendLocal(ENotification.FASTTRAVEL_DONE);
 	}
