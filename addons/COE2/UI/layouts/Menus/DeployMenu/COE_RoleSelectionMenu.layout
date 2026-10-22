@@ -1,38 +1,43 @@
 FrameWidgetClass {
  {
-  SizeLayoutWidgetClass "{5D66B544E2E20FB0}" {
-   Prefab "{5D66B544E2E20FB0}"
+  OverlayWidgetClass "{6A0A70589A179858}" {
+   Prefab "{6A0A70589A179858}"
    {
-    OverlayWidgetClass "{5D66B544E2E20FB3}" {
-     Prefab "{5D66B544E2E20FB3}"
+    SizeLayoutWidgetClass "{5D66B544E2E20FB0}" {
+     Prefab "{5D66B544E2E20FB0}"
      {
-      VerticalLayoutWidgetClass "{5D66B544E2E20FB5}" {
-       Prefab "{5D66B544E2E20FB5}"
+      OverlayWidgetClass "{5D66B544E2E20FB3}" {
+       Prefab "{5D66B544E2E20FB3}"
        {
-        FrameWidgetClass "{5D66B544E2E586DB}" {
-         Prefab "{5D66B544E2E586DB}"
+        VerticalLayoutWidgetClass "{5D66B544E2E20FB5}" {
+         Prefab "{5D66B544E2E20FB5}"
          {
-          VerticalLayoutWidgetClass "{5D66B544E2E586DA}" {
-           Prefab "{5D66B544E2E586DA}"
+          FrameWidgetClass "{5D66B544E2E586DB}" {
+           Prefab "{5D66B544E2E586DB}"
            {
-            HorizontalLayoutWidgetClass "{5D66B544E2E56FEB}" {
-             Prefab "{5D66B544E2E56FEB}"
+            VerticalLayoutWidgetClass "{5D66B544E2E586DA}" {
+             Prefab "{5D66B544E2E586DA}"
              {
-              SizeLayoutWidgetClass "{5D66B544E2E56FEA}" {
-               Prefab "{5D66B544E2E56FEA}"
+              HorizontalLayoutWidgetClass "{5D66B544E2E56FEB}" {
+               Prefab "{5D66B544E2E56FEB}"
                {
-                FrameWidgetClass "{5D66B544E2E546C7}" {
-                 Prefab "{5D66B544E2E546C7}"
+                SizeLayoutWidgetClass "{5D66B544E2E56FEA}" {
+                 Prefab "{5D66B544E2E56FEA}"
                  {
-                  OverlayWidgetClass "{5D66B544E2E546C4}" {
-                   Prefab "{5D66B544E2E546C4}"
+                  FrameWidgetClass "{5D66B544E2E546C7}" {
+                   Prefab "{5D66B544E2E546C7}"
                    {
-                    VerticalLayoutWidgetClass "{5D66B544E2E546C5}" {
-                     Prefab "{5D66B544E2E546C5}"
+                    OverlayWidgetClass "{5D66B544E2E546C4}" {
+                     Prefab "{5D66B544E2E546C4}"
                      {
-                      RichTextWidgetClass "{5D66B544E2E549B7}" {
-                       Prefab "{5D66B544E2E549B7}"
-                       Text "#COE-DeployScreen_NoFactionsAvailable"
+                      VerticalLayoutWidgetClass "{5D66B544E2E546C5}" {
+                       Prefab "{5D66B544E2E546C5}"
+                       {
+                        RichTextWidgetClass "{5D66B544E2E549B7}" {
+                         Prefab "{5D66B544E2E549B7}"
+                         Text "#COE-DeployScreen_NoFactionsAvailable"
+                        }
+                       }
                       }
                      }
                     }
@@ -46,50 +51,43 @@ FrameWidgetClass {
             }
            }
           }
-         }
-        }
-        HorizontalLayoutWidgetClass "{5D66B544E2E7CA06}" {
-         Prefab "{5D66B544E2E7CA06}"
-         {
-          ButtonWidgetClass "{609452351A8C96A4}" : "{08CF3B69CB1ACBC4}UI/layouts/WidgetLibrary/Buttons/WLib_NavigationButton.layout" {
-           Name "ScenarioAttributes"
-           Slot LayoutSlot "{609452369F87DB8B}" {
-            HorizontalAlign 1
-            VerticalAlign 0
-            Padding 0 0 20 0
-           }
-           components {
-            SCR_InputButtonComponent "{5D346C3DD81D95CD}" {
-             m_sActionName "MenuConfigure"
-             m_sLabel "#AR-KeybindEditor_ScenarioAttributes"
-            }
-            COE_ScenarioSettingsButtonUIComponent "{60986DADA4E5DC33}" {
-            }
-           }
+          HorizontalLayoutWidgetClass "{5D66B544E2E7CA06}" {
+           Prefab "{5D66B544E2E7CA06}"
            {
-            HorizontalLayoutWidgetClass "{5DB89B776AA9CEFF}" {
-             Prefab "{5DB89B776AA9CEFF}"
-             Slot ButtonWidgetSlot "{5DB89B776AA9CEBD}" {
+            ButtonWidgetClass "{609452351A8C96A4}" : "{08CF3B69CB1ACBC4}UI/layouts/WidgetLibrary/Buttons/WLib_NavigationButton.layout" {
+             Name "ScenarioAttributes"
+             Slot LayoutSlot "{609452369F87DB8B}" {
+              HorizontalAlign 1
+              VerticalAlign 0
+              Padding 0 0 20 0
+             }
+             components {
+              SCR_InputButtonComponent "{5D346C3DD81D95CD}" {
+               m_sActionName "MenuConfigure"
+               m_sLabel "#AR-KeybindEditor_ScenarioAttributes"
+              }
+              COE_ScenarioSettingsButtonUIComponent "{60986DADA4E5DC33}" {
+              }
              }
              {
-              HorizontalLayoutWidgetClass "{5D8A71797D491473}" {
-               Prefab "{5D8A71797D491473}"
+              HorizontalLayoutWidgetClass "{5DB89B776AA9CEFF}" {
+               Prefab "{5DB89B776AA9CEFF}"
+               Slot ButtonWidgetSlot "{5DB89B776AA9CEBD}" {
+               }
                {
-                SizeLayoutWidgetClass "{5D8ACEF129D3EC88}" {
-                 Prefab "{5D8ACEF129D3EC88}"
-                 Slot LayoutSlot "{5D8ACEF129D3F360}" {
+                HorizontalLayoutWidgetClass "{5D8A71797D491473}" {
+                 Prefab "{5D8A71797D491473}"
+                 {
+                  SizeLayoutWidgetClass "{5D8ACEF129D3EC88}" {
+                   Prefab "{5D8ACEF129D3EC88}"
+                   Slot LayoutSlot "{5D8ACEF129D3F360}" {
+                   }
+                  }
                  }
                 }
                }
               }
              }
-            }
-           }
-          }
-          ButtonWidgetClass "{5D74AEEB4BD9E58B}" {
-           Prefab "{5D74AEEB4BD9E58B}"
-           components {
-            SCR_InputButtonComponent "{5D346C3DD81D95CD}" {
             }
            }
           }

@@ -11,5 +11,7 @@ MetaFileClass {
   }
   LayoutResourceClass HEADLESS : PC {
   }
+  LayoutResourceClass PS5 : PC {
+  }
  }
 }
