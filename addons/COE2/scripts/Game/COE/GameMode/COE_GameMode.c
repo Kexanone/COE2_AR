@@ -182,7 +182,15 @@ class COE_GameMode : SCR_BaseGameMode
 	override protected void OnGameStart()
 	{
 		super.OnGameStart();
-		
+
+		// Runs on every machine; the main base, factions, state and commander are set by the server and replicated
+		if (!Replication.IsServer())
+			return;
+
+		SCR_EditorManagerCore core = SCR_EditorManagerCore.Cast(SCR_EditorManagerCore.GetInstance(SCR_EditorManagerCore));
+		if (core)
+			core.Event_OnEditorManagerCreatedServer.Insert(OnEditorManagerCreatedServer);
+
 		array<IEntity> bases = {};
 		KSC_WorldTools.GetEntitiesByType(bases, COE_MainBaseEntity);
 		if (bases.IsEmpty())
@@ -351,8 +359,11 @@ class COE_GameMode : SCR_BaseGameMode
 				break;
 			}
 		}
-		
+
 		Replication.BumpMe();
+
+		// The onRpl handler only runs on proxies
+		COE_OnStateChanged();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -426,7 +437,8 @@ class COE_GameMode : SCR_BaseGameMode
 				continue;
 			
 			COE_PlayerController playerCtrl = COE_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
-			playerCtrl.RequestFastTravel(targetPositions[i], 0, 5);
+			if (playerCtrl)
+				playerCtrl.RequestFastTravel(targetPositions[i], 0, 5);
 			
 			SCR_DamageManagerComponent damageManager = player.GetDamageManager();
 			damageManager.FullHeal();
@@ -579,6 +591,14 @@ class COE_GameMode : SCR_BaseGameMode
 	//------------------------------------------------------------------------------------------------
 	SCR_SpawnPoint GetInsertionPoint()
 	{
+		// On proxies the spawn point can stream in after its ID was replicated; resolve it when it is needed
+		if (!m_pInsertionPoint && !Replication.IsServer() && m_iInsertionPointId != Replication.INVALID_ID)
+		{
+			RplComponent rpl = RplComponent.Cast(Replication.FindItem(m_iInsertionPointId));
+			if (rpl)
+				m_pInsertionPoint = SCR_SpawnPoint.Cast(rpl.GetEntity());
+		}
+
 		return m_pInsertionPoint;
 	}
 	
@@ -806,22 +826,10 @@ class COE_GameMode : SCR_BaseGameMode
 	{
 		if (Replication.IsServer())
 			return;
-		
-		GetGame().GetCallqueue().CallLater(OnInsertionPointUpdatedDelayed, 1000);
+
+		// Resolved from the new ID by GetInsertionPoint once the entity has streamed in
+		m_pInsertionPoint = null;
 	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected void OnInsertionPointUpdatedDelayed()
-	{
-		RplComponent rpl = RplComponent.Cast(Replication.FindItem(m_iInsertionPointId));
-		if (!rpl)
-		{
-			m_pInsertionPoint = null;
-			return;
-		}
-		
-		m_pInsertionPoint = SCR_SpawnPoint.Cast(rpl.GetEntity());
-	}	
 	
 	//------------------------------------------------------------------------------------------------
 	protected void COE_OnStateChanged()
@@ -836,6 +844,24 @@ class COE_GameMode : SCR_BaseGameMode
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	protected EEditorMode GetCommanderEditorModes()
+	{
+		EEditorMode modes = EEditorMode.COE_COMMANDER;
+		if (m_bCommanderBecomesGM)
+			modes |= EEditorMode.EDIT;
+
+		return modes;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Gives the commander modes to a commander whose editor manager did not exist yet when they got the role
+	protected void OnEditorManagerCreatedServer(SCR_EditorManagerEntity editorManager)
+	{
+		if (editorManager && IsCommander(editorManager.GetPlayerID()))
+			editorManager.AddEditorModes(EEditorModeAccess.BASE, GetCommanderEditorModes());
+	}
+
+	//------------------------------------------------------------------------------------------------
 	//! If player becomes admin or commander, they should get access to the commander editor
 	protected override void OnPlayerRoleChange(int playerId, EPlayerRole roleFlags)
 	{
@@ -849,21 +875,25 @@ class COE_GameMode : SCR_BaseGameMode
 		// Check if commander flag was changed
 		if (wasCommander != becomesCommander)
 		{
+			// The editor manager can be missing when the role arrives first (e.g. administrator at connect); the
+			// modes are then given when it is created (OnEditorManagerCreatedServer)
+			SCR_EditorManagerEntity editorManager;
 			SCR_EditorManagerCore core = SCR_EditorManagerCore.Cast(SCR_EditorManagerCore.GetInstance(SCR_EditorManagerCore));
-			SCR_EditorManagerEntity editorManager = core.GetEditorManager(playerId);
-			
-			EEditorMode modes = EEditorMode.COE_COMMANDER;
-			if (m_bCommanderBecomesGM)
-				modes |= EEditorMode.EDIT;
-			
+			if (core)
+				editorManager = core.GetEditorManager(playerId);
+
 			if (becomesCommander)
 			{
-				editorManager.AddEditorModes(EEditorModeAccess.BASE, modes);
+				if (editorManager)
+					editorManager.AddEditorModes(EEditorModeAccess.BASE, GetCommanderEditorModes());
+
 				m_aCommanderPlayerIDs.Insert(playerId);
 			}
 			else
 			{
-				editorManager.RemoveEditorModes(EEditorModeAccess.BASE, modes);
+				if (editorManager)
+					editorManager.RemoveEditorModes(EEditorModeAccess.BASE, GetCommanderEditorModes());
+
 				m_aCommanderPlayerIDs.RemoveItem(playerId);
 			}
 			
