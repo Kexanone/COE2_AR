@@ -8,4 +8,8 @@ COE_PlayerController : "{CD2B8EF361478648}Prefabs/Characters/Core/DefaultPlayerC
   SCR_SpawnerRequestComponent "{5F12A4F038B79C31}" {
   }
  }
+ m_ScenarioInfoComponent SCR_ScenarioFrameworkActionShowWidget "{6A28D0931C47D9AA}" {
+  m_sLayout "{154FA26B098EC2CF}UI/ScenarioInfoHUD/ScenarioInfoElement.layout"
+  m_iHideTimeDelay 5
+ }
 }

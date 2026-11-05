@@ -9,6 +9,9 @@ class COE_PlayerController : SCR_PlayerController
 	protected ref ScriptInvoker<bool> m_OnLocalCommanderRoleChanged = new ScriptInvoker<bool>();
 	static ref ScriptInvoker s_OnLocalPlayerFastTraveled = new ScriptInvoker();
 	
+	[Attribute(category: "Fast Travel")]
+	protected ref SCR_ScenarioFrameworkActionShowWidget m_ScenarioInfoComponent;
+	
 	protected const float FAST_TRAVEL_FADE_DURATION = 1.5;
 	protected const float FAST_TRAVEL_BLACKSCREEN_DURATION = 1;
 	protected const float FAST_TRAVEL_MIN_DISTANCE = 25;
@@ -18,6 +21,18 @@ class COE_PlayerController : SCR_PlayerController
 	static COE_PlayerController GetInstance()
 	{
 		return COE_PlayerController.Cast(GetGame().GetPlayerController());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected override void OnOwnershipChanged(bool changing, bool becameOwner)
+	{
+		super.OnOwnershipChanged(changing, becameOwner);
+		
+		if (changing || !becameOwner)
+			return;
+		
+		SCR_RespawnComponent.SGetOnLocalPlayerSpawned().Insert(ShowScenarioLocationDateInfo);
+		s_OnLocalPlayerFastTraveled.Insert(ShowScenarioLocationDateInfoDelayed);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -120,5 +135,45 @@ class COE_PlayerController : SCR_PlayerController
 			m_OnLocalCommanderRoleChanged = new ScriptInvoker<bool>();
 		
 		return m_OnLocalCommanderRoleChanged;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void ShowScenarioLocationDateInfoDelayed()
+	{
+		GetGame().GetCallqueue().CallLater(ShowScenarioLocationDateInfo, 100);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ShowScenarioLocationDateInfo()
+	{
+		array<string> lines = {};
+		
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return;
+		
+		IEntity player = GetControlledEntity();
+		if (!player)
+			return;
+		
+		vector playerPos = player.GetOrigin();
+		
+		if (vector.DistanceXZ(gameMode.GetMainBasePos(), playerPos) > 25)
+			lines.Insert("Insertion");
+		else
+			lines.Insert("RTB");
+		
+		ChimeraWorld world = GetWorld();
+		TimeAndWeatherManagerEntity timeManager = world.GetTimeAndWeatherManager();
+		int year, month, day;
+		timeManager.GetDate(year, month, day);
+		int hours, minutes, seconds;
+		timeManager.GetHoursMinutesSeconds(hours, minutes, seconds);
+		lines.Insert(string.Format("%1, %2", SCR_DateTimeHelper.GetDateString(day, month, year), SCR_FormatHelper.GetTimeFormattingHoursMinutes(hours, minutes)));
+		
+		lines.Insert(KSC_WorldTools.GetLocationName(playerPos));
+		
+		m_ScenarioInfoComponent.KSC_SetLines(lines);
+		m_ScenarioInfoComponent.OnActivate(null);
 	}
 }
