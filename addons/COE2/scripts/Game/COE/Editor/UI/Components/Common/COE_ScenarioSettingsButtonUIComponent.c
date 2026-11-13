@@ -67,9 +67,9 @@ class COE_ScenarioSettingsButtonUIComponent: ScriptedWidgetComponent
 	//------------------------------------------------------------------------------------------------
 	override void HandlerDeattached(Widget w)
 	{
-		if (!m_pGameMode)
+		if (!m_pGameMode || !m_pPlayerController)
 			return;
-		
+
 		m_pGameMode.COE_GetOnStateChanged().Remove(OnGameStateChange);
 		m_pPlayerController.GetOnLocalCommanderRoleChanged().Remove(OnPlayerCommanderRoleChanged);
 		GetGame().GetInputManager().RemoveActionListener("MenuConfigure", EActionTrigger.DOWN, PerformAction);

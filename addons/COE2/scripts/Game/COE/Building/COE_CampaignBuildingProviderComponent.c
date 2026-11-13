@@ -29,11 +29,16 @@ class COE_CampaignBuildingProviderComponent : SCR_CampaignBuildingProviderCompon
 		if (!factionManager)
 			return false;
 		
+		// Without an enemy faction, characters without a faction would count as enemies
+		Faction enemyFaction = factionManager.GetEnemyFaction();
+		if (!enemyFaction)
+			return false;
+
 		FactionAffiliationComponent factionComponent = FactionAffiliationComponent.Cast(char.FindComponent(FactionAffiliationComponent));
 		if (!factionComponent)
 			return false;
-		
-		return factionManager.GetEnemyFaction() == factionComponent.GetAffiliatedFaction();
+
+		return enemyFaction == factionComponent.GetAffiliatedFaction();
 	}
 	
 	//------------------------------------------------------------------------------------------------

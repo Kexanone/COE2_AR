@@ -24,7 +24,14 @@ class COE_MapObjectiveAreaMarkersUI : SCR_MapUIBaseComponent
 		if (!factionManager)
 			return;
 		
-		Color color = factionManager.GetEnemyFaction().GetFactionColor();
+		// No enemy faction yet (none set, or not replicated yet on a proxy)
+		Color color;
+		Faction enemyFaction = factionManager.GetEnemyFaction();
+		if (enemyFaction)
+			color = enemyFaction.GetFactionColor();
+		else
+			color = Color.FromInt(Color.RED);
+
 		color.SetA(m_fColorAlpha);
 		m_iColor = color.PackToInt();
 	}			
