@@ -673,7 +673,7 @@ class COE_AO : KSC_AO
 		array<ResourceName> entries = {};
 		m_pFactionManager.GetFactionEntityListWithLabels(m_pFactionManager.GetCivilianFaction(), EEntityCatalogType.VEHICLE,
 			includedLabels: {EEditableEntityLabel.ENTITYTYPE_VEHICLE},
-			excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER},
+			excludedLabels: {EEditableEntityLabel.VEHICLE_HELICOPTER, EEditableEntityLabel.TRAIT_ARMED},
 		entries);
 		
 		if (entries.IsEmpty())
