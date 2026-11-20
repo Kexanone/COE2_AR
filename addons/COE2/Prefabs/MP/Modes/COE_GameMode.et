@@ -39,7 +39,7 @@ COE_GameMode : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
    m_sHeaderTitle "#AR-CombatScenarioArland_Name"
    m_BaseLayout SCR_DebriefingScreenUnevenFourTiles "{5E6F1867E2884BBF}" {
     m_TopLeftTile SCR_DebriefingScreenBigImageContent "{5E6F1867E2884BBD}" {
-     m_sContentImage "{C9D485F6F055C410}UI/Textures/MissionLoadingScreens/COE_Arland_Preview.edds"
+     m_sContentImage "{A2B69DFBB360368D}UI/Textures/FieldManual/MPModes/COE2/Images/COE2_Logo_FM.edds"
     }
     m_TopRightTile SCR_DebriefingScreenFinishedObjectivesContent "{5E6F1867E2884BBB}" {
      m_sTitleText "#AR-DebriefingScreen_Objectives"
