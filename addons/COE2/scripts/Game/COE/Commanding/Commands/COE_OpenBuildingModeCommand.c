@@ -8,7 +8,19 @@ class COE_OpenBuildingModeCommand : COE_BaseRadialCommanderCommand
 		if (playerID != SCR_PlayerController.GetLocalPlayerId())
 			return true;
 		
-		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(COE_GameMode.GetInstance().GetInsertionPoint().FindComponent(SCR_CampaignBuildingProviderComponent));
+		// The insertion point can be gone by the time the command comes back from the server
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return false;
+
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		if (!insertionPoint)
+			return false;
+
+		SCR_CampaignBuildingProviderComponent provider = SCR_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(SCR_CampaignBuildingProviderComponent));
+		if (!provider)
+			return false;
+
 		provider.RequestEnterBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
 		return true;
 	}
@@ -28,6 +40,9 @@ class COE_OpenBuildingModeCommand : COE_BaseRadialCommanderCommand
 		}
 		
 		COE_CampaignBuildingProviderComponent provider = COE_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(COE_CampaignBuildingProviderComponent));
+		if (!provider)
+			return false;
+
 		if (provider.IsBlockedByEnemy())
 		{
 			m_sCannotPerformReason = "#AR-Campaign_Action_ShowBuildPreviewEnemyPresence";

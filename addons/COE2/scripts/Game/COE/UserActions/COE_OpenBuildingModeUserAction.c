@@ -3,9 +3,18 @@ class COE_OpenBuildingModeUserAction : COE_BaseCommanderBoardUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity) 
-	{		
-		COE_CampaignBuildingProviderComponent provider = COE_CampaignBuildingProviderComponent.Cast(COE_GameMode.GetInstance().GetInsertionPoint().FindComponent(COE_CampaignBuildingProviderComponent));
-		provider.RequestEnterBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
+	{
+		COE_GameMode gameMode = COE_GameMode.GetInstance();
+		if (!gameMode)
+			return;
+
+		IEntity insertionPoint = gameMode.GetInsertionPoint();
+		if (!insertionPoint)
+			return;
+
+		COE_CampaignBuildingProviderComponent provider = COE_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(COE_CampaignBuildingProviderComponent));
+		if (provider)
+			provider.RequestEnterBuildingMode(SCR_PlayerController.GetLocalPlayerId(), true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -23,6 +32,9 @@ class COE_OpenBuildingModeUserAction : COE_BaseCommanderBoardUserAction
 		}
 		
 		COE_CampaignBuildingProviderComponent provider = COE_CampaignBuildingProviderComponent.Cast(insertionPoint.FindComponent(COE_CampaignBuildingProviderComponent));
+		if (!provider)
+			return false;
+
 		if (provider.IsBlockedByEnemy())
 		{
 			m_sCannotPerformReason = "#AR-Campaign_Action_ShowBuildPreviewEnemyPresence";

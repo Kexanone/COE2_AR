@@ -6,16 +6,17 @@ class COE_FactionManagerClass : KSC_FactionManagerClass
 //------------------------------------------------------------------------------------------------
 class COE_FactionManager : KSC_FactionManager
 {
+	// -1 = not set, so that a replicated index 0 counts as a change on proxies
 	[RplProp(onRplName: "OnPlayerFactionChanged")]
-	protected int m_iPlayerFactionId;
+	protected int m_iPlayerFactionId = -1;
 	protected Faction m_pPlayerFaction;
-	
+
 	[RplProp(onRplName: "OnEnemyFactionChanged")]
-	protected int m_iEnemyFactionId;
+	protected int m_iEnemyFactionId = -1;
 	protected Faction m_pEnemyFaction;
-	
+
 	[RplProp(onRplName: "OnCivilianFactionChanged")]
-	protected int m_iCivilianFactionId;
+	protected int m_iCivilianFactionId = -1;
 	protected Faction m_pCivilianFaction;
 	
 	protected SCR_DelegateFactionManagerComponent m_pDelegateFactionManager;
@@ -30,6 +31,10 @@ class COE_FactionManager : KSC_FactionManager
 	//------------------------------------------------------------------------------------------------
 	Faction GetPlayerFaction()
 	{
+		// Proxies may not have run the onRpl handler for the initial state
+		if (!m_pPlayerFaction && m_iPlayerFactionId >= 0)
+			m_pPlayerFaction = GetFactionByIndex(m_iPlayerFactionId);
+
 		return m_pPlayerFaction;
 	}
 	
@@ -102,6 +107,10 @@ class COE_FactionManager : KSC_FactionManager
 	//------------------------------------------------------------------------------------------------
 	Faction GetEnemyFaction()
 	{
+		// Proxies may not have run the onRpl handler for the initial state
+		if (!m_pEnemyFaction && m_iEnemyFactionId >= 0)
+			m_pEnemyFaction = GetFactionByIndex(m_iEnemyFactionId);
+
 		return m_pEnemyFaction;
 	}
 	
@@ -123,6 +132,10 @@ class COE_FactionManager : KSC_FactionManager
 	//------------------------------------------------------------------------------------------------
 	Faction GetCivilianFaction()
 	{
+		// Proxies may not have run the onRpl handler for the initial state
+		if (!m_pCivilianFaction && m_iCivilianFactionId >= 0)
+			m_pCivilianFaction = GetFactionByIndex(m_iCivilianFactionId);
+
 		return m_pCivilianFaction;
 	}
 	
