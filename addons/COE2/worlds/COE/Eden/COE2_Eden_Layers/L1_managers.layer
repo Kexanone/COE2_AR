@@ -35,6 +35,3 @@ MusicManager MusicManager : "{359452CCDBDD03F5}Prefabs/Sounds/Music/MusicManager
 SCR_LoadoutManager LoadoutManager : "{B54D08AEA74A5354}Prefabs/MP/Managers/Loadouts/LoadoutManager_Editor.et" {
  coords 4800.659 0 11870.868
 }
-SCR_BaseTaskManager TaskManager : "{F73FF9A9DC8F1B7A}Prefabs/MP/Managers/Tasks/KSC_TaskManager.et" {
- coords 4718.656 0 6188.125
-}
