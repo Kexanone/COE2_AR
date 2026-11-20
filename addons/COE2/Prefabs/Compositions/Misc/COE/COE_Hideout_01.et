@@ -29,10 +29,10 @@ COE_MainBaseEntity {
     }
    }
    coords -10.446 0.075 1.341
+   m_fRandomSpawnRadius 5
    m_Info SCR_UIInfo "{56B4CC4ECACA2C37}" {
    }
    m_fSpawnPositionUsageRange 5
-   m_fRandomSpawnSafeRange 5
   }
   SCR_DestructibleBuildingEntity : "{A43A100E3C377DB2}Prefabs/Structures/Core/Building_Base.et" {
    ID "60A042236B7D1D3B"
